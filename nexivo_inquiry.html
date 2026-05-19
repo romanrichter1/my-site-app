@@ -658,7 +658,6 @@
           <span class="summary__switch-label">Změnit balíček</span>
           <div class="summary__plans" role="group" aria-label="Změna balíčku">
             <button type="button" data-plan="basic">Basic</button>
-            <button type="button" data-plan="standard">Standard</button>
             <button type="button" data-plan="business">Business</button>
             <button type="button" data-plan="premium">Premium</button>
             <button type="button" data-plan="enterprise">Enterprise</button>
@@ -788,19 +787,6 @@
           "CZ a SK jazyk",
         ],
       },
-      standard: {
-        name: "Standard",
-        sub: "AI recepční a chatbot napojené na vaši stávající stránku. Pro provozy, které už web mají.",
-        priceFmt: "19 890",
-        priceNum: 19890,
-        featured: false,
-        features: [
-          "AI recepční na příchozí hovory",
-          "Chatbot napojený na váš web",
-          "Napojení na Google Kalendář",
-          "SMS a e-mail připomínky",
-        ],
-      },
       business: {
         name: "Business",
         sub: "Kompletní řešení: moderní web, chatbot a AI recepční pod jednou střechou.",
@@ -848,8 +834,8 @@
 
     function getPlanKey() {
       const params = new URLSearchParams(window.location.search);
-      const raw = (params.get("plan") || "standard").toLowerCase();
-      return PLANS[raw] ? raw : "standard";
+      const raw = (params.get("plan") || "basic").toLowerCase();
+      return PLANS[raw] ? raw : "basic";
     }
 
     let currentPlanKey = getPlanKey();
