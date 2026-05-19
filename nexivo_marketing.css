@@ -999,11 +999,39 @@ button { font-family: var(--font-sans); }
   stroke-linejoin: round;
 }
 
-/* ---------- pricing 5-card layout ---------- */
+/* ---------- pricing enterprise row ---------- */
 .pricing--row2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
   margin-top: 20px;
-  max-width: calc(66.66% + 10px);
+}
+
+.plan--wide {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 0 56px;
+  align-items: center;
+  min-height: auto;
+  padding: 36px 48px;
+}
+
+.plan__wide-left {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.plan__wide-left .plan__price {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 18px;
+}
+
+.plan__wide-features {
+  column-count: 1;
+}
+
+.plan__wide-cta {
+  margin-top: 0;
+}
+
+.plan__wide-cta .btn {
+  white-space: nowrap;
 }
