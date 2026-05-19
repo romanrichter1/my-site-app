@@ -688,3 +688,322 @@ button { font-family: var(--font-sans); }
 }
 .calc__foot[hidden] { display: none; }
 .calc__foot .btn { flex: 1; justify-content: center; }
+
+/* ---------- AI agent section ---------- */
+.agent-section {
+  background: var(--ink-1000);
+  padding: 120px 48px;
+  color: var(--bone-50);
+}
+
+.agent-section .section__eyebrow {
+  color: var(--lime-500);
+}
+.agent-section .section__eyebrow::before {
+  background: var(--lime-500);
+}
+
+.agent-layout {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.agent-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.agent-copy h2 {
+  font: 400 56px/1.04 var(--font-display);
+  letter-spacing: -0.026em;
+  color: var(--bone-50);
+  font-variation-settings: "opsz" 96;
+  text-wrap: balance;
+  margin: 0;
+}
+
+.agent-copy h2 em {
+  font-style: italic;
+  color: var(--lime-500);
+}
+
+.agent-copy p {
+  font: 400 18px/1.6 var(--font-sans);
+  color: var(--ink-300);
+  margin: 0;
+  max-width: 480px;
+}
+
+.agent-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.agent-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font: 400 15px/1.5 var(--font-sans);
+  color: var(--bone-50);
+}
+
+.agent-list li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--lime-500);
+  flex-shrink: 0;
+  margin-top: 7px;
+  border-radius: 1px;
+  box-shadow: 0 0 8px rgba(199, 242, 48, 0.6);
+}
+
+/* ---------- chat mockup ---------- */
+.agent-mock {
+  background: var(--ink-900);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow:
+    0 0 0 1px rgba(199,242,48,0.06),
+    0 32px 80px rgba(0,0,0,0.45);
+}
+
+.agent-mock__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.agent-mock__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--lime-500);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agent-mock__avatar svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--ink-1000);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.agent-mock__who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.agent-mock__name {
+  font: 600 14px/1 var(--font-sans);
+  color: var(--bone-50);
+}
+
+.agent-mock__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: 500 11px/1 var(--font-sans);
+  color: var(--lime-500);
+  letter-spacing: 0.04em;
+}
+
+.agent-mock__status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--lime-500);
+  border-radius: 999px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.agent-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 220px;
+}
+
+.agent-bubble {
+  max-width: 88%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font: 400 14px/1.5 var(--font-sans);
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.agent-bubble--them {
+  background: rgba(255,255,255,0.07);
+  color: var(--bone-50);
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  animation: bubbleIn 0.35s var(--ease-out) forwards;
+}
+
+.agent-bubble--agent {
+  background: var(--ink-700);
+  color: var(--bone-50);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  animation: bubbleIn 0.35s var(--ease-out) forwards;
+}
+
+.agent-bubble--confirm {
+  background: var(--lime-500);
+  color: var(--ink-1000);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  font-weight: 500;
+  animation: bubbleIn 0.35s var(--ease-out) forwards;
+}
+
+.agent-bubble small {
+  display: block;
+  font: 400 11px/1 var(--font-sans);
+  opacity: 0.5;
+  margin-top: 4px;
+}
+
+.agent-bubble--confirm small {
+  opacity: 0.65;
+  color: var(--ink-700);
+}
+
+.agent-typing {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+  background: var(--ink-700);
+  border-radius: 12px;
+  border-bottom-right-radius: 4px;
+  opacity: 0;
+  animation: bubbleIn 0.3s var(--ease-out) forwards;
+}
+
+.agent-typing span {
+  width: 5px;
+  height: 5px;
+  background: var(--ink-300);
+  border-radius: 999px;
+  animation: typingDot 1.2s ease-in-out infinite;
+}
+
+.agent-typing span:nth-child(2) { animation-delay: 0.18s; }
+.agent-typing span:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes bubbleIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+.agent-bubble:nth-child(1) { animation-delay: 0.3s; }
+.agent-bubble:nth-child(2) { animation-delay: 1.2s; }
+.agent-typing              { animation-delay: 2.0s; }
+.agent-bubble:nth-child(3) { animation-delay: 3.2s; }
+.agent-bubble:nth-child(4) { animation-delay: 4.4s; }
+
+.agent-cal {
+  margin-top: 4px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: bubbleIn 0.4s var(--ease-out) 5.4s forwards;
+}
+
+.agent-cal__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #4285F4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.agent-cal__icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: #FFFFFF;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.agent-cal__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.agent-cal__title {
+  font: 600 13px/1 var(--font-sans);
+  color: var(--ink-1000);
+}
+
+.agent-cal__meta {
+  font: 400 12px/1.4 var(--font-sans);
+  color: var(--ink-500);
+}
+
+.agent-cal__check {
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #34A853;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.agent-cal__check svg {
+  width: 12px;
+  height: 12px;
+  stroke: #FFFFFF;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- pricing 5-card layout ---------- */
+.pricing--row2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+  max-width: calc(66.66% + 10px);
+}
