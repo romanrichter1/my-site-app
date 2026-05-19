@@ -15,9 +15,11 @@
        ============================================================ -->
   <script>
     window.STRIPE_LINKS = {
-      basic:    "https://buy.stripe.com/test_basic_placeholder",
-      standard: "https://buy.stripe.com/test_standard_placeholder",
-      business: "https://buy.stripe.com/test_business_placeholder"
+      basic:      "https://buy.stripe.com/test_basic_placeholder",
+      standard:   "https://buy.stripe.com/test_standard_placeholder",
+      business:   "https://buy.stripe.com/test_business_placeholder",
+      premium:    "https://buy.stripe.com/test_premium_placeholder",
+      enterprise: "https://buy.stripe.com/test_enterprise_placeholder"
     };
   </script>
 
@@ -657,6 +659,8 @@
             <button type="button" data-plan="basic">Basic</button>
             <button type="button" data-plan="standard">Standard</button>
             <button type="button" data-plan="business">Business</button>
+            <button type="button" data-plan="premium">Premium</button>
+            <button type="button" data-plan="enterprise">Enterprise</button>
           </div>
         </div>
       </aside>
@@ -807,6 +811,35 @@
           "Chatbot s vlastním tónem",
           "AI recepční s vlastním hlasem",
           "Vícejazyčný chat (CZ · SK · EN)",
+          "Týdenní souhrn a doporučení",
+        ],
+      },
+      premium: {
+        name: "Premium",
+        sub: "Moderní web s AI agentem — rezervace, potvrzení a připomínky přes chat.",
+        priceFmt: "32 680",
+        priceNum: 32680,
+        featured: false,
+        features: [
+          "Moderní web na míru",
+          "AI agent v chatu",
+          "Rezervace přes Google Kalendář / Reservio",
+          "Potvrzovací e-mail automaticky",
+          "SMS / chat připomínka před termínem",
+          "CZ · SK · EN",
+        ],
+      },
+      enterprise: {
+        name: "Enterprise",
+        sub: "Web s AI agentem a AI recepční. Chat i telefon — každý kontaktní bod pokrytý.",
+        priceFmt: "37 680",
+        priceNum: 37680,
+        featured: true,
+        features: [
+          "Vše z balíčku Premium",
+          "AI recepční na příchozí hovory",
+          "Vlastní hlas AI recepční",
+          "Synchronizace chatu a telefonu",
           "Týdenní souhrn a doporučení",
         ],
       },
