@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #ffffff;
+      --ink: #111111;
+      --muted: #888888;
+      --line: #e0e0e0;
+      --x-color: #111111;
+      --o-color: #d44;
+      --win-bg: #f5f5f5;
+      --sans: system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .score {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .score-item {
+      text-align: center;
+    }
+
+    .score-item .label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .score-item .value {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    .score-divider {
+      width: 1px;
+      height: 2.5rem;
+      background: var(--line);
+    }
+
+    .status {
+      font-size: 0.85rem;
+      color: var(--muted);
+      height: 1.2em;
+      transition: opacity 0.2s;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 0;
+      position: relative;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 2.4rem;
+      font-weight: 300;
+      user-select: none;
+      transition: background 0.1s;
+      border: 1px solid var(--line);
+      position: relative;
+    }
+
+    .cell:hover:not(.taken) {
+      background: #fafafa;
+    }
+
+    .cell.x { color: var(--x-color); }
+    .cell.o { color: var(--o-color); }
+
+    .cell.winner {
+      background: var(--win-bg);
+    }
+
+    /* clean grid — remove outer borders */
+    .cell:nth-child(1), .cell:nth-child(2), .cell:nth-child(3) { border-top: none; }
+    .cell:nth-child(7), .cell:nth-child(8), .cell:nth-child(9) { border-bottom: none; }
+    .cell:nth-child(1), .cell:nth-child(4), .cell:nth-child(7) { border-left: none; }
+    .cell:nth-child(3), .cell:nth-child(6), .cell:nth-child(9) { border-right: none; }
+
+    .cell.taken { cursor: default; }
+
+    button {
+      margin-top: 0.5rem;
+      padding: 0.55rem 1.6rem;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    button:hover {
+      background: #f5f5f5;
+      border-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tic Tac Toe</h1>
+
+  <div class="score">
+    <div class="score-item">
+      <div class="label">You (X)</div>
+      <div class="value" id="score-x">0</div>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <div class="label">Draws</div>
+      <div class="value" id="score-d">0</div>
+    </div>
+    <div class="score-divider"></div>
+    <div class="score-item">
+      <div class="label">CPU (O)</div>
+      <div class="value" id="score-o">0</div>
+    </div>
+  </div>
+
+  <div class="status" id="status">Your turn</div>
+
+  <div class="board" id="board">
+    <div class="cell" data-i="0"></div>
+    <div class="cell" data-i="1"></div>
+    <div class="cell" data-i="2"></div>
+    <div class="cell" data-i="3"></div>
+    <div class="cell" data-i="4"></div>
+    <div class="cell" data-i="5"></div>
+    <div class="cell" data-i="6"></div>
+    <div class="cell" data-i="7"></div>
+    <div class="cell" data-i="8"></div>
+  </div>
+
+  <button id="restart">New game</button>
+
+  <script>
+    const WINS = [
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6]
+    ];
+
+    let board, locked;
+    let scores = { x: 0, o: 0, d: 0 };
+
+    const cells = Array.from(document.querySelectorAll('.cell'));
+    const statusEl = document.getElementById('status');
+
+    function init() {
+      board = Array(9).fill(null);
+      locked = false;
+      cells.forEach(c => {
+        c.textContent = '';
+        c.className = 'cell';
+      });
+      setStatus('Your turn');
+    }
+
+    function setStatus(msg) { statusEl.textContent = msg; }
+
+    function checkWinner(b, player) {
+      return WINS.find(([a, bp, c]) => b[a] === player && b[bp] === player && b[c] === player) || null;
+    }
+
+    function isDraw(b) { return b.every(v => v !== null); }
+
+    function render() {
+      board.forEach((v, i) => {
+        const c = cells[i];
+        if (v === 'X') { c.textContent = 'X'; c.classList.add('x', 'taken'); }
+        else if (v === 'O') { c.textContent = 'O'; c.classList.add('o', 'taken'); }
+      });
+    }
+
+    function highlightWin(line) {
+      line.forEach(i => cells[i].classList.add('winner'));
+    }
+
+    function endGame(winner, line) {
+      locked = true;
+      if (winner === 'X') {
+        scores.x++;
+        highlightWin(line);
+        setStatus('You win!');
+      } else if (winner === 'O') {
+        scores.o++;
+        highlightWin(line);
+        setStatus('CPU wins.');
+      } else {
+        scores.d++;
+        setStatus('Draw.');
+      }
+      document.getElementById('score-x').textContent = scores.x;
+      document.getElementById('score-o').textContent = scores.o;
+      document.getElementById('score-d').textContent = scores.d;
+    }
+
+    // AI: tries to win, tries to block, otherwise weighted random
+    function cpuMove() {
+      const empty = board.map((v, i) => v === null ? i : -1).filter(i => i !== -1);
+      if (!empty.length) return;
+
+      // 1. win if possible
+      for (const i of empty) {
+        board[i] = 'O';
+        if (checkWinner(board, 'O')) { board[i] = null; return i; }
+        board[i] = null;
+      }
+
+      // 2. block player win
+      for (const i of empty) {
+        board[i] = 'X';
+        if (checkWinner(board, 'X')) { board[i] = null; return i; }
+        board[i] = null;
+      }
+
+      // 3. take center if free
+      if (board[4] === null) return 4;
+
+      // 4. take a corner (with small chance of picking edge — makes it beatable)
+      const corners = [0, 2, 6, 8].filter(i => board[i] === null);
+      const edges   = [1, 3, 5, 7].filter(i => board[i] === null);
+
+      // ~70% corners, ~30% edges — introduces imperfection
+      if (corners.length && Math.random() < 0.7) {
+        return corners[Math.floor(Math.random() * corners.length)];
+      }
+      if (edges.length) return edges[Math.floor(Math.random() * edges.length)];
+      return corners[Math.floor(Math.random() * corners.length)];
+    }
+
+    function playerMove(i) {
+      if (locked || board[i] !== null) return;
+
+      board[i] = 'X';
+      render();
+
+      const wLine = checkWinner(board, 'X');
+      if (wLine) { endGame('X', wLine); return; }
+      if (isDraw(board)) { endGame(null); return; }
+
+      locked = true;
+      setStatus('CPU thinking…');
+
+      setTimeout(() => {
+        const move = cpuMove();
+        if (move === undefined) return;
+        board[move] = 'O';
+        render();
+
+        const oLine = checkWinner(board, 'O');
+        if (oLine) { endGame('O', oLine); return; }
+        if (isDraw(board)) { endGame(null); return; }
+
+        locked = false;
+        setStatus('Your turn');
+      }, 350);
+    }
+
+    cells.forEach(c => c.addEventListener('click', () => playerMove(+c.dataset.i)));
+    document.getElementById('restart').addEventListener('click', init);
+
+    init();
+  </script>
+</body>
+</html>
