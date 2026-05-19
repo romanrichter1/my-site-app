@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1440, initial-scale=1">
+  <title>Nexivo — Webové stránky, které berou rezervace</title>
+  <link rel="icon" href="assets/nexivo-favicon.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="nexivo_marketing.css">
+
+  <!-- ============================================================
+       CALENDLY · rezervační formulář
+       ============================================================ -->
+  <script>
+    window.CALENDLY_URL = "https://calendly.com/romecrichter/freestar";
+  </script>
+</head>
+<body data-screen-label="Marketing Landing">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="nav__logo">
+      <span class="nav__word">nexivo</span>
+    </a>
+    <div class="nav__links">
+      <a class="nav__link" href="#receptionist">AI recepční</a>
+      <a class="nav__link" href="#websites">Weby s chatem</a>
+      <a class="nav__link" href="#for-whom">Pro koho</a>
+      <a class="nav__link" href="#pricing">Ceník</a>
+      <a class="nav__link" href="#refs">Reference</a>
+    </div>
+    <div class="nav__right">
+      <a href="#" class="nav__signin">Přihlásit</a>
+      <a href="#calendly" target="_blank" rel="noopener" class="nav__cta" data-cta="calendly">Domluvit ukázku</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <span class="hero__eyebrow">Pro malé provozy v ČR a SR</span>
+      <h1 class="hero__title">Webové stránky, které berou rezervace, <em>i&nbsp;když&nbsp;spíte.</em></h1>
+      <p class="hero__sub">AI recepční odpoví na každý hovor v češtině a slovenštině, zapíše schůzku do kalendáře a pošle připomínku. Sedm dní v týdnu, bez práce navíc.</p>
+      <div class="hero__cta">
+        <a href="#calendly" target="_blank" rel="noopener" class="btn btn--primary" data-cta="calendly">Domluvit ukázku
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <button class="btn btn--ghost" data-calc>Spočítat úsporu</button>
+      </div>
+      <div class="hero__proof">
+        <span class="pill"><span class="dot"></span>Živý hovor &middot; 09:14</span>
+        <span>Salóny, ordinace a penziony v Brně, Bratislavě, Olomouci a dál.</span>
+      </div>
+    </div>
+
+    <!-- live call card -->
+    <aside class="callcard">
+      <div class="callcard__head">
+        <span class="callcard__avatar">LH</span>
+        <div class="callcard__who">
+          <span class="callcard__name">Lucie Hájková</span>
+          <span class="callcard__meta">Příchozí hovor &middot; 02:48</span>
+        </div>
+        <span class="callcard__status"><span class="dot"></span>Živo</span>
+      </div>
+      <div class="transcript">
+        <div class="bubble bubble--them">Dobrý den, chtěla bych se objednat na střih a foukanou na čtvrtek odpoledne.<small>09:14:22</small></div>
+        <div class="bubble bubble--ai">Jasně, ráda pomůžu. Mám volno ve čtvrtek ve 14:30 nebo v 16:15 u Petry. Která doba se vám hodí lépe?<small>AI recepční · 09:14:28</small></div>
+        <div class="bubble bubble--them">14:30 by bylo perfektní.<small>09:14:39</small></div>
+        <div class="bubble bubble--ai">Hotovo. Schůzku jsem zapsala a pošlu vám SMS s připomínkou den předem.<small>AI recepční · 09:14:44</small></div>
+      </div>
+      <div class="callcard__action">
+        <span>Zapsáno do Google Kalendáře</span>
+        <span class="meta">Klient: Lucie H. · čt 19. 5. · 14:30</span>
+      </div>
+    </aside>
+  </header>
+
+  <!-- PROOF BAR -->
+  <section class="proofbar">
+    <div class="proofbar__inner">
+      <span class="proofbar__label">Spolupracujeme s</span>
+      <div class="proofbar__names">
+        <span>Autocamp Free Star</span>
+        <span>RIVENTI s.r.o.</span>
+        <span>Rellax Team s.r.o.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE TRIAD -->
+  <section class="section" id="receptionist">
+    <div class="section__head">
+      <div>
+        <span class="section__eyebrow">Co Nexivo dělá</span>
+        <h2 class="section__title">Tři věci, díky kterým ušetříte deset hodin týdně.</h2>
+      </div>
+      <p class="section__intro">Recepční na poloviční úvazek vás stojí přes 200 tisíc ročně. Nexivo zastane drtivou většinu její rutinní práce za zlomek ceny a běží nepřetržitě.</p>
+    </div>
+    <div class="features">
+      <article class="feature">
+        <span class="feature__num">01</span>
+        <h3 class="feature__title">AI recepční zvedá telefon do tří vteřin.</h3>
+        <p class="feature__body">Odpovídá v češtině i slovenštině, bez přízvuku. Pozná dotaz na otevírací dobu, ceník, dostupnost i specifickou službu. Když si neví rady, předá hovor vám.</p>
+        <a class="feature__more" href="#">Jak funguje hlas
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+      <article class="feature">
+        <span class="feature__num">02</span>
+        <h3 class="feature__title">Chat na webu zapisuje rezervace přímo do kalendáře.</h3>
+        <p class="feature__body">Napojené na Google Kalendář, Reservio nebo váš vlastní systém. Klient si vybere termín a dostane potvrzení dřív, než vy položíte nůžky.</p>
+        <a class="feature__more" href="#">Ukázat web
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+      <article class="feature">
+        <span class="feature__num">03</span>
+        <h3 class="feature__title">Připomínky a follow-up posíláme automaticky.</h3>
+        <p class="feature__body">SMS a e-mail den před schůzkou, dotaz na recenzi po návštěvě. Snížení no-show o desítky procent bez jediného kliknutí navíc.</p>
+        <a class="feature__more" href="#">Co všechno automatizujeme
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- PRODUCT DETAIL: WEBSITE + CHAT -->
+  <section class="section" id="websites" style="background:var(--bone-100);">
+    <div class="product">
+      <div class="product__copy">
+        <span class="section__eyebrow">Weby s chatem</span>
+        <h2>Web, který za vás odpovídá. A pak rovnou zapíše schůzku.</h2>
+        <p>Stránka navržená tak, aby každý druhý návštěvník skončil v rezervaci. Chat ví vše o vašem provozu, mluví vaším tónem a 95 % konverzací dotáhne sám.</p>
+        <ul class="product__list">
+          <li>Trénovaný na vašem ceníku, službách a otevírací době.</li>
+          <li>Rezervace přes Google Kalendář, Reservio i vlastní systém.</li>
+          <li>Vícejazyčný — čeština, slovenština, angličtina.</li>
+          <li>Editorial design, který vypadá draho a otevírá se pod 1,2 vteřiny.</li>
+        </ul>
+        <div class="hero__cta">
+          <button class="btn btn--secondary">Pozrieť ukázku webu</button>
+        </div>
+      </div>
+      <div class="product__visual">
+        <div class="metric">
+          <span class="metric__label">Konverze webu</span>
+          <span class="metric__num">31,4&#8239;%</span>
+          <span class="metric__delta">↑ 2,8&times; oproti staré stránce</span>
+        </div>
+        <div class="metric">
+          <span class="metric__label">Doba odpovědi</span>
+          <span class="metric__num">2,1&#8239;s</span>
+          <span class="metric__delta">Průměr přes 7 dní</span>
+        </div>
+        <div class="metric">
+          <span class="metric__label">Rezervací / týden</span>
+          <span class="metric__num">86</span>
+          <span class="metric__delta">↑ z 24 před nasazením</span>
+        </div>
+        <div class="metric">
+          <span class="metric__label">No-show</span>
+          <span class="metric__num">3,2&#8239;%</span>
+          <span class="metric__delta">↓ z 18 %</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVINGS STRIP -->
+  <section class="savings">
+    <h3>Místo recepční na poloviční úvazek ušetříte přes čtvrt milionu ročně.</h3>
+    <div style="display:flex;gap:48px">
+      <div class="savings__stat">
+        <span class="num">12,4</span>
+        <span class="label">hodin / týden</span>
+      </div>
+      <div class="savings__stat">
+        <span class="num">284 800</span>
+        <span class="label">Kč / rok</span>
+      </div>
+    </div>
+    <div class="savings__cta">
+      <button class="btn btn--secondary" data-calc>Spočítat moji úsporu</button>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="section__head">
+      <div>
+        <span class="section__eyebrow">Ceník</span>
+        <h2 class="section__title">Jedna investice. Splatí se obvykle do druhého měsíce.</h2>
+      </div>
+      <p class="section__intro">Vyberte si rozsah, který sedí vašemu provozu. Vše je jednorázová platba bez měsíčního závazku za software. Telefonní náklady AI recepční účtujeme podle skutečného využití.</p>
+    </div>
+    <div class="pricing">
+      <article class="plan">
+        <h3 class="plan__name">Basic</h3>
+        <p class="plan__sub">Moderní OnePager s rezervačním systémem a chatbotem. Pro živnostníky, kteří začínají.</p>
+        <div class="plan__price">
+          <span class="num">13&#8239;890</span>
+          <span class="unit">Kč</span>
+          <span class="once">jednorázově</span>
+        </div>
+        <ul class="plan__list">
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Moderní OnePager web</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Rezervační systém</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Chatbot trénovaný na vašem provozu</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> CZ a SK jazyk</li>
+        </ul>
+        <div class="plan__cta"><a class="btn btn--ghost" href="nexivo_inquiry.html?plan=basic">Vybrat Basic</a></div>
+      </article>
+
+      <article class="plan">
+        <h3 class="plan__name">Standard</h3>
+        <p class="plan__sub">AI recepční a chatbot napojené na vaši stávající stránku. Pro provozy, které už web mají.</p>
+        <div class="plan__price">
+          <span class="num">19&#8239;890</span>
+          <span class="unit">Kč</span>
+          <span class="once">jednorázově</span>
+        </div>
+        <ul class="plan__list">
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> AI recepční na příchozí hovory</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Chatbot napojený na váš web</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Napojení na Google Kalendář</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> SMS a e-mail připomínky</li>
+        </ul>
+        <div class="plan__cta"><a class="btn btn--ghost" href="nexivo_inquiry.html?plan=standard">Vybrat Standard</a></div>
+      </article>
+
+      <article class="plan plan--featured">
+        <span class="plan__tag">Nejvolenější</span>
+        <h3 class="plan__name">Business</h3>
+        <p class="plan__sub">Kompletní řešení: moderní web, chatbot a AI recepční pod jednou střechou.</p>
+        <div class="plan__price">
+          <span class="num">28&#8239;680</span>
+          <span class="unit">Kč</span>
+          <span class="once">jednorázově</span>
+        </div>
+        <ul class="plan__list">
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Moderní web na míru</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Chatbot s vlastním tónem</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> AI recepční s vlastním hlasem</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Vícejazyčný chat (CZ · SK · EN)</li>
+          <li><svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M20 6L9 17l-5-5"/></svg> Týdenní souhrn a doporučení</li>
+        </ul>
+        <div class="plan__cta"><a class="btn btn--primary" href="nexivo_inquiry.html?plan=business">Vybrat Business</a></div>
+      </article>
+    </div>
+
+    <p class="pricing-note">
+      <span><b>Poznámka k AI recepční.</b> U balíčků Standard a Business se k jednorázové ceně účtují měsíční náklady na telefon podle skutečného využití. Konkrétní částku vám spočítáme z odhadovaného počtu hovorů během úvodní konzultace.</span>
+    </p>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="closer">
+    <h2>Ten první týden už <em>nezvedáte</em> telefon.</h2>
+    <p>30minutová ukázka. Ukážeme vám, jak by AI recepční zvládla typické hovory u vás. Bez prezentací, bez závazku.</p>
+    <div class="hero__cta">
+      <a href="#calendly" target="_blank" rel="noopener" class="btn btn--primary" data-cta="calendly">Domluvit ukázku
+        <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div>
+      <span class="footer__word">nexivo</span>
+      <p class="footer__tag">AI recepční a weby s chatem pro malé provozy v Česku a na Slovensku.</p>
+    </div>
+    <div>
+      <h5>Produkt</h5>
+      <ul>
+        <li><a href="#">AI recepční</a></li>
+        <li><a href="#">Weby s chatem</a></li>
+        <li><a href="#">Automatizace</a></li>
+        <li><a href="#">Integrace</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Pro koho</h5>
+      <ul>
+        <li><a href="#">Salóny a barbeři</a></li>
+        <li><a href="#">Ordinace</a></li>
+        <li><a href="#">Penziony a kempy</a></li>
+        <li><a href="#">Autoservisy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Firma</h5>
+      <ul>
+        <li><a href="#">O Nexivu</a></li>
+        <li><a href="#">Reference</a></li>
+        <li><a href="#">Kontakt</a></li>
+        <li><a href="#">Kariéra</a></li>
+      </ul>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Nexivo s.r.o. Brno · Bratislava</span>
+      <span>Ochrana údajů · Obchodní podmínky</span>
+    </div>
+  </footer>
+
+  <!-- CALCULATOR MODAL -->
+  <div class="calc-scrim" id="calc" role="dialog" aria-modal="true" aria-labelledby="calc-q">
+
+    <div class="calc">
+      <div class="calc__head">
+        <span class="calc__eyebrow">Kalkulačka úspory</span>
+        <button class="calc__close" data-calc-close aria-label="Zavřít">
+          <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="calc__steps">
+        <span class="calc__step-dot is-active" data-dot="1"></span>
+        <span class="calc__step-dot" data-dot="2"></span>
+        <span class="calc__step-dot" data-dot="3"></span>
+      </div>
+
+      <div class="calc__body">
+
+        <!-- STEP 1: who answers -->
+        <section data-step="1">
+          <h2 class="calc__q" id="calc-q">Kdo dnes zvedá hovory ve vašem provozu?</h2>
+          <p style="font:400 14px/1.5 var(--font-sans);color:var(--ink-500);margin:8px 0 22px">Podle toho vám ukážeme buď peněžní úsporu, nebo úsporu vašeho času.</p>
+          <div class="calc__options" data-cols="2">
+            <button class="calc__option" data-who="staff">
+              <span class="lead">Recepční nebo asistentka</span>
+              <span class="sub">Zaměstnankyně, brigádnice nebo někdo na DPP.</span>
+            </button>
+            <button class="calc__option" data-who="self">
+              <span class="lead">Já sám / sama</span>
+              <span class="sub">Hovory zvedám mezi klienty.</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- STEP 2: volume -->
+        <section data-step="2" hidden>
+          <button class="calc__back" data-calc-back>
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            Zpět
+          </button>
+          <h2 class="calc__q">Kolik hovorů typicky přijmete za den?</h2>
+          <p style="font:400 14px/1.5 var(--font-sans);color:var(--ink-500);margin:8px 0 22px">Hrubý odhad stačí. Pondělí a před svátky se nepočítají.</p>
+          <div class="calc__options" data-cols="3">
+            <button class="calc__option" data-vol="low">
+              <span class="lead">Méně než 5</span>
+              <span class="sub">Klidnější provoz, pár rezervací denně.</span>
+            </button>
+            <button class="calc__option" data-vol="mid">
+              <span class="lead">5 až 15</span>
+              <span class="sub">Stabilní vytížení po celý den.</span>
+            </button>
+            <button class="calc__option" data-vol="high">
+              <span class="lead">15 a víc</span>
+              <span class="sub">Telefon zvoní pořád, často se nestíhá.</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- STEP 3: result -->
+        <section data-step="3" hidden>
+          <button class="calc__back" data-calc-back>
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            Spočítat jinak
+          </button>
+          <div class="calc__result">
+            <div class="calc__result-card">
+              <span class="calc__result-eyebrow" data-result-eyebrow>Ušetříte měsíčně</span>
+              <span class="calc__result-num" data-result-num><em>—</em></span>
+              <span class="calc__result-unit" data-result-unit>—</span>
+              <p class="calc__result-body" data-result-body>—</p>
+            </div>
+            <div class="calc__breakdown">
+              <div class="calc__breakdown-item">
+                <span class="k">Hovorů denně</span>
+                <span class="v" data-result-calls>—</span>
+              </div>
+              <div class="calc__breakdown-item">
+                <span class="k" data-result-altk>—</span>
+                <span class="v" data-result-altv>—</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="calc__foot" data-calc-foot hidden>
+        <button class="btn btn--ghost" data-calc-restart>Spočítat znovu</button>
+        <a href="#calendly" target="_blank" rel="noopener" class="btn btn--primary" data-cta="calendly" data-calc-close-cta>Domluvit ukázku
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Wire all Calendly CTAs to the URL configured in <head>
+    (function () {
+      const url = window.CALENDLY_URL;
+      if (!url) return;
+      document.querySelectorAll('a[data-cta="calendly"]').forEach(a => {
+        a.setAttribute('href', url);
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const scrim = document.getElementById('calc');
+      const dots = scrim.querySelectorAll('[data-dot]');
+      const steps = scrim.querySelectorAll('[data-step]');
+      const foot = scrim.querySelector('[data-calc-foot]');
+      const resEyebrow = scrim.querySelector('[data-result-eyebrow]');
+      const resNum = scrim.querySelector('[data-result-num]');
+      const resUnit = scrim.querySelector('[data-result-unit]');
+      const resBody = scrim.querySelector('[data-result-body]');
+      const resCalls = scrim.querySelector('[data-result-calls]');
+      const resAltK = scrim.querySelector('[data-result-altk]');
+      const resAltV = scrim.querySelector('[data-result-altv]');
+
+      let who = null;
+      let vol = null;
+
+      const callsLabel = { low: '< 5', mid: '5–15', high: '15+' };
+
+      const data = {
+        staff: {
+          low:  { money: '27 000', alt: { k: 'Čas, který získáte zpět', v: '~30 hodin / měsíc' }, body: 'Recepční vás stojí minimálně <b>27 000 Kč měsíčně</b>. Při tomto objemu AI zastane drtivou většinu hovorů a recepční můžete přeřadit na práci s klienty.' },
+          mid:  { money: '42 000', alt: { k: 'Čas, který získáte zpět', v: '~75 hodin / měsíc' }, body: 'Recepční na plný úvazek se mzdou, odvody a benefity stojí kolem <b>42 000 Kč měsíčně</b>. AI zvládne 90 % rutiny a vy ušetříte i přesčasy.' },
+          high: { money: '65 000', alt: { k: 'Čas, který získáte zpět', v: '120+ hodin / měsíc' }, body: 'Při tomto objemu už dnes pravděpodobně potřebujete <b>dvě recepční nebo přesčasy</b>. AI zastane práci za méně než zlomek.' }
+        },
+        self: {
+          low:  { hours: '30', range: '~1 hodina / den', money: '~13 500', body: 'Hovory vám denně vezmou kolem <b>1 hodiny</b>. To je čas, který trávíte mimo klienta, který jste mohli obsluhovat.' },
+          mid:  { hours: '75', range: '2 až 3 hodiny / den', money: '~33 750', body: 'Telefony vám sežerou <b>2 až 3 hodiny denně</b>. Při hodinové sazbě běžného živnostníka je to měsíčně přes 30 000 Kč ušlého výdělku.' },
+          high: { hours: '120+', range: '3 až 5 hodin / den', money: '~54 000', body: 'Hovory vám berou <b>3 až 5 hodin denně</b>. Reálně řešíte recepci místo svého řemesla. AI to vyřeší během prvního týdne.' }
+        }
+      };
+
+      function setStep(n) {
+        steps.forEach(s => { s.hidden = (+s.dataset.step !== n); });
+        dots.forEach(d => {
+          const idx = +d.dataset.dot;
+          d.classList.remove('is-active', 'is-done');
+          if (idx < n) d.classList.add('is-done');
+          if (idx === n) d.classList.add('is-active');
+        });
+        foot.hidden = n !== 3;
+      }
+
+      function compute() {
+        const d = data[who][vol];
+        if (who === 'staff') {
+          resEyebrow.textContent = 'Ušetříte měsíčně';
+          resNum.innerHTML = d.money + ' <em>Kč</em>';
+          resUnit.textContent = 'jen na nákladech za recepční';
+          resBody.innerHTML = d.body;
+          resCalls.textContent = callsLabel[vol] + ' / den';
+          resAltK.textContent = d.alt.k;
+          resAltV.textContent = d.alt.v;
+        } else {
+          resEyebrow.textContent = 'Získáte zpět';
+          resNum.innerHTML = d.hours + ' <em>h</em>';
+          resUnit.textContent = 'měsíčně · ' + d.range;
+          resBody.innerHTML = d.body;
+          resCalls.textContent = callsLabel[vol] + ' / den';
+          resAltK.textContent = 'V přepočtu na vaši práci';
+          resAltV.textContent = d.money + ' Kč / měsíc';
+        }
+        setStep(3);
+      }
+
+      function reset() {
+        who = null; vol = null; setStep(1);
+      }
+
+      function open() { scrim.classList.add('is-open'); document.body.style.overflow = 'hidden'; reset(); }
+      function close() { scrim.classList.remove('is-open'); document.body.style.overflow = ''; }
+
+      document.querySelectorAll('[data-calc]').forEach(b => b.addEventListener('click', open));
+      scrim.querySelectorAll('[data-calc-close], [data-calc-close-cta]').forEach(b => b.addEventListener('click', close));
+      scrim.addEventListener('click', e => { if (e.target === scrim) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && scrim.classList.contains('is-open')) close(); });
+
+      scrim.querySelectorAll('[data-who]').forEach(b => b.addEventListener('click', () => {
+        who = b.dataset.who; setStep(2);
+      }));
+      scrim.querySelectorAll('[data-vol]').forEach(b => b.addEventListener('click', () => {
+        vol = b.dataset.vol; compute();
+      }));
+      scrim.querySelectorAll('[data-calc-back]').forEach(b => b.addEventListener('click', () => {
+        const current = [...steps].findIndex(s => !s.hidden) + 1;
+        setStep(Math.max(1, current - 1));
+      }));
+      scrim.querySelector('[data-calc-restart]').addEventListener('click', reset);
+    })();
+  </script>
+
+</body>
+</html>

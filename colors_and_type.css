@@ -1,0 +1,309 @@
+/* =========================================================================
+   Nexivo Design Tokens
+   Monochromatic warm-neutral + electric lime accent
+   Fraunces (display) + Manrope (text)
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* ---------- PRIMITIVE COLORS ---------- */
+  /* Ink — dark text and surfaces */
+  --ink-1000: #0A0A09;     /* near-black, almost-warm */
+  --ink-900:  #14140F;
+  --ink-800:  #1F1E18;
+  --ink-700:  #2D2C24;
+  --ink-600:  #3D3B30;
+  --ink-500:  #5C5A4B;
+  --ink-400:  #84826F;
+  --ink-300:  #A8A593;
+  --ink-200:  #C9C6B5;
+  --ink-100:  #E4E1D2;
+  --ink-50:   #EFEDDF;
+
+  /* Bone — warm neutral background scale (paper, cream, off-white) */
+  --bone-50:  #FBFAF5;     /* primary background */
+  --bone-100: #F5F2EA;     /* card / secondary surface */
+  --bone-200: #ECE8DC;     /* hairline-tint surface */
+  --bone-300: #DDD8C8;     /* divider on warm bg */
+
+  /* Lime — electric accent */
+  --lime-300: #E4FF7A;
+  --lime-400: #D6FB4D;
+  --lime-500: #C7F230;     /* PRIMARY accent */
+  --lime-600: #A8D018;
+  --lime-700: #7FA00C;
+  --lime-900: #2F3D04;
+
+  /* Semantic state colors (distinct from lime) */
+  --success-500: #1F8A5B;  /* forest green */
+  --success-50:  #E6F4ED;
+  --warning-500: #D98A1F;  /* amber, not red, not orange-red */
+  --warning-50:  #FBF1E2;
+  --info-500:    #2A6FDB;  /* deep blue, used sparingly */
+  --info-50:     #E8F0FC;
+
+  /* ---------- SEMANTIC COLOR TOKENS ---------- */
+  --bg:                var(--bone-50);
+  --bg-elevated:       #FFFFFF;
+  --bg-sunken:         var(--bone-100);
+  --bg-inverse:        var(--ink-1000);
+
+  --surface:           #FFFFFF;
+  --surface-warm:      var(--bone-100);
+  --surface-tinted:    var(--bone-200);
+
+  --fg:                var(--ink-1000);    /* primary text */
+  --fg-muted:          var(--ink-500);     /* secondary text */
+  --fg-subtle:         var(--ink-400);     /* tertiary text, captions */
+  --fg-inverse:        var(--bone-50);     /* text on dark */
+  --fg-on-accent:      var(--ink-1000);    /* text on lime */
+
+  --accent:            var(--lime-500);
+  --accent-hover:      var(--lime-400);
+  --accent-pressed:    var(--lime-600);
+  --accent-soft:       var(--lime-300);
+
+  --border:            var(--ink-100);     /* default hairline */
+  --border-strong:     var(--ink-200);
+  --border-on-dark:    rgba(255,255,255,0.10);
+
+  --success:           var(--success-500);
+  --warning:           var(--warning-500);
+  --info:              var(--info-500);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+  --font-sans:    'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Type scale — modular 1.250 (major third), rounded for clarity */
+  --fs-xs:    12px;
+  --fs-sm:    14px;
+  --fs-base:  16px;
+  --fs-md:    18px;
+  --fs-lg:    20px;
+  --fs-xl:    24px;
+  --fs-2xl:   32px;
+  --fs-3xl:   40px;
+  --fs-4xl:   56px;
+  --fs-5xl:   72px;
+  --fs-6xl:   96px;
+
+  /* Line heights — tight for display, generous for body */
+  --lh-display: 1.02;
+  --lh-heading: 1.12;
+  --lh-snug:    1.32;
+  --lh-body:    1.55;
+  --lh-relaxed: 1.7;
+
+  /* Letter spacing */
+  --tracking-display: -0.022em;  /* tighten display */
+  --tracking-tight:   -0.012em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.02em;
+  --tracking-eyebrow: 0.14em;    /* uppercase eyebrows */
+
+  /* Font weight */
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* ---------- SPACING (4px grid) ---------- */
+  --space-0:   0px;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+  --space-40:  160px;
+
+  /* ---------- RADIUS ---------- */
+  --radius-none:  0px;          /* product images, hero crops */
+  --radius-xs:    4px;
+  --radius-sm:    8px;          /* DEFAULT buttons, inputs, badges */
+  --radius-md:    12px;         /* cards */
+  --radius-lg:    16px;         /* large surface */
+  --radius-pill:  999px;        /* eyebrows, tag chips */
+
+  /* ---------- SHADOW (diffused, soft, never sharp) ---------- */
+  /* Layered soft shadows tuned for warm neutral background */
+  --shadow-subtle:
+    0 1px 2px rgba(20, 20, 15, 0.04),
+    0 2px 6px rgba(20, 20, 15, 0.03);
+
+  --shadow-medium:
+    0 2px 4px rgba(20, 20, 15, 0.04),
+    0 8px 20px rgba(20, 20, 15, 0.06),
+    0 1px 0 rgba(20, 20, 15, 0.02);
+
+  --shadow-elevated:
+    0 4px 8px rgba(20, 20, 15, 0.05),
+    0 16px 40px rgba(20, 20, 15, 0.10),
+    0 2px 2px rgba(20, 20, 15, 0.03);
+
+  /* Focus ring */
+  --ring-accent: 0 0 0 3px rgba(199, 242, 48, 0.45);
+  --ring-focus:  0 0 0 3px rgba(42, 111, 219, 0.35);
+
+  /* ---------- MOTION ---------- */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:    cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-inout: cubic-bezier(0.83, 0, 0.17, 1);
+  --dur-fast:   140ms;
+  --dur-base:   220ms;
+  --dur-slow:   420ms;
+
+  /* ---------- LAYOUT ---------- */
+  --container-narrow: 720px;
+  --container-base:   1080px;
+  --container-wide:   1280px;
+  --container-xwide:  1440px;
+}
+
+/* =========================================================================
+   SEMANTIC TYPE STYLES — use these in components
+   ========================================================================= */
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-regular);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.eyebrow,
+[data-style="eyebrow"] {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--fg-muted);
+}
+
+.display,
+[data-style="display"] {
+  font-family: var(--font-display);
+  font-size: var(--fs-6xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--fw-regular);
+  font-variation-settings: "opsz" 120;
+  color: var(--fg);
+}
+
+h1, .h1, [data-style="h1"] {
+  font-family: var(--font-display);
+  font-size: var(--fs-5xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--fw-regular);
+  font-variation-settings: "opsz" 96;
+  color: var(--fg);
+  margin: 0;
+}
+
+h2, .h2, [data-style="h2"] {
+  font-family: var(--font-display);
+  font-size: var(--fs-4xl);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--fw-regular);
+  font-variation-settings: "opsz" 72;
+  color: var(--fg);
+  margin: 0;
+}
+
+h3, .h3, [data-style="h3"] {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--fw-regular);
+  font-variation-settings: "opsz" 48;
+  color: var(--fg);
+  margin: 0;
+}
+
+h4, .h4, [data-style="h4"] {
+  font-family: var(--font-sans);
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--fg);
+  margin: 0;
+}
+
+h5, .h5, [data-style="h5"] {
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: var(--lh-snug);
+  font-weight: var(--fw-semibold);
+  color: var(--fg);
+  margin: 0;
+}
+
+p, .body, [data-style="body"] {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  color: var(--fg);
+  margin: 0;
+}
+
+.body-lg, [data-style="body-lg"] {
+  font-size: var(--fs-md);
+  line-height: var(--lh-body);
+  color: var(--fg);
+}
+
+.lead, [data-style="lead"] {
+  font-family: var(--font-sans);
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+  font-weight: var(--fw-regular);
+  color: var(--fg-muted);
+}
+
+.small, small, [data-style="small"] {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+  color: var(--fg-muted);
+}
+
+.caption, [data-style="caption"] {
+  font-size: var(--fs-xs);
+  line-height: 1.4;
+  color: var(--fg-subtle);
+}
+
+.numeric, [data-style="numeric"] {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 96;
+  font-feature-settings: "tnum", "lnum";
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+}
+
+code, .mono, [data-style="mono"] {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Nexivo symbol">
+  
+  
+  <rect x="14" y="14" width="14" height="68" fill="#0A0A09"></rect>
+  
+  <rect x="68" y="14" width="14" height="68" fill="#0A0A09"></rect>
+  
+  <path d="M 28 24 L 68 72" stroke="#C7F230" stroke-width="14" stroke-linecap="square"></path>
+  
+  <rect x="14" y="14" width="14" height="20" fill="#0A0A09"></rect>
+  <rect x="68" y="62" width="14" height="20" fill="#0A0A09"></rect>
+</svg>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1440, initial-scale=1">
+  <title>Nexivo — Mám zájem o balíček</title>
+  <link rel="icon" href="assets/nexivo-favicon.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="nexivo_marketing.css">
+
+  <!-- ============================================================
+       STRIPE · platební brána bude doplněna
+       Sem vlož Stripe Payment Link nebo Checkout Session URL
+       per balíček.
+       ============================================================ -->
+  <script>
+    window.STRIPE_LINKS = {
+      basic:    "https://buy.stripe.com/test_basic_placeholder",
+      standard: "https://buy.stripe.com/test_standard_placeholder",
+      business: "https://buy.stripe.com/test_business_placeholder"
+    };
+  </script>
+
+  <style>
+    body { background: var(--bg); }
+
+    .inq-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 56px 48px 120px;
+    }
+
+    .inq-crumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-500);
+      margin-bottom: 32px;
+      transition: color 220ms var(--ease-out);
+    }
+    .inq-crumb:hover { color: var(--ink-1000); }
+    .inq-crumb svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    .inq-head {
+      max-width: 780px;
+      margin-bottom: 56px;
+    }
+    .inq-eyebrow {
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-1000);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .inq-eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--lime-500); }
+    .inq-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 64px;
+      line-height: 1.02;
+      letter-spacing: -0.024em;
+      margin: 0 0 20px;
+      color: var(--ink-1000);
+      font-variation-settings: "opsz" 96;
+      text-wrap: balance;
+    }
+    .inq-lead {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--ink-500);
+      max-width: 620px;
+      margin: 0;
+    }
+
+    .inq-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    body.is-thanked .inq-head,
+    body.is-thanked .summary,
+    body.is-thanked .inq-crumb { display: none; }
+    body.is-thanked .inq-grid { grid-template-columns: 1fr; }
+    body.is-thanked .formcard {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 64px;
+    }
+
+    .summary {
+      position: sticky;
+      top: 96px;
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-subtle);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .summary__label {
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-500);
+    }
+    .summary__plan {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .summary__name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+      color: var(--ink-1000);
+      font-variation-settings: "opsz" 72;
+      margin: 0;
+    }
+    .summary__tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-1000);
+      background: var(--lime-500);
+      padding: 5px 9px;
+      border-radius: 999px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .summary__sub {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink-500);
+      margin: 0;
+    }
+    .summary__price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 24px 0 4px;
+      border-top: 1px solid var(--ink-100);
+    }
+    .summary__num {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 56px;
+      line-height: 1;
+      letter-spacing: -0.022em;
+      color: var(--ink-1000);
+      font-variation-settings: "opsz" 96;
+      font-feature-settings: "tnum", "lnum";
+    }
+    .summary__unit {
+      font-family: var(--font-sans);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--ink-1000);
+    }
+    .summary__once {
+      font-size: 13px;
+      color: var(--ink-500);
+      margin-left: 6px;
+    }
+    .summary__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .summary__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--ink-700);
+    }
+    .summary__list svg {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      stroke: var(--lime-600);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .summary__foot {
+      border-top: 1px solid var(--ink-100);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .summary__row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--ink-500);
+      line-height: 1.5;
+    }
+    .summary__row svg {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      stroke: var(--ink-500);
+      stroke-width: 1.7;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .summary__switch {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 4px;
+    }
+    .summary__switch-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-500);
+    }
+    .summary__plans {
+      display: flex;
+      gap: 6px;
+    }
+    .summary__plans button {
+      flex: 1;
+      background: transparent;
+      border: 1px solid var(--ink-100);
+      color: var(--ink-700);
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 180ms var(--ease-out);
+    }
+    .summary__plans button:hover { background: var(--bone-100); }
+    .summary__plans button[aria-pressed="true"] {
+      background: var(--ink-1000);
+      border-color: var(--ink-1000);
+      color: var(--bone-50);
+    }
+
+    .formcard {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-subtle);
+      padding: 48px 56px;
+      min-height: 640px;
+      position: relative;
+    }
+
+    .form-state { display: none; }
+    .form-state[data-active="true"] { display: block; }
+
+    .form-head { margin-bottom: 36px; }
+    .form-head h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 36px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink-1000);
+      font-variation-settings: "opsz" 72;
+      margin: 0 0 10px;
+    }
+    .form-head p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-500);
+      margin: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px 24px;
+    }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field--full { grid-column: 1 / -1; }
+    .field label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-1000);
+    }
+    .field label .optional {
+      font-weight: 400;
+      color: var(--ink-400);
+      margin-left: 4px;
+    }
+    .field input,
+    .field textarea {
+      height: 50px;
+      padding: 0 14px;
+      background: var(--bone-100);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--ink-1000);
+      transition: border-color 180ms var(--ease-out), background 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+      width: 100%;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--ink-400); }
+    .field input:hover,
+    .field textarea:hover { background: var(--bone-200); }
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      background: #FFFFFF;
+      border-color: var(--ink-1000);
+      box-shadow: var(--ring-accent);
+    }
+    .field textarea {
+      height: auto;
+      min-height: 120px;
+      padding: 14px;
+      line-height: 1.5;
+      resize: vertical;
+      font-family: var(--font-sans);
+    }
+    .field .help { font-size: 12px; color: var(--ink-400); line-height: 1.4; }
+    .field[data-error="true"] input,
+    .field[data-error="true"] textarea { border-color: var(--warning); background: #FFFFFF; }
+    .field .err { font-size: 12px; color: var(--warning); display: none; line-height: 1.4; }
+    .field[data-error="true"] .err { display: block; }
+    .field[data-error="true"] .help { display: none; }
+
+    .consent {
+      margin-top: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 18px;
+      background: var(--bone-100);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 180ms var(--ease-out), border-color 180ms var(--ease-out);
+      user-select: none;
+    }
+    .consent:hover { background: var(--bone-200); }
+    .consent[data-error="true"] { border-color: var(--warning); background: #FFFFFF; }
+    .consent input {
+      appearance: none;
+      -webkit-appearance: none;
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      margin: 1px 0 0;
+      background: #FFFFFF;
+      border: 1.5px solid var(--ink-300);
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 140ms var(--ease-out), border-color 140ms var(--ease-out);
+      position: relative;
+    }
+    .consent input:hover { border-color: var(--ink-1000); }
+    .consent input:checked { background: var(--lime-500); border-color: var(--lime-500); }
+    .consent input:checked::after {
+      content: "";
+      position: absolute;
+      left: 5px; top: 1px;
+      width: 6px; height: 11px;
+      border: solid var(--ink-1000);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .consent input:focus-visible { outline: none; box-shadow: var(--ring-accent); }
+    .consent__text { font-size: 13px; line-height: 1.5; color: var(--ink-700); }
+    .consent__link {
+      margin: 8px 0 0;
+      padding-left: 32px;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--ink-500);
+    }
+    .consent__link a {
+      color: var(--ink-700);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .consent__link a:hover { color: var(--ink-1000); }
+    .consent__err { font-size: 12px; color: var(--warning); margin-top: 8px; display: none; line-height: 1.4; }
+    .consent-wrap[data-error="true"] .consent__err { display: block; }
+
+    .form-foot {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .form-foot__hint {
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--warning);
+      line-height: 1.4;
+    }
+    .form-foot__hint[hidden] { display: none; }
+    .form-foot__hint svg {
+      width: 18px; height: 18px;
+      stroke: var(--warning);
+      stroke-width: 1.8;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .shake { animation: shake 360ms var(--ease-inout); }
+
+    .submit {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 15px;
+      background: var(--lime-500);
+      color: var(--ink-1000);
+      border: none;
+      border-radius: 8px;
+      padding: 14px 28px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 180ms var(--ease-out), transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+      white-space: nowrap;
+    }
+    .submit:hover { background: var(--lime-400); transform: translateY(-1px); box-shadow: var(--shadow-medium); }
+    .submit:active { transform: translateY(0); background: var(--lime-600); box-shadow: none; }
+    .submit:focus-visible { outline: none; box-shadow: var(--ring-accent); }
+    .submit svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    .thanks { padding: 24px 0 0; }
+    .thanks__mark {
+      width: 56px; height: 56px;
+      border-radius: 999px;
+      background: var(--lime-500);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+    .thanks__mark svg {
+      width: 28px; height: 28px;
+      stroke: var(--ink-1000);
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .thanks__title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 48px;
+      line-height: 1.04;
+      letter-spacing: -0.022em;
+      color: var(--ink-1000);
+      font-variation-settings: "opsz" 96;
+      margin: 0 0 18px;
+      text-wrap: balance;
+    }
+    .thanks__lead {
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--ink-700);
+      margin: 0 0 28px;
+      max-width: 560px;
+    }
+
+    .pay-panel {
+      margin-top: 32px;
+      background: var(--ink-1000);
+      color: var(--bone-50);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+    .pay-panel__lead {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-300);
+      margin: 0 0 6px;
+    }
+    .pay-panel__amount {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .pay-panel__amount .num {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--bone-50);
+      font-variation-settings: "opsz" 72;
+      font-feature-settings: "tnum", "lnum";
+    }
+    .pay-panel__amount .unit {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--bone-50);
+    }
+    .pay-panel__sub {
+      font-size: 13px;
+      color: var(--ink-300);
+      margin: 0;
+      max-width: 360px;
+      line-height: 1.5;
+    }
+    .pay-btn {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 15px;
+      background: var(--lime-500);
+      color: var(--ink-1000);
+      border: none;
+      border-radius: 8px;
+      padding: 16px 24px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 180ms var(--ease-out), transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+      white-space: nowrap;
+    }
+    .pay-btn:hover { background: var(--lime-400); transform: translateY(-1px); box-shadow: var(--shadow-medium); }
+    .pay-btn:active { transform: translateY(0); background: var(--lime-600); box-shadow: none; }
+    .pay-btn svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    @media (max-width: 1024px) {
+      .inq-wrap { padding: 40px 32px 80px; }
+      .inq-title { font-size: 48px; }
+      .inq-grid { grid-template-columns: 1fr; gap: 32px; }
+      .summary { position: static; }
+      .formcard { padding: 36px 32px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .pay-panel { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-screen-label="Inquiry — Mám zájem">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="nexivo_landing.html" class="nav__logo">
+      <span class="nav__word">nexivo</span>
+    </a>
+    <div class="nav__links">
+      <a class="nav__link" href="nexivo_landing.html#receptionist">AI recepční</a>
+      <a class="nav__link" href="nexivo_landing.html#websites">Weby s chatem</a>
+      <a class="nav__link" href="nexivo_landing.html#for-whom">Pro koho</a>
+      <a class="nav__link" href="nexivo_landing.html#pricing">Ceník</a>
+      <a class="nav__link" href="nexivo_landing.html#refs">Reference</a>
+    </div>
+    <div class="nav__right">
+      <a href="#" class="nav__signin">Přihlásit</a>
+      <a href="nexivo_landing.html#pricing" class="nav__cta">Zpět na ceník</a>
+    </div>
+  </nav>
+
+  <main class="inq-wrap">
+
+    <a href="nexivo_landing.html#pricing" class="inq-crumb">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      Zpět na ceník
+    </a>
+
+    <header class="inq-head">
+      <span class="inq-eyebrow" id="eyebrow">Vybraný balíček</span>
+      <h1 class="inq-title" id="page-title">Mám zájem o balíček.</h1>
+      <p class="inq-lead">Nechte nám pár základních údajů. Do 24 hodin se ozve specialista na AI a domluví krátký telefonát, kde si projdeme detaily provozu a finální nastavení.</p>
+    </header>
+
+    <div class="inq-grid">
+
+      <!-- LEFT — order summary -->
+      <aside class="summary" aria-label="Souhrn vybraného balíčku">
+        <div>
+          <span class="summary__label">Vybraný balíček</span>
+        </div>
+        <div class="summary__plan">
+          <h2 class="summary__name" id="sum-name">Standard</h2>
+          <span class="summary__tag" id="sum-tag" hidden>Nejvolenější</span>
+        </div>
+        <p class="summary__sub" id="sum-sub">AI recepční a chatbot napojené na vaši stávající stránku. Pro provozy, které už web mají.</p>
+
+        <div class="summary__price">
+          <span class="summary__num" id="sum-num">19&#8239;890</span>
+          <span class="summary__unit">Kč</span>
+          <span class="summary__once">jednorázově</span>
+        </div>
+
+        <ul class="summary__list" id="sum-list">
+          <!-- populated by JS -->
+        </ul>
+
+        <div class="summary__foot">
+          <div class="summary__row">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.86 19.86 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>Specialista na AI vás bude kontaktovat do 24 hodin (pracovní dny).</span>
+          </div>
+          <div class="summary__row">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+            <span>Platba probíhá přes Stripe až po telefonátu se specialistou.</span>
+          </div>
+        </div>
+
+        <div class="summary__switch">
+          <span class="summary__switch-label">Změnit balíček</span>
+          <div class="summary__plans" role="group" aria-label="Změna balíčku">
+            <button type="button" data-plan="basic">Basic</button>
+            <button type="button" data-plan="standard">Standard</button>
+            <button type="button" data-plan="business">Business</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT — form card -->
+      <section class="formcard" aria-live="polite">
+
+        <!-- STATE A: form -->
+        <div class="form-state" data-active="true" data-state="form">
+          <div class="form-head">
+            <h2>Kontaktní údaje</h2>
+            <p>Vše pro zaslání nabídky a domluvení úvodního telefonátu. Údaje použijeme pouze pro přípravu zakázky.</p>
+          </div>
+
+          <form id="inq-form" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-name">Jméno a příjmení</label>
+                <input id="f-name" name="name" type="text" placeholder="Jan Novák" autocomplete="name" required>
+                <span class="err">Vyplňte prosím jméno a příjmení.</span>
+              </div>
+
+              <div class="field">
+                <label for="f-company">Název firmy</label>
+                <input id="f-company" name="company" type="text" placeholder="Kadeřnictví Lucie s.r.o." autocomplete="organization" required>
+                <span class="err">Vyplňte prosím název firmy.</span>
+              </div>
+
+              <div class="field">
+                <label for="f-ico">IČO</label>
+                <input id="f-ico" name="ico" type="text" inputmode="numeric" placeholder="12345678" maxlength="10" required>
+                <span class="help">8 číslic. Najdete ho v živnostenském rejstříku.</span>
+                <span class="err">IČO musí mít 8 číslic.</span>
+              </div>
+
+              <div class="field">
+                <label for="f-email">E-mail</label>
+                <input id="f-email" name="email" type="email" placeholder="jan@vasefirma.cz" autocomplete="email" required>
+                <span class="err">Zkontrolujte prosím tvar e-mailové adresy.</span>
+              </div>
+
+              <div class="field field--full">
+                <label for="f-phone">Telefonní číslo</label>
+                <input id="f-phone" name="phone" type="tel" placeholder="+420 605 123 456" autocomplete="tel" required>
+                <span class="help">Použijeme pouze pro úvodní telefonát se specialistou.</span>
+                <span class="err">Vyplňte prosím telefonní číslo.</span>
+              </div>
+
+              <div class="field field--full">
+                <label for="f-note">Poznámka <span class="optional">(volitelné)</span></label>
+                <textarea id="f-note" name="note" placeholder="Co byste si u nás přáli vyřešit? Kolik máte zhruba hovorů týdně? Jakýkoli detail o provozu, který by nám pomohl."></textarea>
+              </div>
+            </div>
+
+            <div class="consent-wrap">
+              <label class="consent" for="f-consent">
+                <input id="f-consent" name="consent" type="checkbox">
+                <span class="consent__text">
+                  Souhlasím se zpracováním osobních údajů pro přípravu nabídky. Údaje použijeme pouze interně a nikomu je nepředáváme.
+                </span>
+              </label>
+              <p class="consent__link">
+                <a href="#" target="_blank" rel="noopener">Přečíst zásady zpracování osobních údajů</a>
+              </p>
+              <span class="consent__err">Pro odeslání je potřeba souhlasit se zpracováním osobních údajů.</span>
+            </div>
+
+            <div class="form-foot">
+              <p class="form-foot__hint" id="submit-hint" hidden>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                <span id="submit-hint-text">Doplňte prosím chybějící údaje.</span>
+              </p>
+              <button type="submit" class="submit">
+                Mám zájem
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- STATE B: thank you -->
+        <div class="form-state" data-state="thanks">
+          <div class="thanks">
+            <span class="thanks__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            </span>
+            <h2 class="thanks__title">Děkujeme za projevený zájem.</h2>
+            <p class="thanks__lead">Prosím dokončete objednávku. Náš specialista na AI vás bude po dokončení platby do 24 hodin kontaktovat.</p>
+
+            <div class="pay-panel">
+              <div>
+                <p class="pay-panel__lead">K úhradě — <span id="pay-plan">Standard</span></p>
+                <div class="pay-panel__amount">
+                  <span class="num" id="pay-num">19&#8239;890</span>
+                  <span class="unit">Kč</span>
+                </div>
+                <p class="pay-panel__sub">Jednorázová částka. Platební bránu Stripe doplníme, tlačítko vás na ni přesměruje.</p>
+              </div>
+              <button type="button" class="pay-btn" id="pay-btn">
+                Dokončit objednávku
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    const PLANS = {
+      basic: {
+        name: "Basic",
+        sub: "Moderní OnePager s rezervačním systémem a chatbotem. Pro živnostníky, kteří začínají.",
+        priceFmt: "13 890",
+        priceNum: 13890,
+        featured: false,
+        features: [
+          "Moderní OnePager web",
+          "Rezervační systém",
+          "Chatbot trénovaný na vašem provozu",
+          "CZ a SK jazyk",
+        ],
+      },
+      standard: {
+        name: "Standard",
+        sub: "AI recepční a chatbot napojené na vaši stávající stránku. Pro provozy, které už web mají.",
+        priceFmt: "19 890",
+        priceNum: 19890,
+        featured: false,
+        features: [
+          "AI recepční na příchozí hovory",
+          "Chatbot napojený na váš web",
+          "Napojení na Google Kalendář",
+          "SMS a e-mail připomínky",
+        ],
+      },
+      business: {
+        name: "Business",
+        sub: "Kompletní řešení: moderní web, chatbot a AI recepční pod jednou střechou.",
+        priceFmt: "28 680",
+        priceNum: 28680,
+        featured: true,
+        features: [
+          "Moderní web na míru",
+          "Chatbot s vlastním tónem",
+          "AI recepční s vlastním hlasem",
+          "Vícejazyčný chat (CZ · SK · EN)",
+          "Týdenní souhrn a doporučení",
+        ],
+      },
+    };
+
+    function getPlanKey() {
+      const params = new URLSearchParams(window.location.search);
+      const raw = (params.get("plan") || "standard").toLowerCase();
+      return PLANS[raw] ? raw : "standard";
+    }
+
+    let currentPlanKey = getPlanKey();
+
+    function renderPlan(key) {
+      const plan = PLANS[key];
+      currentPlanKey = key;
+
+      document.getElementById("sum-name").textContent = plan.name;
+      document.getElementById("sum-sub").textContent = plan.sub;
+      document.getElementById("sum-num").innerHTML = plan.priceFmt;
+      document.getElementById("pay-plan").textContent = plan.name;
+      document.getElementById("pay-num").innerHTML = plan.priceFmt;
+
+      const tag = document.getElementById("sum-tag");
+      tag.hidden = !plan.featured;
+
+      const ul = document.getElementById("sum-list");
+      ul.innerHTML = plan.features.map(f => `
+        <li>
+          <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>${f}</span>
+        </li>
+      `).join("");
+
+      document.getElementById("page-title").innerHTML = `Mám zájem o balíček <em style="font-style: italic;">${plan.name}</em>.`;
+
+      document.querySelectorAll(".summary__plans button").forEach(btn => {
+        btn.setAttribute("aria-pressed", btn.dataset.plan === key ? "true" : "false");
+      });
+
+      const url = new URL(window.location.href);
+      url.searchParams.set("plan", key);
+      window.history.replaceState({}, "", url);
+    }
+
+    document.querySelectorAll(".summary__plans button").forEach(btn => {
+      btn.addEventListener("click", () => renderPlan(btn.dataset.plan));
+    });
+
+    renderPlan(currentPlanKey);
+
+    const form = document.getElementById("inq-form");
+
+    function setError(fieldEl, hasError) {
+      fieldEl.setAttribute("data-error", hasError ? "true" : "false");
+    }
+
+    function validate() {
+      let ok = true;
+      const fields = form.querySelectorAll(".field");
+      fields.forEach(f => f.setAttribute("data-error", "false"));
+
+      const name = form.elements["name"].value.trim();
+      if (name.length < 2) { setError(form.elements["name"].closest(".field"), true); ok = false; }
+
+      const company = form.elements["company"].value.trim();
+      if (company.length < 2) { setError(form.elements["company"].closest(".field"), true); ok = false; }
+
+      const ico = form.elements["ico"].value.replace(/\D/g, "");
+      if (!/^\d{8}$/.test(ico)) { setError(form.elements["ico"].closest(".field"), true); ok = false; }
+
+      const email = form.elements["email"].value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError(form.elements["email"].closest(".field"), true); ok = false; }
+
+      const phone = form.elements["phone"].value.trim();
+      if (phone.replace(/[\s+\-()]/g, "").length < 9) { setError(form.elements["phone"].closest(".field"), true); ok = false; }
+
+      const consentWrap = form.querySelector(".consent-wrap");
+      consentWrap.setAttribute("data-error", "false");
+      consentWrap.querySelector(".consent").setAttribute("data-error", "false");
+      if (!form.elements["consent"].checked) {
+        consentWrap.setAttribute("data-error", "true");
+        consentWrap.querySelector(".consent").setAttribute("data-error", "true");
+        ok = false;
+      }
+
+      return ok;
+    }
+
+    form.querySelectorAll("input, textarea").forEach(el => {
+      el.addEventListener("input", () => {
+        const f = el.closest(".field");
+        if (f) f.setAttribute("data-error", "false");
+        const hint = document.getElementById("submit-hint");
+        if (hint) hint.hidden = true;
+      });
+    });
+
+    form.elements["consent"].addEventListener("change", () => {
+      const wrap = form.querySelector(".consent-wrap");
+      wrap.setAttribute("data-error", "false");
+      wrap.querySelector(".consent").setAttribute("data-error", "false");
+      const hint = document.getElementById("submit-hint");
+      if (hint) hint.hidden = true;
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const hint = document.getElementById("submit-hint");
+      const hintText = document.getElementById("submit-hint-text");
+      if (!validate()) {
+        const consentBad = form.querySelector('.consent-wrap[data-error="true"]');
+        const fieldBad = form.querySelector('.field[data-error="true"]');
+        if (consentBad && !fieldBad) {
+          hintText.textContent = "Zaškrtněte prosím souhlas se zpracováním údajů.";
+        } else {
+          hintText.textContent = "Doplňte prosím chybějící údaje.";
+        }
+        hint.hidden = false;
+        const btn = form.querySelector(".submit");
+        btn.classList.remove("shake");
+        void btn.offsetWidth;
+        btn.classList.add("shake");
+        const firstErr = form.querySelector('.field[data-error="true"], .consent-wrap[data-error="true"]');
+        if (firstErr) {
+          const top = firstErr.getBoundingClientRect().top + window.scrollY - 120;
+          window.scrollTo({ top, behavior: "smooth" });
+          const input = firstErr.querySelector("input, textarea");
+          if (input) input.focus();
+        }
+        return;
+      }
+      hint.hidden = true;
+
+      document.body.classList.add("is-thanked");
+      document.querySelector('[data-state="form"]').setAttribute("data-active", "false");
+      document.querySelector('[data-state="thanks"]').setAttribute("data-active", "true");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("pay-btn").addEventListener("click", () => {
+      const link = (window.STRIPE_LINKS && window.STRIPE_LINKS[currentPlanKey]) || "#";
+      window.open(link, "_blank", "noopener");
+    });
+  </script>
+
+</body>
+</html>
