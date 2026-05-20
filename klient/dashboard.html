@@ -1,315 +1,314 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nexivo · Klientský dashboard</title>
-  <link rel="icon" href="../assets/nexivo-favicon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; background: #F5F3EE; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440, initial-scale=1">
+<title>Nexivo · Klientský portál</title>
+<link rel="icon" href="../assets/nexivo-favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #F0EEE9; -webkit-font-smoothing: antialiased; }
+#root { width: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; }
+#root > .app, #root > .login { width: 1440px; min-height: 100vh; }
 
-    :root {
-      --cream:    #F5F3EE;
-      --cream-2:  #EDEAE0;
-      --paper:    #FFFFFF;
-      --ink:      #0A0A09;
-      --ink-2:    #111111;
-      --ink-3:    #1F1E18;
-      --muted:    #6B6A5C;
-      --muted-2:  #98968A;
-      --hair:     rgba(10,10,9,0.08);
-      --hair-2:   rgba(10,10,9,0.14);
-      --hair-dk:  rgba(255,255,255,0.10);
-      --hair-dk2: rgba(255,255,255,0.16);
-      --lime:     #C7F230;
-      --lime-dim: rgba(199,242,48,0.20);
-      --font-display: 'Fraunces', Georgia, serif;
-      --font-sans:    'Manrope', -apple-system, sans-serif;
-    }
+:root {
+  --cream:#F5F3EE; --cream-2:#EDEAE0; --paper:#FFFFFF;
+  --ink:#0A0A09; --ink-2:#111111; --ink-3:#1F1E18;
+  --muted:#6B6A5C; --muted-2:#98968A;
+  --hair:rgba(10,10,9,0.08); --hair-2:rgba(10,10,9,0.14);
+  --hair-dk:rgba(255,255,255,0.10); --hair-dk2:rgba(255,255,255,0.16);
+  --lime:#C7F230; --lime-dim:rgba(199,242,48,0.20);
+  --font-display:'Fraunces',Georgia,serif;
+  --font-sans:'Manrope',-apple-system,sans-serif;
+  --dur-base:220ms; --ease-out:cubic-bezier(0.16,1,0.3,1);
+}
 
-    * { -webkit-font-smoothing: antialiased; }
+/* APP SHELL */
+.app { position:relative; width:100%; height:100%; background:var(--cream); color:var(--ink); font-family:var(--font-sans); display:grid; grid-template-columns:232px 1fr; overflow:hidden; }
 
-    /* ── APP SHELL ── */
-    .app {
-      width: 100vw; height: 100vh;
-      background: var(--cream);
-      color: var(--ink);
-      font-family: var(--font-sans);
-      display: grid;
-      grid-template-columns: 232px 1fr;
-      overflow: hidden;
-    }
+/* SIDEBAR */
+.side { height:100%; display:flex; flex-direction:column; padding:28px 20px 20px; border-right:1px solid var(--hair); background:var(--cream); }
+.side__brand { display:inline-flex; align-items:flex-end; gap:6px; font-family:var(--font-display); font-weight:600; font-size:28px; line-height:1; letter-spacing:-0.022em; font-variation-settings:"opsz" 96; color:var(--ink); padding:0 8px 28px; border-bottom:1px solid var(--hair); cursor:pointer; }
+.side__brand::after { content:""; width:7px; height:7px; background:var(--lime); margin-bottom:6px; }
+.side__group { margin-top:24px; display:flex; flex-direction:column; gap:2px; }
+.side__cap { font:600 11px/1 var(--font-sans); letter-spacing:0.16em; text-transform:uppercase; color:var(--muted-2); padding:0 10px 10px; }
+.side__link { display:flex; align-items:center; gap:12px; padding:9px 10px; border-radius:8px; font:500 14px/1 var(--font-sans); color:var(--ink); cursor:pointer; letter-spacing:-0.002em; transition:background 180ms var(--ease-out); user-select:none; white-space:nowrap; }
+.side__link:hover { background:var(--cream-2); }
+.side__link svg { width:18px; height:18px; stroke:currentColor; stroke-width:1.5; fill:none; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+.side__link--active { background:var(--ink); color:var(--cream); }
+.side__link--active:hover { background:var(--ink-2); }
+.side__link .meta { margin-left:auto; font-size:11px; font-weight:600; letter-spacing:0.02em; padding:3px 7px; border-radius:999px; background:var(--lime); color:var(--ink); flex-shrink:0; }
+.side__foot { margin-top:auto; }
+.side__user { display:grid; grid-template-columns:32px 1fr auto; align-items:center; gap:10px; padding:10px; border-radius:10px; border:1px solid var(--hair); background:var(--paper); }
+.side__avatar { width:32px; height:32px; border-radius:999px; background:var(--ink); color:var(--cream); display:inline-flex; align-items:center; justify-content:center; font:600 12px/1 var(--font-sans); }
+.side__who { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.side__who .n { font-weight:600; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.side__who .r { font-size:11px; color:var(--muted); letter-spacing:0.02em; }
+.side__user svg { width:16px; height:16px; stroke:var(--muted); stroke-width:1.5; fill:none; }
 
-    /* ── SIDEBAR ── */
-    .side {
-      height: 100%;
-      display: flex; flex-direction: column;
-      padding: 28px 20px 20px;
-      border-right: 1px solid var(--hair);
-      background: var(--cream);
-    }
-    .side__brand {
-      display: inline-flex; align-items: flex-end; gap: 6px;
-      font-family: var(--font-display); font-weight: 600;
-      font-size: 28px; line-height: 1; letter-spacing: -0.022em;
-      font-variation-settings: "opsz" 96;
-      color: var(--ink);
-      padding: 0 8px 28px;
-      border-bottom: 1px solid var(--hair);
-      cursor: pointer;
-    }
-    .side__brand::after { content: ""; width: 7px; height: 7px; background: var(--lime); margin-bottom: 6px; }
-    .side__group { margin-top: 24px; display: flex; flex-direction: column; gap: 2px; }
-    .side__cap {
-      font: 600 11px/1 var(--font-sans);
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--muted-2);
-      padding: 0 10px 10px;
-    }
-    .side__link {
-      display: flex; align-items: center; gap: 12px;
-      padding: 9px 10px;
-      border-radius: 8px;
-      font: 500 14px/1 var(--font-sans);
-      color: var(--ink);
-      cursor: pointer;
-      letter-spacing: -0.002em;
-      transition: background 180ms cubic-bezier(0.16,1,0.3,1);
-    }
-    .side__link:hover { background: var(--cream-2); }
-    .side__link svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    .side__link--active { background: var(--ink); color: var(--cream); }
-    .side__link--active:hover { background: var(--ink-2); }
-    .side__link .meta {
-      margin-left: auto;
-      font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
-      padding: 3px 7px; border-radius: 999px;
-      background: var(--lime); color: var(--ink);
-    }
-    .side__foot { margin-top: auto; }
-    .side__user {
-      display: grid; grid-template-columns: 32px 1fr auto;
-      align-items: center; gap: 10px;
-      padding: 10px; border-radius: 10px;
-      border: 1px solid var(--hair); background: var(--paper);
-    }
-    .side__avatar {
-      width: 32px; height: 32px; border-radius: 999px;
-      background: var(--ink); color: var(--cream);
-      display: inline-flex; align-items: center; justify-content: center;
-      font: 600 12px/1 var(--font-sans);
-    }
-    .side__who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-    .side__who .n { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .side__who .r { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
-    .side__user svg { width: 16px; height: 16px; stroke: var(--muted); stroke-width: 1.5; fill: none; }
+/* MAIN */
+.main { height:100%; overflow:auto; display:flex; flex-direction:column; }
+.main::-webkit-scrollbar { display:none; }
 
-    /* ── MAIN ── */
-    .main { height: 100%; overflow: auto; display: flex; flex-direction: column; }
-    .main::-webkit-scrollbar { display: none; }
+/* TOPBAR */
+.top { display:flex; align-items:center; justify-content:space-between; padding:28px 48px 24px; border-bottom:1px solid var(--hair); flex-shrink:0; }
+.top__l { display:flex; flex-direction:column; gap:6px; }
+.top__eyebrow { font:600 11px/1 var(--font-sans); letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
+.top__eyebrow::before { content:""; width:7px; height:7px; background:var(--lime); }
+.top__hello { font-family:var(--font-display); font-weight:400; font-size:30px; line-height:1.05; letter-spacing:-0.018em; font-variation-settings:"opsz" 72; }
+.top__hello em { font-style:italic; }
+.top__r { display:flex; align-items:center; gap:14px; }
+.tabs { display:inline-flex; background:var(--paper); border:1px solid var(--hair); border-radius:999px; padding:4px; }
+.tabs button { font:600 13px/1 var(--font-sans); border:0; background:transparent; padding:9px 16px; border-radius:999px; color:var(--muted); cursor:pointer; transition:all 180ms var(--ease-out); white-space:nowrap; }
+.tabs button:hover { color:var(--ink); }
+.tabs button.on { background:var(--ink); color:var(--cream); }
+.topbtn { display:inline-flex; align-items:center; gap:8px; font:600 13px/1 var(--font-sans); padding:11px 16px; border-radius:8px; border:1px solid var(--hair-2); background:var(--paper); color:var(--ink); cursor:pointer; transition:background 150ms; white-space:nowrap; }
+.topbtn:hover { background:var(--cream-2); }
+.topbtn--ink { background:var(--ink); color:var(--cream); border-color:transparent; }
+.topbtn--ink:hover { background:var(--ink-3); }
+.topbtn svg { width:16px; height:16px; stroke:currentColor; stroke-width:1.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.topbtn .dot { width:7px; height:7px; background:var(--lime); border-radius:999px; box-shadow:0 0 0 3px rgba(199,242,48,0.30); }
 
-    /* ── TOPBAR ── */
-    .top {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 28px 48px 24px;
-      border-bottom: 1px solid var(--hair);
-      flex-shrink: 0;
-    }
-    .top__l { display: flex; flex-direction: column; gap: 6px; }
-    .top__eyebrow {
-      font: 600 11px/1 var(--font-sans);
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted);
-      display: inline-flex; align-items: center; gap: 10px;
-    }
-    .top__eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--lime); }
-    .top__hello {
-      font-family: var(--font-display); font-weight: 400;
-      font-size: 30px; line-height: 1.05; letter-spacing: -0.018em;
-      font-variation-settings: "opsz" 72;
-    }
-    .top__hello em { font-style: italic; }
-    .top__r { display: flex; align-items: center; gap: 14px; }
-    .tabs {
-      display: inline-flex;
-      background: var(--paper);
-      border: 1px solid var(--hair);
-      border-radius: 999px;
-      padding: 4px;
-    }
-    .tabs button {
-      font: 600 13px/1 var(--font-sans);
-      border: 0; background: transparent;
-      padding: 9px 16px; border-radius: 999px;
-      color: var(--muted); cursor: pointer;
-      letter-spacing: -0.005em;
-      transition: all 180ms cubic-bezier(0.16,1,0.3,1);
-    }
-    .tabs button:hover { color: var(--ink); }
-    .tabs button.on { background: var(--ink); color: var(--cream); }
-    .topbtn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font: 600 13px/1 var(--font-sans);
-      padding: 11px 16px; border-radius: 8px;
-      border: 1px solid var(--hair-2);
-      background: var(--paper); color: var(--ink);
-      cursor: pointer;
-      transition: background 150ms;
-    }
-    .topbtn:hover { background: var(--cream-2); }
-    .topbtn--ink { background: var(--ink); color: var(--cream); border-color: transparent; }
-    .topbtn--ink:hover { background: var(--ink-3); }
-    .topbtn svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    .topbtn .dot { width: 7px; height: 7px; background: var(--lime); border-radius: 999px; box-shadow: 0 0 0 3px rgba(199,242,48,0.30); }
+/* HERO */
+.hero { padding:48px 48px 32px; display:grid; grid-template-columns:1.35fr 1fr; gap:56px; align-items:flex-end; flex-shrink:0; }
+.hero__label { display:flex; align-items:center; gap:12px; font:600 12px/1 var(--font-sans); letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; white-space:nowrap; }
+.hero__label::before { content:""; width:7px; height:7px; background:var(--lime); }
+.hero__num { font-family:var(--font-display); font-weight:400; font-size:196px; line-height:0.88; letter-spacing:-0.038em; font-variation-settings:"opsz" 144; font-feature-settings:"tnum","lnum"; color:var(--ink); display:flex; align-items:flex-start; gap:8px; }
+.hero__unit { font-family:var(--font-display); font-weight:400; font-size:44px; letter-spacing:-0.022em; margin-top:24px; color:var(--muted); }
+.hero__caption { display:flex; flex-direction:column; gap:14px; margin-top:28px; max-width:480px; }
+.hero__caption p { font:400 17px/1.5 var(--font-sans); color:var(--muted); margin:0; }
+.hero__caption p em { font-style:normal; color:var(--ink); font-weight:600; }
+.hero__delta { display:inline-flex; align-items:center; gap:8px; padding:7px 12px; border-radius:999px; background:var(--lime-dim); color:var(--ink); font:600 13px/1 var(--font-sans); align-self:flex-start; white-space:nowrap; }
+.hero__delta svg { width:14px; height:14px; stroke:currentColor; stroke-width:2; fill:none; }
+.hero__side { display:flex; flex-direction:column; gap:14px; }
 
-    /* ── HERO ── */
-    .hero {
-      padding: 48px 48px 32px;
-      display: grid; grid-template-columns: 1.35fr 1fr;
-      gap: 56px; align-items: flex-end;
-      flex-shrink: 0;
-    }
-    .hero__label {
-      display: flex; align-items: center; gap: 12px;
-      font: 600 12px/1 var(--font-sans);
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 20px;
-    }
-    .hero__label::before { content: ""; width: 7px; height: 7px; background: var(--lime); }
-    .hero__num {
-      font-family: var(--font-display); font-weight: 400;
-      font-size: 232px; line-height: 0.86; letter-spacing: -0.038em;
-      font-variation-settings: "opsz" 144; font-feature-settings: "tnum","lnum";
-      color: var(--ink);
-      display: flex; align-items: flex-start; gap: 8px;
-    }
-    .hero__unit {
-      font-family: var(--font-display); font-weight: 400;
-      font-size: 52px; letter-spacing: -0.022em;
-      margin-top: 30px; color: var(--muted);
-    }
-    .hero__caption { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; max-width: 480px; }
-    .hero__caption p { font: 400 17px/1.5 var(--font-sans); color: var(--muted); }
-    .hero__caption p em { font-style: normal; color: var(--ink); font-weight: 600; }
-    .hero__delta {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 7px 12px; border-radius: 999px;
-      background: var(--lime-dim); color: var(--ink);
-      font: 600 13px/1 var(--font-sans); align-self: flex-start;
-    }
-    .hero__delta svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
-    .hero__side { display: flex; flex-direction: column; gap: 14px; }
+/* KPI */
+.kpi { background:var(--paper); border-radius:14px; padding:22px 24px; border:1px solid var(--hair); display:grid; grid-template-columns:1fr auto; gap:12px; align-items:end; }
+.kpi__label { font:600 11px/1 var(--font-sans); letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
+.kpi__name { font:500 14px/1.2 var(--font-sans); margin-top:8px; color:var(--ink); }
+.kpi__num { font-family:var(--font-display); font-weight:400; font-size:56px; line-height:1; letter-spacing:-0.028em; font-feature-settings:"tnum","lnum"; font-variation-settings:"opsz" 72; display:flex; align-items:baseline; gap:4px; white-space:nowrap; }
+.kpi__num .u { font-size:18px; color:var(--muted); letter-spacing:0; margin-left:2px; font-family:var(--font-sans); font-weight:500; }
+.kpi__delta { font:600 12px/1 var(--font-sans); display:inline-flex; align-items:center; gap:4px; color:#1F8A5B; white-space:nowrap; }
+.kpi__delta--neg { color:#B85C1F; }
+.kpi__delta svg { width:12px; height:12px; stroke:currentColor; stroke-width:2; fill:none; }
+.kpis-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
 
-    /* ── KPIs ── */
-    .kpi {
-      background: var(--paper); border-radius: 14px;
-      padding: 22px 24px; border: 1px solid var(--hair);
-      display: grid; grid-template-columns: 1fr auto;
-      gap: 12px; align-items: end;
-    }
-    .kpi__label { font: 600 11px/1 var(--font-sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-    .kpi__name { font: 500 14px/1.2 var(--font-sans); margin-top: 8px; color: var(--ink); }
-    .kpi__num {
-      font-family: var(--font-display); font-weight: 400;
-      font-size: 56px; line-height: 1; letter-spacing: -0.028em;
-      font-feature-settings: "tnum","lnum"; font-variation-settings: "opsz" 72;
-      display: flex; align-items: baseline; gap: 4px; white-space: nowrap;
-    }
-    .kpi__num .u { font-size: 18px; color: var(--muted); letter-spacing: 0; margin-left: 2px; font-family: var(--font-sans); font-weight: 500; }
-    .kpi__delta { font: 600 12px/1 var(--font-sans); display: inline-flex; align-items: center; gap: 4px; color: #1F8A5B; }
-    .kpi__delta--neg { color: #B85C1F; }
-    .kpi__delta svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 2; fill: none; }
+/* SERVICE CARDS */
+.svcs { padding:32px 48px; display:grid; gap:16px; flex-shrink:0; }
+.svcs--3 { grid-template-columns:repeat(3,1fr); }
+.svcs--3 .svc-card__big { font-size:78px; }
+.svcs--3 .svc-card__sub { max-width:280px; font-size:13px; }
+.svcs--3 .svc-card__row .v { font-size:19px; }
+.svc-card { background:var(--ink-2); color:var(--cream); border-radius:18px; padding:28px 28px 24px; display:flex; flex-direction:column; gap:16px; min-height:280px; position:relative; overflow:hidden; cursor:pointer; transition:transform var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out); }
+.svc-card:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(20,20,15,0.18); }
+.svc-card__top { display:flex; align-items:center; justify-content:space-between; }
+.svc-card__name { display:inline-flex; align-items:center; gap:10px; font:600 13px/1 var(--font-sans); letter-spacing:0.04em; }
+.svc-card__name .ic { width:32px; height:32px; border-radius:8px; background:rgba(255,255,255,0.06); display:inline-flex; align-items:center; justify-content:center; }
+.svc-card__name .ic svg { width:16px; height:16px; stroke:var(--cream); stroke-width:1.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.svc-card__live { display:inline-flex; align-items:center; gap:6px; font:600 10px/1 var(--font-sans); letter-spacing:0.16em; text-transform:uppercase; color:var(--lime); white-space:nowrap; }
+.svc-card__live::before { content:""; width:6px; height:6px; background:var(--lime); border-radius:999px; box-shadow:0 0 0 3px rgba(199,242,48,0.20); animation:livepulse 2s ease-in-out infinite; }
+@keyframes livepulse { 0%,100%{opacity:1}50%{opacity:0.55} }
+.svc-card__big { margin-top:12px; font-family:var(--font-display); font-weight:400; font-size:96px; line-height:0.88; letter-spacing:-0.034em; font-feature-settings:"tnum","lnum"; font-variation-settings:"opsz" 96; }
+.svc-card__big .u { font-family:var(--font-sans); font-weight:500; font-size:18px; letter-spacing:0; color:var(--muted-2); margin-left:6px; }
+.svc-card__sub { font:400 14px/1.45 var(--font-sans); color:rgba(245,243,238,0.65); max-width:320px; }
+.svc-card__row { margin-top:auto; padding-top:14px; border-top:1px solid var(--hair-dk); display:flex; justify-content:space-between; gap:14px; }
+.svc-card__row .s { display:flex; flex-direction:column; gap:4px; }
+.svc-card__row .lab { font:600 10px/1 var(--font-sans); letter-spacing:0.14em; text-transform:uppercase; color:var(--muted-2); }
+.svc-card__row .v { font-family:var(--font-display); font-weight:400; font-size:22px; letter-spacing:-0.014em; font-feature-settings:"tnum","lnum"; color:var(--cream); }
+.svc-card__row .v .u { font-family:var(--font-sans); font-size:12px; color:var(--muted-2); font-weight:500; margin-left:2px; }
+.svc-card--featured::before { content:""; position:absolute; top:28px; right:28px; width:8px; height:8px; background:var(--lime); }
+.svc-card__cta { margin-top:8px; display:inline-flex; align-items:center; gap:6px; align-self:flex-start; font:600 12px/1 var(--font-sans); letter-spacing:0.02em; color:var(--lime); cursor:pointer; }
+.svc-card__cta svg { width:14px; height:14px; stroke:currentColor; stroke-width:1.5; fill:none; }
 
-    /* ── SERVICE CARDS ── */
-    .svcs { padding: 32px 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex-shrink: 0; }
-    .svc-card {
-      background: var(--ink-2); color: var(--cream);
-      border-radius: 18px; padding: 28px 28px 24px;
-      display: flex; flex-direction: column; gap: 16px;
-      min-height: 280px; position: relative; overflow: hidden;
-    }
-    .svc-card__top { display: flex; align-items: center; justify-content: space-between; }
-    .svc-card__name { display: inline-flex; align-items: center; gap: 10px; font: 600 13px/1 var(--font-sans); letter-spacing: 0.04em; }
-    .svc-card__name .ic { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.06); display: inline-flex; align-items: center; justify-content: center; }
-    .svc-card__name .ic svg { width: 16px; height: 16px; stroke: var(--cream); stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    .svc-card__live { display: inline-flex; align-items: center; gap: 6px; font: 600 10px/1 var(--font-sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--lime); }
-    .svc-card__live::before { content: ""; width: 6px; height: 6px; background: var(--lime); border-radius: 999px; box-shadow: 0 0 0 3px rgba(199,242,48,0.20); animation: livepulse 2s ease-in-out infinite; }
-    @keyframes livepulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
-    .svc-card__big { margin-top: 12px; font-family: var(--font-display); font-weight: 400; font-size: 96px; line-height: 0.88; letter-spacing: -0.034em; font-feature-settings: "tnum","lnum"; font-variation-settings: "opsz" 96; }
-    .svc-card__big .u { font-family: var(--font-sans); font-weight: 500; font-size: 18px; letter-spacing: 0; color: var(--muted-2); margin-left: 6px; }
-    .svc-card__sub { font: 400 14px/1.45 var(--font-sans); color: rgba(245,243,238,0.65); max-width: 320px; }
-    .svc-card__row { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--hair-dk); display: flex; justify-content: space-between; gap: 14px; }
-    .svc-card__row .s { display: flex; flex-direction: column; gap: 4px; }
-    .svc-card__row .lab { font: 600 10px/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); }
-    .svc-card__row .v { font-family: var(--font-display); font-weight: 400; font-size: 22px; letter-spacing: -0.014em; font-feature-settings: "tnum","lnum"; color: var(--cream); }
-    .svc-card__row .v .u { font-family: var(--font-sans); font-size: 12px; color: var(--muted-2); font-weight: 500; margin-left: 2px; }
-    .svc-card--featured::before { content: ""; position: absolute; top: 28px; right: 28px; width: 8px; height: 8px; background: var(--lime); }
+/* ANALYTICS ROW */
+.row2 { padding:16px 48px 56px; display:grid; grid-template-columns:1.55fr 1fr; gap:16px; flex-shrink:0; }
 
-    /* ── ANALYTICS ROW ── */
-    .row2 { padding: 16px 48px 56px; display: grid; grid-template-columns: 1.55fr 1fr; gap: 16px; flex-shrink: 0; }
-    .chartcard { background: var(--paper); border-radius: 16px; border: 1px solid var(--hair); padding: 28px; display: flex; flex-direction: column; gap: 22px; }
-    .chartcard__head { display: flex; align-items: flex-start; justify-content: space-between; }
-    .chartcard__title { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.1; letter-spacing: -0.014em; font-variation-settings: "opsz" 48; }
-    .chartcard__title em { font-style: italic; }
-    .chartcard__sub { font: 400 13px/1 var(--font-sans); color: var(--muted); margin-top: 6px; letter-spacing: 0.02em; }
-    .chartcard__legend { display: flex; gap: 16px; }
-    .chartcard__legend span { display: inline-flex; align-items: center; gap: 7px; font: 500 12px/1 var(--font-sans); color: var(--muted); }
-    .chartcard__legend span::before { content: ""; width: 9px; height: 9px; }
-    .chartcard__legend .l1::before { background: var(--ink); border-radius: 999px; }
-    .chartcard__legend .l2::before { background: var(--lime); }
-    .chart { position: relative; height: 260px; width: 100%; }
-    .chart svg { display: block; width: 100%; height: 100%; overflow: visible; }
-    .chart__xaxis { display: flex; justify-content: space-between; margin-top: 12px; font: 500 11px/1 var(--font-sans); color: var(--muted-2); letter-spacing: 0.04em; }
-    .chartcard__foot { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--hair); font: 500 13px/1 var(--font-sans); color: var(--muted); }
-    .chartcard__foot strong { color: var(--ink); font-weight: 600; }
+/* CHART CARD */
+.chartcard { background:var(--paper); border-radius:16px; border:1px solid var(--hair); padding:28px; display:flex; flex-direction:column; gap:22px; }
+.chartcard__head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
+.chartcard__title { font-family:var(--font-display); font-weight:400; font-size:26px; line-height:1.1; letter-spacing:-0.014em; font-variation-settings:"opsz" 48; }
+.chartcard__title em { font-style:italic; }
+.chartcard__sub { font:400 13px/1 var(--font-sans); color:var(--muted); margin-top:6px; letter-spacing:0.02em; }
+.chartcard__controls { display:inline-flex; align-items:center; gap:10px; flex-shrink:0; }
+.chartcard__summary { display:grid; grid-template-columns:auto 1fr auto; gap:24px; align-items:end; padding-bottom:4px; }
+.chartcard__bignum { font-family:var(--font-display); font-weight:400; font-size:56px; line-height:0.95; letter-spacing:-0.022em; font-feature-settings:"tnum","lnum"; font-variation-settings:"opsz" 96; color:var(--ink); white-space:nowrap; }
+.chartcard__delta { display:flex; flex-direction:column; gap:6px; padding-bottom:4px; }
+.chartcard__deltapill { display:inline-flex; align-items:center; gap:6px; align-self:flex-start; padding:6px 10px; border-radius:999px; background:var(--lime-dim); font:600 12px/1 var(--font-sans); color:var(--ink); white-space:nowrap; }
+.chartcard__deltapill svg { width:12px; height:12px; stroke:currentColor; stroke-width:2; fill:none; }
+.chartcard__deltahint { font:500 11px/1 var(--font-sans); letter-spacing:0.02em; color:var(--muted); white-space:nowrap; }
+.chartcard__legend { display:flex; gap:16px; align-self:end; padding-bottom:6px; }
+.chartcard__legend span { display:inline-flex; align-items:center; gap:7px; font:500 12px/1 var(--font-sans); color:var(--muted); }
+.chartcard__legend span::before { content:""; width:9px; height:9px; }
+.chartcard__legend .l1::before { background:var(--ink); border-radius:999px; }
+.chartcard__legend .l2::before { background:var(--lime); }
+.chart { position:relative; height:260px; width:100%; }
+.chart svg { display:block; width:100%; height:100%; overflow:visible; }
+.chart__xaxis { display:flex; justify-content:space-between; margin-top:12px; font:500 11px/1 var(--font-sans); color:var(--muted-2); letter-spacing:0.04em; }
+.chartcard__foot { display:flex; justify-content:space-between; align-items:center; padding-top:20px; border-top:1px solid var(--hair); font:500 13px/1 var(--font-sans); color:var(--muted); }
+.chartcard__foot strong { color:var(--ink); font-weight:600; }
 
-    /* ── ACTIVITY ── */
-    .activity { background: var(--paper); border-radius: 16px; border: 1px solid var(--hair); padding: 28px; display: flex; flex-direction: column; gap: 20px; }
-    .activity__head { display: flex; align-items: flex-start; justify-content: space-between; }
-    .activity__title { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.1; letter-spacing: -0.014em; font-variation-settings: "opsz" 48; }
-    .activity__title em { font-style: italic; }
-    .activity__link { font: 600 12px/1 var(--font-sans); letter-spacing: -0.005em; color: var(--ink); display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
-    .activity__list { display: flex; flex-direction: column; gap: 4px; }
-    .activity__item { display: grid; grid-template-columns: 32px 1fr auto; align-items: center; gap: 14px; padding: 12px 6px; border-bottom: 1px solid var(--hair); }
-    .activity__item:last-child { border-bottom: 0; }
-    .activity__ic { width: 32px; height: 32px; border-radius: 999px; background: var(--cream-2); display: inline-flex; align-items: center; justify-content: center; }
-    .activity__ic svg { width: 14px; height: 14px; stroke: var(--ink); stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    .activity__ic--lime { background: var(--lime); }
-    .activity__txt { display: flex; flex-direction: column; gap: 2px; }
-    .activity__what { font: 500 13px/1.3 var(--font-sans); color: var(--ink); }
-    .activity__what .b { font-weight: 600; }
-    .activity__when { font: 400 11px/1 var(--font-sans); color: var(--muted); letter-spacing: 0.02em; }
-    .activity__val { font-family: var(--font-display); font-weight: 400; font-size: 17px; letter-spacing: -0.012em; font-feature-settings: "tnum","lnum"; color: var(--ink); }
-    .activity__val .u { font-family: var(--font-sans); font-size: 11px; color: var(--muted); font-weight: 500; margin-left: 2px; }
+/* TOGGLES & SEGMENTS */
+.toggle { display:inline-flex; align-items:center; background:var(--paper); border:1px solid var(--hair); padding:4px; border-radius:999px; font:600 12px/1 var(--font-sans); }
+.toggle button { background:transparent; border:0; cursor:pointer; padding:8px 14px; border-radius:999px; color:var(--muted); display:inline-flex; align-items:center; gap:6px; }
+.toggle button svg { width:12px; height:12px; stroke:currentColor; stroke-width:1.5; fill:none; }
+.toggle button.on { background:var(--lime); color:var(--ink); }
+.toggle--sm button { padding:6px 10px; font-size:11px; }
+.toggle--sm svg { width:11px; height:11px; }
+.seg { display:inline-flex; background:var(--cream); border:1px solid var(--hair); border-radius:999px; padding:3px; }
+.seg button { font:600 12px/1 var(--font-sans); border:0; background:transparent; padding:7px 12px; border-radius:999px; color:var(--muted); cursor:pointer; transition:all 180ms var(--ease-out); white-space:nowrap; }
+.seg button:hover { color:var(--ink); }
+.seg button.on { background:var(--ink); color:var(--cream); }
 
-    /* ── DETAIL VIEW ── */
-    .detail { padding: 36px 48px 48px; display: flex; flex-direction: column; gap: 28px; }
-    .detail__crumb { display: inline-flex; align-items: center; gap: 8px; font: 600 12px/1 var(--font-sans); color: var(--muted); letter-spacing: 0.02em; }
-    .detail__crumb svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 1.5; fill: none; }
-    .detail__crumb b { color: var(--ink); font-weight: 600; }
-    .detail__hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: flex-end; }
-    .detail__title { font-family: var(--font-display); font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.022em; font-variation-settings: "opsz" 96; margin: 14px 0 0; max-width: 720px; }
-    .detail__title em { font-style: italic; }
-    .detail__statbig { font-family: var(--font-display); font-weight: 400; font-size: 168px; line-height: 0.86; letter-spacing: -0.036em; font-feature-settings: "tnum","lnum"; font-variation-settings: "opsz" 144; margin-top: 28px; }
-    .detail__statbig .u { font-size: 32px; font-family: var(--font-sans); font-weight: 500; color: var(--muted); letter-spacing: 0; margin-left: 6px; }
-    .detail__statsub { font: 500 16px/1.5 var(--font-sans); color: var(--muted); margin-top: 8px; max-width: 480px; }
-    .detail__statsub em { font-style: normal; color: var(--ink); font-weight: 600; }
-    .detail__rightcard { background: var(--ink-2); color: var(--cream); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 20px; min-height: 320px; }
-    .detail__rightcard h4 { font: 600 11px/1 var(--font-sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-2); }
-    .calldemo { display: flex; flex-direction: column; gap: 10px; }
-    .calldemo .bub { padding: 11px 14px; border-radius: 12px; font: 400 14px/1.42 var(--font-sans); max-width: 86%; }
-    .calldemo .bub--them { background: rgba(255,255,255,0.06); align-self: flex-start; border-bottom-left-radius: 4px; }
-    .calldemo .bub--ai { background: var(--lime); color: var(--ink); align-self: flex-end; border-bottom-right-radius: 4px; }
-    .calldemo .bub .ts { display: block; font-size: 10px; opacity: 0.55; margin-top: 4px; letter-spacing: 0.04em; }
-    .detail__rightcard .row { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--hair-dk); display: flex; justify-content: space-between; align-items: center; font: 600 12px/1 var(--font-sans); }
-    .detail__rightcard .row svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1.5; fill: none; }
-    .toggle { display: inline-flex; align-items: center; background: var(--paper); border: 1px solid var(--hair); padding: 4px; border-radius: 999px; font: 600 12px/1 var(--font-sans); }
-    .toggle button { background: transparent; border: 0; cursor: pointer; padding: 8px 14px; border-radius: 999px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
-    .toggle button svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 1.5; fill: none; }
-    .toggle button.on { background: var(--lime); color: var(--ink); }
-  </style>
+/* ACTIVITY */
+.activity { background:var(--paper); border-radius:16px; border:1px solid var(--hair); padding:28px; display:flex; flex-direction:column; gap:20px; }
+.activity__head { display:flex; align-items:flex-start; justify-content:space-between; }
+.activity__title { font-family:var(--font-display); font-weight:400; font-size:22px; line-height:1.1; letter-spacing:-0.014em; font-variation-settings:"opsz" 48; }
+.activity__title em { font-style:italic; }
+.activity__link { font:600 12px/1 var(--font-sans); color:var(--ink); display:inline-flex; align-items:center; gap:4px; cursor:pointer; white-space:nowrap; }
+.activity__list { display:flex; flex-direction:column; gap:4px; }
+.activity__item { display:grid; grid-template-columns:32px 1fr auto; align-items:center; gap:14px; padding:12px 6px; border-bottom:1px solid var(--hair); }
+.activity__item:last-child { border-bottom:0; }
+.activity__ic { width:32px; height:32px; border-radius:999px; background:var(--cream-2); display:inline-flex; align-items:center; justify-content:center; }
+.activity__ic svg { width:14px; height:14px; stroke:var(--ink); stroke-width:1.5; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.activity__ic--lime { background:var(--lime); }
+.activity__txt { display:flex; flex-direction:column; gap:2px; }
+.activity__what { font:500 13px/1.3 var(--font-sans); color:var(--ink); }
+.activity__what .b { font-weight:600; }
+.activity__when { font:400 11px/1 var(--font-sans); color:var(--muted); letter-spacing:0.02em; white-space:nowrap; }
+.activity__val { font-family:var(--font-display); font-weight:400; font-size:17px; letter-spacing:-0.012em; font-feature-settings:"tnum","lnum"; color:var(--ink); white-space:nowrap; }
+.activity__val .u { font-family:var(--font-sans); font-size:11px; color:var(--muted); font-weight:500; margin-left:2px; }
+
+/* DETAIL VIEW */
+.detail { padding:36px 48px 48px; display:flex; flex-direction:column; gap:28px; }
+.detail__crumb { display:inline-flex; align-items:center; gap:8px; font:600 12px/1 var(--font-sans); color:var(--muted); letter-spacing:0.02em; white-space:nowrap; }
+.detail__crumb svg { width:12px; height:12px; stroke:currentColor; stroke-width:1.5; fill:none; }
+.detail__crumb b { color:var(--ink); font-weight:600; }
+.detail__crumb a { cursor:pointer; color:var(--muted); text-decoration:none; transition:color 180ms var(--ease-out); }
+.detail__crumb a:hover { color:var(--ink); }
+.detail__hero { display:grid; grid-template-columns:1.4fr 1fr; gap:56px; align-items:flex-end; }
+.detail__title { font-family:var(--font-display); font-weight:400; font-size:48px; line-height:1.05; letter-spacing:-0.022em; font-variation-settings:"opsz" 96; margin:14px 0 0; max-width:720px; }
+.detail__title em { font-style:italic; }
+.detail__statbig { font-family:var(--font-display); font-weight:400; font-size:168px; line-height:0.86; letter-spacing:-0.036em; font-feature-settings:"tnum","lnum"; font-variation-settings:"opsz" 144; margin-top:28px; }
+.detail__statbig .u { font-size:32px; font-family:var(--font-sans); font-weight:500; color:var(--muted); letter-spacing:0; margin-left:6px; }
+.detail__statsub { font:500 16px/1.5 var(--font-sans); color:var(--muted); margin-top:8px; max-width:480px; }
+.detail__statsub em { font-style:normal; color:var(--ink); font-weight:600; }
+.detail__rightcard { background:var(--ink-2); color:var(--cream); border-radius:18px; padding:28px; display:flex; flex-direction:column; gap:20px; min-height:320px; }
+.detail__rightcard h4 { font:600 11px/1 var(--font-sans); letter-spacing:0.18em; text-transform:uppercase; color:var(--muted-2); }
+.calldemo { display:flex; flex-direction:column; gap:10px; }
+.calldemo .bub { padding:11px 14px; border-radius:12px; font:400 14px/1.42 var(--font-sans); max-width:86%; }
+.calldemo .bub--them { background:rgba(255,255,255,0.06); align-self:flex-start; border-bottom-left-radius:4px; }
+.calldemo .bub--ai { background:var(--lime); color:var(--ink); align-self:flex-end; border-bottom-right-radius:4px; }
+.calldemo .bub .ts { display:block; font-size:10px; opacity:0.55; margin-top:4px; letter-spacing:0.04em; }
+.detail__rightcard .row { margin-top:auto; padding-top:14px; border-top:1px solid var(--hair-dk); display:flex; justify-content:space-between; align-items:center; font:600 12px/1 var(--font-sans); }
+.detail__rightcard .row > * { white-space:nowrap; }
+.detail__rightcard .row svg { width:14px; height:14px; stroke:currentColor; stroke-width:1.5; fill:none; }
+
+/* TABLE */
+.tablecard { background:var(--paper); border-radius:16px; border:1px solid var(--hair); padding:28px 28px 12px; display:flex; flex-direction:column; gap:18px; }
+.tablecard__head { display:flex; align-items:center; justify-content:space-between; }
+.tablecard__title { font-family:var(--font-display); font-weight:400; font-size:22px; line-height:1.1; letter-spacing:-0.014em; font-variation-settings:"opsz" 48; }
+.tablecard__title em { font-style:italic; }
+.tablecard__actions { display:inline-flex; gap:8px; }
+.tbl { width:100%; border-collapse:collapse; }
+.tbl thead th { text-align:left; font:600 10px/1 var(--font-sans); letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); padding:12px; border-bottom:1px solid var(--hair); }
+.tbl tbody td { font:500 14px/1.4 var(--font-sans); color:var(--ink); padding:16px 12px; border-bottom:1px solid var(--hair); }
+.tbl tbody tr:last-child td { border-bottom:0; }
+.tbl tbody tr:hover { background:var(--cream); }
+.tbl td:nth-child(1) { font-family:var(--font-display); font-weight:400; font-feature-settings:"tnum","lnum"; font-size:16px; letter-spacing:-0.008em; }
+.pill { display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border-radius:999px; font:600 11px/1 var(--font-sans); letter-spacing:0.02em; white-space:nowrap; }
+.pill::before { content:""; width:6px; height:6px; border-radius:999px; background:currentColor; }
+.pill--lime { background:var(--lime-dim); color:#4F6A06; }
+.pill--ok { background:var(--cream-2); color:var(--muted); }
+.pill--warn { background:#FBF1E2; color:#B85C1F; }
+
+/* INTEGRATIONS */
+.integ { background:var(--paper); border:1px solid var(--hair); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:22px; }
+.integ__head { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+.integ__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.integ__card { border:1px solid var(--hair); border-radius:12px; padding:18px; display:grid; grid-template-columns:40px 1fr auto; gap:14px; align-items:center; background:var(--cream); }
+.integ__card--ok { background:var(--paper); }
+.integ__icbox { width:40px; height:40px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; background:var(--cream-2); }
+.integ__icbox svg { width:18px; height:18px; stroke:var(--ink); stroke-width:1.5; fill:none; }
+.integ__body { display:flex; flex-direction:column; gap:4px; min-width:0; }
+.integ__name { font:600 14px/1.2 var(--font-sans); color:var(--ink); }
+.integ__sub { font:500 12px/1.35 var(--font-sans); color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.integ__status { display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.integ__pill { display:inline-flex; align-items:center; gap:6px; font:600 11px/1 var(--font-sans); letter-spacing:0.04em; padding:4px 9px; border-radius:999px; background:var(--lime-dim); color:#4F6A06; white-space:nowrap; }
+.integ__pill i { width:6px; height:6px; border-radius:999px; background:var(--lime); box-shadow:0 0 0 3px rgba(199,242,48,0.30); display:inline-block; }
+.integ__when { font:500 11px/1 var(--font-sans); color:var(--muted); white-space:nowrap; }
+
+/* TOPICS (chatbot) */
+.topics { display:flex; flex-direction:column; gap:14px; }
+.topic { display:grid; grid-template-columns:1fr 56px; gap:4px 14px; align-items:center; }
+.topic__row { grid-column:1/-1; display:flex; justify-content:space-between; align-items:baseline; }
+.topic__name { font:500 14px/1.2 var(--font-sans); color:var(--ink); }
+.topic__share { font-family:var(--font-display); font-weight:400; font-size:18px; letter-spacing:-0.012em; font-feature-settings:"tnum","lnum"; color:var(--ink); }
+.topic__bar { grid-column:1/2; height:8px; background:var(--cream-2); border-radius:999px; overflow:hidden; }
+.topic__bar span { display:block; height:100%; background:var(--lime); }
+.topic__delta { grid-column:2/3; font:500 11px/1 var(--font-sans); color:var(--muted); text-align:right; }
+
+/* KB CARD */
+.kbcard { background:var(--paper); border:1px solid var(--hair); border-radius:16px; padding:32px; display:grid; grid-template-columns:1.4fr 1fr; gap:40px; }
+.kbcard__eyebrow { font:600 11px/1 var(--font-sans); letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; display:inline-flex; align-items:center; gap:10px; }
+.kbcard__eyebrow::before { content:""; width:7px; height:7px; background:var(--lime); }
+.kbcard__h { font-family:var(--font-display); font-weight:400; font-size:34px; line-height:1.08; letter-spacing:-0.018em; font-variation-settings:"opsz" 72; margin:0 0 12px; }
+.kbcard__h em { font-style:italic; }
+.kbcard__l p { font:400 15px/1.55 var(--font-sans); color:var(--muted); margin:0 0 20px; max-width:520px; }
+.kbcard__l p a { color:var(--ink); text-decoration:underline; text-underline-offset:4px; cursor:pointer; }
+.kbcard__metrics { display:flex; gap:36px; padding-top:18px; border-top:1px solid var(--hair); }
+.kbcard__metrics > div { display:flex; flex-direction:column; gap:6px; }
+.kbcard__metrics .l { font:600 10px/1 var(--font-sans); letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); }
+.kbcard__metrics .v { font-family:var(--font-display); font-weight:400; font-size:32px; letter-spacing:-0.018em; font-feature-settings:"tnum","lnum"; }
+.kbcard__metrics .v i { font-style:normal; font-family:var(--font-sans); font-weight:500; font-size:14px; color:var(--muted); margin-left:2px; }
+.kbcard__r { display:flex; flex-direction:column; gap:18px; align-items:flex-start; }
+.kbcta { display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:var(--cream); padding:14px 18px; border-radius:10px; border:0; cursor:pointer; font:700 13px/1 var(--font-sans); }
+.kbcta svg { width:14px; height:14px; stroke:currentColor; stroke-width:1.5; fill:none; }
+.kbcard__list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; width:100%; }
+.kbcard__list li { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--hair); font:500 14px/1.3 var(--font-sans); color:var(--ink); }
+.kbcard__list li:last-child { border-bottom:0; }
+.kbcard__list li em { font-style:normal; font:600 11px/1 var(--font-sans); letter-spacing:0.04em; color:var(--muted); padding:4px 8px; background:var(--cream-2); border-radius:999px; white-space:nowrap; }
+
+/* LOGIN */
+.login { min-height:100vh; display:grid; grid-template-columns:1fr 0.85fr; }
+.login__l { padding:52px 80px; display:flex; flex-direction:column; }
+.login__brand { display:inline-flex; align-items:flex-end; gap:6px; font-family:var(--font-display); font-weight:600; font-size:32px; line-height:1; letter-spacing:-0.022em; font-variation-settings:"opsz" 96; color:var(--ink); cursor:pointer; }
+.login__brand::after { content:""; width:8px; height:8px; background:var(--lime); margin-bottom:6px; }
+.login__center { margin:auto 0; max-width:480px; }
+.login__eyebrow { display:inline-flex; align-items:center; gap:12px; font:600 12px/1 var(--font-sans); letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
+.login__eyebrow::before { content:""; width:8px; height:8px; background:var(--lime); }
+.login__h { margin-top:20px; font-family:var(--font-display); font-weight:400; font-size:64px; line-height:1.0; letter-spacing:-0.026em; font-variation-settings:"opsz" 96; }
+.login__h em { font-style:italic; }
+.login__form { margin-top:40px; display:flex; flex-direction:column; gap:16px; }
+.field { display:flex; flex-direction:column; gap:8px; }
+.field label { font:600 12px/1 var(--font-sans); letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); }
+.field input { height:52px; padding:0 18px; border:1px solid var(--hair-2); background:var(--paper); border-radius:10px; font:500 16px/1 var(--font-sans); color:var(--ink); outline:none; transition:all 180ms var(--ease-out); width:100%; }
+.field input:focus { border-color:var(--ink); box-shadow:0 0 0 3px rgba(199,242,48,0.45); }
+.field--row { display:flex; justify-content:space-between; align-items:center; font:500 13px/1 var(--font-sans); }
+.field--row a { color:var(--ink); text-decoration:underline; text-underline-offset:4px; cursor:pointer; }
+.checkbox { display:inline-flex; align-items:center; gap:8px; color:var(--muted); cursor:pointer; }
+.checkbox span { width:16px; height:16px; border:1px solid var(--hair-2); background:var(--paper); border-radius:4px; display:inline-flex; align-items:center; justify-content:center; }
+.checkbox span::after { content:""; width:8px; height:8px; background:var(--lime); }
+.login__cta { margin-top:8px; display:inline-flex; align-items:center; justify-content:space-between; background:var(--ink); color:var(--cream); padding:18px 22px; border-radius:10px; font:700 16px/1 var(--font-sans); border:0; cursor:pointer; width:100%; transition:background 180ms var(--ease-out); }
+.login__cta:hover { background:var(--ink-3); }
+.login__cta::after { content:""; width:9px; height:9px; background:var(--lime); margin-right:4px; }
+.login__note { margin-top:24px; font:400 13px/1.5 var(--font-sans); color:var(--muted); }
+.login__note a { color:var(--ink); text-decoration:underline; text-underline-offset:4px; }
+.login__foot { margin-top:32px; display:flex; justify-content:space-between; font:500 12px/1 var(--font-sans); color:var(--muted-2); letter-spacing:0.04em; }
+.login__r { background:var(--ink-2); color:var(--cream); position:relative; overflow:hidden; display:flex; flex-direction:column; padding:56px 64px; }
+.login__r::before { content:""; position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E"); background-size:200px; pointer-events:none; }
+.login__r-eyebrow { position:relative; display:inline-flex; align-items:center; gap:12px; font:600 12px/1 var(--font-sans); letter-spacing:0.18em; text-transform:uppercase; color:var(--lime); white-space:nowrap; }
+.login__r-eyebrow::before { content:""; width:8px; height:8px; background:var(--lime); }
+.login__r-big { position:relative; margin-top:28px; font-family:var(--font-display); font-weight:400; font-size:176px; line-height:0.88; letter-spacing:-0.036em; color:var(--lime); font-feature-settings:"tnum","lnum"; font-variation-settings:"opsz" 144; display:flex; align-items:flex-start; gap:6px; }
+.login__r-big .u { font-size:44px; margin-top:22px; letter-spacing:-0.022em; }
+.login__r-cap { position:relative; margin-top:16px; font-family:var(--font-display); font-weight:400; font-size:36px; line-height:1.05; letter-spacing:-0.018em; color:var(--cream); max-width:460px; }
+.login__r-cap em { font-style:italic; }
+.login__r-stamp { position:relative; margin-top:auto; padding-top:36px; border-top:1px solid var(--hair-dk); display:flex; justify-content:space-between; align-items:center; }
+.login__r-mini { display:flex; flex-direction:column; gap:4px; }
+.login__r-mini .l { font:600 11px/1 var(--font-sans); letter-spacing:0.16em; text-transform:uppercase; color:var(--muted-2); }
+.login__r-mini .v { font-family:var(--font-display); font-weight:400; font-size:24px; letter-spacing:-0.014em; color:var(--cream); }
+.login__r-mini .v em { font-style:italic; }
+</style>
 </head>
 <body>
 <div id="root"></div>
@@ -319,92 +318,189 @@
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
 
 <script type="text/babel">
-const { useState } = React;
+const { useState, useEffect, useMemo } = React;
 
 /* ── ICONS ── */
 const Ico = {
-  home:     () => <svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 01-2 2h-4v-7H10v7H6a2 2 0 01-2-2z"/></svg>,
-  phone:    () => <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>,
-  chat:     () => <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>,
-  globe:    () => <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>,
-  bar:      () => <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
-  bell:     () => <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>,
-  cog:      () => <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 008.91 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 8.91a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>,
-  arrowUp:  () => <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>,
-  arrowDn:  () => <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>,
-  arrowR:   () => <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>,
-  chevR:    () => <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>,
-  chevD:    () => <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>,
-  clock:    () => <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
-  coins:    () => <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1110.34 18M7 6h1v4M7.71 10.5l1.42-1.42M16.5 13.5l-1.42 1.42"/></svg>,
-  download: () => <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>,
-  check:    () => <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>,
-  zap:      () => <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
-  logout:   () => <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>,
+  home:    ()=><svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 01-2 2h-4v-7H10v7H6a2 2 0 01-2-2z"/></svg>,
+  phone:   ()=><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>,
+  chat:    ()=><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>,
+  bot:     ()=><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="3"/><path d="M9 14h.01M15 14h.01M12 3v4M8 20l1 2M16 20l-1 2"/></svg>,
+  bar:     ()=><svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
+  bell:    ()=><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>,
+  cog:     ()=><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 008.91 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 8.91a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>,
+  arrowUp: ()=><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>,
+  arrowDn: ()=><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>,
+  arrowR:  ()=><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>,
+  chevR:   ()=><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>,
+  chevD:   ()=><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>,
+  clock:   ()=><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+  coins:   ()=><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1110.34 18M7 6h1v4M7.71 10.5l1.42-1.42M16.5 13.5l-1.42 1.42"/></svg>,
+  calendar:()=><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>,
+  download:()=><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>,
+  check:   ()=><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>,
+  zap:     ()=><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+  search:  ()=><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>,
+  globe:   ()=><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>,
+  user:    ()=><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+  thumb:   ()=><svg viewBox="0 0 24 24"><path d="M7 11V21H3V11zM7 11l4-9a2 2 0 013 1v6h6a2 2 0 012 2l-2 8a2 2 0 01-2 1H7"/></svg>,
+  logout:  ()=><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>,
 };
 function I({ name, ...rest }) {
-  const Cmp = Ico[name];
-  return Cmp ? <span {...rest}><Cmp /></span> : null;
+  const C = Ico[name];
+  return C ? <span {...rest}><C /></span> : null;
 }
 
-/* ── CHART ── */
-function SavingsChart() {
-  const w = 700, h = 240, padX = 8, padY = 16;
-  const pts = arr => {
-    const max = Math.max(...arr), min = Math.min(...arr);
-    const stepX = (w - padX*2) / (arr.length - 1);
-    return arr.map((v, i) => [padX + i*stepX, h - padY - ((v-min)/(max-min))*(h-padY*2)]);
-  };
-  const seriesA = [3,4,3,5,4,6,5,7,6,8,7,9,8,11,9,10,12,11,13,12,14,13,15,14];
-  const seriesB = [12,14,11,17,15,19,16,22,18,24,21,25,23,28,25,27,31,28,33,30,36,32,38,35];
-  const a = pts(seriesA), b = pts(seriesB);
-  const toPath = p => p.reduce((s,[x,y],i) => s+(i?' L ':' M ')+x.toFixed(1)+' '+y.toFixed(1),'');
-  const areaPath = toPath(b)+' L '+(w-padX)+' '+(h-padY)+' L '+padX+' '+(h-padY)+' Z';
+/* ── CHART DATA ── */
+const RATE = 220;
+function pair(h) { return { hours: h, money: h.map(v => Math.round(v * RATE / 10) * 10) }; }
+const CHART_DATA = {
+  day:   { labels:['00','03','06','09','12','15','18','21'], now:pair([0.1,0.05,0.05,0.2,0.6,1.1,1.4,1.8,2.0,2.4,2.7,3.1,3.4,3.0,2.6,2.2,1.9,1.7,1.4,1.1,0.9,0.7,0.4,0.2]), prev:pair([0.1,0.05,0.05,0.15,0.4,0.7,1.0,1.2,1.5,1.7,1.9,2.0,2.1,1.9,1.7,1.5,1.3,1.1,0.9,0.7,0.5,0.4,0.3,0.1]), totals:{now:{hours:31,money:6820},prev:{hours:21,money:4620}}, delta:{hours:'+10 h',money:'+2 200 Kč'} },
+  week:  { labels:['Po','Út','St','Čt','Pá','So','Ne'], now:pair([5.2,6.8,7.1,8.4,7.6,3.2,0.8]), prev:pair([3.8,4.9,5.0,6.1,5.6,2.4,0.7]), totals:{now:{hours:39,money:8580},prev:{hours:28,money:6160}}, delta:{hours:'+11 h',money:'+2 420 Kč'} },
+  month: { labels:['1.','5.','10.','15.','20.','25.','31.'], now:pair([4.1,5.0,4.8,5.6,5.2,6.0,2.1,1.0,5.4,5.8,6.1,6.4,5.9,2.4,1.2,6.0,6.3,6.5,6.8,6.4,3.0,1.4,7.0,7.2,7.5,7.6,7.4,3.6,1.6,8.0,8.4]), prev:pair([2.6,3.1,3.0,3.4,3.2,3.9,1.4,0.7,3.5,3.7,3.8,4.0,3.9,1.7,0.9,4.1,4.2,4.3,4.5,4.4,2.1,1.1,4.8,4.9,5.0,5.0,5.1,2.5,1.2,5.5,5.7]), totals:{now:{hours:162,money:35640},prev:{hours:105,money:23100}}, delta:{hours:'+57 h',money:'+12 540 Kč'} },
+  year:  { labels:['Čvn','Čvc','Srp','Zář','Říj','Lis','Pro','Led','Úno','Bře','Dub','Kvě'], now:pair([72,96,84,118,132,145,128,156,168,174,188,162]), prev:pair([54,70,62,84,94,102,90,112,120,124,132,105]), totals:{now:{hours:1823,money:401060},prev:{hours:1249,money:274780}}, delta:{hours:'+574 h',money:'+126 280 Kč'} },
+};
+const PERIOD_TABS = [{key:'day',label:'Den'},{key:'week',label:'Týden'},{key:'month',label:'Měsíc'},{key:'year',label:'Rok'}];
+function fmtMoney(n) { return new Intl.NumberFormat('cs-CZ').format(n)+' Kč'; }
+function fmtHours(n) { return n>=100?new Intl.NumberFormat('cs-CZ').format(n)+' h':String(n).replace('.',',')+' h'; }
+
+/* ── CHART SVG ── */
+function ChartSVG({ period, metric }) {
+  const d = CHART_DATA[period];
+  const w=720,h=240,pX=8,pY=18;
+  const vN=d.now[metric], vP=d.prev[metric];
+  const max=Math.max(...vN,...vP), min=0;
+  const proj=arr=>arr.map((v,i)=>[pX+i*(w-pX*2)/(arr.length-1),h-pY-((v-min)/(max-min||1))*(h-pY*2)]);
+  const a=proj(vN),b=proj(vP);
+  const path=p=>p.reduce((s,[x,y],i)=>s+(i?' L ':' M ')+x.toFixed(1)+' '+y.toFixed(1),'');
+  const area=path(a)+' L '+(w-pX)+' '+(h-pY)+' L '+pX+' '+(h-pY)+' Z';
+  const last=a[a.length-1];
   return (
-    <div className="chart">
-      <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
-        {[0.25,0.5,0.75].map((g,i) => <line key={i} x1={padX} x2={w-padX} y1={padY+g*(h-padY*2)} y2={padY+g*(h-padY*2)} stroke="rgba(10,10,9,0.06)" strokeWidth="1"/>)}
-        <path d={areaPath} fill="rgba(199,242,48,0.16)"/>
-        <path d={toPath(b)} fill="none" stroke="#C7F230" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round"/>
-        <path d={toPath(a)} fill="none" stroke="#0A0A09" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" strokeDasharray="6 3"/>
-      </svg>
+    <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
+      {[.25,.5,.75].map((g,i)=><line key={i} x1={pX} x2={w-pX} y1={pY+g*(h-pY*2)} y2={pY+g*(h-pY*2)} stroke="rgba(10,10,9,0.06)" strokeWidth="1"/>)}
+      <path d={path(b)} fill="none" stroke="rgba(10,10,9,0.42)" strokeWidth="1.5" strokeDasharray="4 5" strokeLinejoin="round" strokeLinecap="round"/>
+      <path d={area} fill="rgba(199,242,48,0.18)"/>
+      <path d={path(a)} fill="none" stroke="#0A0A09" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"/>
+      <circle cx={last[0]} cy={last[1]} r="6" fill="#C7F230" stroke="#0A0A09" strokeWidth="2"/>
+    </svg>
+  );
+}
+
+/* ── CHART CARD ── */
+function ChartCard({ title='Úspora v čase', period:pProp, onPeriod, defaultMetric='money', defaultPeriod='week' }) {
+  const [pLocal,setPLocal]=useState(defaultPeriod);
+  const period=pProp||pLocal;
+  const setP=k=>{ setPLocal(k); if(onPeriod) onPeriod(k); };
+  const [metric,setMetric]=useState(defaultMetric);
+  const d=CHART_DATA[period];
+  const fmt=metric==='money'?fmtMoney:fmtHours;
+  const totalNow=d.totals.now[metric];
+  const sub={day:'Posledních 24 hodin · po hodinách',week:'Tento týden · po dnech',month:'Květen 2026 · po dnech',year:'Posledních 12 měsíců · po měsících'}[period];
+  const periodHint={day:'dni',week:'týdnu',month:'měsíci',year:'roku'}[period];
+  return (
+    <div className="chartcard">
+      <div className="chartcard__head">
+        <div>
+          <div className="chartcard__title">{title.split(' ')[0]} <em>{title.split(' ').slice(1).join(' ')}</em></div>
+          <div className="chartcard__sub">{sub}</div>
+        </div>
+        <div className="chartcard__controls">
+          <div className="toggle toggle--sm">
+            <button className={metric==='money'?'on':''} onClick={()=>setMetric('money')}><I name="coins"/> Kč</button>
+            <button className={metric==='hours'?'on':''} onClick={()=>setMetric('hours')}><I name="clock"/> Hodiny</button>
+          </div>
+          <div className="seg">
+            {PERIOD_TABS.map(t=><button key={t.key} className={period===t.key?'on':''} onClick={()=>setP(t.key)}>{t.label}</button>)}
+          </div>
+        </div>
+      </div>
+      <div className="chartcard__summary">
+        <div className="chartcard__bignum">{fmt(totalNow)}</div>
+        <div className="chartcard__delta">
+          <span className="chartcard__deltapill"><I name="arrowUp"/> {d.delta[metric]}</span>
+          <span className="chartcard__deltahint">oproti minulému {periodHint}</span>
+        </div>
+        <div className="chartcard__legend"><span className="l1">Po Nexivo</span><span className="l2">Před Nexivo</span></div>
+      </div>
+      <div className="chart"><ChartSVG period={period} metric={metric}/></div>
+      <div className="chart__xaxis">{d.labels.map((l,i)=><span key={i}>{l}</span>)}</div>
+      <div className="chartcard__foot">
+        <span>Předchozí období: <strong>{fmt(d.totals.prev[metric])}</strong></span>
+        <span style={{display:'inline-flex',alignItems:'center',gap:6}}><I name="zap"/> Nejlepší: <strong>{fmt(Math.max(...d.now[metric]))}</strong></span>
+      </div>
+    </div>
+  );
+}
+
+/* ── ACTIVITY ── */
+function Activity({ title='Poslední aktivita', items=[] }) {
+  return (
+    <div className="activity">
+      <div className="activity__head">
+        <div className="activity__title">{title.split(' ')[0]} <em>{title.split(' ').slice(1).join(' ')}</em></div>
+        <a className="activity__link">Vše <I name="chevR"/></a>
+      </div>
+      <div className="activity__list">
+        {items.map((it,i)=>(
+          <div className="activity__item" key={i}>
+            <div className={'activity__ic'+(it.tone==='lime'?' activity__ic--lime':'')}><I name={it.icon||'zap'}/></div>
+            <div className="activity__txt">
+              <div className="activity__what"><span className="b">{it.what}</span>{it.detail?' · '+it.detail:''}</div>
+              <div className="activity__when">{it.when}</div>
+            </div>
+            <div className="activity__val">{it.value}<span className="u">{it.unit}</span></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── KPI ── */
+function Kpi({ label, name, num, unit, delta, deltaTone='pos' }) {
+  return (
+    <div className="kpi">
+      <div><div className="kpi__label">{label}</div><div className="kpi__name">{name}</div></div>
+      <div>
+        <div className="kpi__num">{num}{unit?<span className="u">{unit}</span>:null}</div>
+        {delta?<div className={'kpi__delta'+(deltaTone==='neg'?' kpi__delta--neg':'')}><I name={deltaTone==='neg'?'arrowDn':'arrowUp'}/> {delta}</div>:null}
+      </div>
     </div>
   );
 }
 
 /* ── SIDEBAR ── */
-function Side({ active, onNav }) {
+function Side({ active='home', onNav }) {
+  const item=(key,icon,label,badge)=>(
+    <a className={'side__link '+(active===key?'side__link--active':'')} onClick={()=>onNav&&onNav(key)} role="button">
+      <I name={icon}/> {label}
+      {badge?<span className="meta">{badge}</span>:null}
+    </a>
+  );
   return (
     <aside className="side">
-      <div className="side__brand" onClick={() => onNav('overview')}>nexivo</div>
+      <div className="side__brand" onClick={()=>onNav&&onNav('home')}>nexivo</div>
       <div className="side__group">
         <div className="side__cap">Přehled</div>
-        <div className={'side__link '+(active==='overview'?'side__link--active':'')} onClick={() => onNav('overview')}>
-          <I name="home"/> Dashboard
-        </div>
-        <div className="side__link"><I name="bar"/> Reporty</div>
+        {item('home','home','Dashboard')}
+        {item('reports','bar','Reporty')}
       </div>
       <div className="side__group">
         <div className="side__cap">Služby</div>
-        <div className={'side__link '+(active==='receptionist'?'side__link--active':'')} onClick={() => onNav('receptionist')}>
-          <I name="phone"/> AI recepční <span className="meta">live</span>
-        </div>
-        <div className="side__link"><I name="chat"/> Chatbot</div>
-        <div className="side__link"><I name="globe"/> Web konverze</div>
+        {item('agent','bot','AI agent','live')}
+        {item('reception','phone','AI recepční','live')}
+        {item('chatbot','chat','Chatbot','live')}
       </div>
       <div className="side__group">
         <div className="side__cap">Účet</div>
-        <div className="side__link"><I name="bell"/> Upozornění</div>
-        <div className="side__link"><I name="cog"/> Nastavení</div>
-        <div className="side__link" onClick={() => { window.location.href='/klient'; }}><I name="logout"/> Odhlásit se</div>
+        {item('alerts','bell','Upozornění')}
+        {item('settings','cog','Nastavení')}
+        <a className="side__link" onClick={()=>window.location.href='/klient'} role="button"><I name="logout"/> Odhlásit se</a>
       </div>
       <div className="side__foot">
         <div className="side__user">
           <div className="side__avatar">MK</div>
-          <div className="side__who">
-            <div className="n">Martina Kovaříková</div>
-            <div className="r">Salón Lumi · Olomouc</div>
-          </div>
+          <div className="side__who"><div className="n">Martina Kovaříková</div><div className="r">Salón Lumi · Olomouc</div></div>
           <I name="chevD"/>
         </div>
       </div>
@@ -413,145 +509,184 @@ function Side({ active, onNav }) {
 }
 
 /* ── TOPBAR ── */
-function Top({ hello, active, onTabChange }) {
-  const tabs = ['Den','Týden','Měsíc','Rok'];
-  const today = new Date().toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  const capitalized = today.charAt(0).toUpperCase() + today.slice(1);
+function Top({ hello='Dobré ráno, Martino', period='week', onPeriod, livePill='AI agent · živě' }) {
+  const today=new Date().toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const [first,second]=(hello+',').split(',');
   return (
     <div className="top">
       <div className="top__l">
-        <div className="top__eyebrow">{capitalized}</div>
-        <div className="top__hello">{hello.split(',')[0]}, <em>{hello.split(',')[1]?.trim()}</em>.</div>
+        <div className="top__eyebrow">{today.charAt(0).toUpperCase()+today.slice(1)}</div>
+        <div className="top__hello">{first.trim()}, <em>{(second||'').trim()}</em>.</div>
       </div>
       <div className="top__r">
-        <div className="tabs">
-          {tabs.map(t => (
-            <button key={t} className={t.toLowerCase()===active?'on':''} onClick={() => onTabChange(t.toLowerCase())}>{t}</button>
-          ))}
-        </div>
+        <div className="tabs">{PERIOD_TABS.map(t=><button key={t.key} className={period===t.key?'on':''} onClick={()=>onPeriod&&onPeriod(t.key)}>{t.label}</button>)}</div>
         <button className="topbtn"><I name="download"/> Export</button>
-        <button className="topbtn topbtn--ink"><span className="dot"></span> AI recepční · živé</button>
+        <button className="topbtn topbtn--ink"><span className="dot"></span> {livePill}</button>
       </div>
     </div>
   );
 }
 
-/* ── OVERVIEW SCREEN ── */
-function Overview({ onNav }) {
-  const [tab, setTab] = useState('týden');
+/* ── OVERVIEW ── */
+function Overview({ onNav, period:pProp, onPeriod }) {
+  const [pLocal,setPLocal]=useState('week');
+  const period=pProp||pLocal;
+  const setP=p=>{ setPLocal(p); if(onPeriod) onPeriod(p); };
+  const d=CHART_DATA[period];
+  const heroTotal=d.totals.now.money, heroHours=d.totals.now.hours;
+  const pLabel={day:'Dnes',week:'Tento týden',month:'Květen 2026',year:'Posledních 12 měsíců'}[period];
+  const SVC={
+    agent:{conv:{day:'38',week:'168',month:'702',year:'8 240'}[period],booked:{day:'21',week:'89',month:'372',year:'4 410'}[period],hours:{day:'5',week:'23',month:'98',year:'1 160'}[period]},
+    reception:{calls:{day:'47',week:'184',month:'812',year:'9 640'}[period],booked:{day:'14',week:'57',month:'248',year:'2 940'}[period],hours:{day:'6',week:'22',month:'94',year:'1 120'}[period]},
+    chatbot:{msgs:{day:'214',week:'892',month:'3 642',year:'42 180'}[period],hours:{day:'3',week:'11',month:'48',year:'580'}[period]},
+  };
   return (
     <div className="app">
-      <Side active="overview" onNav={onNav}/>
+      <Side active="home" onNav={onNav}/>
       <main className="main">
-        <Top hello="Dobré ráno, Martino" active={tab} onTabChange={setTab}/>
+        <Top hello="Dobré ráno, Martino" period={period} onPeriod={setP}/>
         <section className="hero">
           <div>
-            <div className="hero__label">Celková úspora · Tento týden</div>
-            <div className="hero__num"><span>62&nbsp;480</span><span className="hero__unit">Kč</span></div>
+            <div className="hero__label">Celková úspora · {pLabel}</div>
+            <div className="hero__num"><span>{new Intl.NumberFormat('cs-CZ').format(heroTotal)}</span><span className="hero__unit">Kč</span></div>
             <div className="hero__caption">
-              <span className="hero__delta"><I name="arrowUp"/> +18 % oproti minulému týdnu</span>
-              <p>Ekvivalent <em>38 hodin práce recepční</em> a <em>312 odbavených interakcí</em>. Dnes nezmeškán ani jeden hovor.</p>
+              <span className="hero__delta"><I name="arrowUp"/> {d.delta.money} oproti minulému</span>
+              <p>Ekvivalent <em>{heroHours} hodin práce recepční</em> a stovek odbavených interakcí.</p>
             </div>
           </div>
           <div className="hero__side">
-            <div className="kpi">
-              <div><div className="kpi__label">Čas ušetřen</div><div className="kpi__name">Tento týden</div></div>
-              <div><div className="kpi__num">38<span className="u">h&nbsp;24m</span></div><div className="kpi__delta"><I name="arrowUp"/> +5 h</div></div>
-            </div>
-            <div className="kpi">
-              <div><div className="kpi__label">Interakce</div><div className="kpi__name">Vyřízeno automaticky</div></div>
-              <div><div className="kpi__num">312</div><div className="kpi__delta"><I name="arrowUp"/> +42</div></div>
-            </div>
+            <Kpi label="Čas ušetřen" name={pLabel} num={heroHours} unit="h" delta={d.delta.hours}/>
+            <Kpi label="Interakce" name="Vyřízeno automaticky" num={{day:'299',week:'1 244',month:'5 156',year:'60 060'}[period]} delta={'+'+{day:'48',week:'186',month:'742',year:'9 120'}[period]}/>
           </div>
         </section>
 
-        <section className="svcs">
-          <div className="svc-card svc-card--featured" style={{cursor:'pointer'}} onClick={() => onNav('receptionist')}>
-            <div className="svc-card__top">
-              <div className="svc-card__name"><span className="ic"><I name="phone"/></span>AI recepční</div>
-              <div className="svc-card__live">Live</div>
-            </div>
-            <div className="svc-card__big">184<span className="u">hovorů</span></div>
-            <div className="svc-card__sub">Průměrná délka 1m 24s. Bez čekání, bez zmeškaných.</div>
+        <section className="svcs svcs--3">
+          <div className="svc-card" onClick={()=>onNav&&onNav('agent')}>
+            <div className="svc-card__top"><div className="svc-card__name"><span className="ic"><I name="bot"/></span>AI agent</div><div className="svc-card__live">Live</div></div>
+            <div className="svc-card__big">{SVC.agent.conv}<span className="u">konverzací</span></div>
+            <div className="svc-card__sub">Chat na webu rezervuje termíny do Google Calendar a Reservio.</div>
             <div className="svc-card__row">
-              <div className="s"><span className="lab">Schůzky</span><span className="v">57</span></div>
-              <div className="s"><span className="lab">Konverze</span><span className="v">31<span className="u">%</span></span></div>
-              <div className="s"><span className="lab">Ušetřeno</span><span className="v">22<span className="u">h</span></span></div>
+              <div className="s"><span className="lab">Rezervace</span><span className="v">{SVC.agent.booked}</span></div>
+              <div className="s"><span className="lab">Konverze</span><span className="v">53<span className="u">%</span></span></div>
+              <div className="s"><span className="lab">Ušetřeno</span><span className="v">{SVC.agent.hours}<span className="u">h</span></span></div>
             </div>
+            <a className="svc-card__cta">Otevřít detail <I name="arrowR"/></a>
           </div>
-          <div className="svc-card">
-            <div className="svc-card__top">
-              <div className="svc-card__name"><span className="ic"><I name="chat"/></span>Chatbot</div>
-              <div className="svc-card__live">Live</div>
+          <div className="svc-card svc-card--featured" onClick={()=>onNav&&onNav('reception')}>
+            <div className="svc-card__top"><div className="svc-card__name"><span className="ic"><I name="phone"/></span>AI recepční</div><div className="svc-card__live">Live</div></div>
+            <div className="svc-card__big">{SVC.reception.calls}<span className="u">hovorů</span></div>
+            <div className="svc-card__sub">Zvedá telefony, rezervuje termíny, bez čekání a bez zmeškaných.</div>
+            <div className="svc-card__row">
+              <div className="s"><span className="lab">Schůzky</span><span className="v">{SVC.reception.booked}</span></div>
+              <div className="s"><span className="lab">Konverze</span><span className="v">31<span className="u">%</span></span></div>
+              <div className="s"><span className="lab">Ušetřeno</span><span className="v">{SVC.reception.hours}<span className="u">h</span></span></div>
             </div>
-            <div className="svc-card__big">892<span className="u">zpráv</span></div>
-            <div className="svc-card__sub">71 % zákazníků vyřešil chatbot bez zásahu člověka.</div>
+            <a className="svc-card__cta">Otevřít detail <I name="arrowR"/></a>
+          </div>
+          <div className="svc-card" onClick={()=>onNav&&onNav('chatbot')}>
+            <div className="svc-card__top"><div className="svc-card__name"><span className="ic"><I name="chat"/></span>Chatbot</div><div className="svc-card__live">Live</div></div>
+            <div className="svc-card__big">{SVC.chatbot.msgs}<span className="u">zpráv</span></div>
+            <div className="svc-card__sub">Odpovídá na otázky o salónu — ceny, doba, parkování. Bez rezervací.</div>
             <div className="svc-card__row">
               <div className="s"><span className="lab">Vyřešeno</span><span className="v">71<span className="u">%</span></span></div>
               <div className="s"><span className="lab">Avg odpověď</span><span className="v">1,2<span className="u">s</span></span></div>
-              <div className="s"><span className="lab">Ušetřeno</span><span className="v">11<span className="u">h</span></span></div>
+              <div className="s"><span className="lab">Ušetřeno</span><span className="v">{SVC.chatbot.hours}<span className="u">h</span></span></div>
             </div>
-          </div>
-          <div className="svc-card">
-            <div className="svc-card__top">
-              <div className="svc-card__name"><span className="ic"><I name="globe"/></span>Web konverze</div>
-              <div className="svc-card__live">Live</div>
-            </div>
-            <div className="svc-card__big">2&nbsp;418<span className="u">návštěv</span></div>
-            <div className="svc-card__sub">Z toho 312 dokončilo rezervaci přes web.</div>
-            <div className="svc-card__row">
-              <div className="s"><span className="lab">Rezervace</span><span className="v">312</span></div>
-              <div className="s"><span className="lab">CTR</span><span className="v">12,9<span className="u">%</span></span></div>
-              <div className="s"><span className="lab">Ušetřeno</span><span className="v">5<span className="u">h</span></span></div>
-            </div>
+            <a className="svc-card__cta">Otevřít detail <I name="arrowR"/></a>
           </div>
         </section>
 
         <section className="row2">
-          <div className="chartcard">
-            <div className="chartcard__head">
-              <div>
-                <div className="chartcard__title">Úspora <em>v čase</em></div>
-                <div className="chartcard__sub">Posledních 24 týdnů · CET</div>
-              </div>
-              <div className="chartcard__legend">
-                <span className="l1">Hodiny ušetřeno</span>
-                <span className="l2">Tisíce Kč</span>
-              </div>
+          <ChartCard title="Úspora v čase" period={period} onPeriod={setP}/>
+          <Activity title="Poslední aktivita" items={[
+            {icon:'calendar',tone:'lime',what:'Rezervace',detail:'Chat → Reservio · Petra N.',when:'před 2 min · Čt 16:45',value:'1',unit:'ks'},
+            {icon:'phone',tone:'lime',what:'Hovor odbaven',detail:'AI recepční · +420 723 18•',when:'před 4 min · Schůzka uložena',value:'1',unit:'m 42s'},
+            {icon:'chat',what:'Chatbot',detail:'Dotaz na ceník melíru',when:'před 12 min · Vyřešeno automaticky',value:'+8',unit:'zpr.'},
+            {icon:'bot',tone:'lime',what:'Rezervace',detail:'Chat → Google Calendar',when:'před 28 min · Tomáš B.',value:'1',unit:'ks'},
+            {icon:'phone',tone:'lime',what:'Hovor odbaven',detail:'+420 602 ••• 14',when:'před 1 h · Bez akce',value:'52',unit:'s'},
+          ]}/>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+/* ── AI AGENT DETAIL ── */
+function AgentDetail({ onNav, period:pProp, onPeriod }) {
+  const [pLocal,setPLocal]=useState('week');
+  const period=pProp||pLocal;
+  const setP=p=>{ setPLocal(p); if(onPeriod) onPeriod(p); };
+  const conv={day:'38',week:'168',month:'702',year:'8 240'}[period];
+  const booked={day:'21',week:'89',month:'372',year:'4 410'}[period];
+  return (
+    <div className="app">
+      <Side active="agent" onNav={onNav}/>
+      <main className="main">
+        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="AI agent · živě"/>
+        <section className="detail">
+          <div className="detail__crumb"><a onClick={()=>onNav&&onNav('home')}>Dashboard</a> <I name="chevR"/> Služby <I name="chevR"/> <b>AI agent</b></div>
+          <div className="detail__hero">
+            <div>
+              <div className="hero__label">Konverzace · {{day:'Dnes',week:'Tento týden',month:'Květen 2026',year:'Posledních 12 měsíců'}[period]}</div>
+              <div className="detail__title">Chat na webu, který <em>rezervuje termín</em><br/>místo recepční.</div>
+              <div className="detail__statbig">{conv}<span className="u">konverzací</span></div>
+              <div className="detail__statsub">Z toho <em>{booked} rezervací</em> do <em>Google Calendar</em> a <em>Reservio</em>. Průměrná délka 1 m 48 s.</div>
             </div>
-            <SavingsChart/>
-            <div className="chart__xaxis">
-              <span>Pro 24</span><span>Led 25</span><span>Úno 25</span><span>Bře 25</span><span>Dub 25</span><span>Kvě 25</span>
-            </div>
-            <div className="chartcard__foot">
-              <span>Růst posledních 12 týdnů: <strong>+32 %</strong></span>
-              <span style={{display:'inline-flex',alignItems:'center',gap:6}}><I name="zap"/> Best week: <strong>62 480 Kč</strong></span>
+            <div className="detail__rightcard">
+              <h4>Živá konverzace · Před 3 min</h4>
+              <div className="calldemo">
+                <div className="bub bub--them">Dobrý den, chci se objednat na melír.<span className="ts">14:46 · web</span></div>
+                <div className="bub bub--ai">Volné termíny: Čt 16:45 nebo Pá 10:00. Co preferujete?<span className="ts">14:46 · Nexivo AI</span></div>
+                <div className="bub bub--them">Čtvrtek 16:45.<span className="ts">14:46</span></div>
+                <div className="bub bub--ai">Hotovo. Rezervaci posílám do Reservia. Potvrzení e-mailem.<span className="ts">14:47 · Reservio ✓</span></div>
+              </div>
+              <div className="row">
+                <span style={{display:'inline-flex',alignItems:'center',gap:8,color:'var(--lime)'}}><I name="check"/> Rezervace uložena · Čt 16:45</span>
+                <span style={{color:'rgba(245,243,238,0.55)'}}>1 m 48 s</span>
+              </div>
             </div>
           </div>
-
-          <div className="activity">
-            <div className="activity__head">
-              <div className="activity__title">Poslední <em>aktivita</em></div>
-              <a className="activity__link">Vše <I name="chevR"/></a>
+          <ChartCard title="Rezervace v čase" period={period} onPeriod={setP}/>
+          <div className="kpis-row">
+            <Kpi label="Rezervace" name="Chat → kalendář" num={booked} delta="+12"/>
+            <Kpi label="Konverze" name="Konverzace → rezervace" num="53" unit="%" delta="+4 p.p."/>
+            <Kpi label="Avg délka" name="Jedna konverzace" num="1" unit="m 48s" delta="−9 s" deltaTone="neg"/>
+            <Kpi label="Ušetřeno" name={{day:'Dnes',week:'Tento týden',month:'Tento měsíc',year:'Tento rok'}[period]} num={{day:'5',week:'23',month:'98',year:'1 160'}[period]} unit="h" delta="+5 h"/>
+          </div>
+          <div className="integ">
+            <div className="integ__head">
+              <div><div className="chartcard__title">Napojení <em>na vaše systémy</em></div><div className="chartcard__sub">Agent píše do kalendáře a rezervačního systému v reálném čase.</div></div>
+              <button className="topbtn"><I name="cog"/> Spravovat</button>
             </div>
-            <div className="activity__list">
-              {[
-                { ic:'phone', lime:true,  what:<><span className="b">Hovor odbaven</span> · Petra N., +420 723 18•</>, when:'před 4 min · Schůzka uložena · Čt 16:45', val:<>1<span className="u">m 42s</span></> },
-                { ic:'chat',  lime:false, what:<><span className="b">Chatbot</span> · Dotaz na ceník melíru</>, when:'před 12 min · Vyřešeno automaticky', val:<>+8<span className="u">zpr.</span></> },
-                { ic:'globe', lime:false, what:<><span className="b">Rezervace</span> · Web → kalendář</>, when:'před 28 min · Klient: Tomáš B.', val:<>1<span className="u">ks</span></> },
-                { ic:'phone', lime:true,  what:<><span className="b">Hovor odbaven</span> · +420 602 ••• 14</>, when:'před 1 h · Bez akce · pouze info', val:<>52<span className="u">s</span></> },
-                { ic:'chat',  lime:false, what:<><span className="b">Chatbot</span> · Otevírací doba o víkendu</>, when:'před 2 h · Vyřešeno automaticky', val:<>+3<span className="u">zpr.</span></> },
-              ].map((item, i) => (
-                <div className="activity__item" key={i}>
-                  <div className={'activity__ic'+(item.lime?' activity__ic--lime':'')}><I name={item.ic}/></div>
-                  <div className="activity__txt">
-                    <div className="activity__what">{item.what}</div>
-                    <div className="activity__when">{item.when}</div>
-                  </div>
-                  <div className="activity__val">{item.val}</div>
-                </div>
-              ))}
+            <div className="integ__grid">
+              <div className="integ__card integ__card--ok">
+                <div className="integ__icbox" style={{background:'#fff'}}><svg viewBox="0 0 24 24" width="22" height="22"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="#1A73E8" strokeWidth="1.6"/><path d="M16 3v4M8 3v4M3 10h18" stroke="#1A73E8" strokeWidth="1.6" fill="none"/><rect x="7" y="13" width="3" height="3" fill="#1A73E8"/><rect x="11" y="13" width="3" height="3" fill="#34A853"/><rect x="15" y="13" width="3" height="3" fill="#FBBC04"/></svg></div>
+                <div className="integ__body"><div className="integ__name">Google Calendar</div><div className="integ__sub">salon.lumi@gmail.com · 247 událostí tento měsíc</div></div>
+                <div className="integ__status"><span className="integ__pill"><i></i> Připojeno</span><span className="integ__when">Sync · před 2 min</span></div>
+              </div>
+              <div className="integ__card integ__card--ok">
+                <div className="integ__icbox" style={{background:'#FFE9D6',color:'#D24812'}}><span style={{fontFamily:'var(--font-display)',fontSize:18,fontWeight:600,letterSpacing:'-0.02em'}}>Re</span></div>
+                <div className="integ__body"><div className="integ__name">Reservio</div><div className="integ__sub">salon-lumi.reservio.com · {booked} rezervací</div></div>
+                <div className="integ__status"><span className="integ__pill"><i></i> Připojeno</span><span className="integ__when">Sync · před 5 min</span></div>
+              </div>
+              <div className="integ__card integ__card--ok">
+                <div className="integ__icbox"><I name="globe"/></div>
+                <div className="integ__body"><div className="integ__name">Web salonlumi.cz</div><div className="integ__sub">Widget nasazen · stránka /rezervace</div></div>
+                <div className="integ__status"><span className="integ__pill"><i></i> Připojeno</span><span className="integ__when">Verze · 1.4.2</span></div>
+              </div>
             </div>
+          </div>
+          <div className="tablecard">
+            <div className="tablecard__head"><div className="tablecard__title">Rezervace <em>za dnešek</em></div><div className="tablecard__actions"><button className="topbtn"><I name="search"/> Hledat</button><button className="topbtn"><I name="download"/> Export CSV</button></div></div>
+            <table className="tbl"><thead><tr><th>Termín</th><th>Klient</th><th>Služba</th><th>Kanál</th><th>Hodnota</th><th>Stav</th></tr></thead>
+            <tbody>{[
+              {t:'Čt 16:45',n:'Petra N.',s:'Melír s foukanou',c:'Reservio',d:'2 750 Kč',st:'lime'},
+              {t:'Pá 10:00',n:'Tomáš B.',s:'Pánský střih',c:'Google Calendar',d:'550 Kč',st:'lime'},
+              {t:'Pá 14:30',n:'Hana V.',s:'Střih + barva',c:'Reservio',d:'2 400 Kč',st:'lime'},
+              {t:'So 9:30',n:'Jakub D.',s:'Pánský střih',c:'Reservio',d:'550 Kč',st:'lime'},
+              {t:'So 11:00',n:'Eva K.',s:'Foukaná',c:'Google Calendar',d:'350 Kč',st:'ok'},
+              {t:'Po 8:00',n:'+420 731 ••• 09',s:'Střih',c:'Reservio',d:'650 Kč',st:'warn'},
+            ].map((r,i)=><tr key={i}><td>{r.t}</td><td>{r.n}</td><td>{r.s}</td><td>{r.c}</td><td>{r.d}</td><td><span className={'pill pill--'+r.st}>{r.st==='lime'?'Potvrzeno':r.st==='warn'?'Čeká':'Volitelné'}</span></td></tr>)}</tbody></table>
           </div>
         </section>
       </main>
@@ -559,40 +694,34 @@ function Overview({ onNav }) {
   );
 }
 
-/* ── DETAIL: AI RECEPČNÍ ── */
-function DetailReceptionist({ onNav }) {
-  const [tab, setTab] = useState('měsíc');
+/* ── AI RECEPČNÍ DETAIL ── */
+function ReceptionistDetail({ onNav, period:pProp, onPeriod }) {
+  const [pLocal,setPLocal]=useState('month');
+  const period=pProp||pLocal;
+  const setP=p=>{ setPLocal(p); if(onPeriod) onPeriod(p); };
+  const calls={day:'47',week:'184',month:'1 247',year:'14 820'}[period];
+  const bookings={day:'14',week:'57',month:'389',year:'4 640'}[period];
   return (
     <div className="app">
-      <Side active="receptionist" onNav={onNav}/>
+      <Side active="reception" onNav={onNav}/>
       <main className="main">
-        <Top hello="Dobré odpoledne, Martino" active={tab} onTabChange={setTab}/>
+        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="AI recepční · živě"/>
         <section className="detail">
-          <div className="detail__crumb">
-            <span style={{cursor:'pointer'}} onClick={() => onNav('overview')}>Dashboard</span>
-            <I name="chevR"/> Služby <I name="chevR"/> <b>AI recepční</b>
-          </div>
-
+          <div className="detail__crumb"><a onClick={()=>onNav&&onNav('home')}>Dashboard</a> <I name="chevR"/> Služby <I name="chevR"/> <b>AI recepční</b></div>
           <div className="detail__hero">
             <div>
-              <div className="hero__label">Hovory · Květen 2026</div>
+              <div className="hero__label">Hovory · {{day:'Dnes',week:'Tento týden',month:'Květen 2026',year:'Posledních 12 měsíců'}[period]}</div>
               <div className="detail__title">Hovory přijaté <em>do tří vteřin</em>,<br/>schůzky <em>uložené</em> automaticky.</div>
-              <div className="detail__statbig">1&nbsp;247<span className="u">hovorů</span></div>
-              <div className="detail__statsub">Z toho <em>389 rezervací</em>, <em>nula zmeškaných</em>. Průměrná délka odpovědi 1,2 s.</div>
-              <div style={{marginTop:32,display:'flex',gap:12,alignItems:'center'}}>
-                <div className="toggle">
-                  <button className="on"><I name="coins"/> Peníze</button>
-                  <button><I name="clock"/> Čas</button>
-                </div>
-              </div>
+              <div className="detail__statbig">{calls}<span className="u">hovorů</span></div>
+              <div className="detail__statsub">Z toho <em>{bookings} rezervací</em>, <em>nula zmeškaných</em>. Průměrná délka odpovědi 1,2 s.</div>
             </div>
-
             <div className="detail__rightcard">
               <h4>Živý přepis · Před 4 min</h4>
               <div className="calldemo">
                 <div className="bub bub--them">Dobrý den, chtěla bych se objednat na barvení.<span className="ts">14:32:08 · Petra N.</span></div>
                 <div className="bub bub--ai">Ráda. Volný je čtvrtek 16:45 nebo pátek v 10:00. Co vyhovuje?<span className="ts">14:32:10 · Nexivo AI</span></div>
                 <div className="bub bub--them">Čtvrtek 16:45, prosím. Na Martinu.<span className="ts">14:32:18</span></div>
+                <div className="bub bub--ai">Hotovo. Posílám SMS potvrzení. Hezký den.<span className="ts">14:32:20</span></div>
               </div>
               <div className="row">
                 <span style={{display:'inline-flex',alignItems:'center',gap:8,color:'var(--lime)'}}><I name="check"/> Schůzka uložena</span>
@@ -600,40 +729,24 @@ function DetailReceptionist({ onNav }) {
               </div>
             </div>
           </div>
-
-          <div className="chartcard">
-            <div className="chartcard__head">
-              <div>
-                <div className="chartcard__title">Hovory <em>za den</em> · Květen</div>
-                <div className="chartcard__sub">AI recepční vs. zmeškané před nasazením</div>
-              </div>
-              <div className="chartcard__legend">
-                <span className="l1">Po Nexivo</span>
-                <span className="l2">Před Nexivo</span>
-              </div>
-            </div>
-            <SavingsChart/>
-            <div className="chart__xaxis">
-              <span>1. 5.</span><span>5. 5.</span><span>10. 5.</span><span>15. 5.</span><span>20. 5.</span><span>25. 5.</span><span>31. 5.</span>
-            </div>
-            <div className="chartcard__foot">
-              <span>Špička: <strong>úterý 14:00–16:00</strong></span>
-              <span>Průměr / den: <strong>40 hovorů</strong></span>
-            </div>
+          <ChartCard title="Hovory v čase" period={period} onPeriod={setP}/>
+          <div className="kpis-row">
+            <Kpi label="Konverze" name="Hovor → rezervace" num="31" unit="%" delta="+6 p.p."/>
+            <Kpi label="Zmeškané" name="Za celý měsíc" num="0" delta="100 % pickup"/>
+            <Kpi label="Avg délka" name="Jeden hovor" num="1" unit="m 18s" delta="−12 s" deltaTone="neg"/>
+            <Kpi label="Ušetřeno" name={{day:'Dnes',week:'Tento týden',month:'Tento měsíc',year:'Tento rok'}[period]} num={{day:'6',week:'22',month:'94',year:'1 120'}[period]} unit="h" delta="+14 h"/>
           </div>
-
-          <div className="svcs" style={{padding:0,gridTemplateColumns:'repeat(4,1fr)'}}>
-            {[
-              {label:'Konverze',name:'Hovor → rezervace',num:<>31<span className="u">%</span></>,delta:<><I name="arrowUp"/> +6 p.p.</>},
-              {label:'Zmeškané',name:'Za celý měsíc',num:'0',delta:<><I name="check"/> 100% pickup</>},
-              {label:'Avg délka',name:'Jeden hovor',num:<>1<span className="u">m 18s</span></>,delta:<><I name="arrowDn"/> −12s</>,neg:true},
-              {label:'Ušetřeno',name:'Tento měsíc',num:<>94<span className="u">h</span></>,delta:<><I name="arrowUp"/> +14 h</>},
-            ].map((k,i) => (
-              <div className="kpi" key={i}>
-                <div><div className="kpi__label">{k.label}</div><div className="kpi__name">{k.name}</div></div>
-                <div><div className="kpi__num">{k.num}</div><div className={'kpi__delta'+(k.neg?' kpi__delta--neg':'')}>{k.delta}</div></div>
-              </div>
-            ))}
+          <div className="tablecard">
+            <div className="tablecard__head"><div className="tablecard__title">Hovory <em>za dnešek</em></div><div className="tablecard__actions"><button className="topbtn"><I name="search"/> Hledat</button><button className="topbtn"><I name="download"/> Export CSV</button></div></div>
+            <table className="tbl"><thead><tr><th>Čas</th><th>Volající</th><th>Záměr</th><th>Akce</th><th>Délka</th><th>Stav</th></tr></thead>
+            <tbody>{[
+              {t:'14:32',n:'Petra N.',i:'Objednat barvení',a:'Schůzka Čt 16:45',d:'1 m 42 s',s:'lime'},
+              {t:'13:11',n:'+420 602 ••• 14',i:'Otevírací doba',a:'Pouze info',d:'52 s',s:'ok'},
+              {t:'12:04',n:'Hana V.',i:'Přesun termínu',a:'Schůzka Pá 11:00',d:'2 m 06 s',s:'lime'},
+              {t:'11:48',n:'+420 731 ••• 09',i:'Cena střihu',a:'Odesláno SMS',d:'38 s',s:'ok'},
+              {t:'10:22',n:'Jakub D.',i:'Objednat střih',a:'Schůzka So 9:30',d:'1 m 18 s',s:'lime'},
+              {t:'09:14',n:'Tomáš B.',i:'Storno rezervace',a:'Zrušeno + uvolněno',d:'44 s',s:'warn'},
+            ].map((r,i)=><tr key={i}><td>{r.t}</td><td>{r.n}</td><td>{r.i}</td><td>{r.a}</td><td>{r.d}</td><td><span className={'pill pill--'+r.s}>{r.s==='lime'?'Rezervace':r.s==='warn'?'Storno':'Info'}</span></td></tr>)}</tbody></table>
           </div>
         </section>
       </main>
@@ -641,14 +754,156 @@ function DetailReceptionist({ onNav }) {
   );
 }
 
-/* ── ROOT ── */
-function App() {
-  const [screen, setScreen] = useState('overview');
-  if (screen === 'receptionist') return <DetailReceptionist onNav={setScreen}/>;
-  return <Overview onNav={setScreen}/>;
+/* ── CHATBOT DETAIL ── */
+function ChatbotDetail({ onNav, period:pProp, onPeriod }) {
+  const [pLocal,setPLocal]=useState('week');
+  const period=pProp||pLocal;
+  const setP=p=>{ setPLocal(p); if(onPeriod) onPeriod(p); };
+  const msgs={day:'214',week:'892',month:'3 642',year:'42 180'}[period];
+  const convs={day:'38',week:'162',month:'648',year:'7 720'}[period];
+  const solved={day:'72',week:'71',month:'69',year:'68'}[period];
+  const kbDocs={day:'47',week:'47',month:'52',year:'58'}[period];
+  const topics=[
+    {name:'Ceník služeb',share:31,vol:'+4 %'},{name:'Otevírací doba',share:24,vol:'+1 %'},
+    {name:'Lokace · parkování',share:14,vol:'−1 %'},{name:'Dárkové poukazy',share:12,vol:'+3 %'},
+    {name:'Postup služby',share:8,vol:'+2 %'},{name:'Ostatní',share:11,vol:'—'},
+  ];
+  return (
+    <div className="app">
+      <Side active="chatbot" onNav={onNav}/>
+      <main className="main">
+        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="Chatbot · živě"/>
+        <section className="detail">
+          <div className="detail__crumb"><a onClick={()=>onNav&&onNav('home')}>Dashboard</a> <I name="chevR"/> Služby <I name="chevR"/> <b>Chatbot</b></div>
+          <div className="detail__hero">
+            <div>
+              <div className="hero__label">Konverzace · {{day:'Dnes',week:'Tento týden',month:'Květen 2026',year:'Posledních 12 měsíců'}[period]}</div>
+              <div className="detail__title">Otázky o salónu <em>vyřízené</em><br/>do 1,2 sekundy.</div>
+              <div className="detail__statbig">{msgs}<span className="u">zpráv</span></div>
+              <div className="detail__statsub">Ve <em>{convs} konverzacích</em>, <em>{solved} % vyřešeno</em> bez člověka. Chatbot pouze informuje — rezervace zařizuje AI agent.</div>
+            </div>
+            <div className="detail__rightcard">
+              <h4>Živá konverzace · Před 2 min</h4>
+              <div className="calldemo">
+                <div className="bub bub--them">Ahoj, kolik stojí melír s foukanou?<span className="ts">14:48 · web</span></div>
+                <div className="bub bub--ai">Melír od 2 400 Kč podle délky, foukaná 350 Kč.<span className="ts">14:48 · Nexivo AI</span></div>
+                <div className="bub bub--them">A máte otevřeno o víkendu?<span className="ts">14:49</span></div>
+                <div className="bub bub--ai">Sobota 9–14 h, neděle zavřeno. Pro objednání použijte chat „Rezervace".<span className="ts">14:49</span></div>
+              </div>
+              <div className="row">
+                <span style={{display:'inline-flex',alignItems:'center',gap:8,color:'var(--lime)'}}><I name="check"/> Vyřešeno bez člověka</span>
+                <span style={{color:'rgba(245,243,238,0.55)'}}>4 zpr. · 13 s</span>
+              </div>
+            </div>
+          </div>
+          <ChartCard title="Zprávy v čase" period={period} onPeriod={setP}/>
+          <div className="kpis-row">
+            <Kpi label="Vyřešeno" name="Bez člověka" num={solved} unit="%" delta="+3 p.p."/>
+            <Kpi label="Avg odpověď" name="Doba reakce" num="1,2" unit="s" delta="−0,3 s" deltaTone="neg"/>
+            <Kpi label="CSAT" name="Hodnocení 1–5" num="4,7" unit="/5" delta="+0,2"/>
+            <Kpi label="Ušetřeno" name={{day:'Dnes',week:'Tento týden',month:'Tento měsíc',year:'Tento rok'}[period]} num={{day:'3',week:'11',month:'48',year:'580'}[period]} unit="h" delta="+2 h"/>
+          </div>
+          <div className="row2">
+            <div className="chartcard">
+              <div className="chartcard__head">
+                <div><div className="chartcard__title">Top <em>témata</em></div><div className="chartcard__sub">O čem se zákazníci ptají nejčastěji</div></div>
+                <a className="activity__link">Vše <I name="chevR"/></a>
+              </div>
+              <div className="topics">
+                {topics.map((t,i)=>(
+                  <div className="topic" key={i}>
+                    <div className="topic__row"><span className="topic__name">{t.name}</span><span className="topic__share">{t.share} %</span></div>
+                    <div className="topic__bar"><span style={{width:(t.share*3.2)+'%'}}/></div>
+                    <span className="topic__delta">{t.vol}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <Activity title="Poslední konverzace" items={[
+              {icon:'chat',tone:'lime',what:'Cena melíru',detail:'Vyřízeno + délka vlasů',when:'před 2 min · vyřešeno',value:'4',unit:'zpr.'},
+              {icon:'chat',what:'Otevírací doba',detail:'Sobota 9–14',when:'před 7 min · vyřešeno',value:'2',unit:'zpr.'},
+              {icon:'user',what:'Eskalace · člověk',detail:'Reklamace barvy',when:'před 21 min · předáno',value:'7',unit:'zpr.'},
+              {icon:'chat',tone:'lime',what:'Postup melíru',detail:'Délka, fáze, péče',when:'před 38 min · vyřešeno',value:'6',unit:'zpr.'},
+              {icon:'chat',what:'Parkování',detail:'Bezplatné · náměstí',when:'před 1 h · vyřešeno',value:'1',unit:'zpr.'},
+            ]}/>
+          </div>
+          <div className="kbcard">
+            <div className="kbcard__l">
+              <div className="kbcard__eyebrow">Znalostní báze</div>
+              <div className="kbcard__h">Chatbot zná <em>{kbDocs} dokumentů</em>.</div>
+              <p>Posledně synchronizováno před 38 min z webu, ceníku a stránky o salonu. Tři nové dotazy potřebují vaši odpověď.</p>
+              <div className="kbcard__metrics">
+                <div><span className="l">Pokrytí</span><span className="v">94<i>%</i></span></div>
+                <div><span className="l">Neznámé dotazy</span><span className="v">3</span></div>
+                <div><span className="l">Avg confidence</span><span className="v">0,91</span></div>
+              </div>
+            </div>
+            <div className="kbcard__r">
+              <button className="kbcta">Otevřít Inbox <I name="arrowR"/></button>
+              <ul className="kbcard__list">
+                <li><span>Cena permanentního make-upu obočí?</span><em>2× dotaz</em></li>
+                <li><span>Bezbariérový přístup do salónu?</span><em>1× dotaz</em></li>
+                <li><span>Platba přes Apple Pay v salónu?</span><em>1× dotaz</em></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+/* ── LOGIN ── */
+function Login({ onSubmit }) {
+  return (
+    <div className="login">
+      <div className="login__l">
+        <div className="login__brand" onClick={()=>window.location.href='/'}>nexivo</div>
+        <div className="login__center">
+          <div className="login__eyebrow">Klientský portál</div>
+          <h1 className="login__h">Vítejte <em>zpátky</em>.<br/>Vaše čísla čekají.</h1>
+          <form className="login__form" onSubmit={e=>{e.preventDefault();if(onSubmit)onSubmit();}}>
+            <div className="field"><label>E-mail</label><input type="email" placeholder="vas@email.cz"/></div>
+            <div className="field"><label>Heslo</label><input type="password" placeholder="••••••••••••"/></div>
+            <div className="field--row"><span className="checkbox"><span></span> Pamatovat tento prohlížeč</span><a>Zapomenuté heslo?</a></div>
+            <button className="login__cta" type="submit">Přihlásit se</button>
+          </form>
+          <div className="login__note">Nový klient Nexiva? <a>Aktivovat účet</a> přes pozvánku z e-mailu.</div>
+        </div>
+        <div className="login__foot"><span>© 2026 Nexivo · CZ / SK</span><span>Stav systémů · vše běží</span></div>
+      </div>
+      <div className="login__r">
+        <div className="login__r-eyebrow">Tento týden · Salón Lumi</div>
+        <div className="login__r-big">62&nbsp;480<span className="u">Kč</span></div>
+        <div className="login__r-cap">ušetřeno díky <em>AI agentovi</em>, <em>recepční</em> a chatbotu. Přihlaste se, abyste viděli detail.</div>
+        <div className="login__r-stamp">
+          <div className="login__r-mini"><div className="l">Hovorů</div><div className="v">184</div></div>
+          <div className="login__r-mini"><div className="l">Rezervací</div><div className="v">146</div></div>
+          <div className="login__r-mini"><div className="l">Ušetřeno</div><div className="v"><em>56 h</em></div></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── ROUTER ── */
+function readHash() {
+  const h=(window.location.hash||'').replace('#/','').replace('#','');
+  return ['home','agent','reception','chatbot'].includes(h)?h:'home';
+}
+
+function PortalApp() {
+  const [route,setRoute]=useState(readHash);
+  const [period,setPeriod]=useState('week');
+  useEffect(()=>{ const fn=()=>setRoute(readHash()); window.addEventListener('hashchange',fn); return()=>window.removeEventListener('hashchange',fn); },[]);
+  const go=r=>{ setRoute(r); window.location.hash='#/'+r; };
+  if(route==='agent')     return <AgentDetail onNav={go} period={period} onPeriod={setPeriod}/>;
+  if(route==='reception') return <ReceptionistDetail onNav={go} period={period} onPeriod={setPeriod}/>;
+  if(route==='chatbot')   return <ChatbotDetail onNav={go} period={period} onPeriod={setPeriod}/>;
+  return <Overview onNav={go} period={period} onPeriod={setPeriod}/>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<PortalApp/>);
 </script>
 </body>
 </html>
