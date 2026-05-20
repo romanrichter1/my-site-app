@@ -423,7 +423,7 @@ button { font-family: var(--font-sans); }
   background: var(--ink-1000);
   color: var(--bone-50);
 }
-.closer h2 { font: 400 88px/1 var(--font-display); letter-spacing: -0.028em; margin: 0; max-width: 14ch; text-wrap: balance; font-variation-settings: "opsz" 144; }
+.closer h2 { font: 400 88px/1 var(--font-display); letter-spacing: -0.028em; margin: 0; max-width: 14ch; text-wrap: balance; font-variation-settings: "opsz" 144; color: #FFFFFF; }
 .closer h2 em { font-style: italic; }
 .closer p { font: 400 19px/1.5 var(--font-sans); color: var(--ink-300); margin: 0; max-width: 580px; }
 
