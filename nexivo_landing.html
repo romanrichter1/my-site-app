@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=1440, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nexivo — Webové stránky, které berou rezervace</title>
   <link rel="icon" href="assets/nexivo-favicon.svg">
   <link rel="stylesheet" href="colors_and_type.css">
@@ -33,6 +33,9 @@
       <a href="nexivo_login.html" class="nav__signin">Přihlásit</a>
       <a href="#calendly" target="_blank" rel="noopener" class="nav__cta" data-cta="calendly">Domluvit ukázku</a>
     </div>
+    <button class="nav__hamburger" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -244,7 +247,7 @@
   <!-- SAVINGS STRIP -->
   <section class="savings">
     <h3>Místo recepční na poloviční úvazek ušetříte přes čtvrt milionu ročně.</h3>
-    <div style="display:flex;gap:48px">
+    <div class="savings__stats">
       <div class="savings__stat">
         <span class="num">12,4</span>
         <span class="label">hodin / týden</span>
@@ -498,6 +501,28 @@
 
     </div>
   </div>
+
+  <script>
+    (function () {
+      const nav = document.querySelector('.nav');
+      const btn = nav && nav.querySelector('.nav__hamburger');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('nav--open');
+        btn.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', e => {
+        if (!nav.contains(e.target)) {
+          nav.classList.remove('nav--open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      nav.querySelectorAll('.nav__link').forEach(a => a.addEventListener('click', () => {
+        nav.classList.remove('nav--open');
+        btn.setAttribute('aria-expanded', 'false');
+      }));
+    })();
+  </script>
 
   <script>
     // Wire all Calendly CTAs to the URL configured in <head>
