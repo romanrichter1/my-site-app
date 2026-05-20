@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexivo · Klientský dashboard</title>
+  <link rel="icon" href="../assets/nexivo-favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: #F5F3EE; }
+
+    :root {
+      --cream:    #F5F3EE;
+      --cream-2:  #EDEAE0;
+      --paper:    #FFFFFF;
+      --ink:      #0A0A09;
+      --ink-2:    #111111;
+      --ink-3:    #1F1E18;
+      --muted:    #6B6A5C;
+      --muted-2:  #98968A;
+      --hair:     rgba(10,10,9,0.08);
+      --hair-2:   rgba(10,10,9,0.14);
+      --hair-dk:  rgba(255,255,255,0.10);
+      --hair-dk2: rgba(255,255,255,0.16);
+      --lime:     #C7F230;
+      --lime-dim: rgba(199,242,48,0.20);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-sans:    'Manrope', -apple-system, sans-serif;
+    }
+
+    * { -webkit-font-smoothing: antialiased; }
+
+    /* ── APP SHELL ── */
+    .app {
+      width: 100vw; height: 100vh;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      display: grid;
+      grid-template-columns: 232px 1fr;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    .side {
+      height: 100%;
+      display: flex; flex-direction: column;
+      padding: 28px 20px 20px;
+      border-right: 1px solid var(--hair);
+      background: var(--cream);
+    }
+    .side__brand {
+      display: inline-flex; align-items: flex-end; gap: 6px;
+      font-family: var(--font-display); font-weight: 600;
+      font-size: 28px; line-height: 1; letter-spacing: -0.022em;
+      font-variation-settings: "opsz" 96;
+      color: var(--ink);
+      padding: 0 8px 28px;
+      border-bottom: 1px solid var(--hair);
+      cursor: pointer;
+    }
+    .side__brand::after { content: ""; width: 7px; height: 7px; background: var(--lime); margin-bottom: 6px; }
+    .side__group { margin-top: 24px; display: flex; flex-direction: column; gap: 2px; }
+    .side__cap {
+      font: 600 11px/1 var(--font-sans);
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted-2);
+      padding: 0 10px 10px;
+    }
+    .side__link {
+      display: flex; align-items: center; gap: 12px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      font: 500 14px/1 var(--font-sans);
+      color: var(--ink);
+      cursor: pointer;
+      letter-spacing: -0.002em;
+      transition: background 180ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .side__link:hover { background: var(--cream-2); }
+    .side__link svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .side__link--active { background: var(--ink); color: var(--cream); }
+    .side__link--active:hover { background: var(--ink-2); }
+    .side__link .meta {
+      margin-left: auto;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+      padding: 3px 7px; border-radius: 999px;
+      background: var(--lime); color: var(--ink);
+    }
+    .side__foot { margin-top: auto; }
+    .side__user {
+      display: grid; grid-template-columns: 32px 1fr auto;
+      align-items: center; gap: 10px;
+      padding: 10px; border-radius: 10px;
+      border: 1px solid var(--hair); background: var(--paper);
+    }
+    .side__avatar {
+      width: 32px; height: 32px; border-radius: 999px;
+      background: var(--ink); color: var(--cream);
+      display: inline-flex; align-items: center; justify-content: center;
+      font: 600 12px/1 var(--font-sans);
+    }
+    .side__who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .side__who .n { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .side__who .r { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
+    .side__user svg { width: 16px; height: 16px; stroke: var(--muted); stroke-width: 1.5; fill: none; }
+
+    /* ── MAIN ── */
+    .main { height: 100%; overflow: auto; display: flex; flex-direction: column; }
+    .main::-webkit-scrollbar { display: none; }
+
+    /* ── TOPBAR ── */
+    .top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 48px 24px;
+      border-bottom: 1px solid var(--hair);
+      flex-shrink: 0;
+    }
+    .top__l { display: flex; flex-direction: column; gap: 6px; }
+    .top__eyebrow {
+      font: 600 11px/1 var(--font-sans);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted);
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .top__eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--lime); }
+    .top__hello {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 30px; line-height: 1.05; letter-spacing: -0.018em;
+      font-variation-settings: "opsz" 72;
+    }
+    .top__hello em { font-style: italic; }
+    .top__r { display: flex; align-items: center; gap: 14px; }
+    .tabs {
+      display: inline-flex;
+      background: var(--paper);
+      border: 1px solid var(--hair);
+      border-radius: 999px;
+      padding: 4px;
+    }
+    .tabs button {
+      font: 600 13px/1 var(--font-sans);
+      border: 0; background: transparent;
+      padding: 9px 16px; border-radius: 999px;
+      color: var(--muted); cursor: pointer;
+      letter-spacing: -0.005em;
+      transition: all 180ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .tabs button:hover { color: var(--ink); }
+    .tabs button.on { background: var(--ink); color: var(--cream); }
+    .topbtn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font: 600 13px/1 var(--font-sans);
+      padding: 11px 16px; border-radius: 8px;
+      border: 1px solid var(--hair-2);
+      background: var(--paper); color: var(--ink);
+      cursor: pointer;
+      transition: background 150ms;
+    }
+    .topbtn:hover { background: var(--cream-2); }
+    .topbtn--ink { background: var(--ink); color: var(--cream); border-color: transparent; }
+    .topbtn--ink:hover { background: var(--ink-3); }
+    .topbtn svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .topbtn .dot { width: 7px; height: 7px; background: var(--lime); border-radius: 999px; box-shadow: 0 0 0 3px rgba(199,242,48,0.30); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 48px 48px 32px;
+      display: grid; grid-template-columns: 1.35fr 1fr;
+      gap: 56px; align-items: flex-end;
+      flex-shrink: 0;
+    }
+    .hero__label {
+      display: flex; align-items: center; gap: 12px;
+      font: 600 12px/1 var(--font-sans);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px;
+    }
+    .hero__label::before { content: ""; width: 7px; height: 7px; background: var(--lime); }
+    .hero__num {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 232px; line-height: 0.86; letter-spacing: -0.038em;
+      font-variation-settings: "opsz" 144; font-feature-settings: "tnum","lnum";
+      color: var(--ink);
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .hero__unit {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 52px; letter-spacing: -0.022em;
+      margin-top: 30px; color: var(--muted);
+    }
+    .hero__caption { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; max-width: 480px; }
+    .hero__caption p { font: 400 17px/1.5 var(--font-sans); color: var(--muted); }
+    .hero__caption p em { font-style: normal; color: var(--ink); font-weight: 600; }
+    .hero__delta {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 999px;
+      background: var(--lime-dim); color: var(--ink);
+      font: 600 13px/1 var(--font-sans); align-self: flex-start;
+    }
+    .hero__delta svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
+    .hero__side { display: flex; flex-direction: column; gap: 14px; }
+
+    /* ── KPIs ── */
+    .kpi {
+      background: var(--paper); border-radius: 14px;
+      padding: 22px 24px; border: 1px solid var(--hair);
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 12px; align-items: end;
+    }
+    .kpi__label { font: 600 11px/1 var(--font-sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .kpi__name { font: 500 14px/1.2 var(--font-sans); margin-top: 8px; color: var(--ink); }
+    .kpi__num {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 56px; line-height: 1; letter-spacing: -0.028em;
+      font-feature-settings: "tnum","lnum"; font-variation-settings: "opsz" 72;
+      display: flex; align-items: baseline; gap: 4px; white-space: nowrap;
+    }
+    .kpi__num .u { font-size: 18px; color: var(--muted); letter-spacing: 0; margin-left: 2px; font-family: var(--font-sans); font-weight: 500; }
+    .kpi__delta { font: 600 12px/1 var(--font-sans); display: inline-flex; align-items: center; gap: 4px; color: #1F8A5B; }
+    .kpi__delta--neg { color: #B85C1F; }
+    .kpi__delta svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+    /* ── SERVICE CARDS ── */
+    .svcs { padding: 32px 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex-shrink: 0; }
+    .svc-card {
+      background: var(--ink-2); color: var(--cream);
+      border-radius: 18px; padding: 28px 28px 24px;
+      display: flex; flex-direction: column; gap: 16px;
+      min-height: 280px; position: relative; overflow: hidden;
+    }
+    .svc-card__top { display: flex; align-items: center; justify-content: space-between; }
+    .svc-card__name { display: inline-flex; align-items: center; gap: 10px; font: 600 13px/1 var(--font-sans); letter-spacing: 0.04em; }
+    .svc-card__name .ic { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.06); display: inline-flex; align-items: center; justify-content: center; }
+    .svc-card__name .ic svg { width: 16px; height: 16px; stroke: var(--cream); stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .svc-card__live { display: inline-flex; align-items: center; gap: 6px; font: 600 10px/1 var(--font-sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--lime); }
+    .svc-card__live::before { content: ""; width: 6px; height: 6px; background: var(--lime); border-radius: 999px; box-shadow: 0 0 0 3px rgba(199,242,48,0.20); animation: livepulse 2s ease-in-out infinite; }
+    @keyframes livepulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+    .svc-card__big { margin-top: 12px; font-family: var(--font-display); font-weight: 400; font-size: 96px; line-height: 0.88; letter-spacing: -0.034em; font-feature-settings: "tnum","lnum"; font-variation-settings: "opsz" 96; }
+    .svc-card__big .u { font-family: var(--font-sans); font-weight: 500; font-size: 18px; letter-spacing: 0; color: var(--muted-2); margin-left: 6px; }
+    .svc-card__sub { font: 400 14px/1.45 var(--font-sans); color: rgba(245,243,238,0.65); max-width: 320px; }
+    .svc-card__row { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--hair-dk); display: flex; justify-content: space-between; gap: 14px; }
+    .svc-card__row .s { display: flex; flex-direction: column; gap: 4px; }
+    .svc-card__row .lab { font: 600 10px/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); }
+    .svc-card__row .v { font-family: var(--font-display); font-weight: 400; font-size: 22px; letter-spacing: -0.014em; font-feature-settings: "tnum","lnum"; color: var(--cream); }
+    .svc-card__row .v .u { font-family: var(--font-sans); font-size: 12px; color: var(--muted-2); font-weight: 500; margin-left: 2px; }
+    .svc-card--featured::before { content: ""; position: absolute; top: 28px; right: 28px; width: 8px; height: 8px; background: var(--lime); }
+
+    /* ── ANALYTICS ROW ── */
+    .row2 { padding: 16px 48px 56px; display: grid; grid-template-columns: 1.55fr 1fr; gap: 16px; flex-shrink: 0; }
+    .chartcard { background: var(--paper); border-radius: 16px; border: 1px solid var(--hair); padding: 28px; display: flex; flex-direction: column; gap: 22px; }
+    .chartcard__head { display: flex; align-items: flex-start; justify-content: space-between; }
+    .chartcard__title { font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.1; letter-spacing: -0.014em; font-variation-settings: "opsz" 48; }
+    .chartcard__title em { font-style: italic; }
+    .chartcard__sub { font: 400 13px/1 var(--font-sans); color: var(--muted); margin-top: 6px; letter-spacing: 0.02em; }
+    .chartcard__legend { display: flex; gap: 16px; }
+    .chartcard__legend span { display: inline-flex; align-items: center; gap: 7px; font: 500 12px/1 var(--font-sans); color: var(--muted); }
+    .chartcard__legend span::before { content: ""; width: 9px; height: 9px; }
+    .chartcard__legend .l1::before { background: var(--ink); border-radius: 999px; }
+    .chartcard__legend .l2::before { background: var(--lime); }
+    .chart { position: relative; height: 260px; width: 100%; }
+    .chart svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .chart__xaxis { display: flex; justify-content: space-between; margin-top: 12px; font: 500 11px/1 var(--font-sans); color: var(--muted-2); letter-spacing: 0.04em; }
+    .chartcard__foot { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--hair); font: 500 13px/1 var(--font-sans); color: var(--muted); }
+    .chartcard__foot strong { color: var(--ink); font-weight: 600; }
+
+    /* ── ACTIVITY ── */
+    .activity { background: var(--paper); border-radius: 16px; border: 1px solid var(--hair); padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+    .activity__head { display: flex; align-items: flex-start; justify-content: space-between; }
+    .activity__title { font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.1; letter-spacing: -0.014em; font-variation-settings: "opsz" 48; }
+    .activity__title em { font-style: italic; }
+    .activity__link { font: 600 12px/1 var(--font-sans); letter-spacing: -0.005em; color: var(--ink); display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+    .activity__list { display: flex; flex-direction: column; gap: 4px; }
+    .activity__item { display: grid; grid-template-columns: 32px 1fr auto; align-items: center; gap: 14px; padding: 12px 6px; border-bottom: 1px solid var(--hair); }
+    .activity__item:last-child { border-bottom: 0; }
+    .activity__ic { width: 32px; height: 32px; border-radius: 999px; background: var(--cream-2); display: inline-flex; align-items: center; justify-content: center; }
+    .activity__ic svg { width: 14px; height: 14px; stroke: var(--ink); stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .activity__ic--lime { background: var(--lime); }
+    .activity__txt { display: flex; flex-direction: column; gap: 2px; }
+    .activity__what { font: 500 13px/1.3 var(--font-sans); color: var(--ink); }
+    .activity__what .b { font-weight: 600; }
+    .activity__when { font: 400 11px/1 var(--font-sans); color: var(--muted); letter-spacing: 0.02em; }
+    .activity__val { font-family: var(--font-display); font-weight: 400; font-size: 17px; letter-spacing: -0.012em; font-feature-settings: "tnum","lnum"; color: var(--ink); }
+    .activity__val .u { font-family: var(--font-sans); font-size: 11px; color: var(--muted); font-weight: 500; margin-left: 2px; }
+
+    /* ── DETAIL VIEW ── */
+    .detail { padding: 36px 48px 48px; display: flex; flex-direction: column; gap: 28px; }
+    .detail__crumb { display: inline-flex; align-items: center; gap: 8px; font: 600 12px/1 var(--font-sans); color: var(--muted); letter-spacing: 0.02em; }
+    .detail__crumb svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+    .detail__crumb b { color: var(--ink); font-weight: 600; }
+    .detail__hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: flex-end; }
+    .detail__title { font-family: var(--font-display); font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.022em; font-variation-settings: "opsz" 96; margin: 14px 0 0; max-width: 720px; }
+    .detail__title em { font-style: italic; }
+    .detail__statbig { font-family: var(--font-display); font-weight: 400; font-size: 168px; line-height: 0.86; letter-spacing: -0.036em; font-feature-settings: "tnum","lnum"; font-variation-settings: "opsz" 144; margin-top: 28px; }
+    .detail__statbig .u { font-size: 32px; font-family: var(--font-sans); font-weight: 500; color: var(--muted); letter-spacing: 0; margin-left: 6px; }
+    .detail__statsub { font: 500 16px/1.5 var(--font-sans); color: var(--muted); margin-top: 8px; max-width: 480px; }
+    .detail__statsub em { font-style: normal; color: var(--ink); font-weight: 600; }
+    .detail__rightcard { background: var(--ink-2); color: var(--cream); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 20px; min-height: 320px; }
+    .detail__rightcard h4 { font: 600 11px/1 var(--font-sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-2); }
+    .calldemo { display: flex; flex-direction: column; gap: 10px; }
+    .calldemo .bub { padding: 11px 14px; border-radius: 12px; font: 400 14px/1.42 var(--font-sans); max-width: 86%; }
+    .calldemo .bub--them { background: rgba(255,255,255,0.06); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .calldemo .bub--ai { background: var(--lime); color: var(--ink); align-self: flex-end; border-bottom-right-radius: 4px; }
+    .calldemo .bub .ts { display: block; font-size: 10px; opacity: 0.55; margin-top: 4px; letter-spacing: 0.04em; }
+    .detail__rightcard .row { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--hair-dk); display: flex; justify-content: space-between; align-items: center; font: 600 12px/1 var(--font-sans); }
+    .detail__rightcard .row svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+    .toggle { display: inline-flex; align-items: center; background: var(--paper); border: 1px solid var(--hair); padding: 4px; border-radius: 999px; font: 600 12px/1 var(--font-sans); }
+    .toggle button { background: transparent; border: 0; cursor: pointer; padding: 8px 14px; border-radius: 999px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+    .toggle button svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+    .toggle button.on { background: var(--lime); color: var(--ink); }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+/* ── ICONS ── */
+const Ico = {
+  home:     () => <svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v10a2 2 0 01-2 2h-4v-7H10v7H6a2 2 0 01-2-2z"/></svg>,
+  phone:    () => <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>,
+  chat:     () => <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>,
+  globe:    () => <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>,
+  bar:      () => <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
+  bell:     () => <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>,
+  cog:      () => <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 008.91 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 8.91a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>,
+  arrowUp:  () => <svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>,
+  arrowDn:  () => <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>,
+  arrowR:   () => <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>,
+  chevR:    () => <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>,
+  chevD:    () => <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>,
+  clock:    () => <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+  coins:    () => <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1110.34 18M7 6h1v4M7.71 10.5l1.42-1.42M16.5 13.5l-1.42 1.42"/></svg>,
+  download: () => <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>,
+  check:    () => <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>,
+  zap:      () => <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+  logout:   () => <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>,
+};
+function I({ name, ...rest }) {
+  const Cmp = Ico[name];
+  return Cmp ? <span {...rest}><Cmp /></span> : null;
+}
+
+/* ── CHART ── */
+function SavingsChart() {
+  const w = 700, h = 240, padX = 8, padY = 16;
+  const pts = arr => {
+    const max = Math.max(...arr), min = Math.min(...arr);
+    const stepX = (w - padX*2) / (arr.length - 1);
+    return arr.map((v, i) => [padX + i*stepX, h - padY - ((v-min)/(max-min))*(h-padY*2)]);
+  };
+  const seriesA = [3,4,3,5,4,6,5,7,6,8,7,9,8,11,9,10,12,11,13,12,14,13,15,14];
+  const seriesB = [12,14,11,17,15,19,16,22,18,24,21,25,23,28,25,27,31,28,33,30,36,32,38,35];
+  const a = pts(seriesA), b = pts(seriesB);
+  const toPath = p => p.reduce((s,[x,y],i) => s+(i?' L ':' M ')+x.toFixed(1)+' '+y.toFixed(1),'');
+  const areaPath = toPath(b)+' L '+(w-padX)+' '+(h-padY)+' L '+padX+' '+(h-padY)+' Z';
+  return (
+    <div className="chart">
+      <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
+        {[0.25,0.5,0.75].map((g,i) => <line key={i} x1={padX} x2={w-padX} y1={padY+g*(h-padY*2)} y2={padY+g*(h-padY*2)} stroke="rgba(10,10,9,0.06)" strokeWidth="1"/>)}
+        <path d={areaPath} fill="rgba(199,242,48,0.16)"/>
+        <path d={toPath(b)} fill="none" stroke="#C7F230" strokeWidth="3" strokeLinejoin="round" strokeLinecap="round"/>
+        <path d={toPath(a)} fill="none" stroke="#0A0A09" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" strokeDasharray="6 3"/>
+      </svg>
+    </div>
+  );
+}
+
+/* ── SIDEBAR ── */
+function Side({ active, onNav }) {
+  return (
+    <aside className="side">
+      <div className="side__brand" onClick={() => onNav('overview')}>nexivo</div>
+      <div className="side__group">
+        <div className="side__cap">Přehled</div>
+        <div className={'side__link '+(active==='overview'?'side__link--active':'')} onClick={() => onNav('overview')}>
+          <I name="home"/> Dashboard
+        </div>
+        <div className="side__link"><I name="bar"/> Reporty</div>
+      </div>
+      <div className="side__group">
+        <div className="side__cap">Služby</div>
+        <div className={'side__link '+(active==='receptionist'?'side__link--active':'')} onClick={() => onNav('receptionist')}>
+          <I name="phone"/> AI recepční <span className="meta">live</span>
+        </div>
+        <div className="side__link"><I name="chat"/> Chatbot</div>
+        <div className="side__link"><I name="globe"/> Web konverze</div>
+      </div>
+      <div className="side__group">
+        <div className="side__cap">Účet</div>
+        <div className="side__link"><I name="bell"/> Upozornění</div>
+        <div className="side__link"><I name="cog"/> Nastavení</div>
+        <div className="side__link" onClick={() => { window.location.href='index.html'; }}><I name="logout"/> Odhlásit se</div>
+      </div>
+      <div className="side__foot">
+        <div className="side__user">
+          <div className="side__avatar">MK</div>
+          <div className="side__who">
+            <div className="n">Martina Kovaříková</div>
+            <div className="r">Salón Lumi · Olomouc</div>
+          </div>
+          <I name="chevD"/>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+/* ── TOPBAR ── */
+function Top({ hello, active, onTabChange }) {
+  const tabs = ['Den','Týden','Měsíc','Rok'];
+  const today = new Date().toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const capitalized = today.charAt(0).toUpperCase() + today.slice(1);
+  return (
+    <div className="top">
+      <div className="top__l">
+        <div className="top__eyebrow">{capitalized}</div>
+        <div className="top__hello">{hello.split(',')[0]}, <em>{hello.split(',')[1]?.trim()}</em>.</div>
+      </div>
+      <div className="top__r">
+        <div className="tabs">
+          {tabs.map(t => (
+            <button key={t} className={t.toLowerCase()===active?'on':''} onClick={() => onTabChange(t.toLowerCase())}>{t}</button>
+          ))}
+        </div>
+        <button className="topbtn"><I name="download"/> Export</button>
+        <button className="topbtn topbtn--ink"><span className="dot"></span> AI recepční · živé</button>
+      </div>
+    </div>
+  );
+}
+
+/* ── OVERVIEW SCREEN ── */
+function Overview({ onNav }) {
+  const [tab, setTab] = useState('týden');
+  return (
+    <div className="app">
+      <Side active="overview" onNav={onNav}/>
+      <main className="main">
+        <Top hello="Dobré ráno, Martino" active={tab} onTabChange={setTab}/>
+        <section className="hero">
+          <div>
+            <div className="hero__label">Celková úspora · Tento týden</div>
+            <div className="hero__num"><span>62&nbsp;480</span><span className="hero__unit">Kč</span></div>
+            <div className="hero__caption">
+              <span className="hero__delta"><I name="arrowUp"/> +18 % oproti minulému týdnu</span>
+              <p>Ekvivalent <em>38 hodin práce recepční</em> a <em>312 odbavených interakcí</em>. Dnes nezmeškán ani jeden hovor.</p>
+            </div>
+          </div>
+          <div className="hero__side">
+            <div className="kpi">
+              <div><div className="kpi__label">Čas ušetřen</div><div className="kpi__name">Tento týden</div></div>
+              <div><div className="kpi__num">38<span className="u">h&nbsp;24m</span></div><div className="kpi__delta"><I name="arrowUp"/> +5 h</div></div>
+            </div>
+            <div className="kpi">
+              <div><div className="kpi__label">Interakce</div><div className="kpi__name">Vyřízeno automaticky</div></div>
+              <div><div className="kpi__num">312</div><div className="kpi__delta"><I name="arrowUp"/> +42</div></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="svcs">
+          <div className="svc-card svc-card--featured" style={{cursor:'pointer'}} onClick={() => onNav('receptionist')}>
+            <div className="svc-card__top">
+              <div className="svc-card__name"><span className="ic"><I name="phone"/></span>AI recepční</div>
+              <div className="svc-card__live">Live</div>
+            </div>
+            <div className="svc-card__big">184<span className="u">hovorů</span></div>
+            <div className="svc-card__sub">Průměrná délka 1m 24s. Bez čekání, bez zmeškaných.</div>
+            <div className="svc-card__row">
+              <div className="s"><span className="lab">Schůzky</span><span className="v">57</span></div>
+              <div className="s"><span className="lab">Konverze</span><span className="v">31<span className="u">%</span></span></div>
+              <div className="s"><span className="lab">Ušetřeno</span><span className="v">22<span className="u">h</span></span></div>
+            </div>
+          </div>
+          <div className="svc-card">
+            <div className="svc-card__top">
+              <div className="svc-card__name"><span className="ic"><I name="chat"/></span>Chatbot</div>
+              <div className="svc-card__live">Live</div>
+            </div>
+            <div className="svc-card__big">892<span className="u">zpráv</span></div>
+            <div className="svc-card__sub">71 % zákazníků vyřešil chatbot bez zásahu člověka.</div>
+            <div className="svc-card__row">
+              <div className="s"><span className="lab">Vyřešeno</span><span className="v">71<span className="u">%</span></span></div>
+              <div className="s"><span className="lab">Avg odpověď</span><span className="v">1,2<span className="u">s</span></span></div>
+              <div className="s"><span className="lab">Ušetřeno</span><span className="v">11<span className="u">h</span></span></div>
+            </div>
+          </div>
+          <div className="svc-card">
+            <div className="svc-card__top">
+              <div className="svc-card__name"><span className="ic"><I name="globe"/></span>Web konverze</div>
+              <div className="svc-card__live">Live</div>
+            </div>
+            <div className="svc-card__big">2&nbsp;418<span className="u">návštěv</span></div>
+            <div className="svc-card__sub">Z toho 312 dokončilo rezervaci přes web.</div>
+            <div className="svc-card__row">
+              <div className="s"><span className="lab">Rezervace</span><span className="v">312</span></div>
+              <div className="s"><span className="lab">CTR</span><span className="v">12,9<span className="u">%</span></span></div>
+              <div className="s"><span className="lab">Ušetřeno</span><span className="v">5<span className="u">h</span></span></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="row2">
+          <div className="chartcard">
+            <div className="chartcard__head">
+              <div>
+                <div className="chartcard__title">Úspora <em>v čase</em></div>
+                <div className="chartcard__sub">Posledních 24 týdnů · CET</div>
+              </div>
+              <div className="chartcard__legend">
+                <span className="l1">Hodiny ušetřeno</span>
+                <span className="l2">Tisíce Kč</span>
+              </div>
+            </div>
+            <SavingsChart/>
+            <div className="chart__xaxis">
+              <span>Pro 24</span><span>Led 25</span><span>Úno 25</span><span>Bře 25</span><span>Dub 25</span><span>Kvě 25</span>
+            </div>
+            <div className="chartcard__foot">
+              <span>Růst posledních 12 týdnů: <strong>+32 %</strong></span>
+              <span style={{display:'inline-flex',alignItems:'center',gap:6}}><I name="zap"/> Best week: <strong>62 480 Kč</strong></span>
+            </div>
+          </div>
+
+          <div className="activity">
+            <div className="activity__head">
+              <div className="activity__title">Poslední <em>aktivita</em></div>
+              <a className="activity__link">Vše <I name="chevR"/></a>
+            </div>
+            <div className="activity__list">
+              {[
+                { ic:'phone', lime:true,  what:<><span className="b">Hovor odbaven</span> · Petra N., +420 723 18•</>, when:'před 4 min · Schůzka uložena · Čt 16:45', val:<>1<span className="u">m 42s</span></> },
+                { ic:'chat',  lime:false, what:<><span className="b">Chatbot</span> · Dotaz na ceník melíru</>, when:'před 12 min · Vyřešeno automaticky', val:<>+8<span className="u">zpr.</span></> },
+                { ic:'globe', lime:false, what:<><span className="b">Rezervace</span> · Web → kalendář</>, when:'před 28 min · Klient: Tomáš B.', val:<>1<span className="u">ks</span></> },
+                { ic:'phone', lime:true,  what:<><span className="b">Hovor odbaven</span> · +420 602 ••• 14</>, when:'před 1 h · Bez akce · pouze info', val:<>52<span className="u">s</span></> },
+                { ic:'chat',  lime:false, what:<><span className="b">Chatbot</span> · Otevírací doba o víkendu</>, when:'před 2 h · Vyřešeno automaticky', val:<>+3<span className="u">zpr.</span></> },
+              ].map((item, i) => (
+                <div className="activity__item" key={i}>
+                  <div className={'activity__ic'+(item.lime?' activity__ic--lime':'')}><I name={item.ic}/></div>
+                  <div className="activity__txt">
+                    <div className="activity__what">{item.what}</div>
+                    <div className="activity__when">{item.when}</div>
+                  </div>
+                  <div className="activity__val">{item.val}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+/* ── DETAIL: AI RECEPČNÍ ── */
+function DetailReceptionist({ onNav }) {
+  const [tab, setTab] = useState('měsíc');
+  return (
+    <div className="app">
+      <Side active="receptionist" onNav={onNav}/>
+      <main className="main">
+        <Top hello="Dobré odpoledne, Martino" active={tab} onTabChange={setTab}/>
+        <section className="detail">
+          <div className="detail__crumb">
+            <span style={{cursor:'pointer'}} onClick={() => onNav('overview')}>Dashboard</span>
+            <I name="chevR"/> Služby <I name="chevR"/> <b>AI recepční</b>
+          </div>
+
+          <div className="detail__hero">
+            <div>
+              <div className="hero__label">Hovory · Květen 2026</div>
+              <div className="detail__title">Hovory přijaté <em>do tří vteřin</em>,<br/>schůzky <em>uložené</em> automaticky.</div>
+              <div className="detail__statbig">1&nbsp;247<span className="u">hovorů</span></div>
+              <div className="detail__statsub">Z toho <em>389 rezervací</em>, <em>nula zmeškaných</em>. Průměrná délka odpovědi 1,2 s.</div>
+              <div style={{marginTop:32,display:'flex',gap:12,alignItems:'center'}}>
+                <div className="toggle">
+                  <button className="on"><I name="coins"/> Peníze</button>
+                  <button><I name="clock"/> Čas</button>
+                </div>
+              </div>
+            </div>
+
+            <div className="detail__rightcard">
+              <h4>Živý přepis · Před 4 min</h4>
+              <div className="calldemo">
+                <div className="bub bub--them">Dobrý den, chtěla bych se objednat na barvení.<span className="ts">14:32:08 · Petra N.</span></div>
+                <div className="bub bub--ai">Ráda. Volný je čtvrtek 16:45 nebo pátek v 10:00. Co vyhovuje?<span className="ts">14:32:10 · Nexivo AI</span></div>
+                <div className="bub bub--them">Čtvrtek 16:45, prosím. Na Martinu.<span className="ts">14:32:18</span></div>
+              </div>
+              <div className="row">
+                <span style={{display:'inline-flex',alignItems:'center',gap:8,color:'var(--lime)'}}><I name="check"/> Schůzka uložena</span>
+                <span style={{color:'rgba(245,243,238,0.55)'}}>1m 42s · CZ</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="chartcard">
+            <div className="chartcard__head">
+              <div>
+                <div className="chartcard__title">Hovory <em>za den</em> · Květen</div>
+                <div className="chartcard__sub">AI recepční vs. zmeškané před nasazením</div>
+              </div>
+              <div className="chartcard__legend">
+                <span className="l1">Po Nexivo</span>
+                <span className="l2">Před Nexivo</span>
+              </div>
+            </div>
+            <SavingsChart/>
+            <div className="chart__xaxis">
+              <span>1. 5.</span><span>5. 5.</span><span>10. 5.</span><span>15. 5.</span><span>20. 5.</span><span>25. 5.</span><span>31. 5.</span>
+            </div>
+            <div className="chartcard__foot">
+              <span>Špička: <strong>úterý 14:00–16:00</strong></span>
+              <span>Průměr / den: <strong>40 hovorů</strong></span>
+            </div>
+          </div>
+
+          <div className="svcs" style={{padding:0,gridTemplateColumns:'repeat(4,1fr)'}}>
+            {[
+              {label:'Konverze',name:'Hovor → rezervace',num:<>31<span className="u">%</span></>,delta:<><I name="arrowUp"/> +6 p.p.</>},
+              {label:'Zmeškané',name:'Za celý měsíc',num:'0',delta:<><I name="check"/> 100% pickup</>},
+              {label:'Avg délka',name:'Jeden hovor',num:<>1<span className="u">m 18s</span></>,delta:<><I name="arrowDn"/> −12s</>,neg:true},
+              {label:'Ušetřeno',name:'Tento měsíc',num:<>94<span className="u">h</span></>,delta:<><I name="arrowUp"/> +14 h</>},
+            ].map((k,i) => (
+              <div className="kpi" key={i}>
+                <div><div className="kpi__label">{k.label}</div><div className="kpi__name">{k.name}</div></div>
+                <div><div className="kpi__num">{k.num}</div><div className={'kpi__delta'+(k.neg?' kpi__delta--neg':'')}>{k.delta}</div></div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+/* ── ROOT ── */
+function App() {
+  const [screen, setScreen] = useState('overview');
+  if (screen === 'receptionist') return <DetailReceptionist onNav={setScreen}/>;
+  return <Overview onNav={setScreen}/>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
