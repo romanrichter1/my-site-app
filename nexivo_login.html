@@ -157,6 +157,44 @@
     }
     .auth-footer-link a:hover { color: var(--ink-700); }
 
+    .auth-divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 4px 0;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--ink-100);
+    }
+    .auth-divider span {
+      font: 400 12px/1 var(--font-sans);
+      color: var(--ink-400);
+      white-space: nowrap;
+    }
+
+    .auth-no-reg {
+      font: 700 15px/1 var(--font-sans);
+      background: transparent;
+      color: var(--ink-1000);
+      border: 1px solid var(--ink-200);
+      border-radius: 8px;
+      padding: 15px 24px;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: background 180ms var(--ease-out);
+    }
+    .auth-no-reg:hover { background: var(--bone-100); }
+
     @media (max-width: 600px) {
       .auth-card { padding: 40px 28px; }
       .auth-title { font-size: 32px; }
@@ -215,6 +253,8 @@
 
       <div class="auth-footer">
         <p class="auth-footer-link">Nemáte účet? <a href="nexivo_register.html">Zaregistrujte se</a></p>
+        <div class="auth-divider"><span>nebo</span></div>
+        <a href="nexivo_inquiry.html" class="auth-no-reg">Nemáte registraci?</a>
       </div>
     </div>
   </div>
