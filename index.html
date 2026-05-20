@@ -7,6 +7,7 @@
   <link rel="icon" href="assets/nexivo-favicon.svg">
   <link rel="stylesheet" href="colors_and_type.css">
   <link rel="stylesheet" href="nexivo_marketing.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
   <!-- ============================================================
        CALENDLY · rezervační formulář
@@ -14,6 +15,7 @@
   <script>
     window.CALENDLY_URL = "https://calendly.com/romecrichter/freestar";
   </script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body data-screen-label="Marketing Landing">
 
@@ -611,12 +613,15 @@
   </script>
 
   <script>
-    // Wire all Calendly CTAs to the URL configured in <head>
+    // Wire all Calendly CTAs to open popup widget
     (function () {
       const url = window.CALENDLY_URL;
       if (!url) return;
-      document.querySelectorAll('a[data-cta="calendly"]').forEach(a => {
-        a.setAttribute('href', url);
+      document.querySelectorAll('[data-cta="calendly"]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          Calendly.initPopupWidget({ url });
+        });
       });
     })();
   </script>
