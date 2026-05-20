@@ -12,8 +12,10 @@
   <!-- ============================================================
        CALENDLY · rezervační formulář
        ============================================================ -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <script>
-    window.CALENDLY_URL = "https://calendly.com/romecrichter/freestar";
+    window.CALENDLY_URL = "https://calendly.com/romecrichter/nexivo";
   </script>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
@@ -613,14 +615,19 @@
   </script>
 
   <script>
-    // Wire all Calendly CTAs to open popup widget
     (function () {
       const url = window.CALENDLY_URL;
       if (!url) return;
       document.querySelectorAll('[data-cta="calendly"]').forEach(el => {
+        el.removeAttribute('href');
+        el.style.cursor = 'pointer';
         el.addEventListener('click', (e) => {
           e.preventDefault();
-          Calendly.initPopupWidget({ url });
+          if (window.Calendly) {
+            Calendly.initPopupWidget({ url });
+          } else {
+            window.open(url, '_blank');
+          }
         });
       });
     })();
