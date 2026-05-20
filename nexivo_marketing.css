@@ -1063,6 +1063,11 @@ button { font-family: var(--font-sans); }
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
+/* --- callcard initial state — invisible but in layout (no jumps) --- */
+.callcard .bubble { opacity: 0; transform: translateY(8px); }
+.callcard .callcard__action { opacity: 0; }
+.callcard .callcard__typing { opacity: 0; }
+
 /* --- 2. callcard typing indicator --- */
 .callcard__typing {
   display: flex;

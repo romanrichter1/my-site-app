@@ -550,7 +550,6 @@
     const action  = callcard.querySelector('.callcard__action');
 
     function showEl(el) {
-      el.style.display = '';
       el.style.transform = 'translateY(8px)';
       el.style.opacity = '0';
       el.style.transition = 'none';
@@ -563,38 +562,29 @@
     function hideEl(el) {
       el.style.transition = 'opacity 0.22s ease';
       el.style.opacity = '0';
-      setTimeout(() => { el.style.display = 'none'; }, 250);
     }
 
-    // Timings (ms from loop start)
+    // Timings (ms from start)
     const BUBBLE_T   = [600, 2400, 3700, 5100];
     const TYPING_ON  = [1200, 4300];
     const TYPING_OFF = [2300, 5000];
     const ACTION_T   = 6200;
-    const LOOP_T     = 9400;
-    let timers = [], loopId = 0;
 
-    function startLoop() {
-      const id = ++loopId;
-      timers.forEach(clearTimeout); timers = [];
-
-      // Reset inline
-      bubbles.forEach(b => { b.style.cssText = 'display:none;opacity:0;transition:none'; });
-      if (typing)  typing.style.cssText  = 'display:none;opacity:0;transition:none';
+    function runOnce() {
+      // Reset via opacity/transform only — no display:none, layout stays stable
+      bubbles.forEach(b => { b.style.cssText = 'opacity:0;transform:translateY(8px);transition:none'; });
+      if (typing)  typing.style.cssText  = 'opacity:0;transition:none';
       if (action)  action.style.cssText  = 'opacity:0;transform:translateY(8px);transition:none';
 
-      function safe(fn, t) {
-        timers.push(setTimeout(() => { if (loopId === id) fn(); }, t));
-      }
-      bubbles.forEach((b, i) => safe(() => showEl(b), BUBBLE_T[i]));
+      bubbles.forEach((b, i) => setTimeout(() => showEl(b), BUBBLE_T[i]));
       if (typing) {
-        TYPING_ON.forEach(t  => safe(() => showEl(typing), t));
-        TYPING_OFF.forEach(t => safe(() => hideEl(typing), t));
+        TYPING_ON.forEach(t  => setTimeout(() => showEl(typing), t));
+        TYPING_OFF.forEach(t => setTimeout(() => hideEl(typing), t));
       }
-      if (action) safe(() => showEl(action), ACTION_T);
-      safe(startLoop, LOOP_T);
+      if (action) setTimeout(() => showEl(action), ACTION_T);
+      // No restart — animation plays once and stays in final state
     }
-    startLoop();
+    runOnce();
   })();
   </script>
 
