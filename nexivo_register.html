@@ -243,13 +243,6 @@
       <p class="auth-lead">Klientské ID jste obdrželi od Nexivo po zakoupení balíčku.</p>
 
       <form class="auth-form" id="register-form" novalidate>
-        <div class="field" id="field-client-id">
-          <label for="f-client-id">Klientské ID</label>
-          <input id="f-client-id" name="client_id" type="text" placeholder="NX-000000" autocomplete="off" required>
-          <span class="help">ID jste obdrželi e-mailem po dokončení objednávky.</span>
-          <span class="err">Zadejte prosím klientské ID.</span>
-        </div>
-
         <div class="field" id="field-username">
           <label for="f-username">Uživatelské jméno</label>
           <input id="f-username" name="username" type="text" placeholder="jan.novak" autocomplete="username" required>
@@ -287,15 +280,6 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       let ok = true;
-
-      // Client ID
-      const clientIdField = document.getElementById('field-client-id');
-      const clientId = form.elements['client_id'].value.trim();
-      if (!clientId) {
-        clientIdField.setAttribute('data-error', 'true'); ok = false;
-      } else {
-        clientIdField.setAttribute('data-error', 'false');
-      }
 
       // Username
       const usernameField = document.getElementById('field-username');
