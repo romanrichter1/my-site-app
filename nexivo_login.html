@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexivo — Přihlášení</title>
+  <link rel="icon" href="assets/nexivo-favicon.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="nexivo_marketing.css">
+  <style>
+    body { background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; }
+
+    .auth-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+    }
+
+    .auth-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-elevated);
+      padding: 56px 64px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .auth-logo {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      color: var(--ink-1000);
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 5px;
+      margin-bottom: 40px;
+      text-decoration: none;
+    }
+    .auth-logo::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--lime-500);
+      margin-bottom: 5px;
+    }
+
+    .auth-eyebrow {
+      font: 600 11px/1 var(--font-sans);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-500);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .auth-eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--lime-500);
+    }
+
+    .auth-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -0.022em;
+      color: var(--ink-1000);
+      font-variation-settings: "opsz" 72;
+      margin: 0 0 36px;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .field label {
+      font: 500 13px/1 var(--font-sans);
+      color: var(--ink-1000);
+    }
+    .field input {
+      height: 50px;
+      padding: 0 14px;
+      background: var(--bone-100);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font: 400 15px/1 var(--font-sans);
+      color: var(--ink-1000);
+      transition: border-color 180ms var(--ease-out), background 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+      width: 100%;
+    }
+    .field input::placeholder { color: var(--ink-400); }
+    .field input:hover { background: var(--bone-200); }
+    .field input:focus {
+      outline: none;
+      background: #FFFFFF;
+      border-color: var(--ink-1000);
+      box-shadow: var(--ring-accent);
+    }
+    .field[data-error="true"] input { border-color: var(--warning); background: #FFFFFF; }
+    .field .err {
+      font: 400 12px/1.4 var(--font-sans);
+      color: var(--warning);
+      display: none;
+    }
+    .field[data-error="true"] .err { display: block; }
+
+    .auth-submit {
+      font: 700 15px/1 var(--font-sans);
+      background: var(--lime-500);
+      color: var(--ink-1000);
+      border: none;
+      border-radius: 8px;
+      padding: 15px 24px;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+      transition: background 180ms var(--ease-out), transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+    }
+    .auth-submit:hover { background: var(--lime-400); transform: translateY(-1px); box-shadow: var(--shadow-medium); }
+    .auth-submit:active { transform: translateY(0); background: var(--lime-600); }
+    .auth-submit svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    .auth-footer {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .auth-footer-link {
+      font: 400 14px/1 var(--font-sans);
+      color: var(--ink-500);
+    }
+    .auth-footer-link a {
+      color: var(--ink-1000);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .auth-footer-link a:hover { color: var(--ink-700); }
+
+    @media (max-width: 600px) {
+      .auth-card { padding: 40px 28px; }
+      .auth-title { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="nexivo_landing.html" class="nav__logo">
+      <span class="nav__word">nexivo</span>
+    </a>
+    <div class="nav__links">
+      <a class="nav__link" href="nexivo_landing.html#receptionist">AI recepční</a>
+      <a class="nav__link" href="nexivo_landing.html#websites">Weby s chatem</a>
+      <a class="nav__link" href="nexivo_landing.html#agent">AI agent</a>
+      <a class="nav__link" href="nexivo_landing.html#pricing">Ceník</a>
+    </div>
+    <div class="nav__right">
+      <a href="nexivo_login.html" class="nav__signin">Přihlásit</a>
+      <a href="nexivo_inquiry.html" class="nav__cta">Domluvit ukázku</a>
+    </div>
+  </nav>
+
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <a href="nexivo_landing.html" class="auth-logo">nexivo</a>
+
+      <span class="auth-eyebrow">Klientský portál</span>
+      <h1 class="auth-title">Přihlaste se.</h1>
+
+      <form class="auth-form" id="login-form" novalidate>
+        <div class="field" id="field-id">
+          <label for="f-client-id">Klientské číslo</label>
+          <input id="f-client-id" name="client_id" type="text" inputmode="numeric" placeholder="NX-000000" autocomplete="off" required>
+          <span class="err">Zadejte prosím klientské číslo.</span>
+        </div>
+
+        <div class="field" id="field-username">
+          <label for="f-username">Uživatelské jméno</label>
+          <input id="f-username" name="username" type="text" placeholder="jan.novak" autocomplete="username" required>
+          <span class="err">Zadejte prosím uživatelské jméno.</span>
+        </div>
+
+        <div class="field" id="field-password">
+          <label for="f-password">Heslo</label>
+          <input id="f-password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+          <span class="err">Zadejte prosím heslo.</span>
+        </div>
+
+        <button type="submit" class="auth-submit">
+          Přihlásit se
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p class="auth-footer-link">Nemáte účet? <a href="nexivo_register.html">Zaregistrujte se</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('login-form');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let ok = true;
+
+      const fields = [
+        { id: 'field-id',       name: 'client_id' },
+        { id: 'field-username', name: 'username' },
+        { id: 'field-password', name: 'password' },
+      ];
+
+      fields.forEach(({ id, name }) => {
+        const field = document.getElementById(id);
+        const input = form.elements[name];
+        if (!input.value.trim()) {
+          field.setAttribute('data-error', 'true');
+          ok = false;
+        } else {
+          field.setAttribute('data-error', 'false');
+        }
+      });
+
+      if (ok) {
+        // Placeholder — backend bude doplněn
+      }
+    });
+
+    form.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => {
+        input.closest('.field').setAttribute('data-error', 'false');
+      });
+    });
+  </script>
+
+</body>
+</html>
