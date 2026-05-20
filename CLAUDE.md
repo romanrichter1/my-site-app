@@ -25,6 +25,10 @@ This is a collection of standalone HTML files — no build system, no dependenci
 
 **Language:** `maestro_barbershop.html` and both nexivo files are in Czech (`lang="cs"`). Keep copy in Czech when editing those files.
 
+## Landing page — dual file rule
+
+`index.html` and `nexivo_landing.html` are identical files — GitHub Pages serves `index.html` as the homepage, while other pages (login, register) link to `nexivo_landing.html`. **Every change to one must be applied to the other.** Never edit only one of them.
+
 ## Previewing
 
 Open any `.html` file directly in a browser — no server needed. For email templates, test rendering in an email client or tool like Litmus/Email on Acid, as web browser rendering differs from email clients.
