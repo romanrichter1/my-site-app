@@ -1320,7 +1320,7 @@ button { font-family: var(--font-sans); }
 
   /* Hero */
   .hero { padding: 40px 16px 56px; gap: 36px; }
-  .hero__title { font-size: 64px; }
+  .hero__title { font-size: 80px; }
   .hero__cta { flex-direction: column; }
   .hero__cta .btn { width: 100%; justify-content: center; }
 
