@@ -71,6 +71,7 @@
         <div class="bubble bubble--ai">Jasně, ráda pomůžu. Mám volno ve čtvrtek ve 14:30 nebo v 16:15 u Petry. Která doba se vám hodí lépe?<small>AI recepční · 09:14:28</small></div>
         <div class="bubble bubble--them">14:30 by bylo perfektní.<small>09:14:39</small></div>
         <div class="bubble bubble--ai">Hotovo. Schůzku jsem zapsala a pošlu vám SMS s připomínkou den předem.<small>AI recepční · 09:14:44</small></div>
+        <div class="callcard__typing" aria-hidden="true"><span></span><span></span><span></span></div>
       </div>
       <div class="callcard__action">
         <span>Zapsáno do Google Kalendáře</span>
@@ -80,7 +81,7 @@
   </header>
 
   <!-- PROOF BAR -->
-  <section class="proofbar">
+  <section class="proofbar" data-reveal>
     <div class="proofbar__inner">
       <span class="proofbar__label">Spolupracujeme s</span>
       <div class="proofbar__names">
@@ -93,7 +94,7 @@
 
   <!-- FEATURE TRIAD -->
   <section class="section" id="receptionist">
-    <div class="section__head">
+    <div class="section__head" data-reveal>
       <div>
         <span class="section__eyebrow">Co Nexivo dělá</span>
         <h2 class="section__title">Tři věci, díky kterým ušetříte deset hodin týdně.</h2>
@@ -101,7 +102,7 @@
       <p class="section__intro">Recepční na poloviční úvazek vás stojí přes 200 tisíc ročně. Nexivo zastane drtivou většinu její rutinní práce za zlomek ceny a běží nepřetržitě.</p>
     </div>
     <div class="features">
-      <article class="feature">
+      <article class="feature" data-reveal>
         <span class="feature__num">01</span>
         <h3 class="feature__title">AI recepční zvedá telefon do tří vteřin.</h3>
         <p class="feature__body">Odpovídá v češtině i slovenštině, bez přízvuku. Pozná dotaz na otevírací dobu, ceník, dostupnost i specifickou službu. Když si neví rady, předá hovor vám.</p>
@@ -109,7 +110,7 @@
           <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </article>
-      <article class="feature">
+      <article class="feature" data-reveal data-reveal-delay="1">
         <span class="feature__num">02</span>
         <h3 class="feature__title">Chat na webu zapisuje rezervace přímo do kalendáře.</h3>
         <p class="feature__body">Napojené na Google Kalendář, Reservio nebo váš vlastní systém. Klient si vybere termín a dostane potvrzení dřív, než vy položíte nůžky.</p>
@@ -117,7 +118,7 @@
           <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </article>
-      <article class="feature">
+      <article class="feature" data-reveal data-reveal-delay="2">
         <span class="feature__num">03</span>
         <h3 class="feature__title">Připomínky a follow-up posíláme automaticky.</h3>
         <p class="feature__body">SMS a e-mail den před schůzkou, dotaz na recenzi po návštěvě. Snížení no-show o desítky procent bez jediného kliknutí navíc.</p>
@@ -131,7 +132,7 @@
   <!-- PRODUCT DETAIL: WEBSITE + CHAT -->
   <section class="section" id="websites" style="background:var(--bone-100);">
     <div class="product">
-      <div class="product__copy">
+      <div class="product__copy" data-reveal>
         <span class="section__eyebrow">Weby s chatem</span>
         <h2>Web, který za vás odpovídá. A pak rovnou zapíše schůzku.</h2>
         <p>Stránka navržená tak, aby každý druhý návštěvník skončil v rezervaci. Chat ví vše o vašem provozu, mluví vaším tónem a 95 % konverzací dotáhne sám.</p>
@@ -145,25 +146,25 @@
           <button class="btn btn--secondary">Pozrieť ukázku webu</button>
         </div>
       </div>
-      <div class="product__visual">
+      <div class="product__visual" data-reveal data-reveal-delay="2">
         <div class="metric">
           <span class="metric__label">Konverze webu</span>
-          <span class="metric__num">31,4&#8239;%</span>
+          <span class="metric__num" data-count="31.4" data-fmt="31,4&#8239;%">31,4&#8239;%</span>
           <span class="metric__delta">↑ 2,8&times; oproti staré stránce</span>
         </div>
         <div class="metric">
           <span class="metric__label">Doba odpovědi</span>
-          <span class="metric__num">2,1&#8239;s</span>
+          <span class="metric__num" data-count="2.1" data-fmt="2,1&#8239;s">2,1&#8239;s</span>
           <span class="metric__delta">Průměr přes 7 dní</span>
         </div>
         <div class="metric">
           <span class="metric__label">Rezervací / týden</span>
-          <span class="metric__num">86</span>
+          <span class="metric__num" data-count="86" data-fmt="86">86</span>
           <span class="metric__delta">↑ z 24 před nasazením</span>
         </div>
         <div class="metric">
           <span class="metric__label">No-show</span>
-          <span class="metric__num">3,2&#8239;%</span>
+          <span class="metric__num" data-count="3.2" data-fmt="3,2&#8239;%">3,2&#8239;%</span>
           <span class="metric__delta">↓ z 18 %</span>
         </div>
       </div>
@@ -172,7 +173,7 @@
 
   <!-- AI AGENT -->
   <section class="agent-section" id="agent">
-    <div class="section__head" style="margin-bottom:64px;">
+    <div class="section__head" data-reveal style="margin-bottom:64px;">
       <div>
         <span class="section__eyebrow">AI agent</span>
         <h2 class="section__title" style="color:var(--bone-50);">Rezervace dokončena. <em style="font-style:italic;color:var(--lime-500);">Vy jste u&nbsp;toho nebyli.</em></h2>
@@ -181,7 +182,7 @@
     </div>
 
     <div class="agent-layout">
-      <div class="agent-copy">
+      <div class="agent-copy" data-reveal>
         <ul class="agent-list">
           <li>Napojení na Google Kalendář a Reservio — rezervace v reálném čase.</li>
           <li>Agent vezme jméno, kontakt a termín přímo v chatu.</li>
@@ -197,7 +198,7 @@
       </div>
 
       <!-- Animated chat mockup -->
-      <div class="agent-mock">
+      <div class="agent-mock" data-reveal data-reveal-delay="2">
         <div class="agent-mock__head">
           <div class="agent-mock__avatar">
             <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -246,25 +247,25 @@
 
   <!-- SAVINGS STRIP -->
   <section class="savings">
-    <h3>Místo recepční na poloviční úvazek ušetříte přes čtvrt milionu ročně.</h3>
-    <div class="savings__stats">
+    <h3 data-reveal>Místo recepční na poloviční úvazek ušetříte přes čtvrt milionu ročně.</h3>
+    <div class="savings__stats" data-reveal data-reveal-delay="1">
       <div class="savings__stat">
-        <span class="num">12,4</span>
+        <span class="num" data-count="12.4" data-fmt="12,4">12,4</span>
         <span class="label">hodin / týden</span>
       </div>
       <div class="savings__stat">
-        <span class="num">284 800</span>
+        <span class="num" data-count="284800" data-fmt="284&#8239;800">284 800</span>
         <span class="label">Kč / rok</span>
       </div>
     </div>
-    <div class="savings__cta">
+    <div class="savings__cta" data-reveal data-reveal-delay="2">
       <button class="btn btn--secondary" data-calc>Spočítat moji úsporu</button>
     </div>
   </section>
 
   <!-- PRICING -->
   <section class="section" id="pricing">
-    <div class="section__head">
+    <div class="section__head" data-reveal>
       <div>
         <span class="section__eyebrow">Ceník</span>
         <h2 class="section__title">Jedna investice. Splatí se obvykle do druhého měsíce.</h2>
@@ -272,7 +273,7 @@
       <p class="section__intro">Vyberte si rozsah, který sedí vašemu provozu. Vše je jednorázová platba bez měsíčního závazku za software. Telefonní náklady AI recepční účtujeme podle skutečného využití.</p>
     </div>
     <div class="pricing">
-      <article class="plan">
+      <article class="plan" data-reveal>
         <h3 class="plan__name">Basic</h3>
         <p class="plan__sub">Moderní OnePager s rezervačním systémem a chatbotem. Pro živnostníky, kteří začínají.</p>
         <div class="plan__price">
@@ -289,7 +290,7 @@
         <div class="plan__cta"><a class="btn btn--ghost" href="nexivo_inquiry.html?plan=basic">Vybrat Basic</a></div>
       </article>
 
-      <article class="plan plan--featured">
+      <article class="plan plan--featured" data-reveal data-reveal-delay="1">
         <span class="plan__tag">Nejvolenější</span>
         <h3 class="plan__name">Business</h3>
         <p class="plan__sub">Kompletní řešení: moderní web, chatbot a AI recepční pod jednou střechou.</p>
@@ -307,7 +308,7 @@
         </ul>
         <div class="plan__cta"><a class="btn btn--primary" href="nexivo_inquiry.html?plan=business">Vybrat Business</a></div>
       </article>
-      <article class="plan">
+      <article class="plan" data-reveal data-reveal-delay="2">
         <h3 class="plan__name">Premium</h3>
         <p class="plan__sub">Moderní web s AI agentem — rezervace, potvrzení a připomínky přes chat. Bez chatbotu, s inteligencí.</p>
         <div class="plan__price">
@@ -328,7 +329,7 @@
     </div>
 
     <div class="pricing--row2">
-      <article class="plan plan--featured plan--wide">
+      <article class="plan plan--featured plan--wide" data-reveal>
         <div class="plan__wide-left">
           <span class="plan__tag">Kompletní řešení</span>
           <h3 class="plan__name">Enterprise</h3>
@@ -357,9 +358,9 @@
 
   <!-- CLOSING CTA -->
   <section class="closer">
-    <h2>Ten první týden už <em>nezvedáte</em> telefon.</h2>
-    <p>30minutová ukázka. Ukážeme vám, jak by AI recepční zvládla typické hovory u vás. Bez prezentací, bez závazku.</p>
-    <div class="hero__cta">
+    <h2 data-reveal>Ten první týden už <em>nezvedáte</em> telefon.</h2>
+    <p data-reveal data-reveal-delay="1">30minutová ukázka. Ukážeme vám, jak by AI recepční zvládla typické hovory u vás. Bez prezentací, bez závazku.</p>
+    <div class="hero__cta" data-reveal data-reveal-delay="2">
       <a href="#calendly" target="_blank" rel="noopener" class="btn btn--primary" data-cta="calendly">Domluvit ukázku
         <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -501,6 +502,100 @@
 
     </div>
   </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // ── 1. Scroll reveals ──────────────────────────────────────────
+    const revealIO = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); revealIO.unobserve(e.target); }
+      }),
+      { threshold: 0.10, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('[data-reveal]').forEach(el => revealIO.observe(el));
+
+    // ── 2. Counter animations ──────────────────────────────────────
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+    function fmtCzech(v, target) {
+      if (target % 1 !== 0) return v.toFixed(1).replace('.', ',');
+      if (target >= 10000) return Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      return Math.round(v).toString();
+    }
+    function runCounter(el) {
+      const target = parseFloat(el.dataset.count);
+      const finalHTML = el.dataset.fmt;
+      const dur = 1400, t0 = performance.now();
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        if (p < 1) { el.textContent = fmtCzech(target * easeOutCubic(p), target); requestAnimationFrame(tick); }
+        else el.innerHTML = finalHTML;
+      })(t0);
+    }
+    const counterIO = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) { runCounter(e.target); counterIO.unobserve(e.target); }
+      }),
+      { threshold: 0.6 }
+    );
+    document.querySelectorAll('[data-count]').forEach(el => counterIO.observe(el));
+
+    // ── 3. Hero callcard loop ──────────────────────────────────────
+    const callcard = document.querySelector('.callcard');
+    if (!callcard) return;
+    const bubbles = Array.from(callcard.querySelectorAll('.bubble'));
+    const typing  = callcard.querySelector('.callcard__typing');
+    const action  = callcard.querySelector('.callcard__action');
+
+    function showEl(el) {
+      el.style.display = '';
+      el.style.transform = 'translateY(8px)';
+      el.style.opacity = '0';
+      el.style.transition = 'none';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.style.transition = 'opacity 0.42s ease, transform 0.42s ease';
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }));
+    }
+    function hideEl(el) {
+      el.style.transition = 'opacity 0.22s ease';
+      el.style.opacity = '0';
+      setTimeout(() => { el.style.display = 'none'; }, 250);
+    }
+
+    // Timings (ms from loop start)
+    const BUBBLE_T   = [600, 2400, 3700, 5100];
+    const TYPING_ON  = [1200, 4300];
+    const TYPING_OFF = [2300, 5000];
+    const ACTION_T   = 6200;
+    const LOOP_T     = 9400;
+    let timers = [], loopId = 0;
+
+    function startLoop() {
+      const id = ++loopId;
+      timers.forEach(clearTimeout); timers = [];
+
+      // Reset inline
+      bubbles.forEach(b => { b.style.cssText = 'display:none;opacity:0;transition:none'; });
+      if (typing)  typing.style.cssText  = 'display:none;opacity:0;transition:none';
+      if (action)  action.style.cssText  = 'opacity:0;transform:translateY(8px);transition:none';
+
+      function safe(fn, t) {
+        timers.push(setTimeout(() => { if (loopId === id) fn(); }, t));
+      }
+      bubbles.forEach((b, i) => safe(() => showEl(b), BUBBLE_T[i]));
+      if (typing) {
+        TYPING_ON.forEach(t  => safe(() => showEl(typing), t));
+        TYPING_OFF.forEach(t => safe(() => hideEl(typing), t));
+      }
+      if (action) safe(() => showEl(action), ACTION_T);
+      safe(startLoop, LOOP_T);
+    }
+    startLoop();
+  })();
+  </script>
 
   <script>
     (function () {
