@@ -1244,7 +1244,7 @@ button { font-family: var(--font-sans); }
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .hero__title { font-size: 48px; line-height: 1.03; }
+  .hero__title { font-size: 56px; line-height: 1.02; }
   .hero__sub { font-size: 16px; max-width: 100%; }
   .hero__proof { flex-wrap: wrap; gap: 8px; }
 
@@ -1320,7 +1320,7 @@ button { font-family: var(--font-sans); }
 
   /* Hero */
   .hero { padding: 40px 16px 56px; gap: 36px; }
-  .hero__title { font-size: 36px; }
+  .hero__title { font-size: 48px; }
   .hero__cta { flex-direction: column; }
   .hero__cta .btn { width: 100%; justify-content: center; }
 
