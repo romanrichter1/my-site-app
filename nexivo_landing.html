@@ -7,6 +7,7 @@
   <link rel="icon" href="assets/nexivo-favicon.svg">
   <link rel="stylesheet" href="colors_and_type.css">
   <link rel="stylesheet" href="nexivo_marketing.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
   <!-- ============================================================
        CALENDLY · rezervační formulář
@@ -14,6 +15,7 @@
   <script>
     window.CALENDLY_URL = "https://calendly.com/romecrichter/freestar";
   </script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body data-screen-label="Marketing Landing">
 
@@ -43,8 +45,8 @@
   <header class="hero">
     <div>
       <span class="hero__eyebrow">Pro malé provozy v ČR a SR</span>
-      <h1 class="hero__title">Webové stránky, které berou rezervace, <em>i&nbsp;když&nbsp;spíte.</em></h1>
-      <p class="hero__sub">AI recepční odpoví na každý hovor v češtině a slovenštině, zapíše schůzku do kalendáře a pošle připomínku. Sedm dní v týdnu, bez práce navíc.</p>
+      <h1 class="hero__title">AI automatizace do vaší firmy <em>na&nbsp;míru.</em></h1>
+      <p class="hero__sub">Agenti, recepční a chatboti ve vašich službách. Pomůžeme vám implementovat umělou inteligenci, aby za vás dělali rezervace, posílali připomínky a šetřili desítky hodin měsíčně a stovky tisíc Kč ročně.</p>
       <div class="hero__cta">
         <a href="#calendly" target="_blank" rel="noopener" class="btn btn--primary" data-cta="calendly">Domluvit ukázku
           <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -144,7 +146,7 @@
           <li>Editorial design, který vypadá draho a otevírá se pod 1,2 vteřiny.</li>
         </ul>
         <div class="hero__cta">
-          <button class="btn btn--secondary">Pozrieť ukázku webu</button>
+          <a href="#" class="btn btn--secondary" data-cta="calendly">Domluvit ukázku</a>
         </div>
       </div>
       <div class="product__visual" data-reveal data-reveal-delay="2">
@@ -611,12 +613,15 @@
   </script>
 
   <script>
-    // Wire all Calendly CTAs to the URL configured in <head>
+    // Wire all Calendly CTAs to open popup widget
     (function () {
       const url = window.CALENDLY_URL;
       if (!url) return;
-      document.querySelectorAll('a[data-cta="calendly"]').forEach(a => {
-        a.setAttribute('href', url);
+      document.querySelectorAll('[data-cta="calendly"]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          Calendly.initPopupWidget({ url });
+        });
       });
     })();
   </script>
