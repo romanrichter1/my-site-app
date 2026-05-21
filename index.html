@@ -371,6 +371,97 @@
     </p>
   </section>
 
+  <!-- FAQ -->
+  <section class="section faq-section" id="faq">
+    <div class="faq-head" data-reveal>
+      <span class="section__eyebrow">Časté otázky</span>
+      <h2 class="faq-title">Co vás zajímá nejčastěji.</h2>
+    </div>
+    <div class="faq" id="faq-list">
+
+      <div class="faq__item" data-reveal>
+        <button class="faq__q" aria-expanded="false">
+          Jak začít, když nevíme, kde má AI smysl?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__a"><div>
+          <p>Začínáme bezplatnou konzultací — projdeme váš provoz a zjistíme, kde AI reálně pomůže a kde ne. Pokud dojdeme k tomu, že to pro vás dává smysl, domluvíme onboarding call, kde nastavíme vše do detailu přesně podle vašich potřeb.</p>
+        </div></div>
+      </div>
+
+      <div class="faq__item" data-reveal>
+        <button class="faq__q" aria-expanded="false">
+          Jak dlouho trvá, než uvidíme první výsledky?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__a"><div>
+          <p>Od podpisu smlouvy do spuštění trvá implementace 7–14 dní podle rozsahu balíčku. První výsledky — méně zmeškaných hovorů, rezervace bez vaší účasti — vidíte od prvního dne, kdy AI běží.</p>
+        </div></div>
+      </div>
+
+      <div class="faq__item" data-reveal>
+        <button class="faq__q" aria-expanded="false">
+          Jsou data mých zákazníků v bezpečí?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__a"><div>
+          <p>Ano. Vaše data nikdy neopouštějí vaši infrastrukturu a veřejné AI modely se na nich neučí. Pracujeme v souladu s GDPR.</p>
+        </div></div>
+      </div>
+
+      <div class="faq__item" data-reveal>
+        <button class="faq__q" aria-expanded="false">
+          Napojí se AI na Google Kalendář nebo Reservio, které už používám?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__a"><div>
+          <p>Ano — integrace s Google Kalendářem a Reserviem je součástí balíčků Business, Premium a Enterprise. AI agent nebo recepční píše přímo do vašeho stávajícího systému. Nepotřebujete nic měnit ani přesouvat.</p>
+        </div></div>
+      </div>
+
+      <div class="faq__item" data-reveal>
+        <button class="faq__q" aria-expanded="false">
+          Musíme mít vlastní datové vědce nebo programátory?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__a"><div>
+          <p>Ne. Celou implementaci, nastavení a trénink AI řešíme my. Vy nám poskytnete podklady — ceník, otevírací dobu, informace o službách — a my se postaráme o zbytek.</p>
+        </div></div>
+      </div>
+
+      <div class="faq__item" data-reveal>
+        <button class="faq__q" aria-expanded="false">
+          Nahradí AI naše zaměstnance?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__a"><div>
+          <p>Ne. AI přebírá rutinní opakující se úkoly — zvedání telefonu, odpovídání na časté dotazy, zapisování rezervací. Vaši lidé se místo toho věnují práci, kde je člověk nenahraditelný.</p>
+        </div></div>
+      </div>
+
+      <div class="faq__item" data-reveal>
+        <button class="faq__q" aria-expanded="false">
+          Jak řešíte halucinace AI (vymýšlení nesmyslů)?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__a"><div>
+          <p>Používáme metodu RAG (Retrieval-Augmented Generation), která AI striktně omezuje pouze na vaše ověřené dokumenty a data. AI nevymýšlí — pokud odpověď v podkladech nenajde, přizná to.</p>
+        </div></div>
+      </div>
+
+      <div class="faq__item" data-reveal>
+        <button class="faq__q" aria-expanded="false">
+          Co když se AI modely za půl roku změní?
+          <span class="faq__icon"></span>
+        </button>
+        <div class="faq__a"><div>
+          <p>Stavíme architektury nezávislé na konkrétním modelu. Když vyjde lepší verze, jednoduše ji vyměníme bez nutnosti předělávat celý systém. Vy to ani nepoznáte.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- CLOSING CTA -->
   <section class="closer">
     <h2 data-reveal>Ten první týden už <em>nezvedáte</em> telefon.</h2>
@@ -609,6 +700,24 @@
         btn.setAttribute('aria-expanded', 'false');
       }));
     })();
+  </script>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq__q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq__item');
+        const isOpen = item.hasAttribute('data-open');
+        document.querySelectorAll('.faq__item[data-open]').forEach(el => {
+          el.removeAttribute('data-open');
+          el.querySelector('.faq__q').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.setAttribute('data-open', '');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
   </script>
 
   <script>
