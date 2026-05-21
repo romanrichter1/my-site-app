@@ -492,7 +492,7 @@ button { font-family: var(--font-sans); }
 .faq__item[data-open] .faq__a { grid-template-rows: 1fr; }
 .faq__a > div { overflow: hidden; }
 .faq__a p {
-  font: 400 16px/1.65 var(--font-sans);
+  font: 400 14px/1.65 var(--font-sans);
   color: var(--ink-500);
   padding-bottom: 24px;
   max-width: 720px;
