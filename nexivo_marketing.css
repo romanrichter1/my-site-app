@@ -433,10 +433,10 @@ button { font-family: var(--font-sans); }
 .faq-section { background: var(--bone-50); }
 .faq-head { max-width: 720px; margin-bottom: 48px; }
 .faq-title {
-  font: 400 56px/1.05 var(--font-display);
-  letter-spacing: -0.022em;
+  font: 400 40px/1.05 var(--font-display);
+  letter-spacing: -0.018em;
   color: var(--ink-1000);
-  font-variation-settings: "opsz" 96;
+  font-variation-settings: "opsz" 72;
   margin: 14px 0 0;
 }
 
