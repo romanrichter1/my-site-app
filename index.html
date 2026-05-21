@@ -19,11 +19,6 @@
   <link rel="icon" href="assets/nexivo-favicon.svg">
   <link rel="stylesheet" href="colors_and_type.css">
   <link rel="stylesheet" href="nexivo_marketing.css">
-  <!-- ============================================================
-       CALENDLY · rezervační formulář
-       ============================================================ -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <script>
     window.CALENDLY_URL = "https://calendly.com/romecrichter/nexivo";
   </script>
@@ -721,22 +716,36 @@
   </script>
 
   <script>
-    // Wire all Calendly CTAs to open popup widget
+    // Booking modal
     (function () {
       const url = window.CALENDLY_URL;
       if (!url) return;
+      const modal   = document.getElementById('booking-modal');
+      const iframe  = document.getElementById('booking-iframe');
+      const backdrop = modal.querySelector('.bm__backdrop');
+      const closeBtn = modal.querySelector('.bm__close');
+
+      function open() {
+        if (!iframe.src) iframe.src = url + '?hide_gdpr_banner=1';
+        modal.classList.add('bm--open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        modal.classList.remove('bm--open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
       document.querySelectorAll('[data-cta="calendly"]').forEach(el => {
         el.removeAttribute('href');
         el.style.cursor = 'pointer';
-        el.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (window.Calendly) {
-            Calendly.initPopupWidget({ url });
-          } else {
-            window.open(url, '_blank');
-          }
-        });
+        el.addEventListener('click', e => { e.preventDefault(); open(); });
       });
+
+      backdrop.addEventListener('click', close);
+      closeBtn.addEventListener('click', close);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     })();
   </script>
 
@@ -830,6 +839,22 @@
       scrim.querySelector('[data-calc-restart]').addEventListener('click', reset);
     })();
   </script>
+
+  <!-- BOOKING MODAL -->
+  <div id="booking-modal" class="bm" aria-hidden="true">
+    <div class="bm__backdrop"></div>
+    <div class="bm__panel" role="dialog" aria-modal="true" aria-label="Domluvit ukázku">
+      <div class="bm__head">
+        <span class="bm__brand">nexivo</span>
+        <button class="bm__close" aria-label="Zavřít">
+          <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="bm__body">
+        <iframe id="booking-iframe" class="bm__iframe" src="" title="Domluvit ukázku"></iframe>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
