@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=1440, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nexivo · Klientský portál</title>
 <link rel="icon" href="../assets/nexivo-favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -308,6 +308,82 @@ html, body { margin: 0; height: 100%; background: #F0EEE9; -webkit-font-smoothin
 .login__r-mini .l { font:600 11px/1 var(--font-sans); letter-spacing:0.16em; text-transform:uppercase; color:var(--muted-2); }
 .login__r-mini .v { font-family:var(--font-display); font-weight:400; font-size:24px; letter-spacing:-0.014em; color:var(--cream); }
 .login__r-mini .v em { font-style:italic; }
+
+/* ── HAMBURGER ── */
+.hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; width:36px; height:36px; background:none; border:1px solid var(--hair-2); border-radius:8px; cursor:pointer; padding:8px; flex-shrink:0; }
+.hamburger span { display:block; height:1.5px; background:var(--ink); border-radius:2px; transition:all 200ms var(--ease-out); }
+
+/* ── SIDEBAR OVERLAY (mobile) ── */
+.side-backdrop { display:none; position:fixed; inset:0; background:rgba(10,10,9,0.4); z-index:99; }
+.side-backdrop.visible { display:block; }
+@media (max-width: 900px) {
+  .hamburger { display:flex; }
+
+  #root > .app { grid-template-columns:1fr; }
+
+  .side {
+    position:fixed; top:0; left:0; height:100vh; z-index:100;
+    transform:translateX(-100%); transition:transform 280ms var(--ease-out);
+    box-shadow:4px 0 32px rgba(10,10,9,0.18);
+    width:260px;
+  }
+  .side.side--open { transform:translateX(0); }
+
+  .top { padding:16px 20px; flex-wrap:wrap; gap:10px; }
+  .top__r { flex-wrap:wrap; gap:8px; }
+  .tabs { display:none; }
+  .topbtn--ink .dot + * { display:none; }
+
+  .hero { grid-template-columns:1fr; padding:24px 20px 16px; gap:20px; }
+  .hero__num { font-size:88px; }
+  .hero__unit { font-size:28px; margin-top:14px; }
+  .hero__side { flex-direction:row; gap:12px; }
+  .hero__side .kpi { flex:1; }
+  .kpi__num { font-size:36px; }
+  .kpi__num .u { font-size:13px; }
+
+  .svcs { padding:16px 20px; }
+  .svcs--3 { grid-template-columns:1fr; }
+  .svcs--3 .svc-card__big { font-size:72px; }
+
+  .row2 { grid-template-columns:1fr; padding:12px 20px 40px; }
+
+  .detail { padding:20px; gap:20px; }
+  .detail__hero { grid-template-columns:1fr; gap:20px; }
+  .detail__statbig { font-size:88px; }
+  .detail__title { font-size:32px; }
+
+  .kpis-row { grid-template-columns:repeat(2,1fr); }
+
+  .integ__grid { grid-template-columns:1fr; }
+  .integ__card { grid-template-columns:36px 1fr; }
+  .integ__status { display:none; }
+
+  .kbcard { grid-template-columns:1fr; }
+
+  .tablecard { overflow-x:auto; }
+  .tbl { min-width:520px; }
+
+  .chartcard__controls { flex-direction:column; align-items:flex-start; gap:8px; }
+  .chartcard__summary { grid-template-columns:auto 1fr; gap:12px; }
+  .chartcard__legend { display:none; }
+
+  .login { grid-template-columns:1fr; min-height:100vh; }
+  .login__r { display:none; }
+  .login__l { padding:36px 24px; }
+  .login__h { font-size:44px; }
+}
+
+@media (max-width: 480px) {
+  .hero__num { font-size:64px; }
+  .hero__side { flex-direction:column; }
+  .kpis-row { grid-template-columns:1fr; }
+  .detail__statbig { font-size:64px; }
+  .top { padding:12px 16px; }
+  .detail { padding:16px; }
+  .svcs { padding:12px 16px; }
+  .row2 { padding:8px 16px 32px; }
+}
 </style>
 </head>
 <body>
@@ -470,7 +546,7 @@ function Kpi({ label, name, num, unit, delta, deltaTone='pos' }) {
 }
 
 /* ── SIDEBAR ── */
-function Side({ active='home', onNav }) {
+function Side({ active='home', onNav, isOpen=false }) {
   const item=(key,icon,label,badge)=>(
     <a className={'side__link '+(active===key?'side__link--active':'')} onClick={()=>onNav&&onNav(key)} role="button">
       <I name={icon}/> {label}
@@ -478,7 +554,7 @@ function Side({ active='home', onNav }) {
     </a>
   );
   return (
-    <aside className="side">
+    <aside className={'side'+(isOpen?' side--open':'')}>
       <div className="side__brand" onClick={()=>onNav&&onNav('home')}>nexivo</div>
       <div className="side__group">
         <div className="side__cap">Přehled</div>
@@ -509,14 +585,19 @@ function Side({ active='home', onNav }) {
 }
 
 /* ── TOPBAR ── */
-function Top({ hello='Dobré ráno, Martino', period='week', onPeriod, livePill='AI agent · živě' }) {
+function Top({ hello='Dobré ráno, Martino', period='week', onPeriod, livePill='AI agent · živě', onHamburger }) {
   const today=new Date().toLocaleDateString('cs-CZ',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   const [first,second]=(hello+',').split(',');
   return (
     <div className="top">
-      <div className="top__l">
-        <div className="top__eyebrow">{today.charAt(0).toUpperCase()+today.slice(1)}</div>
-        <div className="top__hello">{first.trim()}, <em>{(second||'').trim()}</em>.</div>
+      <div className="top__l" style={{display:'flex',alignItems:'center',gap:12}}>
+        <button className="hamburger" onClick={onHamburger} aria-label="Menu">
+          <span/><span/><span/>
+        </button>
+        <div>
+          <div className="top__eyebrow">{today.charAt(0).toUpperCase()+today.slice(1)}</div>
+          <div className="top__hello">{first.trim()}, <em>{(second||'').trim()}</em>.</div>
+        </div>
       </div>
       <div className="top__r">
         <div className="tabs">{PERIOD_TABS.map(t=><button key={t.key} className={period===t.key?'on':''} onClick={()=>onPeriod&&onPeriod(t.key)}>{t.label}</button>)}</div>
@@ -528,7 +609,7 @@ function Top({ hello='Dobré ráno, Martino', period='week', onPeriod, livePill=
 }
 
 /* ── OVERVIEW ── */
-function Overview({ onNav, period:pProp, onPeriod }) {
+function Overview({ onNav, period:pProp, onPeriod, onHamburger, sideOpen }) {
   const [pLocal,setPLocal]=useState('week');
   const period=pProp||pLocal;
   const setP=p=>{ setPLocal(p); if(onPeriod) onPeriod(p); };
@@ -542,9 +623,9 @@ function Overview({ onNav, period:pProp, onPeriod }) {
   };
   return (
     <div className="app">
-      <Side active="home" onNav={onNav}/>
+      <Side active="home" onNav={onNav} isOpen={sideOpen}/>
       <main className="main">
-        <Top hello="Dobré ráno, Martino" period={period} onPeriod={setP}/>
+        <Top hello="Dobré ráno, Martino" period={period} onPeriod={setP} onHamburger={onHamburger}/>
         <section className="hero">
           <div>
             <div className="hero__label">Celková úspora · {pLabel}</div>
@@ -612,7 +693,7 @@ function Overview({ onNav, period:pProp, onPeriod }) {
 }
 
 /* ── AI AGENT DETAIL ── */
-function AgentDetail({ onNav, period:pProp, onPeriod }) {
+function AgentDetail({ onNav, period:pProp, onPeriod, onHamburger, sideOpen }) {
   const [pLocal,setPLocal]=useState('week');
   const period=pProp||pLocal;
   const setP=p=>{ setPLocal(p); if(onPeriod) onPeriod(p); };
@@ -620,9 +701,9 @@ function AgentDetail({ onNav, period:pProp, onPeriod }) {
   const booked={day:'21',week:'89',month:'372',year:'4 410'}[period];
   return (
     <div className="app">
-      <Side active="agent" onNav={onNav}/>
+      <Side active="agent" onNav={onNav} isOpen={sideOpen}/>
       <main className="main">
-        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="AI agent · živě"/>
+        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="AI agent · živě" onHamburger={onHamburger}/>
         <section className="detail">
           <div className="detail__crumb"><a onClick={()=>onNav&&onNav('home')}>Dashboard</a> <I name="chevR"/> Služby <I name="chevR"/> <b>AI agent</b></div>
           <div className="detail__hero">
@@ -695,7 +776,7 @@ function AgentDetail({ onNav, period:pProp, onPeriod }) {
 }
 
 /* ── AI RECEPČNÍ DETAIL ── */
-function ReceptionistDetail({ onNav, period:pProp, onPeriod }) {
+function ReceptionistDetail({ onNav, period:pProp, onPeriod, onHamburger, sideOpen }) {
   const [pLocal,setPLocal]=useState('month');
   const period=pProp||pLocal;
   const setP=p=>{ setPLocal(p); if(onPeriod) onPeriod(p); };
@@ -703,9 +784,9 @@ function ReceptionistDetail({ onNav, period:pProp, onPeriod }) {
   const bookings={day:'14',week:'57',month:'389',year:'4 640'}[period];
   return (
     <div className="app">
-      <Side active="reception" onNav={onNav}/>
+      <Side active="reception" onNav={onNav} isOpen={sideOpen}/>
       <main className="main">
-        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="AI recepční · živě"/>
+        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="AI recepční · živě" onHamburger={onHamburger}/>
         <section className="detail">
           <div className="detail__crumb"><a onClick={()=>onNav&&onNav('home')}>Dashboard</a> <I name="chevR"/> Služby <I name="chevR"/> <b>AI recepční</b></div>
           <div className="detail__hero">
@@ -755,7 +836,7 @@ function ReceptionistDetail({ onNav, period:pProp, onPeriod }) {
 }
 
 /* ── CHATBOT DETAIL ── */
-function ChatbotDetail({ onNav, period:pProp, onPeriod }) {
+function ChatbotDetail({ onNav, period:pProp, onPeriod, onHamburger, sideOpen }) {
   const [pLocal,setPLocal]=useState('week');
   const period=pProp||pLocal;
   const setP=p=>{ setPLocal(p); if(onPeriod) onPeriod(p); };
@@ -770,9 +851,9 @@ function ChatbotDetail({ onNav, period:pProp, onPeriod }) {
   ];
   return (
     <div className="app">
-      <Side active="chatbot" onNav={onNav}/>
+      <Side active="chatbot" onNav={onNav} isOpen={sideOpen}/>
       <main className="main">
-        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="Chatbot · živě"/>
+        <Top hello="Dobré odpoledne, Martino" period={period} onPeriod={setP} livePill="Chatbot · živě" onHamburger={onHamburger}/>
         <section className="detail">
           <div className="detail__crumb"><a onClick={()=>onNav&&onNav('home')}>Dashboard</a> <I name="chevR"/> Služby <I name="chevR"/> <b>Chatbot</b></div>
           <div className="detail__hero">
@@ -895,12 +976,20 @@ function readHash() {
 function PortalApp() {
   const [route,setRoute]=useState(readHash);
   const [period,setPeriod]=useState('week');
+  const [sideOpen,setSideOpen]=useState(false);
   useEffect(()=>{ const fn=()=>setRoute(readHash()); window.addEventListener('hashchange',fn); return()=>window.removeEventListener('hashchange',fn); },[]);
-  const go=r=>{ setRoute(r); window.location.hash='#/'+r; };
-  if(route==='agent')     return <AgentDetail onNav={go} period={period} onPeriod={setPeriod}/>;
-  if(route==='reception') return <ReceptionistDetail onNav={go} period={period} onPeriod={setPeriod}/>;
-  if(route==='chatbot')   return <ChatbotDetail onNav={go} period={period} onPeriod={setPeriod}/>;
-  return <Overview onNav={go} period={period} onPeriod={setPeriod}/>;
+  const go=r=>{ setRoute(r); window.location.hash='#/'+r; setSideOpen(false); };
+  const ham=()=>setSideOpen(v=>!v);
+  const props={ onNav:go, period, onPeriod:setPeriod, onHamburger:ham, sideOpen };
+  return (
+    <>
+      <div className={'side-backdrop'+(sideOpen?' visible':'')} onClick={()=>setSideOpen(false)}/>
+      {route==='agent'     && <AgentDetail {...props}/>}
+      {route==='reception' && <ReceptionistDetail {...props}/>}
+      {route==='chatbot'   && <ChatbotDetail {...props}/>}
+      {route==='home'      && <Overview {...props}/>}
+    </>
+  );
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<PortalApp/>);

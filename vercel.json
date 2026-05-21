@@ -1,6 +1,8 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/nexivo_landing", "destination": "/", "permanent": true }
+    { "source": "/nexivo_landing",  "destination": "/",        "permanent": true },
+    { "source": "/nexivo_login",    "destination": "/klient",  "permanent": true },
+    { "source": "/nexivo_register", "destination": "/klient",  "permanent": true }
   ]
 }
