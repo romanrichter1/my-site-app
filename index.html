@@ -19,6 +19,8 @@
   <link rel="icon" href="assets/nexivo-favicon.svg">
   <link rel="stylesheet" href="colors_and_type.css">
   <link rel="stylesheet" href="nexivo_marketing.css">
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script>
     window.CALENDLY_URL = "https://calendly.com/romecrichter/nexivo";
   </script>
@@ -601,7 +603,7 @@
         </button>
       </div>
       <div class="bm__body">
-        <iframe id="booking-iframe" class="bm__iframe" src="" title="Domluvit ukázku"></iframe>
+        <div id="booking-inline" class="bm__inline"></div>
       </div>
     </div>
   </div>
@@ -733,18 +735,29 @@
   <script>
     // Booking modal
     (function () {
-      const url = window.CALENDLY_URL;
+      const url      = window.CALENDLY_URL;
       if (!url) return;
-      const modal   = document.getElementById('booking-modal');
-      const iframe  = document.getElementById('booking-iframe');
+      const modal    = document.getElementById('booking-modal');
+      const container = document.getElementById('booking-inline');
       const backdrop = modal.querySelector('.bm__backdrop');
       const closeBtn = modal.querySelector('.bm__close');
+      let initialized = false;
 
       function open() {
-        if (!iframe.src) iframe.src = url + '?hide_gdpr_banner=1';
         modal.classList.add('bm--open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        if (!initialized) {
+          initialized = true;
+          function init() {
+            Calendly.initInlineWidget({
+              url: url,
+              parentElement: container,
+            });
+          }
+          if (window.Calendly) { init(); }
+          else { window.addEventListener('load', init, { once: true }); }
+        }
       }
       function close() {
         modal.classList.remove('bm--open');
