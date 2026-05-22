@@ -24,9 +24,9 @@
   <script>
     window.STRIPE_LINKS = {
       basic:      "https://buy.stripe.com/00w3co36V0os4Xo2fo1B603",
-      business:   "https://buy.stripe.com/eVq8wI5f34EI89Af2a1B602",
-      premium:    "https://buy.stripe.com/7sY5kw9vjefi1Lc2fo1B601",
-      enterprise: "https://buy.stripe.com/bJe4gs6j74EI4Xo9HQ1B600"
+      plus:       "https://buy.stripe.com/eVq8wI5f34EI89Af2a1B602",
+      business:   "https://buy.stripe.com/7sY5kw9vjefi1Lc2fo1B601",
+      premium:    "https://buy.stripe.com/bJe4gs6j74EI4Xo9HQ1B600"
     };
   </script>
 
@@ -667,9 +667,9 @@
           <span class="summary__switch-label">Změnit balíček</span>
           <div class="summary__plans" role="group" aria-label="Změna balíčku">
             <button type="button" data-plan="basic">Basic</button>
+            <button type="button" data-plan="plus">Plus</button>
             <button type="button" data-plan="business">Business</button>
             <button type="button" data-plan="premium">Premium</button>
-            <button type="button" data-plan="enterprise">Enterprise</button>
           </div>
         </div>
       </aside>
@@ -796,8 +796,8 @@
           "CZ a SK jazyk",
         ],
       },
-      business: {
-        name: "Business",
+      plus: {
+        name: "Plus",
         sub: "Moderní web s AI agentem — rezervuje termíny přes chat přímo do kalendáře.",
         priceFmt: "28 680",
         priceNum: 28680,
@@ -811,8 +811,8 @@
           "CZ · SK · EN",
         ],
       },
-      premium: {
-        name: "Premium",
+      business: {
+        name: "Business",
         sub: "Kompletní řešení: moderní web, chatbot a AI recepční pod jednou střechou.",
         priceFmt: "32 680",
         priceNum: 32680,
@@ -825,14 +825,14 @@
           "Týdenní souhrn a doporučení",
         ],
       },
-      enterprise: {
-        name: "Enterprise",
+      premium: {
+        name: "Premium",
         sub: "Web s AI agentem a AI recepční. Chat i telefon — každý kontaktní bod pokrytý.",
         priceFmt: "37 680",
         priceNum: 37680,
         featured: true,
         features: [
-          "Vše z Business i Premium",
+          "Vše z Plus i Business",
           "AI agent v chatu + AI recepční na telefonu",
           "Vlastní hlas AI recepční",
           "Synchronizace chatu a telefonu",
