@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>OG Image Generator — Nexivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #333; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 24px; font-family: sans-serif; }
+  canvas { display: block; max-width: 100%; box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
+  button { padding: 14px 32px; background: #C7F230; color: #0A0A09; font-weight: 700; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; }
+  button:hover { background: #b8e020; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1200" height="630"></canvas>
+<button onclick="download()">Stáhnout PNG → ulož jako assets/nexivo-og.png</button>
+
+<script>
+document.fonts.ready.then(draw);
+
+function draw() {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const W = 1200, H = 630;
+
+  // Background
+  ctx.fillStyle = '#FBFAF5';
+  ctx.fillRect(0, 0, W, H);
+
+  // --- LOGO ---
+  const logoSize = 164;
+  ctx.font = `600 ${logoSize}px Fraunces`;
+  ctx.textBaseline = 'alphabetic';
+
+  // Measure parts
+  const nexW  = ctx.measureText('nex').width;
+  const voW   = ctx.measureText('vo').width;
+
+  // "i" construction
+  const stemW  = Math.round(logoSize * 0.075);
+  const stemH  = Math.round(logoSize * 0.68);
+  const sqSize = Math.round(logoSize * 0.1);
+  const sqGap  = Math.round(logoSize * 0.03);
+  const charGap = Math.round(logoSize * 0.01);
+
+  const totalW = nexW + charGap + stemW + charGap + voW;
+  const startX = Math.round((W - totalW) / 2);
+  const baseline = Math.round(H * 0.44);
+
+  // "nex"
+  ctx.fillStyle = '#0A0A09';
+  ctx.fillText('nex', startX, baseline);
+
+  // "i" stem
+  const stemX = Math.round(startX + nexW + charGap);
+  const stemTop = Math.round(baseline - stemH);
+  ctx.fillStyle = '#0A0A09';
+  ctx.fillRect(stemX, stemTop, stemW, stemH);
+
+  // lime square (dot above i)
+  const sqX = Math.round(stemX + (stemW - sqSize) / 2);
+  const sqY = stemTop - sqGap - sqSize;
+  ctx.fillStyle = '#C7F230';
+  ctx.fillRect(sqX, sqY, sqSize, sqSize);
+
+  // "vo"
+  ctx.fillStyle = '#0A0A09';
+  ctx.fillText('vo', stemX + stemW + charGap, baseline);
+
+  // --- TAGLINE ---
+  ctx.font = '400 26px Manrope';
+  ctx.fillStyle = '#5C5A4B';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText('AI automatizace pro vaši firmu na míru.', W / 2, Math.round(H * 0.68));
+}
+
+function download() {
+  const canvas = document.getElementById('c');
+  const a = document.createElement('a');
+  a.download = 'nexivo-og.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+}
+</script>
+</body>
+</html>
