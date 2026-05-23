@@ -1461,6 +1461,7 @@ button { font-family: var(--font-sans); }
   .proofbar__inner { flex-direction: column; gap: 14px; align-items: flex-start; }
   .proofbar__names { flex-wrap: wrap; gap: 16px; font-size: 18px; }
   .proofbar__names span + span::before { display: none; }
+  .proofbar__logo { height: 22px; }
 
   /* Sections */
   .section { padding: 72px 20px; }
@@ -1534,6 +1535,7 @@ button { font-family: var(--font-sans); }
 
   /* Proof bar */
   .proofbar { padding: 20px 16px; }
+  .proofbar__logo { height: 18px; }
 
   /* Sections */
   .section { padding: 56px 16px; }
