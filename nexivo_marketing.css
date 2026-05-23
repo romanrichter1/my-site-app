@@ -256,6 +256,11 @@ button { font-family: var(--font-sans); }
   mix-blend-mode: screen;
   opacity: 0.75;
 }
+.proofbar__logo--on-dark {
+  filter: none;
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
 
 /* ---------- features ---------- */
 .section { padding: 120px 48px; }
