@@ -262,7 +262,7 @@ button { font-family: var(--font-sans); }
   opacity: 0.75;
 }
 .proofbar__logo--riventi {
-  height: 46px;
+  height: 24px;
   filter: none;
   mix-blend-mode: normal;
   opacity: 0.82;
@@ -1473,7 +1473,7 @@ button { font-family: var(--font-sans); }
   .proofbar__names { flex-wrap: wrap; gap: 16px; font-size: 18px; }
   .proofbar__names span + span::before { display: none; }
   .proofbar__logo { height: 22px; }
-  .proofbar__logo--riventi { height: 36px; }
+  .proofbar__logo--riventi { height: 20px; }
 
   /* Sections */
   .section { padding: 72px 20px; }
@@ -1548,7 +1548,7 @@ button { font-family: var(--font-sans); }
   /* Proof bar */
   .proofbar { padding: 20px 16px; }
   .proofbar__logo { height: 18px; }
-  .proofbar__logo--riventi { height: 30px; }
+  .proofbar__logo--riventi { height: 18px; }
 
   /* Sections */
   .section { padding: 56px 16px; }
