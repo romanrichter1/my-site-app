@@ -251,6 +251,11 @@ button { font-family: var(--font-sans); }
   opacity: 0.75;
   vertical-align: middle;
 }
+.proofbar__logo--on-white {
+  filter: grayscale(1) invert(1) brightness(10);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
 
 /* ---------- features ---------- */
 .section { padding: 120px 48px; }
