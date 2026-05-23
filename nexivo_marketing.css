@@ -141,6 +141,13 @@ button { font-family: var(--font-sans); }
 .hero__proof .pill .dot { width: 8px; height: 8px; background: var(--lime-500); border-radius: 999px; box-shadow: 0 0 0 3px rgba(199, 242, 48, 0.30); }
 
 /* ---------- call card ---------- */
+.hero__photo {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: var(--shadow-elevated);
+}
 .callcard {
   background: #FFFFFF;
   border-radius: 16px;
