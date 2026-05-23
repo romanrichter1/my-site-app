@@ -244,6 +244,14 @@ button { font-family: var(--font-sans); }
   margin-left: -40px;
 }
 
+.proofbar__logo {
+  height: 28px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.75;
+  vertical-align: middle;
+}
+
 /* ---------- features ---------- */
 .section { padding: 120px 48px; }
 .section--ink { background: var(--ink-1000); color: var(--bone-50); }
