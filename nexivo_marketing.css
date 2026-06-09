@@ -1670,3 +1670,74 @@ button { font-family: var(--font-sans); }
   .calc__body { padding: 20px; }
   .calc__steps { padding: 12px 20px 0; }
 }
+
+/* ---------- report card (interní automatizace) ---------- */
+.product__visual--card {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  display: block;
+}
+.report-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: var(--shadow-elevated);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.report-card__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.report-card__icon {
+  width: 44px; height: 44px;
+  background: var(--ink-1000);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.report-card__icon svg { width: 20px; height: 20px; stroke: var(--bone-50); }
+.report-card__title { font-weight: 600; font-size: 15px; color: var(--ink-1000); display: block; }
+.report-card__meta { font-size: 12px; color: var(--ink-400); display: block; margin-top: 2px; }
+.report-card__stat {
+  background: var(--bone-100);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.report-card__label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-400);
+  display: block; margin-bottom: 6px;
+}
+.report-card__num {
+  font-family: var(--font-display);
+  font-size: 36px; font-weight: 400;
+  letter-spacing: -0.02em; color: var(--ink-1000);
+  display: block; line-height: 1.1;
+}
+.report-card__delta { font-size: 13px; font-weight: 500; color: #1a8a4a; display: block; margin-top: 4px; }
+.report-card__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.report-card__mini { background: var(--bone-100); border-radius: 8px; padding: 14px 16px; }
+.report-card__mini-num {
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 400;
+  letter-spacing: -0.02em; color: var(--ink-1000);
+  display: block; line-height: 1.1; margin-top: 4px;
+}
+.report-card__tasks {
+  border-top: 1px solid var(--ink-100);
+  padding-top: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.report-card__task {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; line-height: 1.5; color: var(--ink-700);
+}
+.report-card__task-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ink-300); flex-shrink: 0; margin-top: 5px;
+}
+.report-card__task-dot--warn { background: #f59e0b; }
