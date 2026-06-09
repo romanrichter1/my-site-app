@@ -1789,6 +1789,18 @@ button { font-family: var(--font-sans); }
   color: var(--ink-600);
   margin: 0;
 }
+.agent-card--more {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--ink-300);
+}
+.agent-card--more .agent-card__icon {
+  background: transparent;
+  border: 1px solid var(--ink-300);
+}
+.agent-card--more .agent-card__icon svg {
+  stroke: var(--ink-1000);
+}
 @media (max-width: 1024px) {
   .agents-grid { grid-template-columns: repeat(2, 1fr); }
 }
