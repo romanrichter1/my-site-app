@@ -1539,6 +1539,68 @@ button { font-family: var(--font-sans); }
   .calc__options[data-cols="3"] { grid-template-columns: 1fr 1fr; }
 }
 
+/* ---------- pricing hero + addons ---------- */
+.pricing-hero {
+  margin-bottom: 20px;
+}
+.plan--hero {
+  min-height: auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.plan--hero .plan__name { font-size: 36px; }
+.plan--hero .plan__price .num { font-size: 64px; }
+.plan__from {
+  font: 500 16px/1 var(--font-sans);
+  color: var(--ink-300);
+  align-self: baseline;
+}
+.plan__hero-cta { margin-top: 0; }
+.plan__hero-cta .btn { width: auto; }
+
+.addons__label {
+  font: 600 11px/1 var(--font-sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  margin-bottom: 16px;
+}
+.addons__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.addon {
+  background: var(--bone-100);
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.addon__name {
+  font: 400 18px/1.1 var(--font-display);
+  letter-spacing: -0.014em;
+  margin: 0;
+  color: var(--ink-1000);
+}
+.addon__desc {
+  font: 400 14px/1.5 var(--font-sans);
+  color: var(--ink-500);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .plan--hero { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .addons__grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .addons__grid { grid-template-columns: 1fr; }
+  .plan--hero .plan__price .num { font-size: 48px; }
+}
+
 /* ---------- sm: ≤ 480 ---------- */
 @media (max-width: 480px) {
   .nav { padding: 0 16px; min-height: 60px; }
