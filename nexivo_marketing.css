@@ -1560,6 +1560,18 @@ button { font-family: var(--font-sans); }
 .plan__hero-cta { margin-top: 0; }
 .plan__hero-cta .btn { width: auto; }
 
+.packages { margin-top: 48px; }
+.plan__tag--outline {
+  background: transparent;
+  color: var(--ink-500);
+  border: 1px solid var(--ink-200);
+}
+.plan__price-custom {
+  font: 400 36px/1 var(--font-display);
+  letter-spacing: -0.02em;
+  color: var(--ink-1000);
+}
+
 .addons__label {
   font: 600 11px/1 var(--font-sans);
   letter-spacing: 0.14em;
