@@ -1741,3 +1741,57 @@ button { font-family: var(--font-sans); }
   background: var(--ink-300); flex-shrink: 0; margin-top: 5px;
 }
 .report-card__task-dot--warn { background: #f59e0b; }
+
+/* Agents catalog grid */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+.agent-card {
+  background: #FFFFFF;
+  border: 1px solid var(--ink-100);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.agent-card__icon {
+  width: 44px;
+  height: 44px;
+  background: var(--ink-1000);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.agent-card__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--bone-50);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.agent-card__name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-1000);
+  margin: 0;
+}
+.agent-card__desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-600);
+  margin: 0;
+}
+@media (max-width: 1024px) {
+  .agents-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .agents-grid { grid-template-columns: 1fr; }
+}
