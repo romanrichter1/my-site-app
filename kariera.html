@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kariéra — Nexivo</title>
+  <meta name="description" content="Nexivo hledá Sales Representanta a Navolávače do obchodního týmu. Pomáhejte firmám v ČR a SR nasazovat AI agenty a automatizaci.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nexivoagency.eu/kariera">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nexivoagency.eu/kariera">
+  <meta property="og:title" content="Kariéra — Nexivo">
+  <meta property="og:description" content="Nexivo hledá Sales Representanta a Navolávače do obchodního týmu. Pomáhejte firmám v ČR a SR nasazovat AI agenty a automatizaci.">
+  <meta property="og:image" content="https://nexivoagency.eu/assets/nexivo-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="cs_CZ">
+  <meta property="og:site_name" content="Nexivo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kariéra — Nexivo">
+  <meta name="twitter:description" content="Nexivo hledá Sales Representanta a Navolávače do obchodního týmu.">
+  <meta name="twitter:image" content="https://nexivoagency.eu/assets/nexivo-og.png">
+  <link rel="icon" href="assets/nexivo-favicon.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <link rel="stylesheet" href="nexivo_marketing.css">
+
+  <style>
+    .page-wrap { max-width: 1080px; margin: 0 auto; padding: 56px 48px 0; }
+
+    .page-head { max-width: 720px; margin-bottom: 64px; }
+    .page-eyebrow {
+      font-weight: 600; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-1000); display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;
+    }
+    .page-eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--lime-500); }
+    .page-title {
+      font-family: var(--font-display); font-weight: 400; font-size: 56px; line-height: 1.04;
+      letter-spacing: -0.024em; margin: 0 0 20px; color: var(--ink-1000);
+      font-variation-settings: "opsz" 96; text-wrap: balance;
+    }
+    .page-lead { font-size: 18px; line-height: 1.55; color: var(--ink-500); max-width: 620px; margin: 0; }
+
+    .jobs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 0 48px; max-width: 1080px; margin: 0 auto 120px; }
+    .job-card {
+      background: #FFFFFF; border-radius: var(--radius-md); box-shadow: var(--shadow-subtle);
+      padding: 40px; display: flex; flex-direction: column; gap: 20px;
+    }
+    .job-card__title { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.15; letter-spacing: -0.014em; margin: 0; color: var(--ink-1000); font-variation-settings: "opsz" 48; }
+    .job-card__intro { font-size: 15px; line-height: 1.6; color: var(--ink-500); margin: 0; }
+    .job-card__block h4 { font: 600 12px/1 var(--font-sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-700); margin: 0 0 10px; }
+    .job-card__block ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .job-card__block li { display: flex; align-items: flex-start; gap: 10px; font: 400 14px/1.5 var(--font-sans); color: var(--ink-700); }
+    .job-card__block li::before { content: ""; flex-shrink: 0; width: 5px; height: 5px; margin-top: 8px; background: var(--lime-500); }
+    .job-card .btn { margin-top: 8px; align-self: flex-start; }
+
+    .form-section { background: var(--bone-100); padding: 96px 48px 120px; }
+    .formcard {
+      max-width: 720px; margin: 0 auto; background: #FFFFFF; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-subtle); padding: 48px 56px; position: relative;
+    }
+    .form-state { display: none; }
+    .form-state[data-active="true"] { display: block; }
+    .form-head { margin-bottom: 36px; }
+    .form-head h2 { font-family: var(--font-display); font-weight: 400; font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink-1000); font-variation-settings: "opsz" 72; margin: 0 0 10px; }
+    .form-head p { font-size: 15px; line-height: 1.55; color: var(--ink-500); margin: 0; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 24px; }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field--full { grid-column: 1 / -1; }
+    .field label { font-size: 13px; font-weight: 500; color: var(--ink-1000); }
+    .field input,
+    .field select {
+      height: 50px; padding: 0 14px; background: var(--bone-100); border: 1px solid transparent; border-radius: 8px;
+      font-family: var(--font-sans); font-weight: 400; font-size: 15px; color: var(--ink-1000);
+      transition: border-color 180ms var(--ease-out), background 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+      width: 100%; appearance: none;
+    }
+    .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235C5A4B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 40px; }
+    .field input::placeholder { color: var(--ink-400); }
+    .field input:hover, .field select:hover { background-color: var(--bone-200); }
+    .field input:focus, .field select:focus { outline: none; background: #FFFFFF; border-color: var(--ink-1000); box-shadow: var(--ring-accent); }
+    .field .help { font-size: 12px; color: var(--ink-400); line-height: 1.4; }
+    .field[data-error="true"] input, .field[data-error="true"] select { border-color: var(--warning); background: #FFFFFF; }
+    .field .err { font-size: 12px; color: var(--warning); display: none; line-height: 1.4; }
+    .field[data-error="true"] .err { display: block; }
+    .field[data-error="true"] .help { display: none; }
+
+    .field--file { position: relative; }
+    .field--file input[type="file"] {
+      height: auto; padding: 14px; cursor: pointer; font-size: 14px;
+    }
+    .field--file input[type="file"]::file-selector-button {
+      font-family: var(--font-sans); font-weight: 600; font-size: 13px; color: var(--ink-1000);
+      background: var(--bone-200); border: none; border-radius: 6px; padding: 8px 14px; margin-right: 12px; cursor: pointer;
+    }
+
+    .consent { margin-top: 28px; display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; background: var(--bone-100); border: 1px solid transparent; border-radius: 8px; cursor: pointer; transition: background 180ms var(--ease-out), border-color 180ms var(--ease-out); user-select: none; }
+    .consent:hover { background: var(--bone-200); }
+    .consent[data-error="true"] { border-color: var(--warning); background: #FFFFFF; }
+    .consent input { appearance: none; -webkit-appearance: none; flex-shrink: 0; width: 20px; height: 20px; margin: 1px 0 0; background: #FFFFFF; border: 1.5px solid var(--ink-300); border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 140ms var(--ease-out), border-color 140ms var(--ease-out); position: relative; }
+    .consent input:hover { border-color: var(--ink-1000); }
+    .consent input:checked { background: var(--lime-500); border-color: var(--lime-500); }
+    .consent input:checked::after { content: ""; position: absolute; left: 5px; top: 1px; width: 6px; height: 11px; border: solid var(--ink-1000); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+    .consent input:focus-visible { outline: none; box-shadow: var(--ring-accent); }
+    .consent__text { font-size: 13px; line-height: 1.5; color: var(--ink-700); }
+    .consent__err { font-size: 12px; color: var(--warning); margin-top: 8px; display: none; line-height: 1.4; }
+    .consent-wrap[data-error="true"] .consent__err { display: block; }
+
+    .form-foot { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .form-foot__hint { margin: 0; display: inline-flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: var(--warning); line-height: 1.4; }
+    .form-foot__hint[hidden] { display: none; }
+    .form-foot__hint svg { width: 18px; height: 18px; stroke: var(--warning); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+    .shake { animation: shake 360ms var(--ease-inout); }
+
+    .submit {
+      font-family: var(--font-sans); font-weight: 700; font-size: 15px; background: var(--lime-500); color: var(--ink-1000);
+      border: none; border-radius: 8px; padding: 14px 28px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px;
+      transition: background 180ms var(--ease-out), transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out); white-space: nowrap;
+    }
+    .submit:hover { background: var(--lime-400); transform: translateY(-1px); box-shadow: var(--shadow-medium); }
+    .submit:active { transform: translateY(0); background: var(--lime-600); box-shadow: none; }
+    .submit svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    .thanks { padding: 24px 0 0; text-align: center; }
+    .thanks__mark { width: 56px; height: 56px; border-radius: 999px; background: var(--lime-500); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 28px; }
+    .thanks__mark svg { width: 28px; height: 28px; stroke: var(--ink-1000); stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .thanks__title { font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1.08; letter-spacing: -0.022em; color: var(--ink-1000); font-variation-settings: "opsz" 96; margin: 0 0 18px; text-wrap: balance; }
+    .thanks__lead { font-size: 17px; line-height: 1.55; color: var(--ink-700); margin: 0 auto; max-width: 460px; }
+
+    @media (max-width: 860px) {
+      .jobs-grid { grid-template-columns: 1fr; padding: 0 24px; }
+      .page-wrap { padding: 40px 24px 0; }
+      .form-section { padding: 64px 24px 80px; }
+      .formcard { padding: 36px 28px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .page-title { font-size: 40px; }
+    }
+  </style>
+</head>
+<body data-screen-label="Kariéra">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav__logo">
+      <span class="nav__word">nexivo</span>
+    </a>
+    <div class="nav__links">
+      <a class="nav__link" href="/#automation">Automatizace</a>
+      <a class="nav__link" href="/#voice">Voice agenti</a>
+      <a class="nav__link" href="/#agent">AI agent</a>
+      <a class="nav__link" href="/#pricing">Nabídka služeb</a>
+      <a class="nav__link" href="/#refs">Reference</a>
+    </div>
+    <div class="nav__right">
+      <a href="/klient" class="nav__signin">Přihlásit</a>
+      <a href="/#pricing" class="nav__cta">Zpět na nabídku</a>
+    </div>
+    <button class="nav__hamburger" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main>
+    <div class="page-wrap">
+      <header class="page-head">
+        <span class="page-eyebrow">Kariéra</span>
+        <h1 class="page-title">Pomozte firmám vyměnit rutinu za AI. <em>My hledáme lidi, kteří to umí prodat.</em></h1>
+        <p class="page-lead">Nexivo staví AI agenty a automatizaci pro firmy v Česku a na Slovensku. Rosteme a hledáme posily do obchodního týmu — pokud vás baví telefon a rychlé rozhodování, budeme rádi za vaši přihlášku.</p>
+      </header>
+    </div>
+
+    <div class="jobs-grid">
+      <article class="job-card">
+        <h2 class="job-card__title">Sales Representative</h2>
+        <p class="job-card__intro">Vedete obchodní hovory s poptávkami, které už o Nexivo projevily zájem — přes web, kalkulačku úspor nebo doporučení. Představujete řešení, domlouváte úvodní hovory se specialistou a dotahujete první obchody.</p>
+        <div class="job-card__block">
+          <h4>Koho hledáme</h4>
+          <ul>
+            <li>Sebevědomý mluvčí s chutí obchodovat.</li>
+            <li>Zkušenost s telefonickým nebo online obchodem výhodou, není podmínkou.</li>
+            <li>Umíte pracovat samostatně a s CRM.</li>
+          </ul>
+        </div>
+        <div class="job-card__block">
+          <h4>Co nabízíme</h4>
+          <ul>
+            <li>Zahřáté leady, ne studené volání od nuly.</li>
+            <li>Zaškolení do produktu i celého prodejního procesu.</li>
+            <li>Provizní odměnu bez stropu, práci na dálku.</li>
+          </ul>
+        </div>
+        <button type="button" class="btn btn--primary" data-apply="sales">
+          Mám zájem
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </article>
+
+      <article class="job-card">
+        <h2 class="job-card__title">Navolávač</h2>
+        <p class="job-card__intro">Aktivně oslovujete nové potenciální klienty telefonicky, představujete Nexivo a domlouváte úvodní schůzky pro obchodní tým. Pracujete podle připravených kontaktů a skriptu, který si můžete přizpůsobit.</p>
+        <div class="job-card__block">
+          <h4>Koho hledáme</h4>
+          <ul>
+            <li>Vytrvalého komunikátora, kterého telefon nerozhodí.</li>
+            <li>Odmítnutí bere jako součást hry, ne jako problém.</li>
+            <li>Zkušenost s cold callingem výhodou.</li>
+          </ul>
+        </div>
+        <div class="job-card__block">
+          <h4>Co nabízíme</h4>
+          <ul>
+            <li>Jasně daný proces a skript, žádné bloudění.</li>
+            <li>Odměnu za každou domluvenou schůzku.</li>
+            <li>Flexibilní dobu a možnost růstu na Sales Representative.</li>
+          </ul>
+        </div>
+        <button type="button" class="btn btn--primary" data-apply="navolavac">
+          Mám zájem
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </article>
+    </div>
+
+    <section class="form-section" id="prihlaska">
+      <div class="formcard" aria-live="polite">
+
+        <!-- STATE A: form -->
+        <div class="form-state" data-active="true" data-state="form">
+          <div class="form-head">
+            <h2>Přihláška</h2>
+            <p>Vyplňte pár základních údajů a přiložte životopis. Ozveme se vám zpět.</p>
+          </div>
+
+          <form id="hire-form" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="f-jmeno">Jméno</label>
+                <input id="f-jmeno" name="jmeno" type="text" placeholder="Jan" autocomplete="given-name" required>
+                <span class="err">Vyplňte prosím jméno.</span>
+              </div>
+
+              <div class="field">
+                <label for="f-prijmeni">Příjmení</label>
+                <input id="f-prijmeni" name="prijmeni" type="text" placeholder="Novák" autocomplete="family-name" required>
+                <span class="err">Vyplňte prosím příjmení.</span>
+              </div>
+
+              <div class="field">
+                <label for="f-email">E-mail</label>
+                <input id="f-email" name="email" type="email" placeholder="jan@email.cz" autocomplete="email" required>
+                <span class="err">Zkontrolujte prosím tvar e-mailové adresy.</span>
+              </div>
+
+              <div class="field">
+                <label for="f-telefon">Telefonní číslo</label>
+                <input id="f-telefon" name="telefon" type="tel" placeholder="+420 605 123 456" autocomplete="tel" required>
+                <span class="err">Vyplňte prosím telefonní číslo.</span>
+              </div>
+
+              <div class="field field--full">
+                <label for="f-pozice">Pozice</label>
+                <select id="f-pozice" name="pozice" required>
+                  <option value="">Vyberte pozici</option>
+                  <option value="sales">Sales Representative</option>
+                  <option value="navolavac">Navolávač</option>
+                </select>
+                <span class="err">Vyberte prosím pozici.</span>
+              </div>
+
+              <div class="field field--full field--file">
+                <label for="f-cv">CV / životopis</label>
+                <input id="f-cv" name="cv" type="file" accept=".pdf,.doc,.docx" required>
+                <span class="help">PDF nebo Word, max. 10 MB.</span>
+                <span class="err">Přiložte prosím životopis.</span>
+              </div>
+            </div>
+
+            <div class="consent-wrap">
+              <label class="consent" for="f-consent">
+                <input id="f-consent" name="consent" type="checkbox">
+                <span class="consent__text">
+                  Souhlasím se zpracováním osobních údajů pro účely výběrového řízení. Údaje použijeme pouze interně.
+                </span>
+              </label>
+              <span class="consent__err">Pro odeslání je potřeba souhlasit se zpracováním osobních údajů.</span>
+            </div>
+
+            <div class="form-foot">
+              <p class="form-foot__hint" id="submit-hint" hidden>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+                <span id="submit-hint-text">Doplňte prosím chybějící údaje.</span>
+              </p>
+              <button type="submit" class="submit">
+                Odeslat přihlášku
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- STATE B: thank you -->
+        <div class="form-state" data-state="thanks">
+          <div class="thanks">
+            <span class="thanks__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            </span>
+            <h2 class="thanks__title">Děkujeme za přihlášku.</h2>
+            <p class="thanks__lead">Vaše údaje i životopis jsme přijali. Ozveme se vám, jakmile přihlášku projdeme.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <span class="footer__word">nexivo</span>
+      <p class="footer__tag">AI agenti, automatizace a hlasové řešení pro podnikatele v Česku a na Slovensku.</p>
+    </div>
+    <div>
+      <h5>Služby</h5>
+      <ul>
+        <li><a href="/#agent">AI agenti</a></li>
+        <li><a href="/#voice">Voice agenti</a></li>
+        <li><a href="/#automation">Automatizace</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Firma</h5>
+      <ul>
+        <li><a href="/#refs">Reference</a></li>
+        <li><a href="/tym">Tým</a></li>
+        <li><a href="/kariera">Kariéra</a></li>
+        <li><a href="mailto:roman@nexivoagency.eu">Kontakt</a></li>
+      </ul>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Nexivo s.r.o. Brno · Bratislava</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const form = document.getElementById("hire-form");
+      const posSelect = form.elements["pozice"];
+
+      document.querySelectorAll("[data-apply]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          posSelect.value = btn.getAttribute("data-apply");
+          document.getElementById("prihlaska").scrollIntoView({ behavior: "smooth", block: "start" });
+          const f = posSelect.closest(".field");
+          if (f) f.setAttribute("data-error", "false");
+        });
+      });
+
+      function setError(fieldEl, hasError) {
+        fieldEl.setAttribute("data-error", hasError ? "true" : "false");
+      }
+
+      function validate() {
+        let ok = true;
+        form.querySelectorAll(".field").forEach(f => f.setAttribute("data-error", "false"));
+
+        if (form.elements["jmeno"].value.trim().length < 2) { setError(form.elements["jmeno"].closest(".field"), true); ok = false; }
+        if (form.elements["prijmeni"].value.trim().length < 2) { setError(form.elements["prijmeni"].closest(".field"), true); ok = false; }
+
+        const email = form.elements["email"].value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError(form.elements["email"].closest(".field"), true); ok = false; }
+
+        const phone = form.elements["telefon"].value.trim();
+        if (phone.replace(/[\s+\-()]/g, "").length < 9) { setError(form.elements["telefon"].closest(".field"), true); ok = false; }
+
+        if (!form.elements["pozice"].value) { setError(form.elements["pozice"].closest(".field"), true); ok = false; }
+        if (!form.elements["cv"].value) { setError(form.elements["cv"].closest(".field"), true); ok = false; }
+
+        const consentWrap = form.querySelector(".consent-wrap");
+        consentWrap.setAttribute("data-error", "false");
+        if (!form.elements["consent"].checked) {
+          consentWrap.setAttribute("data-error", "true");
+          ok = false;
+        }
+
+        return ok;
+      }
+
+      form.querySelectorAll("input, select").forEach(el => {
+        el.addEventListener("input", () => {
+          const f = el.closest(".field");
+          if (f) f.setAttribute("data-error", "false");
+          const hint = document.getElementById("submit-hint");
+          if (hint) hint.hidden = true;
+        });
+        el.addEventListener("change", () => {
+          const f = el.closest(".field");
+          if (f) f.setAttribute("data-error", "false");
+        });
+      });
+
+      form.elements["consent"].addEventListener("change", () => {
+        form.querySelector(".consent-wrap").setAttribute("data-error", "false");
+        const hint = document.getElementById("submit-hint");
+        if (hint) hint.hidden = true;
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const hint = document.getElementById("submit-hint");
+        const hintText = document.getElementById("submit-hint-text");
+        if (!validate()) {
+          const consentBad = form.querySelector('.consent-wrap[data-error="true"]');
+          const fieldBad = form.querySelector('.field[data-error="true"]');
+          hintText.textContent = consentBad && !fieldBad
+            ? "Zaškrtněte prosím souhlas se zpracováním údajů."
+            : "Doplňte prosím chybějící údaje.";
+          hint.hidden = false;
+          const btn = form.querySelector(".submit");
+          btn.classList.remove("shake");
+          void btn.offsetWidth;
+          btn.classList.add("shake");
+          const firstErr = form.querySelector('.field[data-error="true"], .consent-wrap[data-error="true"]');
+          if (firstErr) {
+            const top = firstErr.getBoundingClientRect().top + window.scrollY - 120;
+            window.scrollTo({ top, behavior: "smooth" });
+            const input = firstErr.querySelector("input, select");
+            if (input) input.focus();
+          }
+          return;
+        }
+        hint.hidden = true;
+        document.querySelector('[data-state="form"]').setAttribute("data-active", "false");
+        document.querySelector('[data-state="thanks"]').setAttribute("data-active", "true");
+        document.getElementById("prihlaska").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      const nav = document.querySelector('.nav');
+      const btn = nav && nav.querySelector('.nav__hamburger');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('nav--open');
+        btn.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', e => {
+        if (!nav.contains(e.target)) {
+          nav.classList.remove('nav--open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      nav.querySelectorAll('.nav__link').forEach(a => a.addEventListener('click', () => {
+        nav.classList.remove('nav--open');
+        btn.setAttribute('aria-expanded', 'false');
+      }));
+    })();
+  </script>
+
+</body>
+</html>
