@@ -121,6 +121,7 @@
     }
     .submit:hover { background: var(--lime-400); transform: translateY(-1px); box-shadow: var(--shadow-medium); }
     .submit:active { transform: translateY(0); background: var(--lime-600); box-shadow: none; }
+    .submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
     .submit svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
     .thanks { padding: 24px 0 0; text-align: center; }
@@ -234,6 +235,9 @@
           </div>
 
           <form id="hire-form" novalidate>
+            <input type="hidden" name="_subject" value="Nová přihláška — Kariéra Nexivo">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
             <div class="form-grid">
               <div class="field">
                 <label for="f-jmeno">Jméno</label>
@@ -272,7 +276,7 @@
               <div class="field field--full field--file">
                 <label for="f-cv">CV / životopis</label>
                 <input id="f-cv" name="cv" type="file" accept=".pdf,.doc,.docx" required>
-                <span class="help">PDF nebo Word, max. 10 MB.</span>
+                <span class="help">PDF nebo Word, max. 5 MB.</span>
                 <span class="err">Přiložte prosím životopis.</span>
               </div>
             </div>
@@ -292,8 +296,8 @@
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
                 <span id="submit-hint-text">Doplňte prosím chybějící údaje.</span>
               </p>
-              <button type="submit" class="submit">
-                Odeslat přihlášku
+              <button type="submit" class="submit" id="submit-btn">
+                <span class="submit__label">Odeslat přihlášku</span>
                 <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </button>
             </div>
@@ -334,7 +338,7 @@
         <li><a href="/#refs">Reference</a></li>
         <li><a href="/tym">Tým</a></li>
         <li><a href="/kariera">Kariéra</a></li>
-        <li><a href="mailto:roman@nexivoagency.eu">Kontakt</a></li>
+        <li><a href="/kontakt">Kontakt</a></li>
       </ul>
     </div>
     <div class="footer__bottom">
@@ -405,10 +409,14 @@
         if (hint) hint.hidden = true;
       });
 
+      const FORM_ENDPOINT = "https://formsubmit.co/ajax/roman@nexivoai.cz";
+
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const hint = document.getElementById("submit-hint");
         const hintText = document.getElementById("submit-hint-text");
+        const btn = document.getElementById("submit-btn");
+
         if (!validate()) {
           const consentBad = form.querySelector('.consent-wrap[data-error="true"]');
           const fieldBad = form.querySelector('.field[data-error="true"]');
@@ -416,7 +424,6 @@
             ? "Zaškrtněte prosím souhlas se zpracováním údajů."
             : "Doplňte prosím chybějící údaje.";
           hint.hidden = false;
-          const btn = form.querySelector(".submit");
           btn.classList.remove("shake");
           void btn.offsetWidth;
           btn.classList.add("shake");
@@ -429,10 +436,30 @@
           }
           return;
         }
+
         hint.hidden = true;
-        document.querySelector('[data-state="form"]').setAttribute("data-active", "false");
-        document.querySelector('[data-state="thanks"]').setAttribute("data-active", "true");
-        document.getElementById("prihlaska").scrollIntoView({ behavior: "smooth", block: "start" });
+        btn.disabled = true;
+        btn.querySelector(".submit__label").textContent = "Odesílám…";
+
+        fetch(FORM_ENDPOINT, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        })
+          .then((res) => {
+            if (!res.ok) throw new Error("Odeslání selhalo.");
+            document.querySelector('[data-state="form"]').setAttribute("data-active", "false");
+            document.querySelector('[data-state="thanks"]').setAttribute("data-active", "true");
+            document.getElementById("prihlaska").scrollIntoView({ behavior: "smooth", block: "start" });
+          })
+          .catch(() => {
+            hintText.textContent = "Odeslání se nepovedlo, zkuste to prosím znovu nebo napište na roman@nexivoai.cz.";
+            hint.hidden = false;
+          })
+          .finally(() => {
+            btn.disabled = false;
+            btn.querySelector(".submit__label").textContent = "Odeslat přihlášku";
+          });
       });
     })();
   </script>
