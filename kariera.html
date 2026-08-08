@@ -103,6 +103,9 @@
     .consent input:checked::after { content: ""; position: absolute; left: 5px; top: 1px; width: 6px; height: 11px; border: solid var(--ink-1000); border-width: 0 2px 2px 0; transform: rotate(45deg); }
     .consent input:focus-visible { outline: none; box-shadow: var(--ring-accent); }
     .consent__text { font-size: 13px; line-height: 1.5; color: var(--ink-700); }
+    .consent__link { margin: 8px 0 0; padding-left: 32px; font-size: 12px; line-height: 1.4; color: var(--ink-500); }
+    .consent__link a { color: var(--ink-700); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    .consent__link a:hover { color: var(--ink-1000); }
     .consent__err { font-size: 12px; color: var(--warning); margin-top: 8px; display: none; line-height: 1.4; }
     .consent-wrap[data-error="true"] .consent__err { display: block; }
 
@@ -288,6 +291,9 @@
                   Souhlasím se zpracováním osobních údajů pro účely výběrového řízení. Údaje použijeme pouze interně.
                 </span>
               </label>
+              <p class="consent__link">
+                <a href="/gdpr" target="_blank" rel="noopener">Přečíst zásady zpracování osobních údajů</a>
+              </p>
               <span class="consent__err">Pro odeslání je potřeba souhlasit se zpracováním osobních údajů.</span>
             </div>
 
@@ -343,6 +349,7 @@
     </div>
     <div class="footer__bottom">
       <span>© 2026 Nexivo s.r.o. Brno · Bratislava</span>
+      <span class="footer__legal"><a href="/gdpr">GDPR</a> · <a href="/obchodni-podminky">Obchodní podmínky</a></span>
     </div>
   </footer>
 

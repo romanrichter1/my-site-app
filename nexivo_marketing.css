@@ -633,6 +633,8 @@ button { font-family: var(--font-sans); }
   display: flex; justify-content: space-between; align-items: center;
   font-size: 12px;
 }
+.footer__legal a { color: var(--ink-300); }
+.footer__legal a:hover { color: var(--bone-50); }
 
 /* ---------- calculator modal ---------- */
 .calc-scrim {
