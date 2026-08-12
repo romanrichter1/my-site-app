@@ -1,0 +1,227 @@
+/* ===========================================================
+   /ai-pro-maklere — page-specific styles
+   Loaded after colors_and_type.css + nexivo_marketing.css.
+   Reuses shared tokens/components; only adds what's new here.
+   =========================================================== */
+
+/* ---------- bigger, simpler type on this page ---------- */
+body[data-screen-label="AI pro makléře"] { font-size: 18px; }
+
+.mkl-hero {
+  padding: 56px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+.mkl-hero__logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--ink-1000);
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+.mkl-hero__logo::after { content: ""; width: 6px; height: 6px; background: var(--lime-500); margin-bottom: 5px; }
+.mkl-hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink-1000);
+  max-width: 18ch;
+  text-wrap: balance;
+  margin: 0;
+}
+.mkl-hero__sub {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink-500);
+  max-width: 46ch;
+  margin: 0;
+}
+.mkl-hero .btn--primary {
+  font-size: 18px;
+  padding: 18px 28px;
+}
+
+/* ---------- VSL ---------- */
+.vsl {
+  padding: 0 20px 72px;
+  display: flex;
+  justify-content: center;
+}
+.vsl__frame {
+  width: 100%;
+  max-width: 760px;
+  aspect-ratio: 16 / 9;
+  background: var(--ink-1000);
+  border-radius: 16px;
+  box-shadow: var(--shadow-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.vsl__play {
+  width: 76px;
+  height: 76px;
+  border-radius: 999px;
+  background: var(--lime-500);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 220ms var(--ease-out);
+}
+.vsl__play:hover { transform: scale(1.06); }
+.vsl__play svg { width: 26px; height: 26px; fill: var(--ink-1000); margin-left: 4px; }
+.vsl__caption {
+  text-align: center;
+  font-size: 15px;
+  color: var(--ink-500);
+  max-width: 46ch;
+  margin: 16px auto 0;
+}
+
+/* ---------- problem list ---------- */
+.mkl-problem {
+  padding: 0 20px 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.mkl-problem__list { display: flex; flex-direction: column; gap: 22px; padding: 0; margin: 0; list-style: none; width: 100%; }
+.mkl-problem__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font: 500 21px/1.4 var(--font-sans);
+  color: var(--ink-1000);
+}
+.mkl-problem__list li::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: var(--lime-500);
+  flex-shrink: 0;
+  margin-top: 6px;
+  border-radius: 3px;
+}
+
+/* ---------- solution icons ---------- */
+.feature__icon {
+  width: 48px;
+  height: 48px;
+  background: var(--lime-500);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.feature__icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--ink-1000);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- testimonial placeholder ---------- */
+.testimonial {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: var(--shadow-elevated);
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.testimonial__quote {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.35;
+  color: var(--ink-1000);
+  margin: 0;
+}
+.testimonial__who { display: flex; align-items: center; gap: 12px; }
+.testimonial__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--bone-200);
+  flex-shrink: 0;
+}
+.testimonial__name { font-weight: 600; font-size: 15px; color: var(--ink-1000); }
+.testimonial__role { font-size: 13px; color: var(--ink-500); }
+
+/* ---------- sticky CTA ---------- */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  transform: translateY(120%);
+  transition: transform 260ms var(--ease-out);
+  pointer-events: none;
+}
+.sticky-cta.is-visible { transform: translateY(0); pointer-events: auto; }
+.sticky-cta__bar {
+  width: 100%;
+  max-width: 520px;
+  background: var(--ink-1000);
+  border-radius: 999px;
+  padding: 8px 8px 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: var(--shadow-elevated);
+}
+.sticky-cta__text {
+  color: var(--bone-50);
+  font-size: 14px;
+  font-weight: 500;
+  display: none;
+}
+.sticky-cta .btn--primary { padding: 12px 20px; font-size: 15px; white-space: nowrap; }
+
+@media (min-width: 640px) {
+  .sticky-cta__text { display: block; }
+}
+
+/* ---------- urgency line on final CTA ---------- */
+.mkl-urgency {
+  font-weight: 600;
+  color: var(--lime-500);
+}
+
+/* ---------- responsive ---------- */
+@media (min-width: 768px) {
+  .mkl-hero { padding: 72px 20px 64px; gap: 28px; }
+  .mkl-hero__title { font-size: 58px; }
+  .mkl-hero__sub { font-size: 21px; }
+}
+@media (min-width: 1024px) {
+  .mkl-hero__title { font-size: 68px; }
+}
