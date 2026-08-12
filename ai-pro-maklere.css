@@ -2,10 +2,12 @@
    /ai-pro-maklere — page-specific styles
    Loaded after colors_and_type.css + nexivo_marketing.css.
    Reuses shared tokens/components; only adds what's new here.
+   Typography and CTA buttons are scaled ~33% larger than the
+   shared site defaults for maximum readability on mobile.
    =========================================================== */
 
 /* ---------- bigger, simpler type on this page ---------- */
-body[data-screen-label="AI pro makléře"] { font-size: 18px; }
+body[data-screen-label="AI pro makléře"] { font-size: 24px; }
 
 .mkl-hero {
   padding: 56px 20px 48px;
@@ -18,7 +20,7 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
 .mkl-hero__logo {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 22px;
+  font-size: 29px;
   letter-spacing: -0.02em;
   color: var(--ink-1000);
   display: inline-flex;
@@ -29,7 +31,7 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
 .mkl-hero__title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 44px;
+  font-size: 59px;
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: var(--ink-1000);
@@ -38,15 +40,15 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
   margin: 0;
 }
 .mkl-hero__sub {
-  font-size: 19px;
+  font-size: 25px;
   line-height: 1.55;
   color: var(--ink-500);
   max-width: 46ch;
   margin: 0;
 }
 .mkl-hero .btn--primary {
-  font-size: 18px;
-  padding: 18px 28px;
+  font-size: 24px;
+  padding: 24px 37px;
 }
 
 /* ---------- VSL ---------- */
@@ -69,8 +71,8 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
   overflow: hidden;
 }
 .vsl__play {
-  width: 76px;
-  height: 76px;
+  width: 101px;
+  height: 101px;
   border-radius: 999px;
   background: var(--lime-500);
   border: none;
@@ -81,10 +83,10 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
   transition: transform 220ms var(--ease-out);
 }
 .vsl__play:hover { transform: scale(1.06); }
-.vsl__play svg { width: 26px; height: 26px; fill: var(--ink-1000); margin-left: 4px; }
+.vsl__play svg { width: 35px; height: 35px; fill: var(--ink-1000); margin-left: 5px; }
 .vsl__caption {
   text-align: center;
-  font-size: 15px;
+  font-size: 20px;
   color: var(--ink-500);
   max-width: 46ch;
   margin: 16px auto 0;
@@ -97,41 +99,41 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
 }
-.mkl-problem__list { display: flex; flex-direction: column; gap: 22px; padding: 0; margin: 0; list-style: none; width: 100%; }
+.mkl-problem__list { display: flex; flex-direction: column; gap: 26px; padding: 0; margin: 0; list-style: none; width: 100%; }
 .mkl-problem__list li {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  font: 500 21px/1.4 var(--font-sans);
+  gap: 18px;
+  font: 500 28px/1.4 var(--font-sans);
   color: var(--ink-1000);
 }
 .mkl-problem__list li::before {
   content: "";
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   background: var(--lime-500);
   flex-shrink: 0;
-  margin-top: 6px;
-  border-radius: 3px;
+  margin-top: 8px;
+  border-radius: 4px;
 }
 
 /* ---------- solution icons ---------- */
 .feature__icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   background: var(--lime-500);
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 .feature__icon svg {
-  width: 22px;
-  height: 22px;
+  width: 29px;
+  height: 29px;
   fill: none;
   stroke: var(--ink-1000);
   stroke-width: 1.8;
@@ -141,35 +143,35 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
 
 /* ---------- testimonial placeholder ---------- */
 .testimonial {
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
   background: #FFFFFF;
   border-radius: 16px;
   box-shadow: var(--shadow-elevated);
-  padding: 40px 36px;
+  padding: 44px 40px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 .testimonial__quote {
   font-family: var(--font-display);
   font-weight: 400;
   font-style: italic;
-  font-size: 26px;
+  font-size: 35px;
   line-height: 1.35;
   color: var(--ink-1000);
   margin: 0;
 }
-.testimonial__who { display: flex; align-items: center; gap: 12px; }
+.testimonial__who { display: flex; align-items: center; gap: 14px; }
 .testimonial__avatar {
-  width: 44px;
-  height: 44px;
+  width: 58px;
+  height: 58px;
   border-radius: 999px;
   background: var(--bone-200);
   flex-shrink: 0;
 }
-.testimonial__name { font-weight: 600; font-size: 15px; color: var(--ink-1000); }
-.testimonial__role { font-size: 13px; color: var(--ink-500); }
+.testimonial__name { font-weight: 600; font-size: 20px; color: var(--ink-1000); }
+.testimonial__role { font-size: 17px; color: var(--ink-500); }
 
 /* ---------- sticky CTA ---------- */
 .sticky-cta {
@@ -188,23 +190,23 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
 .sticky-cta.is-visible { transform: translateY(0); pointer-events: auto; }
 .sticky-cta__bar {
   width: 100%;
-  max-width: 520px;
+  max-width: 620px;
   background: var(--ink-1000);
   border-radius: 999px;
-  padding: 8px 8px 8px 20px;
+  padding: 8px 8px 8px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
   box-shadow: var(--shadow-elevated);
 }
 .sticky-cta__text {
   color: var(--bone-50);
-  font-size: 14px;
+  font-size: 19px;
   font-weight: 500;
   display: none;
 }
-.sticky-cta .btn--primary { padding: 12px 20px; font-size: 15px; white-space: nowrap; }
+.sticky-cta .btn--primary { padding: 16px 27px; font-size: 20px; white-space: nowrap; }
 
 @media (min-width: 640px) {
   .sticky-cta__text { display: block; }
@@ -216,12 +218,35 @@ body[data-screen-label="AI pro makléře"] { font-size: 18px; }
   color: var(--lime-500);
 }
 
+/* ---------- enlarged type for shared components used on this page ---------- */
+/* (scoped to this stylesheet only — index.html never loads this file) */
+.section__eyebrow { font-size: 16px; }
+.section__title { font-size: 75px; }
+.feature__num { font-size: 19px; }
+.feature__title { font-size: 35px; }
+.feature__body { font-size: 20px; }
+.closer h2 { font-size: 117px; }
+.closer p { font-size: 25px; }
+
+.btn { font-size: 20px; padding: 19px 29px; }
+.btn .icon { width: 21px; height: 21px; }
+.closer .btn--primary { font-size: 24px; padding: 24px 37px; }
+
 /* ---------- responsive ---------- */
 @media (min-width: 768px) {
   .mkl-hero { padding: 72px 20px 64px; gap: 28px; }
-  .mkl-hero__title { font-size: 58px; }
-  .mkl-hero__sub { font-size: 21px; }
+  .mkl-hero__title { font-size: 77px; }
+  .mkl-hero__sub { font-size: 28px; }
 }
 @media (min-width: 1024px) {
-  .mkl-hero__title { font-size: 68px; }
+  .mkl-hero__title { font-size: 90px; }
+}
+
+@media (max-width: 768px) {
+  .section__title { font-size: 48px; }
+  .closer h2 { font-size: 64px; }
+  .closer p { font-size: 21px; }
+}
+@media (max-width: 480px) {
+  .closer h2 { font-size: 48px; }
 }
