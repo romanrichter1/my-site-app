@@ -40,7 +40,15 @@
     }
     .page-lead { font-size: 18px; line-height: 1.55; color: var(--ink-500); max-width: 620px; margin: 0; }
 
-    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding: 0 48px 140px; max-width: 1080px; margin: 0 auto; }
+    .team-section-head { max-width: 1080px; margin: 0 auto; padding: 0 48px; margin-bottom: 24px; }
+    .team-section-label {
+      font-weight: 600; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--ink-1000); display: inline-flex; align-items: center; gap: 10px;
+    }
+    .team-section-label::before { content: ""; width: 6px; height: 6px; background: var(--lime-500); }
+
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding: 0 48px 64px; max-width: 1080px; margin: 0 auto; }
+    .team-grid--members { padding-bottom: 140px; }
     .team-card { background: #FFFFFF; border-radius: var(--radius-md); box-shadow: var(--shadow-subtle); padding: 44px; display: flex; flex-direction: column; gap: 22px; }
     .team-avatar {
       width: 152px; height: 152px; background: var(--ink-1000); color: var(--lime-500);
@@ -62,7 +70,9 @@
       .page-title { font-size: 40px; }
     }
     @media (max-width: 640px) {
-      .team-grid { grid-template-columns: 1fr; padding: 0 24px 80px; }
+      .team-grid { grid-template-columns: 1fr; padding: 0 24px 48px; }
+      .team-grid--members { padding-bottom: 80px; }
+      .team-section-head { padding: 0 24px; }
     }
   </style>
 </head>
@@ -98,7 +108,10 @@
       </header>
     </div>
 
-    <div class="team-grid">
+    <div class="team-section-head">
+      <span class="team-section-label">Zakladatelé</span>
+    </div>
+    <div class="team-grid team-grid--founders">
       <article class="team-card">
         <span class="team-avatar">
           <img src="assets/team/roman-richter.jpg" alt="Roman Richter" width="152" height="152" loading="lazy">
@@ -118,7 +131,12 @@
           <span class="team-role">Co-Founder &amp; CTO</span>
         </div>
       </article>
+    </div>
 
+    <div class="team-section-head">
+      <span class="team-section-label">Klíčoví členové týmu</span>
+    </div>
+    <div class="team-grid team-grid--members">
       <article class="team-card">
         <span class="team-avatar" aria-hidden="true">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
