@@ -284,6 +284,16 @@
           <span class="err">Vyplňte prosím příjmení.</span>
         </div>
         <div class="field">
+          <label for="f-email">E-mail</label>
+          <input id="f-email" name="email" type="email" placeholder="jan@email.cz" autocomplete="email" required>
+          <span class="err">Zkontrolujte prosím tvar e-mailové adresy.</span>
+        </div>
+        <div class="field">
+          <label for="f-telefon">Telefonní číslo</label>
+          <input id="f-telefon" name="telefon" type="tel" placeholder="+420 605 123 456" autocomplete="tel" required>
+          <span class="err">Vyplňte prosím telefonní číslo.</span>
+        </div>
+        <div class="field">
           <label for="f-ico">IČO</label>
           <input id="f-ico" name="ico" type="text" inputmode="numeric" placeholder="12345678" required>
           <span class="err">Zadejte platné 8místné IČO.</span>
@@ -414,6 +424,12 @@
 
       if (form.elements["jmeno"].value.trim().length < 2) { setFieldError(form.elements["jmeno"].closest(".field"), true); ok = false; }
       if (form.elements["prijmeni"].value.trim().length < 2) { setFieldError(form.elements["prijmeni"].closest(".field"), true); ok = false; }
+
+      const email = form.elements["email"].value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setFieldError(form.elements["email"].closest(".field"), true); ok = false; }
+
+      const phone = form.elements["telefon"].value.trim();
+      if (phone.replace(/[\s+\-()]/g, "").length < 9) { setFieldError(form.elements["telefon"].closest(".field"), true); ok = false; }
 
       const ico = form.elements["ico"].value.replace(/\s/g, "");
       if (!/^\d{8}$/.test(ico)) { setFieldError(form.elements["ico"].closest(".field"), true); ok = false; }
