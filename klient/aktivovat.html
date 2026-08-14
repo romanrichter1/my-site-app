@@ -223,18 +223,18 @@
       letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
     }
     .agent-picker__bars {
-      display: flex; align-items: flex-end; gap: 9px; padding: 10px; cursor: pointer;
+      display: flex; align-items: flex-end; gap: 14px; padding: 10px; cursor: pointer;
       outline: none; border-radius: 12px;
     }
     .agent-picker__bars:focus-visible { box-shadow: 0 0 0 3px rgba(199,242,48,0.4); }
     .agent-picker__bars .bar {
-      width: 26px; border: 0; border-radius: 6px; background: var(--hair-2);
+      width: 36px; border: 0; border-radius: 8px; background: var(--hair-2);
       cursor: pointer; padding: 0; transition: background 160ms, transform 140ms;
     }
     .agent-picker__bars .bar:hover { transform: translateY(-4px); }
     .agent-picker__bars .bar.is-filled { background: var(--lime); }
     .agent-picker__scale {
-      display: flex; justify-content: space-between; width: 100%; max-width: 328px; margin-top: 16px;
+      display: flex; justify-content: space-between; width: 100%; max-width: 244px; margin-top: 16px;
       font: 600 12px/1 var(--font-sans); color: var(--muted-2); letter-spacing: 0.03em;
     }
 
@@ -245,7 +245,7 @@
       .pane__head h1 { font-size: 28px; }
       .grid2 { grid-template-columns: 1fr; }
       .agent-picker__value { font-size: 72px; }
-      .agent-picker__bars .bar { width: 20px; }
+      .agent-picker__bars .bar { width: 30px; }
     }
   </style>
 </head>
@@ -369,8 +369,8 @@
         <div class="agent-picker__value" id="agent-value">3</div>
         <div class="agent-picker__unit">AI agentů</div>
         <div class="agent-picker__bars" id="agent-bars" role="slider" tabindex="0"
-             aria-label="Počet AI agentů" aria-valuemin="1" aria-valuemax="10" aria-valuenow="3"></div>
-        <div class="agent-picker__scale"><span>1 agent</span><span>10 agentů</span></div>
+             aria-label="Počet AI agentů" aria-valuemin="1" aria-valuemax="5" aria-valuenow="3"></div>
+        <div class="agent-picker__scale"><span>1 agent</span><span>5 agentů</span></div>
       </div>
 
       <div class="pane__actions">
@@ -387,19 +387,13 @@
 
 <script>
   (function () {
-    // Platební odkaz na Stripe podle vybraného počtu agentů.
-    // TODO: doplnit zbývající odkazy pro 1, 2, 4–10 agentů.
+    // Platební odkaz na Stripe podle vybraného počtu agentů (max 5).
     const STRIPE_LINKS = {
       1: "https://buy.stripe.com/9B64gs7nb8UY61sbPY1B607",
       2: "https://buy.stripe.com/9B65kw9vjfjm4Xo2fo1B606",
       3: "https://buy.stripe.com/8x2bIUazn6MQ75wdY61B604",
       4: "https://buy.stripe.com/14A7sE22R2wAdtUdY61B608",
-      5: "https://buy.stripe.com/7sYbIU8rf0os75w1bk1B609",
-      6: "https://buy.stripe.com/TODO_6_agentu",
-      7: "https://buy.stripe.com/TODO_7_agentu",
-      8: "https://buy.stripe.com/TODO_8_agentu",
-      9: "https://buy.stripe.com/TODO_9_agentu",
-      10: "https://buy.stripe.com/TODO_10_agentu"
+      5: "https://buy.stripe.com/7sYbIU8rf0os75w1bk1B609"
     };
     const FORM_ENDPOINT = "https://formsubmit.co/ajax/roman@nexivoai.cz";
 
@@ -507,16 +501,17 @@
     });
 
     // ── agent count picker ──
+    const MAX_AGENTS = 5;
     const bars = document.getElementById("agent-bars");
     const valueEl = document.getElementById("agent-value");
     let agentCount = 3;
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= MAX_AGENTS; i++) {
       const b = document.createElement("button");
       b.type = "button";
       b.className = "bar";
       b.setAttribute("data-value", i);
-      b.style.height = (22 + i * 8) + "px";
+      b.style.height = (22 + i * 16) + "px";
       b.setAttribute("aria-label", i + (i === 1 ? " agent" : " agentů"));
       bars.appendChild(b);
     }
@@ -539,7 +534,7 @@
       renderAgents();
     });
     bars.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight" && agentCount < 10) { agentCount++; renderAgents(); e.preventDefault(); }
+      if (e.key === "ArrowRight" && agentCount < MAX_AGENTS) { agentCount++; renderAgents(); e.preventDefault(); }
       if (e.key === "ArrowLeft" && agentCount > 1) { agentCount--; renderAgents(); e.preventDefault(); }
     });
     renderAgents();
