@@ -387,8 +387,20 @@
 
 <script>
   (function () {
-    // TODO: nahradit skutečným Stripe platebním odkazem pro aktivaci účtu (podle počtu agentů).
-    const STRIPE_LINK = "https://buy.stripe.com/TODO_aktivace_uctu";
+    // Platební odkaz na Stripe podle vybraného počtu agentů.
+    // TODO: doplnit zbývající odkazy pro 1, 2, 4–10 agentů.
+    const STRIPE_LINKS = {
+      1: "https://buy.stripe.com/TODO_1_agent",
+      2: "https://buy.stripe.com/TODO_2_agenti",
+      3: "https://buy.stripe.com/8x2bIUazn6MQ75wdY61B604",
+      4: "https://buy.stripe.com/TODO_4_agenti",
+      5: "https://buy.stripe.com/TODO_5_agentu",
+      6: "https://buy.stripe.com/TODO_6_agentu",
+      7: "https://buy.stripe.com/TODO_7_agentu",
+      8: "https://buy.stripe.com/TODO_8_agentu",
+      9: "https://buy.stripe.com/TODO_9_agentu",
+      10: "https://buy.stripe.com/TODO_10_agentu"
+    };
     const FORM_ENDPOINT = "https://formsubmit.co/ajax/roman@nexivoai.cz";
 
     const form = document.getElementById("activate-form");
@@ -535,6 +547,13 @@
     // ── submit: send data, then redirect to Stripe ──
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+
+      const stripeLink = STRIPE_LINKS[agentCount];
+      if (!stripeLink || stripeLink.includes("TODO")) {
+        alert(`Platba pro ${agentCount} agentů zatím není nastavená. Napište nám prosím na roman@nexivoai.cz, ozveme se s odkazem k platbě.`);
+        return;
+      }
+
       const btn = document.getElementById("submit-btn");
       btn.disabled = true;
       btn.querySelector(".cta__label").textContent = "Zpracovávám…";
@@ -548,7 +567,7 @@
       fetch(FORM_ENDPOINT, { method: "POST", body: fd, headers: { Accept: "application/json" } })
         .then((res) => {
           if (!res.ok) throw new Error("Odeslání selhalo.");
-          const url = new URL(STRIPE_LINK);
+          const url = new URL(stripeLink);
           url.searchParams.set("client_reference_id", `${fd.get("jmeno")}-${fd.get("prijmeni")}-${agentCount}agentu`);
           window.location.href = url.toString();
         })
