@@ -6,10 +6,10 @@ This file provides guidance to Claude Code and other AI agents working in this r
 
 Marketing website + client portal for **Nexivo** — a Czech AI agency selling AI receptionist, chatbot and AI agent services to small businesses (salons, clinics, guesthouses) in CZ and SK.
 
-**Live site:** nexivoagency.eu  
+**Live site:** nexivoai.cz  
 **GitHub:** github.com/romanrichter1/my-site-app  
 **Vercel project:** my-site-app (linked via `.vercel/project.json`)  
-**Owner:** Roman Richter — roman@nexivoagency.eu
+**Owner:** Roman Richter — roman@nexivoai.cz
 
 No build system, no package manager. All files are standalone HTML with inline or linked CSS/JS.
 
@@ -19,8 +19,8 @@ No build system, no package manager. All files are standalone HTML with inline o
 
 ```
 /
-├── index.html                  ← Main landing page (nexivoagency.eu)
-├── nexivo_inquiry.html         ← Poptávkový formulář (nexivoagency.eu/nexivo_inquiry)
+├── index.html                  ← Main landing page (nexivoai.cz)
+├── nexivo_inquiry.html         ← Poptávkový formulář (nexivoai.cz/nexivo_inquiry)
 ├── nexivo_marketing.css        ← Shared CSS for all marketing pages
 ├── colors_and_type.css         ← Design tokens: colors, typography, spacing
 ├── og-gen.html                 ← OG image generator (open in browser to download PNG)
@@ -32,8 +32,8 @@ No build system, no package manager. All files are standalone HTML with inline o
 │   ├── nexivo-mark.svg         ← Geometric N mark
 │   └── ...
 └── klient/
-    ├── index.html              ← Login page (nexivoagency.eu/klient)
-    └── dashboard.html          ← Client dashboard (nexivoagency.eu/klient/dashboard)
+    ├── index.html              ← Login page (nexivoai.cz/klient)
+    └── dashboard.html          ← Client dashboard (nexivoai.cz/klient/dashboard)
 ```
 
 **Deleted files** (redirects in vercel.json):
@@ -135,7 +135,7 @@ PATH="/opt/homebrew/opt/node@26/bin:/opt/homebrew/bin:$PATH" vercel --prod
 `cleanUrls: true` → `.html` extensions stripped automatically.  
 After deploy, always push to GitHub: `git push origin main`
 
-**Domain:** nexivoagency.eu (aliased in Vercel)
+**Domain:** nexivoai.cz (aliased in Vercel)
 
 ---
 

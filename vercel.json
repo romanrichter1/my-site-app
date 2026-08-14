@@ -3,6 +3,18 @@
   "redirects": [
     { "source": "/nexivo_landing",  "destination": "/",        "permanent": true },
     { "source": "/nexivo_login",    "destination": "/klient",  "permanent": true },
-    { "source": "/nexivo_register", "destination": "/klient",  "permanent": true }
+    { "source": "/nexivo_register", "destination": "/klient",  "permanent": true },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "nexivoagency.eu" }],
+      "destination": "https://nexivoai.cz/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.nexivoai.cz" }],
+      "destination": "https://nexivoai.cz/:path*",
+      "permanent": true
+    }
   ]
 }
