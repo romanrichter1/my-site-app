@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aktivace účtu — Nexivo</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/nexivo-favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #F5F3EE;
+      --cream-2:  #EDEAE0;
+      --paper:    #FFFFFF;
+      --ink:      #0A0A09;
+      --ink-2:    #111111;
+      --muted:    #6B6A5C;
+      --muted-2:  #98968A;
+      --hair:     rgba(10,10,9,0.08);
+      --hair-2:   rgba(10,10,9,0.14);
+      --lime:     #C7F230;
+      --warn:     #D98A1F;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-sans:    'Manrope', -apple-system, sans-serif;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--cream);
+      font-family: var(--font-sans);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 48px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: -0.022em;
+      font-variation-settings: "opsz" 96;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .brand::after {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--lime);
+      margin-bottom: 5px;
+    }
+    .top__back {
+      font: 600 13px/1 var(--font-sans);
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .top__back:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+    .wrap { max-width: 640px; margin: 0 auto; padding: 8px 24px 120px; }
+
+    .steps { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 36px; }
+    .step-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--hair-2); transition: all 220ms cubic-bezier(0.16,1,0.3,1); }
+    .step-dot.is-active { width: 26px; border-radius: 5px; background: var(--ink); }
+    .step-dot.is-done { background: var(--lime); }
+
+    .pane {
+      display: none;
+      background: var(--paper);
+      border: 1px solid var(--hair);
+      border-radius: 18px;
+      padding: 48px 52px;
+      box-shadow: 0 1px 2px rgba(10,10,9,0.04), 0 12px 32px rgba(10,10,9,0.05);
+    }
+    .pane[data-active="true"] { display: block; animation: fade 320ms cubic-bezier(0.16,1,0.3,1); }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font: 600 12px/1 var(--font-sans);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--lime); }
+
+    .pane__head h1 {
+      margin-top: 16px;
+      margin-bottom: 10px;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 34px;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      font-variation-settings: "opsz" 72;
+    }
+    .pane__head p { font: 400 15px/1.55 var(--font-sans); color: var(--muted); margin-bottom: 36px; max-width: 460px; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 20px; margin-bottom: 8px; }
+    .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .field--full { grid-column: 1 / -1; }
+    .field label { font: 600 12px/1 var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+    .field input {
+      height: 50px;
+      padding: 0 16px;
+      border: 1px solid var(--hair-2);
+      background: var(--paper);
+      border-radius: 10px;
+      font: 500 15px/1 var(--font-sans);
+      color: var(--ink);
+      outline: none;
+      transition: all 180ms cubic-bezier(0.16,1,0.3,1);
+      width: 100%;
+    }
+    .field input::placeholder { color: var(--muted-2); }
+    .field input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(199,242,48,0.45); }
+    .field .err { display: none; font: 500 12px/1.4 var(--font-sans); color: var(--warn); }
+    .field[data-error="true"] input { border-color: var(--warn); }
+    .field[data-error="true"] .err { display: block; }
+
+    .block { margin-bottom: 28px; }
+    .block__label { display: block; margin-bottom: 12px; font: 600 12px/1 var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .toggle-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .toggle-row--3 .toggle-pill { flex: 1 1 0; text-align: center; }
+    .toggle-pill {
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--hair-2);
+      background: var(--paper);
+      font: 700 14px/1 var(--font-sans);
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 160ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .toggle-pill:hover { border-color: var(--ink); }
+    .toggle-pill.is-selected { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .block[data-error="true"] .toggle-pill { border-color: var(--warn); }
+    .block .err { display: none; margin-top: 10px; font: 500 12px/1.4 var(--font-sans); color: var(--warn); }
+    .block[data-error="true"] .err { display: block; }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 18px;
+      background: var(--cream);
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 8px;
+      transition: border-color 160ms;
+    }
+    .consent[data-error="true"] { border-color: var(--warn); }
+    .consent input {
+      appearance: none; -webkit-appearance: none;
+      flex-shrink: 0; width: 20px; height: 20px; margin-top: 1px;
+      background: var(--paper); border: 1.5px solid var(--hair-2); border-radius: 5px;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+      transition: background 140ms, border-color 140ms; position: relative;
+    }
+    .consent input:checked { background: var(--lime); border-color: var(--lime); }
+    .consent input:checked::after {
+      content: ""; position: absolute; left: 6px; top: 2px; width: 6px; height: 11px;
+      border: solid var(--ink); border-width: 0 2px 2px 0; transform: rotate(45deg);
+    }
+    .consent__text { font: 400 13px/1.5 var(--font-sans); color: var(--muted); }
+    .consent__text a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+    .hint { margin-bottom: 20px; font: 500 13px/1.4 var(--font-sans); color: var(--warn); background: #FBF1E2; padding: 12px 16px; border-radius: 8px; }
+    .hint[hidden] { display: none; }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 18px 22px;
+      border-radius: 10px;
+      font: 700 16px/1 var(--font-sans);
+      border: 0;
+      cursor: pointer;
+      width: 100%;
+      transition: background 180ms cubic-bezier(0.16,1,0.3,1), transform 120ms;
+    }
+    .cta:hover { background: #1F1E18; }
+    .cta:active { transform: scale(0.99); }
+    .cta:disabled { opacity: 0.6; cursor: not-allowed; }
+    .cta svg { width: 18px; height: 18px; stroke: var(--lime); flex-shrink: 0; }
+
+    .pane__actions { display: flex; gap: 14px; }
+    .pane__actions .cta { flex: 1; }
+    .ghost {
+      background: transparent; border: 1.5px solid var(--hair-2); color: var(--ink);
+      padding: 18px 22px; border-radius: 10px; font: 700 15px/1 var(--font-sans);
+      cursor: pointer; transition: border-color 160ms;
+    }
+    .ghost:hover { border-color: var(--ink); }
+
+    /* ── AGENT PICKER ── */
+    .agent-picker { display: flex; flex-direction: column; align-items: center; padding: 12px 0 40px; }
+    .agent-picker__value {
+      font-family: var(--font-display); font-weight: 400; font-size: 104px; line-height: 1;
+      letter-spacing: -0.03em; color: var(--ink); font-variation-settings: "opsz" 144;
+      font-feature-settings: "tnum","lnum";
+    }
+    .agent-picker__value.pulse { animation: pop 280ms cubic-bezier(0.16,1,0.3,1); }
+    @keyframes pop { 0% { transform: scale(1); } 45% { transform: scale(1.14); color: var(--lime); text-shadow: 0 0 24px rgba(199,242,48,0.55); } 100% { transform: scale(1); } }
+    .agent-picker__unit {
+      margin-top: 6px; margin-bottom: 40px; font: 700 12px/1 var(--font-sans);
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    }
+    .agent-picker__bars {
+      display: flex; align-items: flex-end; gap: 9px; padding: 10px; cursor: pointer;
+      outline: none; border-radius: 12px;
+    }
+    .agent-picker__bars:focus-visible { box-shadow: 0 0 0 3px rgba(199,242,48,0.4); }
+    .agent-picker__bars .bar {
+      width: 26px; border: 0; border-radius: 6px; background: var(--hair-2);
+      cursor: pointer; padding: 0; transition: background 160ms, transform 140ms;
+    }
+    .agent-picker__bars .bar:hover { transform: translateY(-4px); }
+    .agent-picker__bars .bar.is-filled { background: var(--lime); }
+    .agent-picker__scale {
+      display: flex; justify-content: space-between; width: 100%; max-width: 328px; margin-top: 16px;
+      font: 600 12px/1 var(--font-sans); color: var(--muted-2); letter-spacing: 0.03em;
+    }
+
+    @media (max-width: 640px) {
+      .top { padding: 24px 20px; }
+      .wrap { padding: 8px 16px 80px; }
+      .pane { padding: 36px 24px; }
+      .pane__head h1 { font-size: 28px; }
+      .grid2 { grid-template-columns: 1fr; }
+      .agent-picker__value { font-size: 72px; }
+      .agent-picker__bars .bar { width: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top">
+  <a href="/" class="brand">nexivo</a>
+  <a href="/klient" class="top__back">← Zpět na přihlášení</a>
+</div>
+
+<div class="wrap">
+  <div class="steps">
+    <span class="step-dot is-active" data-dot="1"></span>
+    <span class="step-dot" data-dot="2"></span>
+  </div>
+
+  <form id="activate-form" novalidate>
+
+    <!-- STEP 1: fakturační údaje -->
+    <section class="pane" data-pane="1" data-active="true">
+      <div class="pane__head">
+        <span class="eyebrow">Aktivace účtu</span>
+        <h1>Pár údajů k&nbsp;fakturaci.</h1>
+        <p>Vyplňte fakturační údaje, vyberte způsob platby a jak budete Nexivo používat.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label for="f-jmeno">Jméno</label>
+          <input id="f-jmeno" name="jmeno" type="text" placeholder="Jan" autocomplete="given-name" required>
+          <span class="err">Vyplňte prosím jméno.</span>
+        </div>
+        <div class="field">
+          <label for="f-prijmeni">Příjmení</label>
+          <input id="f-prijmeni" name="prijmeni" type="text" placeholder="Novák" autocomplete="family-name" required>
+          <span class="err">Vyplňte prosím příjmení.</span>
+        </div>
+        <div class="field">
+          <label for="f-ico">IČO</label>
+          <input id="f-ico" name="ico" type="text" inputmode="numeric" placeholder="12345678" required>
+          <span class="err">Zadejte platné 8místné IČO.</span>
+        </div>
+        <div class="field">
+          <label for="f-firma">Název firmy</label>
+          <input id="f-firma" name="firma" type="text" placeholder="Novák s.r.o." required>
+          <span class="err">Vyplňte prosím název firmy.</span>
+        </div>
+        <div class="field field--full">
+          <label for="f-ulice">Ulice a číslo popisné</label>
+          <input id="f-ulice" name="ulice" type="text" placeholder="Korunní 108" autocomplete="street-address" required>
+          <span class="err">Vyplňte prosím ulici a číslo popisné.</span>
+        </div>
+        <div class="field">
+          <label for="f-mesto">Město</label>
+          <input id="f-mesto" name="mesto" type="text" placeholder="Praha 10" autocomplete="address-level2" required>
+          <span class="err">Vyplňte prosím město.</span>
+        </div>
+        <div class="field">
+          <label for="f-psc">PSČ</label>
+          <input id="f-psc" name="psc" type="text" inputmode="numeric" placeholder="101 00" autocomplete="postal-code" required>
+          <span class="err">Zadejte platné PSČ.</span>
+        </div>
+      </div>
+
+      <div class="block" data-group-wrap="platba">
+        <label class="block__label">Způsob platby</label>
+        <div class="toggle-row" data-group="platba">
+          <button type="button" class="toggle-pill" data-value="faktura">Faktura</button>
+          <button type="button" class="toggle-pill" data-value="karta">Kartou online</button>
+        </div>
+        <input type="hidden" name="platba" required>
+        <span class="err">Vyberte prosím způsob platby.</span>
+      </div>
+
+      <div class="block" data-group-wrap="typ">
+        <label class="block__label">Jak budete Nexivo používat?</label>
+        <div class="toggle-row toggle-row--3" data-group="typ">
+          <button type="button" class="toggle-pill" data-value="osvc">OSVČ</button>
+          <button type="button" class="toggle-pill" data-value="majitel">Majitel firmy</button>
+          <button type="button" class="toggle-pill" data-value="osobni">Osobní použití</button>
+        </div>
+        <input type="hidden" name="typ" required>
+        <span class="err">Vyberte prosím jednu z možností.</span>
+      </div>
+
+      <label class="consent" for="f-consent">
+        <input id="f-consent" name="consent" type="checkbox">
+        <span class="consent__text">
+          Souhlasím se zpracováním osobních údajů pro účely aktivace a fakturace účtu. Více v
+          <a href="/gdpr" target="_blank" rel="noopener">zásadách ochrany osobních údajů</a>.
+        </span>
+      </label>
+
+      <p class="hint" id="step1-hint" hidden>Doplňte prosím chybějící údaje výše.</p>
+
+      <button type="button" class="cta" id="to-step2">
+        Pokračovat
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </section>
+
+    <!-- STEP 2: počet agentů -->
+    <section class="pane" data-pane="2">
+      <div class="pane__head">
+        <span class="eyebrow">Poslední krok</span>
+        <h1>Kolik AI agentů potřebujete?</h1>
+        <p>Počet můžete kdykoliv později upravit v klientském portálu.</p>
+      </div>
+
+      <div class="agent-picker">
+        <div class="agent-picker__value" id="agent-value">3</div>
+        <div class="agent-picker__unit">AI agentů</div>
+        <div class="agent-picker__bars" id="agent-bars" role="slider" tabindex="0"
+             aria-label="Počet AI agentů" aria-valuemin="1" aria-valuemax="10" aria-valuenow="3"></div>
+        <div class="agent-picker__scale"><span>1 agent</span><span>10 agentů</span></div>
+      </div>
+
+      <div class="pane__actions">
+        <button type="button" class="ghost" id="back-step1">Zpět</button>
+        <button type="submit" class="cta" id="submit-btn">
+          <span class="cta__label">Pokračovat k platbě</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </section>
+
+  </form>
+</div>
+
+<script>
+  (function () {
+    // TODO: nahradit skutečným Stripe platebním odkazem pro aktivaci účtu (podle počtu agentů).
+    const STRIPE_LINK = "https://buy.stripe.com/TODO_aktivace_uctu";
+    const FORM_ENDPOINT = "https://formsubmit.co/ajax/roman@nexivoai.cz";
+
+    const form = document.getElementById("activate-form");
+    const pane1 = document.querySelector('[data-pane="1"]');
+    const pane2 = document.querySelector('[data-pane="2"]');
+    const dot1 = document.querySelector('[data-dot="1"]');
+    const dot2 = document.querySelector('[data-dot="2"]');
+
+    // ── toggle pill groups (single select) ──
+    document.querySelectorAll(".toggle-row").forEach((row) => {
+      const groupName = row.getAttribute("data-group");
+      const hiddenInput = form.elements[groupName];
+      row.querySelectorAll(".toggle-pill").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          row.querySelectorAll(".toggle-pill").forEach((b) => b.classList.remove("is-selected"));
+          btn.classList.add("is-selected");
+          hiddenInput.value = btn.getAttribute("data-value");
+          row.closest(".block").setAttribute("data-error", "false");
+        });
+      });
+    });
+
+    // ── step 1 validation ──
+    function setFieldError(fieldEl, bad) {
+      if (fieldEl) fieldEl.setAttribute("data-error", bad ? "true" : "false");
+    }
+
+    function validateStep1() {
+      let ok = true;
+      form.querySelectorAll(".field").forEach((f) => f.setAttribute("data-error", "false"));
+      form.querySelectorAll(".block").forEach((b) => b.setAttribute("data-error", "false"));
+      document.getElementById("f-consent").closest(".consent").setAttribute("data-error", "false");
+
+      if (form.elements["jmeno"].value.trim().length < 2) { setFieldError(form.elements["jmeno"].closest(".field"), true); ok = false; }
+      if (form.elements["prijmeni"].value.trim().length < 2) { setFieldError(form.elements["prijmeni"].closest(".field"), true); ok = false; }
+
+      const ico = form.elements["ico"].value.replace(/\s/g, "");
+      if (!/^\d{8}$/.test(ico)) { setFieldError(form.elements["ico"].closest(".field"), true); ok = false; }
+
+      if (form.elements["firma"].value.trim().length < 2) { setFieldError(form.elements["firma"].closest(".field"), true); ok = false; }
+      if (form.elements["ulice"].value.trim().length < 3) { setFieldError(form.elements["ulice"].closest(".field"), true); ok = false; }
+      if (form.elements["mesto"].value.trim().length < 2) { setFieldError(form.elements["mesto"].closest(".field"), true); ok = false; }
+
+      const psc = form.elements["psc"].value.replace(/\s/g, "");
+      if (!/^\d{5}$/.test(psc)) { setFieldError(form.elements["psc"].closest(".field"), true); ok = false; }
+
+      if (!form.elements["platba"].value) {
+        document.querySelector('[data-group-wrap="platba"]').setAttribute("data-error", "true");
+        ok = false;
+      }
+      if (!form.elements["typ"].value) {
+        document.querySelector('[data-group-wrap="typ"]').setAttribute("data-error", "true");
+        ok = false;
+      }
+      if (!form.elements["consent"].checked) {
+        document.getElementById("f-consent").closest(".consent").setAttribute("data-error", "true");
+        ok = false;
+      }
+
+      return ok;
+    }
+
+    form.querySelectorAll(".field input").forEach((el) => {
+      el.addEventListener("input", () => {
+        el.closest(".field").setAttribute("data-error", "false");
+        document.getElementById("step1-hint").hidden = true;
+      });
+    });
+    document.getElementById("f-consent").addEventListener("change", () => {
+      document.getElementById("f-consent").closest(".consent").setAttribute("data-error", "false");
+    });
+
+    document.getElementById("to-step2").addEventListener("click", () => {
+      if (!validateStep1()) {
+        document.getElementById("step1-hint").hidden = false;
+        const firstErr = form.querySelector('.field[data-error="true"], .block[data-error="true"], .consent[data-error="true"]');
+        if (firstErr) {
+          const top = firstErr.getBoundingClientRect().top + window.scrollY - 120;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+        return;
+      }
+      pane1.setAttribute("data-active", "false");
+      pane2.setAttribute("data-active", "true");
+      dot1.classList.remove("is-active");
+      dot1.classList.add("is-done");
+      dot2.classList.add("is-active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("back-step1").addEventListener("click", () => {
+      pane2.setAttribute("data-active", "false");
+      pane1.setAttribute("data-active", "true");
+      dot2.classList.remove("is-active");
+      dot1.classList.add("is-active");
+      dot1.classList.remove("is-done");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // ── agent count picker ──
+    const bars = document.getElementById("agent-bars");
+    const valueEl = document.getElementById("agent-value");
+    let agentCount = 3;
+
+    for (let i = 1; i <= 10; i++) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "bar";
+      b.setAttribute("data-value", i);
+      b.style.height = (22 + i * 8) + "px";
+      b.setAttribute("aria-label", i + (i === 1 ? " agent" : " agentů"));
+      bars.appendChild(b);
+    }
+
+    function renderAgents() {
+      bars.querySelectorAll(".bar").forEach((b) => {
+        b.classList.toggle("is-filled", Number(b.getAttribute("data-value")) <= agentCount);
+      });
+      valueEl.textContent = agentCount;
+      bars.setAttribute("aria-valuenow", agentCount);
+      valueEl.classList.remove("pulse");
+      void valueEl.offsetWidth;
+      valueEl.classList.add("pulse");
+    }
+
+    bars.addEventListener("click", (e) => {
+      const bar = e.target.closest(".bar");
+      if (!bar) return;
+      agentCount = Number(bar.getAttribute("data-value"));
+      renderAgents();
+    });
+    bars.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" && agentCount < 10) { agentCount++; renderAgents(); e.preventDefault(); }
+      if (e.key === "ArrowLeft" && agentCount > 1) { agentCount--; renderAgents(); e.preventDefault(); }
+    });
+    renderAgents();
+
+    // ── submit: send data, then redirect to Stripe ──
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("submit-btn");
+      btn.disabled = true;
+      btn.querySelector(".cta__label").textContent = "Zpracovávám…";
+
+      const fd = new FormData(form);
+      fd.append("pocet_agentu", agentCount);
+      fd.append("_subject", "Nová aktivace účtu — Nexivo");
+      fd.append("_template", "table");
+      fd.append("_captcha", "false");
+
+      fetch(FORM_ENDPOINT, { method: "POST", body: fd, headers: { Accept: "application/json" } })
+        .then((res) => {
+          if (!res.ok) throw new Error("Odeslání selhalo.");
+          const url = new URL(STRIPE_LINK);
+          url.searchParams.set("client_reference_id", `${fd.get("jmeno")}-${fd.get("prijmeni")}-${agentCount}agentu`);
+          window.location.href = url.toString();
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.querySelector(".cta__label").textContent = "Pokračovat k platbě";
+          document.getElementById("step1-hint").hidden = true;
+          alert("Odeslání se nepovedlo, zkuste to prosím znovu nebo napište na roman@nexivoai.cz.");
+        });
+    });
+  })();
+</script>
+
+</body>
+</html>
