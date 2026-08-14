@@ -43,11 +43,11 @@
     .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding: 0 48px 140px; max-width: 1080px; margin: 0 auto; }
     .team-card { background: #FFFFFF; border-radius: var(--radius-md); box-shadow: var(--shadow-subtle); padding: 44px; display: flex; flex-direction: column; gap: 22px; }
     .team-avatar {
-      width: 96px; height: 96px; background: var(--ink-1000); color: var(--lime-500);
+      width: 152px; height: 152px; background: var(--ink-1000); color: var(--lime-500);
       display: inline-flex; align-items: center; justify-content: center;
       border-radius: var(--radius-xs); overflow: hidden;
     }
-    .team-avatar svg { width: 40px; height: 40px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .team-avatar svg { width: 64px; height: 64px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     .team-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .team-name { font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 1.15; letter-spacing: -0.014em; margin: 0; color: var(--ink-1000); font-variation-settings: "opsz" 48; }
     .team-role {
@@ -55,7 +55,6 @@
       letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-700);
     }
     .team-role::before { content: ""; width: 5px; height: 5px; background: var(--lime-500); }
-    .team-bio { font-size: 15px; line-height: 1.6; color: var(--ink-500); margin: 0; }
 
     @media (max-width: 980px) {
       .team-grid { grid-template-columns: 1fr 1fr; }
@@ -102,24 +101,22 @@
     <div class="team-grid">
       <article class="team-card">
         <span class="team-avatar">
-          <img src="assets/team/roman-richter.jpg" alt="Roman Richter" width="96" height="96" loading="lazy">
+          <img src="assets/team/roman-richter.jpg" alt="Roman Richter" width="152" height="152" loading="lazy">
         </span>
         <div>
           <h2 class="team-name">Roman Richter</h2>
           <span class="team-role">Co-Founder &amp; Head of Sales</span>
         </div>
-        <p class="team-bio">Stará se o obchod a vztahy s klienty — od první konzultace až po nasazení agenta. Zná provoz malých a středních firem zevnitř a podle toho staví každé řešení.</p>
       </article>
 
       <article class="team-card">
         <span class="team-avatar">
-          <img src="assets/team/nicolas-richter.jpg" alt="Nicolas Richter" width="96" height="96" loading="lazy">
+          <img src="assets/team/nicolas-richter.jpg" alt="Nicolas Richter" width="152" height="152" loading="lazy">
         </span>
         <div>
           <h2 class="team-name">Nicolas Richter</h2>
           <span class="team-role">Co-Founder &amp; CTO</span>
         </div>
-        <p class="team-bio">Zodpovídá za technologii Nexivo — od hlasových a chatových agentů po napojení na kalendáře a CRM klientů. Dohlíží, aby vše běželo spolehlivě a bez zásahu z jeho strany.</p>
       </article>
 
       <article class="team-card">
@@ -130,7 +127,6 @@
           <h2 class="team-name">Štěpán Sáček</h2>
           <span class="team-role">Main AI Consultant &amp; Sales rep.</span>
         </div>
-        <p class="team-bio">Vede obchodní hovory s klienty a zároveň radí, jak AI agenty nejlépe nastavit na míru jejich provozu — spojuje obchod s hlubokou znalostí produktu.</p>
       </article>
 
       <article class="team-card">
@@ -141,7 +137,6 @@
           <h2 class="team-name">Tomáš Urban</h2>
           <span class="team-role">Sales Representative</span>
         </div>
-        <p class="team-bio">Pomáhá klientům najít správné řešení pro jejich provoz a provází je celým procesem nasazení AI agenta.</p>
       </article>
 
       <article class="team-card">
@@ -152,7 +147,6 @@
           <h2 class="team-name">Dominik Trávníček</h2>
           <span class="team-role">Sales Representative</span>
         </div>
-        <p class="team-bio">Vede úvodní konzultace s klienty a stará se o to, aby nabídka sedla přesně na potřeby jejich provozu.</p>
       </article>
 
       <article class="team-card">
@@ -163,7 +157,6 @@
           <h2 class="team-name">Adam Protiva</h2>
           <span class="team-role">Senior Programmer</span>
         </div>
-        <p class="team-bio">Vyvíjí a ladí technologii za AI agenty Nexivo — od integrací po výkon a stabilitu.</p>
       </article>
 
       <article class="team-card">
@@ -174,7 +167,6 @@
           <h2 class="team-name">Patrik Vrbovský</h2>
           <span class="team-role">Senior Programmer</span>
         </div>
-        <p class="team-bio">Stará se o kvalitu kódu a technickou architekturu řešení, která Nexivo nasazuje klientům.</p>
       </article>
     </div>
   </main>
