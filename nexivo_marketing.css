@@ -195,84 +195,8 @@ button { font-family: var(--font-sans); }
 .callcard__action .meta { color: var(--ink-500); font-weight: 400; }
 
 /* ---------- proof bar ---------- */
-.proofbar {
-  background: #000;
-  color: var(--bone-50);
-  padding: 36px 48px;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
-}
-.proofbar__inner {
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  flex-wrap: nowrap;
-}
-.proofbar__label {
-  font: 600 11px/1 var(--font-sans);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-300);
-  flex-shrink: 0;
-  white-space: nowrap;
-}
-.proofbar__names {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  flex: 1;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 1;
-  letter-spacing: -0.012em;
-  color: var(--bone-50);
-}
-.proofbar__names span {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-.proofbar__names span + span::before {
-  content: "";
-  width: 4px;
-  height: 4px;
-  background: var(--ink-500);
-  margin-right: 40px;
-  margin-left: -40px;
-}
-
-.proofbar__logo {
-  height: 28px;
-  width: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.75;
-  vertical-align: middle;
-}
-.proofbar__logo--on-white {
-  filter: grayscale(1) invert(1) brightness(10);
-  mix-blend-mode: screen;
-  opacity: 0.75;
-}
-.proofbar__logo--on-dark {
-  filter: none;
-  mix-blend-mode: screen;
-  opacity: 0.75;
-}
-.proofbar__logo--riventi {
-  height: 24px;
-  filter: none;
-  mix-blend-mode: normal;
-  opacity: 0.82;
-}
-.proofbar__logo--rellax {
-  height: 34px;
-  filter: none;
-  mix-blend-mode: normal;
-  opacity: 0.86;
-}
+.banner { line-height: 0; }
+.banner__img { width: 100%; height: auto; display: block; }
 
 /* ---------- features ---------- */
 .section { padding: 120px 48px; }
@@ -1355,15 +1279,6 @@ button { font-family: var(--font-sans); }
   .hero__sub { font-size: 16px; max-width: 100%; }
   .hero__proof { flex-wrap: wrap; gap: 8px; }
 
-  /* Proof bar */
-  .proofbar { padding: 24px 20px; }
-  .proofbar__inner { flex-direction: column; gap: 14px; align-items: flex-start; }
-  .proofbar__names { flex-wrap: wrap; gap: 16px; font-size: 18px; }
-  .proofbar__names span + span::before { display: none; }
-  .proofbar__logo { height: 22px; }
-  .proofbar__logo--riventi { height: 20px; }
-  .proofbar__logo--rellax { height: 30px; }
-
   /* Sections */
   .section { padding: 72px 20px; }
   .section__head { grid-template-columns: 1fr; gap: 20px; }
@@ -1423,12 +1338,6 @@ button { font-family: var(--font-sans); }
   .hero__title { font-size: 80px; }
   .hero__cta { flex-direction: column; }
   .hero__cta .btn { width: 100%; justify-content: center; }
-
-  /* Proof bar */
-  .proofbar { padding: 20px 16px; }
-  .proofbar__logo { height: 18px; }
-  .proofbar__logo--riventi { height: 18px; }
-  .proofbar__logo--rellax { height: 26px; }
 
   /* Sections */
   .section { padding: 56px 16px; }
