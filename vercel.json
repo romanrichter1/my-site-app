@@ -4,6 +4,7 @@
     { "source": "/nexivo_landing",  "destination": "/",        "permanent": true },
     { "source": "/nexivo_login",    "destination": "/klient",  "permanent": true },
     { "source": "/nexivo_register", "destination": "/klient",  "permanent": true },
+    { "source": "/ai-pro-maklere",  "destination": "/business", "permanent": true },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "nexivoagency.eu" }],
