@@ -130,12 +130,21 @@ Page is `noindex` (form page, not for search engines).
 
 Formulář posílá JSON na `/api/aktivace` (Vercel serverless, CommonJS, bez závislostí).
 
-- **Vždy:** notifikace s údaji na `NOTIFY_EMAIL` přes Resend.
-- **`platba = faktura`:** Fakturoid API v3 → najde/založí odběratele podle IČO → vystaví fakturu
-  (`vat_price_mode: from_total_with_vat`, splatnost `FAKTUROID_DUE_DAYS`) → pošle ji klientovi
-  (přes Fakturoid; při 403 „upgrade_required" fallback přes Resend) → založí měsíční
-  opakovanou fakturaci od příštího měsíce.
-- **`platba = karta`:** jen notifikace, pak redirect na Stripe Payment Link.
+- **Vždy:** Fakturoid API v3 → najde/založí odběratele podle IČO. **Tohle je jediné trvalé
+  úložiště kontaktu** — i u platby kartou, aby se lead neztratil.
+- **`platba = faktura`:** navíc vystaví fakturu (splatnost `FAKTUROID_DUE_DAYS`) → zkusí ji
+  poslat klientovi → založí měsíční opakovanou fakturaci od příštího měsíce. Odkaz na
+  fakturu (`public_html_url`) se vrací do prohlížeče a zobrazí na potvrzovací obrazovce.
+- **`platba = karta`:** jen odběratel, pak redirect na Stripe Payment Link.
+
+**Odeslání faktury mailem** má tři úrovně: Fakturoid (jen placený tarif, jinak 403) →
+Resend (když je `RESEND_API_KEY`) → odkaz na obrazovce. Účet `riventi1` je na tarifu
+Zdarma a Resend zatím není nastavený, takže reálně platí třetí úroveň. Notifikace majiteli
+je best-effort: když Resend chybí nebo selže, požadavek stále projde (data jsou ve Fakturoidu).
+
+**Účet Fakturoid:** slug `riventi1`, RIVENTI s.r.o., IČO 19892292, `vat_mode:
+identified_person` → **fakturuje se bez DPH**, `FAKTUROID_VAT_RATE=0`. Klíče pro Client
+Credentials se berou z **Nastavení → Uživatelský účet → API**, ne z OAuth aplikace.
 
 Ceny jsou na serveru v `PRICES` — musí odpovídat Stripe Payment Links:
 
@@ -149,10 +158,10 @@ Ceny jsou na serveru v `PRICES` — musí odpovídat Stripe Payment Links:
 
 Ochrana: jen POST, kontrola `Origin`, honeypot pole `website`, serverová validace všech polí.
 
-**Proměnné prostředí ve Vercelu:**
-`RESEND_API_KEY`, `MAIL_FROM`, `NOTIFY_EMAIL`, `FAKTUROID_SLUG`, `FAKTUROID_CLIENT_ID`,
-`FAKTUROID_CLIENT_SECRET`, `FAKTUROID_USER_AGENT`, `FAKTUROID_VAT_RATE` (0 = neplátce DPH),
-`FAKTUROID_DUE_DAYS`.
+**Proměnné prostředí ve Vercelu** (nastaveno v Production):
+`FAKTUROID_SLUG`, `FAKTUROID_CLIENT_ID`, `FAKTUROID_CLIENT_SECRET`, `FAKTUROID_USER_AGENT`,
+`FAKTUROID_VAT_RATE`, `FAKTUROID_DUE_DAYS`, `NOTIFY_EMAIL`.
+Volitelné, zatím nenastavené: `RESEND_API_KEY`, `MAIL_FROM` — bez nich se jen neposílají maily.
 
 ---
 

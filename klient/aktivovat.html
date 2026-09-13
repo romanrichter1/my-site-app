@@ -430,16 +430,16 @@
       </div>
       <span class="eyebrow eyebrow--center">Hotovo</span>
       <h1 class="success__title" id="success-title">Děkujeme, máte hotovo.</h1>
-      <p class="success__lead">Fakturu vám pošleme na e-mail během pár minut.</p>
+      <p class="success__lead" id="success-lead">Vaši fakturu máte připravenou.</p>
 
       <div class="success__steps">
         <div class="success__step">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          <span>Zkontrolujte prosím fakturační údaje, které vám přijdou na e-mail.</span>
+          <span id="success-step-1">Otevřete si fakturu odkazem níže a zkontrolujte fakturační údaje.</span>
         </div>
         <div class="success__step">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          <span>Zaplaťte prosím okamžitou platbou přes QR kód přímo na faktuře.</span>
+          <span>Zaplaťte prosím okamžitou platbou přes QR kód přímo na faktuře. Odkaz si uložte.</span>
         </div>
         <div class="success__step">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -659,8 +659,14 @@
             if (data.faktura && data.faktura.url) {
               const link = document.getElementById("invoice-link");
               link.href = data.faktura.url;
-              link.textContent = `Zobrazit fakturu ${data.faktura.cislo}`;
+              link.textContent = `Zobrazit a zaplatit fakturu ${data.faktura.cislo}`;
               document.getElementById("invoice-link-wrap").hidden = false;
+              if (data.faktura.odeslana_klientovi) {
+                document.getElementById("success-lead").textContent =
+                  "Fakturu jsme vám poslali na e-mail a najdete ji i pod odkazem níže.";
+                document.getElementById("success-step-1").textContent =
+                  "Zkontrolujte prosím fakturační údaje, které vám přišly na e-mail.";
+              }
             }
             pane2.setAttribute("data-active", "false");
             document.querySelector('[data-pane="3"]').setAttribute("data-active", "true");

@@ -50,8 +50,12 @@ module.exports = async function handler(req, res) {
   const result = { ok: true, platba: data.platba };
 
   try {
+    // Odběratele zakládáme vždy, i u platby kartou — jinak by se kontakt nikde neuložil.
+    const subject = await findOrCreateSubject(data);
+    result.odberatel_id = subject.id;
+
     if (data.platba === "faktura") {
-      const invoice = await createInvoice(data, price);
+      const invoice = await createInvoice(data, price, subject);
       result.faktura = {
         cislo: invoice.number,
         url: invoice.public_html_url,
@@ -60,25 +64,19 @@ module.exports = async function handler(req, res) {
       };
     }
   } catch (err) {
-    // Fakturace selhala, ale poptávku nesmíme ztratit — pošleme ji mailem i tak.
-    result.ok = false;
-    result.faktura_chyba = String(err.message || err);
-  }
-
-  try {
-    await notifyOwner(data, price, result);
-  } catch (err) {
-    if (result.ok) {
-      return res.status(502).json({ error: "Nepodařilo se odeslat údaje.", detail: String(err.message || err) });
-    }
-  }
-
-  if (!result.ok) {
     return res.status(502).json({
-      error: "Údaje jsme přijali, ale fakturu se nepodařilo vystavit. Ozveme se vám.",
-      detail: result.faktura_chyba
+      error: data.platba === "faktura"
+        ? "Údaje se nepodařilo uložit a fakturu vystavit. Zkuste to prosím znovu."
+        : "Údaje se nepodařilo uložit. Zkuste to prosím znovu.",
+      detail: String(err.message || err)
     });
   }
+
+  // Notifikace je bonus navíc — když není Resend nastavený nebo selže,
+  // data už bezpečně leží ve Fakturoidu, takže požadavek nezhazujeme.
+  await notifyOwner(data, price, result).catch((err) => {
+    result.notifikace_chyba = String(err.message || err);
+  });
 
   return res.status(200).json(result);
 };
@@ -195,9 +193,7 @@ async function findOrCreateSubject(d) {
   });
 }
 
-async function createInvoice(d, price) {
-  const subject = await findOrCreateSubject(d);
-
+async function createInvoice(d, price, subject) {
   const invoice = await fakturoid("/invoices.json", {
     method: "POST",
     body: JSON.stringify({
@@ -220,6 +216,8 @@ async function createInvoice(d, price) {
     })
   });
 
+  // Odesílání mailem umí Fakturoid jen na placeném tarifu (jinak 403). Na free tarifu
+  // zkusíme Resend, a když ani ten není nastavený, klient dostane odkaz na obrazovce.
   let emailed = false;
   try {
     await fakturoid(`/invoices/${invoice.id}/message.json`, {
@@ -228,10 +226,8 @@ async function createInvoice(d, price) {
     });
     emailed = true;
   } catch (err) {
-    // Odesílání z Fakturoidu je jen na placeném tarifu — fallback pošleme sami.
     if (err.status !== 403) throw err;
-    await sendInvoiceEmail(d, price, invoice);
-    emailed = true;
+    emailed = await sendInvoiceEmail(d, price, invoice).then(() => true).catch(() => false);
   }
 
   await createRecurring(d, price, subject.id).catch(() => {});
@@ -270,7 +266,8 @@ async function createRecurring(d, price, subjectId) {
 // ── Resend ───────────────────────────────────────────────────────────────────
 
 async function sendEmail({ to, subject, html, replyTo }) {
-  const key = requireEnv("RESEND_API_KEY");
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error("Resend není nastavený (chybí RESEND_API_KEY).");
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
@@ -320,9 +317,7 @@ async function notifyOwner(d, price, result) {
   if (result.faktura) {
     rows.push(["Faktura", `${result.faktura.cislo} — ${result.faktura.url}`]);
     rows.push(["Splatnost", result.faktura.splatnost || "—"]);
-  }
-  if (result.faktura_chyba) {
-    rows.push(["CHYBA FAKTURACE", result.faktura_chyba]);
+    rows.push(["Odeslána klientovi", result.faktura.odeslana_klientovi ? "Ano" : "Ne — pošlete ji ručně"]);
   }
 
   const html = `
