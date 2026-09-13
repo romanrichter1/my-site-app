@@ -126,6 +126,36 @@ Page is `noindex` (form page, not for search engines).
 
 ---
 
+## Aktivace účtu (`klient/aktivovat.html` + `api/aktivace.js`)
+
+Formulář posílá JSON na `/api/aktivace` (Vercel serverless, CommonJS, bez závislostí).
+
+- **Vždy:** notifikace s údaji na `NOTIFY_EMAIL` přes Resend.
+- **`platba = faktura`:** Fakturoid API v3 → najde/založí odběratele podle IČO → vystaví fakturu
+  (`vat_price_mode: from_total_with_vat`, splatnost `FAKTUROID_DUE_DAYS`) → pošle ji klientovi
+  (přes Fakturoid; při 403 „upgrade_required" fallback přes Resend) → založí měsíční
+  opakovanou fakturaci od příštího měsíce.
+- **`platba = karta`:** jen notifikace, pak redirect na Stripe Payment Link.
+
+Ceny jsou na serveru v `PRICES` — musí odpovídat Stripe Payment Links:
+
+| Agentů | Kč / měsíc |
+|--------|------------|
+| 1 | 1 790 |
+| 2 | 3 490 |
+| 3 | 4 990 |
+| 4 | 6 690 |
+| 5 | 8 290 |
+
+Ochrana: jen POST, kontrola `Origin`, honeypot pole `website`, serverová validace všech polí.
+
+**Proměnné prostředí ve Vercelu:**
+`RESEND_API_KEY`, `MAIL_FROM`, `NOTIFY_EMAIL`, `FAKTUROID_SLUG`, `FAKTUROID_CLIENT_ID`,
+`FAKTUROID_CLIENT_SECRET`, `FAKTUROID_USER_AGENT`, `FAKTUROID_VAT_RATE` (0 = neplátce DPH),
+`FAKTUROID_DUE_DAYS`.
+
+---
+
 ## Vercel Deployment
 
 ```bash

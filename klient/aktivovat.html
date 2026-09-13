@@ -299,6 +299,9 @@
 
   <form id="activate-form" novalidate>
 
+    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
+           style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+
     <!-- STEP 1: fakturační údaje -->
     <section class="pane" data-pane="1" data-active="true">
       <div class="pane__head">
@@ -446,6 +449,10 @@
 
       <p class="success__thanks">Děkujeme, že jste si vybrali Nexivo — těšíme se na spolupráci!</p>
 
+      <p class="success__lead" id="invoice-link-wrap" hidden>
+        <a id="invoice-link" href="#" target="_blank" rel="noopener">Zobrazit fakturu</a>
+      </p>
+
       <a href="/" class="cta">
         Zpět na hlavní stránku
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -464,7 +471,7 @@
       4: "https://buy.stripe.com/14A7sE22R2wAdtUdY61B608",
       5: "https://buy.stripe.com/7sYbIU8rf0os75w1bk1B609"
     };
-    const FORM_ENDPOINT = "https://formsubmit.co/ajax/roman@nexivoai.cz";
+    const FORM_ENDPOINT = "/api/aktivace";
 
     const form = document.getElementById("activate-form");
     const pane1 = document.querySelector('[data-pane="1"]');
@@ -632,32 +639,44 @@
       btn.disabled = true;
       btn.querySelector(".cta__label").textContent = "Zpracovávám…";
 
-      const fd = new FormData(form);
-      fd.append("pocet_agentu", agentCount);
-      fd.append("_subject", "Nová aktivace účtu — Nexivo");
-      fd.append("_template", "table");
-      fd.append("_captcha", "false");
+      const payload = {};
+      new FormData(form).forEach((value, key) => { payload[key] = value; });
+      payload.consent = form.elements["consent"].checked;
+      payload.pocet_agentu = agentCount;
 
-      fetch(FORM_ENDPOINT, { method: "POST", body: fd, headers: { Accept: "application/json" } })
-        .then((res) => {
-          if (!res.ok) throw new Error("Odeslání selhalo.");
+      fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload)
+      })
+        .then((res) => res.json().catch(() => ({})).then((data) => {
+          if (!res.ok) throw new Error(data.error || "Odeslání selhalo.");
+          return data;
+        }))
+        .then((data) => {
           if (isInvoice) {
-            document.getElementById("success-title").textContent = `Děkujeme, ${fd.get("jmeno")}. Máte hotovo.`;
+            document.getElementById("success-title").textContent = `Děkujeme, ${payload.jmeno}. Máte hotovo.`;
+            if (data.faktura && data.faktura.url) {
+              const link = document.getElementById("invoice-link");
+              link.href = data.faktura.url;
+              link.textContent = `Zobrazit fakturu ${data.faktura.cislo}`;
+              document.getElementById("invoice-link-wrap").hidden = false;
+            }
             pane2.setAttribute("data-active", "false");
             document.querySelector('[data-pane="3"]').setAttribute("data-active", "true");
             document.querySelector(".steps").hidden = true;
             window.scrollTo({ top: 0, behavior: "smooth" });
           } else {
             const url = new URL(stripeLink);
-            url.searchParams.set("client_reference_id", `${fd.get("jmeno")}-${fd.get("prijmeni")}-${agentCount}agentu`);
+            url.searchParams.set("client_reference_id", `${payload.jmeno}-${payload.prijmeni}-${agentCount}agentu`);
             window.location.href = url.toString();
           }
         })
-        .catch(() => {
+        .catch((err) => {
           btn.disabled = false;
           btn.querySelector(".cta__label").textContent = originalLabel;
           document.getElementById("step1-hint").hidden = true;
-          alert("Odeslání se nepovedlo, zkuste to prosím znovu nebo napište na roman@nexivoai.cz.");
+          alert(`${err.message}\n\nZkuste to prosím znovu nebo napište na roman@nexivoai.cz.`);
         });
     });
   })();
