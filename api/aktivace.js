@@ -31,8 +31,9 @@ function priceFor(count) {
   };
 }
 
-// Kód "nexivoNN" u platby fakturou vystaví jen zálohu NN % z konečné (už slevněné) ceny.
-const DEPOSIT_CODE_RE = /^nexivo(\d{1,2})$/i;
+// Kód tvaru "jménoNN" (např. JAKUB10) u platby fakturou vystaví jen zálohu NN %
+// z konečné (už slevněné) ceny.
+const DEPOSIT_CODE_RE = /^[a-z]{2,}(\d{1,2})$/i;
 
 function parseDepositCode(kod) {
   const match = DEPOSIT_CODE_RE.exec(String(kod || "").trim());

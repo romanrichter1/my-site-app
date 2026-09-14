@@ -178,6 +178,9 @@
     .block .err { display: none; margin-top: 10px; font: 500 12px/1.4 var(--font-sans); color: var(--warn); }
     .block[data-error="true"] .err { display: block; }
 
+    #kod-field { margin-top: 16px; margin-bottom: 0; }
+    #kod-field input { font-size: 16px; }
+
     .consent {
       display: flex;
       align-items: flex-start;
@@ -363,7 +366,7 @@
 
         <div class="field" id="kod-field" hidden>
           <label for="f-kod">Kód (nepovinné)</label>
-          <input id="f-kod" name="kod" type="text" placeholder="např. nexivo50" autocomplete="off">
+          <input id="f-kod" name="kod" type="text" placeholder="např. JAKUB10" autocomplete="off" autocapitalize="off" spellcheck="false" inputmode="text">
         </div>
       </div>
 
