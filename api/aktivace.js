@@ -31,6 +31,21 @@ function priceFor(count) {
   };
 }
 
+// Kód "nexivoNN" u platby fakturou vystaví jen zálohu NN % z konečné (už slevněné) ceny.
+const DEPOSIT_CODE_RE = /^nexivo(\d{1,2})$/i;
+
+function parseDepositCode(kod) {
+  const match = DEPOSIT_CODE_RE.exec(String(kod || "").trim());
+  if (!match) return null;
+  const pct = Number(match[1]);
+  if (pct <= 0 || pct >= 100) return null;
+  return pct;
+}
+
+function depositFor(price, pct) {
+  return { pct, amount: Math.round((price.total * pct) / 100) };
+}
+
 const TYP_LABEL = { osvc: "OSVČ", majitel: "Majitel firmy", osobni: "Osobní použití" };
 
 const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || "roman@nexivoai.cz";
@@ -70,6 +85,8 @@ module.exports = async function handler(req, res) {
   }
 
   const price = priceFor(data.pocet_agentu);
+  const depositPct = data.platba === "faktura" ? parseDepositCode(data.kod) : null;
+  const deposit = depositPct ? depositFor(price, depositPct) : null;
   const result = { ok: true, platba: data.platba };
 
   try {
@@ -78,7 +95,7 @@ module.exports = async function handler(req, res) {
     result.odberatel_id = subject.id;
 
     if (data.platba === "faktura") {
-      const invoice = await createInvoice(data, price, subject);
+      const invoice = await createInvoice(data, price, subject, deposit);
       result.faktura = {
         cislo: invoice.number,
         url: invoice.public_html_url,
@@ -97,7 +114,7 @@ module.exports = async function handler(req, res) {
 
   // Notifikace je bonus navíc — když není Resend nastavený nebo selže,
   // data už bezpečně leží ve Fakturoidu, takže požadavek nezhazujeme.
-  await notifyOwner(data, price, result).catch((err) => {
+  await notifyOwner(data, price, result, deposit).catch((err) => {
     result.notifikace_chyba = String(err.message || err);
   });
 
@@ -121,6 +138,7 @@ function normalize(b) {
     mesto: str(b.mesto),
     psc: str(b.psc).replace(/\s/g, ""),
     platba: str(b.platba),
+    kod: str(b.kod),
     typ: str(b.typ),
     consent: b.consent === true || b.consent === "on" || b.consent === "true",
     pocet_agentu: Number(b.pocet_agentu)
@@ -216,7 +234,7 @@ async function findOrCreateSubject(d) {
   });
 }
 
-async function createInvoice(d, price, subject) {
+async function createInvoice(d, price, subject, deposit) {
   const invoice = await fakturoid("/invoices.json", {
     method: "POST",
     body: JSON.stringify({
@@ -226,10 +244,11 @@ async function createInvoice(d, price, subject) {
       currency: "CZK",
       language: "cz",
       vat_price_mode: "from_total_with_vat",
-      custom_id: `nexivo-aktivace-${d.ico}-${d.pocet_agentu}`,
-      note: `Jednorázová aktivace účtu Nexivo — ${TYP_LABEL[d.typ]}. Kontakt: ${d.jmeno} ${d.prijmeni}, ${d.email}, ${d.telefon}.`,
-      tags: ["aktivace", "nexivo-ai"],
-      lines: invoiceLines(price)
+      custom_id: `nexivo-aktivace-${d.ico}-${d.pocet_agentu}${deposit ? `-zaloha${deposit.pct}` : ""}`,
+      note: `Jednorázová aktivace účtu Nexivo — ${TYP_LABEL[d.typ]}. Kontakt: ${d.jmeno} ${d.prijmeni}, ${d.email}, ${d.telefon}.` +
+        (deposit ? ` Záloha ${deposit.pct} % z celkové ceny ${price.total.toLocaleString("cs-CZ")} Kč.` : ""),
+      tags: deposit ? ["aktivace", "nexivo-ai", "zaloha"] : ["aktivace", "nexivo-ai"],
+      lines: invoiceLines(price, deposit)
     })
   });
 
@@ -244,17 +263,30 @@ async function createInvoice(d, price, subject) {
     emailed = true;
   } catch (err) {
     if (err.status !== 403) throw err;
-    emailed = await sendInvoiceEmail(d, price, invoice).then(() => true).catch(() => false);
+    emailed = await sendInvoiceEmail(d, price, invoice, deposit).then(() => true).catch(() => false);
   }
 
   return { ...invoice, emailed };
 }
 
-// Aktivace se fakturuje na dva řádky: plná cena za agenty a pod ní množstevní sleva,
-// aby klient na faktuře viděl, z čeho se výsledná částka skládá.
-function invoiceLines(price) {
+// Aktivace se normálně fakturuje na dva řádky: plná cena za agenty a pod ní množstevní
+// sleva. Se zálohovým kódem (nexivoNN) se místo toho vystaví jediná položka na NN %
+// z konečné (už slevněné) ceny, s názvem předsazeným "Záloha za ...".
+function invoiceLines(price, deposit) {
+  const baseName = `${PRODUCT_NAME} — aktivace ${price.count} ${agentWord(price.count)}`;
+
+  if (deposit) {
+    return [{
+      name: `Záloha za ${baseName}`,
+      quantity: "1",
+      unit_name: "",
+      unit_price: String(deposit.amount),
+      vat_rate: VAT_RATE
+    }];
+  }
+
   const lines = [{
-    name: `${PRODUCT_NAME} — aktivace ${price.count} ${agentWord(price.count)}`,
+    name: baseName,
     quantity: String(price.count),
     unit_name: "agent",
     unit_price: String(price.unitPrice),
@@ -294,16 +326,18 @@ async function sendEmail({ to, subject, html, replyTo }) {
   return res.json();
 }
 
-async function sendInvoiceEmail(d, price, invoice) {
+async function sendInvoiceEmail(d, price, invoice, deposit) {
+  const amount = deposit ? deposit.amount : price.total;
+  const popis = deposit ? `zálohovou fakturu (${deposit.pct} %)` : "jednorázovou fakturu";
   return sendEmail({
     to: d.email,
     replyTo: NOTIFY_EMAIL,
     subject: `Faktura ${invoice.number} — Nexivo`,
     html: `
       <p>Dobrý den, ${esc(d.jmeno)},</p>
-      <p>děkujeme za aktivaci účtu Nexivo. V příloze odkazu najdete jednorázovou fakturu
+      <p>děkujeme za aktivaci účtu Nexivo. V příloze odkazu najdete ${popis}
          <strong>${esc(invoice.number)}</strong> za aktivaci ${price.count} ${esc(agentWord(price.count))}
-         (${price.total.toLocaleString("cs-CZ")} Kč), splatnou ${esc(invoice.due_on || "")}.</p>
+         (${amount.toLocaleString("cs-CZ")} Kč), splatnou ${esc(invoice.due_on || "")}.</p>
       <p><a href="${esc(invoice.public_html_url)}">Zobrazit a zaplatit fakturu</a></p>
       <p>Jakmile platbu zaevidujeme, ozveme se s dalšími kroky k nastavení agentů.</p>
       <p>Roman Richter<br>Nexivo — ${esc(NOTIFY_EMAIL)}</p>
@@ -311,7 +345,7 @@ async function sendInvoiceEmail(d, price, invoice) {
   });
 }
 
-async function notifyOwner(d, price, result) {
+async function notifyOwner(d, price, result, deposit) {
   const rows = [
     ["Jméno", `${d.jmeno} ${d.prijmeni}`],
     ["E-mail", d.email],
@@ -326,6 +360,11 @@ async function notifyOwner(d, price, result) {
     ["Cena celkem", `${price.total.toLocaleString("cs-CZ")} Kč jednorázově`],
     ["Platba", d.platba === "faktura" ? "Faktura" : "Kartou online (Stripe)"]
   ];
+
+  if (deposit) {
+    rows.push(["Kód", d.kod]);
+    rows.push(["Záloha", `${deposit.pct} % = ${deposit.amount.toLocaleString("cs-CZ")} Kč (zbytek ${(price.total - deposit.amount).toLocaleString("cs-CZ")} Kč doplatit)`]);
+  }
 
   if (result.faktura) {
     rows.push(["Faktura", `${result.faktura.cislo} — ${result.faktura.url}`]);

@@ -360,6 +360,11 @@
         </div>
         <input type="hidden" name="platba" required>
         <span class="err">Vyberte prosím způsob platby.</span>
+
+        <div class="field" id="kod-field" hidden>
+          <label for="f-kod">Kód (nepovinné)</label>
+          <input id="f-kod" name="kod" type="text" placeholder="např. nexivo50" autocomplete="off">
+        </div>
       </div>
 
       <div class="block" data-group-wrap="typ">
@@ -483,6 +488,9 @@
           btn.classList.add("is-selected");
           hiddenInput.value = btn.getAttribute("data-value");
           row.closest(".block").setAttribute("data-error", "false");
+          if (groupName === "platba") {
+            document.getElementById("kod-field").hidden = btn.getAttribute("data-value") !== "faktura";
+          }
         });
       });
     });
