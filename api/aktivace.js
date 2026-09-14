@@ -1,13 +1,35 @@
 // Aktivace klientského účtu: odešle notifikaci na Nexivo a u platby fakturou
-// založí ve Fakturoidu odběratele, vystaví první fakturu a nastaví měsíční opakování.
+// založí ve Fakturoidu odběratele a vystaví jednorázovou aktivační fakturu.
 
-const PRICES = {
-  1: { total: 1790, label: "Balíček 1 agenta" },
-  2: { total: 3490, label: "Balíček 2 agentů" },
-  3: { total: 4990, label: "Balíček 3 agentů" },
-  4: { total: 6690, label: "Balíček 4 agentů" },
-  5: { total: 8290, label: "Balíček 5 agentů" }
-};
+const PRODUCT_NAME = "Konzultační a implementační služby v oblasti automatizace procesů";
+const UNIT_PRICE = 19900;
+const MAX_AGENTS = 5;
+
+// Množstevní sleva z aktivačního poplatku: 20 % u dvou agentů, 40 % od tří výš.
+function discountRate(count) {
+  if (count >= 3) return 0.4;
+  if (count === 2) return 0.2;
+  return 0;
+}
+
+function agentWord(count) {
+  return count === 1 ? "agenta" : "agentů";
+}
+
+function priceFor(count) {
+  const subtotal = UNIT_PRICE * count;
+  const rate = discountRate(count);
+  const discount = Math.round(subtotal * rate);
+  return {
+    count,
+    unitPrice: UNIT_PRICE,
+    subtotal,
+    rate,
+    discount,
+    total: subtotal - discount,
+    label: `Aktivace ${count} ${agentWord(count)}`
+  };
+}
 
 const TYP_LABEL = { osvc: "OSVČ", majitel: "Majitel firmy", osobni: "Osobní použití" };
 
@@ -46,7 +68,7 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "Neplatné údaje.", fields: problems });
   }
 
-  const price = PRICES[data.pocet_agentu];
+  const price = priceFor(data.pocet_agentu);
   const result = { ok: true, platba: data.platba };
 
   try {
@@ -118,7 +140,7 @@ function validate(d) {
   if (!["faktura", "karta"].includes(d.platba)) bad.push("platba");
   if (!TYP_LABEL[d.typ]) bad.push("typ");
   if (!d.consent) bad.push("consent");
-  if (!PRICES[d.pocet_agentu]) bad.push("pocet_agentu");
+  if (!Number.isInteger(d.pocet_agentu) || d.pocet_agentu < 1 || d.pocet_agentu > MAX_AGENTS) bad.push("pocet_agentu");
   return bad;
 }
 
@@ -204,15 +226,9 @@ async function createInvoice(d, price, subject) {
       language: "cz",
       vat_price_mode: "from_total_with_vat",
       custom_id: `nexivo-aktivace-${d.ico}-${d.pocet_agentu}`,
-      note: `Aktivace účtu Nexivo — ${TYP_LABEL[d.typ]}. Kontakt: ${d.jmeno} ${d.prijmeni}, ${d.email}, ${d.telefon}.`,
+      note: `Jednorázová aktivace účtu Nexivo — ${TYP_LABEL[d.typ]}. Kontakt: ${d.jmeno} ${d.prijmeni}, ${d.email}, ${d.telefon}.`,
       tags: ["aktivace", "nexivo-ai"],
-      lines: [{
-        name: `${price.label} — měsíční předplatné`,
-        quantity: "1",
-        unit_name: "měsíc",
-        unit_price: String(price.total),
-        vat_rate: VAT_RATE
-      }]
+      lines: invoiceLines(price)
     })
   });
 
@@ -230,37 +246,31 @@ async function createInvoice(d, price, subject) {
     emailed = await sendInvoiceEmail(d, price, invoice).then(() => true).catch(() => false);
   }
 
-  await createRecurring(d, price, subject.id).catch(() => {});
-
   return { ...invoice, emailed };
 }
 
-async function createRecurring(d, price, subjectId) {
-  const start = new Date();
-  start.setMonth(start.getMonth() + 1);
+// Aktivace se fakturuje na dva řádky: plná cena za agenty a pod ní množstevní sleva,
+// aby klient na faktuře viděl, z čeho se výsledná částka skládá.
+function invoiceLines(price) {
+  const lines = [{
+    name: `${PRODUCT_NAME} — aktivace ${price.count} ${agentWord(price.count)}`,
+    quantity: String(price.count),
+    unit_name: "agent",
+    unit_price: String(price.unitPrice),
+    vat_rate: VAT_RATE
+  }];
 
-  return fakturoid("/recurring_generators.json", {
-    method: "POST",
-    body: JSON.stringify({
-      name: `Nexivo — ${price.label} — ${d.firma}`,
-      subject_id: subjectId,
-      start_date: start.toISOString().slice(0, 10),
-      months_period: 1,
-      due: DUE_DAYS,
-      send_email: true,
-      payment_method: "bank",
-      currency: "CZK",
-      language: "cz",
-      vat_price_mode: "from_total_with_vat",
-      lines: [{
-        name: `${price.label} — měsíční předplatné`,
-        quantity: "1",
-        unit_name: "měsíc",
-        unit_price: String(price.total),
-        vat_rate: VAT_RATE
-      }]
-    })
-  });
+  if (price.discount > 0) {
+    lines.push({
+      name: `Množstevní sleva ${Math.round(price.rate * 100)} % při aktivaci ${price.count} ${agentWord(price.count)}`,
+      quantity: "1",
+      unit_name: "",
+      unit_price: String(-price.discount),
+      vat_rate: VAT_RATE
+    });
+  }
+
+  return lines;
 }
 
 // ── Resend ───────────────────────────────────────────────────────────────────
@@ -290,9 +300,9 @@ async function sendInvoiceEmail(d, price, invoice) {
     subject: `Faktura ${invoice.number} — Nexivo`,
     html: `
       <p>Dobrý den, ${esc(d.jmeno)},</p>
-      <p>děkujeme za aktivaci účtu Nexivo. V příloze odkazu najdete fakturu
-         <strong>${esc(invoice.number)}</strong> na ${esc(price.label.toLowerCase())}
-         (${price.total.toLocaleString("cs-CZ")} Kč / měsíc), splatnou ${esc(invoice.due_on || "")}.</p>
+      <p>děkujeme za aktivaci účtu Nexivo. V příloze odkazu najdete jednorázovou fakturu
+         <strong>${esc(invoice.number)}</strong> za aktivaci ${price.count} ${esc(agentWord(price.count))}
+         (${price.total.toLocaleString("cs-CZ")} Kč), splatnou ${esc(invoice.due_on || "")}.</p>
       <p><a href="${esc(invoice.public_html_url)}">Zobrazit a zaplatit fakturu</a></p>
       <p>Jakmile platbu zaevidujeme, ozveme se s dalšími kroky k nastavení agentů.</p>
       <p>Roman Richter<br>Nexivo — ${esc(NOTIFY_EMAIL)}</p>
@@ -310,7 +320,9 @@ async function notifyOwner(d, price, result) {
     ["Adresa", `${d.ulice}, ${d.psc} ${d.mesto}`],
     ["Typ", TYP_LABEL[d.typ]],
     ["Počet agentů", `${d.pocet_agentu} — ${price.label}`],
-    ["Cena", `${price.total.toLocaleString("cs-CZ")} Kč / měsíc`],
+    ["Cena před slevou", `${price.subtotal.toLocaleString("cs-CZ")} Kč`],
+    ["Sleva", price.discount > 0 ? `${Math.round(price.rate * 100)} % — ${price.discount.toLocaleString("cs-CZ")} Kč` : "—"],
+    ["Cena celkem", `${price.total.toLocaleString("cs-CZ")} Kč jednorázově`],
     ["Platba", d.platba === "faktura" ? "Faktura" : "Kartou online (Stripe)"]
   ];
 
