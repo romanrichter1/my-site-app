@@ -37,7 +37,8 @@ const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL || "roman@nexivoai.cz";
 const MAIL_FROM = process.env.MAIL_FROM || "Nexivo <aktivace@nexivoai.cz>";
 const USER_AGENT = process.env.FAKTUROID_USER_AGENT || "Nexivo Web (roman@nexivoai.cz)";
 const VAT_RATE = process.env.FAKTUROID_VAT_RATE ?? "21";
-const DUE_DAYS = Number(process.env.FAKTUROID_DUE_DAYS || 14);
+// Splatnost 0 = faktura je splatná v den vystavení; klient ji rovnou zaplatí přes odkaz.
+const DUE_DAYS = Number(process.env.FAKTUROID_DUE_DAYS ?? 0);
 
 const ALLOWED_ORIGINS = [
   "https://nexivoai.cz",
