@@ -31,16 +31,13 @@ function priceFor(count) {
   };
 }
 
-// Kód tvaru "jménoNN" (např. JAKUB10) u platby fakturou vystaví jen zálohu NN %
-// z konečné (už slevněné) ceny.
-const DEPOSIT_CODE_RE = /^[a-z]{2,}(\d{1,2})$/i;
+// Platné zálohové kódy u platby fakturou → % z konečné (už slevněné) ceny.
+// Zatím jen NEXIVO50, další kódy se dopíší sem časem.
+const DEPOSIT_CODES = { NEXIVO50: 50 };
 
 function parseDepositCode(kod) {
-  const match = DEPOSIT_CODE_RE.exec(String(kod || "").trim());
-  if (!match) return null;
-  const pct = Number(match[1]);
-  if (pct <= 0 || pct >= 100) return null;
-  return pct;
+  const key = String(kod || "").trim().toUpperCase();
+  return DEPOSIT_CODES[key] || null;
 }
 
 function depositFor(price, pct) {
