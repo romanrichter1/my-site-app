@@ -31,7 +31,7 @@ html, body { margin: 0; height: 100%; background: #F0EEE9; -webkit-font-smoothin
 /* SIDEBAR */
 .side { height:100%; display:flex; flex-direction:column; padding:28px 20px 20px; border-right:1px solid var(--hair); background:var(--cream); }
 .side__brand { display:inline-flex; align-items:flex-end; gap:6px; font-family:var(--font-display); font-weight:600; font-size:28px; line-height:1; letter-spacing:-0.022em; font-variation-settings:"opsz" 96; color:var(--ink); padding:0 8px 28px; border-bottom:1px solid var(--hair); cursor:pointer; }
-.side__brand::after { content:""; width:7px; height:7px; background:var(--lime); margin-bottom:6px; }
+.side__brand img { height: 28px; width: auto; display: block; }
 .side__group { margin-top:24px; display:flex; flex-direction:column; gap:2px; }
 .side__cap { font:600 11px/1 var(--font-sans); letter-spacing:0.16em; text-transform:uppercase; color:var(--muted-2); padding:0 10px 10px; }
 .side__link { display:flex; align-items:center; gap:12px; padding:9px 10px; border-radius:8px; font:500 14px/1 var(--font-sans); color:var(--ink); cursor:pointer; letter-spacing:-0.002em; transition:background 180ms var(--ease-out); user-select:none; white-space:nowrap; }
@@ -274,7 +274,7 @@ html, body { margin: 0; height: 100%; background: #F0EEE9; -webkit-font-smoothin
 .login { min-height:100vh; display:grid; grid-template-columns:1fr 0.85fr; }
 .login__l { padding:52px 80px; display:flex; flex-direction:column; }
 .login__brand { display:inline-flex; align-items:flex-end; gap:6px; font-family:var(--font-display); font-weight:600; font-size:32px; line-height:1; letter-spacing:-0.022em; font-variation-settings:"opsz" 96; color:var(--ink); cursor:pointer; }
-.login__brand::after { content:""; width:8px; height:8px; background:var(--lime); margin-bottom:6px; }
+.login__brand img { height: 32px; width: auto; display: block; }
 .login__center { margin:auto 0; max-width:480px; }
 .login__eyebrow { display:inline-flex; align-items:center; gap:12px; font:600 12px/1 var(--font-sans); letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
 .login__eyebrow::before { content:""; width:8px; height:8px; background:var(--lime); }
@@ -556,7 +556,7 @@ function Side({ active='home', onNav, isOpen=false }) {
   );
   return (
     <aside className={'side'+(isOpen?' side--open':'')}>
-      <div className="side__brand" onClick={()=>onNav&&onNav('home')}>nexivo</div>
+      <div className="side__brand" onClick={()=>onNav&&onNav('home')}><img src="../assets/nexivo-logo.png" alt="Nexivo" width="572" height="168" /></div>
       <div className="side__group">
         <div className="side__cap">Přehled</div>
         {item('home','home','Dashboard')}
@@ -940,7 +940,7 @@ function Login({ onSubmit }) {
   return (
     <div className="login">
       <div className="login__l">
-        <div className="login__brand" onClick={()=>window.location.href='/'}>nexivo</div>
+        <div className="login__brand" onClick={()=>window.location.href='/'}><img src="../assets/nexivo-logo.png" alt="Nexivo" width="572" height="168" /></div>
         <div className="login__center">
           <div className="login__eyebrow">Klientský portál</div>
           <h1 className="login__h">Vítejte <em>zpátky</em>.<br/>Vaše čísla čekají.</h1>

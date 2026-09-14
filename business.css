@@ -18,16 +18,10 @@ body[data-screen-label="AI pro makléře"] { font-size: 24px; overflow-x: hidden
   gap: 24px;
 }
 .mkl-hero__logo {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 29px;
-  letter-spacing: -0.02em;
-  color: var(--ink-1000);
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 4px;
+  height: 29px;
+  width: auto;
+  display: block;
 }
-.mkl-hero__logo::after { content: ""; width: 6px; height: 6px; background: var(--lime-500); margin-bottom: 5px; }
 .mkl-hero__title {
   font-family: var(--font-display);
   font-weight: 400;

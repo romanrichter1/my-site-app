@@ -27,9 +27,10 @@ No build system, no package manager. All files are standalone HTML with inline o
 ├── vercel.json                 ← cleanUrls + redirects
 ├── assets/
 │   ├── nexivo-favicon.svg      ← Favicon: "n" + lime dot on cream bg
-│   ├── nexivo-wordmark.svg     ← Logo wordmark (ink on transparent)
-│   ├── nexivo-wordmark-inverse.svg
-│   ├── nexivo-mark.svg         ← Geometric N mark
+│   ├── nexivo-logo.png         ← Logo — používá se všude na světlém pozadí
+│   ├── nexivo-logo-inverse.png ← Totéž pro tmavé pozadí (patička)
+│   ├── nexivo-wordmark.svg     ← Starý wordmark, nikde se nepoužívá
+│   ├── nexivo-mark.svg         ← Geometric N mark, nepoužívá se
 │   └── ...
 └── klient/
     ├── index.html              ← Login page (nexivoai.cz/klient)
@@ -132,29 +133,33 @@ Formulář posílá JSON na `/api/aktivace` (Vercel serverless, CommonJS, bez z�
 
 - **Vždy:** Fakturoid API v3 → najde/založí odběratele podle IČO. **Tohle je jediné trvalé
   úložiště kontaktu** — i u platby kartou, aby se lead neztratil.
-- **`platba = faktura`:** navíc vystaví fakturu (splatnost `FAKTUROID_DUE_DAYS`) → zkusí ji
-  poslat klientovi → založí měsíční opakovanou fakturaci od příštího měsíce. Odkaz na
-  fakturu (`public_html_url`) se vrací do prohlížeče a zobrazí na potvrzovací obrazovce.
+- **`platba = faktura`:** navíc vystaví **jednorázovou** fakturu se splatností v den vystavení
+  (`FAKTUROID_DUE_DAYS=0`) a pošle ji klientovi. Odkaz na fakturu (`public_html_url`) se vrací
+  do prohlížeče a zobrazí na potvrzovací obrazovce, takže klient může zaplatit hned.
 - **`platba = karta`:** jen odběratel, pak redirect na Stripe Payment Link.
 
 **Odeslání faktury mailem** má tři úrovně: Fakturoid (jen placený tarif, jinak 403) →
-Resend (když je `RESEND_API_KEY`) → odkaz na obrazovce. Účet `riventi1` je na tarifu
-Zdarma a Resend zatím není nastavený, takže reálně platí třetí úroveň. Notifikace majiteli
-je best-effort: když Resend chybí nebo selže, požadavek stále projde (data jsou ve Fakturoidu).
+Resend (když je `RESEND_API_KEY`) → odkaz na obrazovce. Účet `riventi1` je na placeném tarifu,
+takže platí první úroveň a faktura klientovi reálně odchází. Notifikace majiteli jde jen přes
+Resend, který nastavený není — je best-effort, takže požadavek projde i bez ní.
 
 **Účet Fakturoid:** slug `riventi1`, RIVENTI s.r.o., IČO 19892292, `vat_mode:
 identified_person` → **fakturuje se bez DPH**, `FAKTUROID_VAT_RATE=0`. Klíče pro Client
 Credentials se berou z **Nastavení → Uživatelský účet → API**, ne z OAuth aplikace.
 
-Ceny jsou na serveru v `PRICES` — musí odpovídat Stripe Payment Links:
+Ceny počítá `priceFor()` — aktivace stojí 19 900 Kč za agenta, s množstevní slevou 20 %
+při dvou a 40 % od tří výš. Na faktuře jsou vždy dva řádky: produkt „Konzultační
+a implementační služby v oblasti automatizace procesů" a pod ním sleva.
 
-| Agentů | Kč / měsíc |
-|--------|------------|
-| 1 | 1 790 |
-| 2 | 3 490 |
-| 3 | 4 990 |
-| 4 | 6 690 |
-| 5 | 8 290 |
+| Agentů | Před slevou | Sleva | Celkem jednorázově |
+|--------|-------------|-------|--------------------|
+| 1 | 19 900 | — | 19 900 |
+| 2 | 39 800 | 20 % | 31 840 |
+| 3 | 59 700 | 40 % | 35 820 |
+| 4 | 79 600 | 40 % | 47 760 |
+| 5 | 99 500 | 40 % | 59 700 |
+
+U platby kartou musí tyto částky odpovídat Stripe Payment Links.
 
 Ochrana: jen POST, kontrola `Origin`, honeypot pole `website`, serverová validace všech polí.
 

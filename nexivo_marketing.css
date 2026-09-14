@@ -23,24 +23,12 @@ button { font-family: var(--font-sans); }
   border-bottom: 1px solid var(--ink-100);
 }
 .nav__logo { display: inline-flex; align-items: center; gap: 10px; }
-.nav__word {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--ink-1000);
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 4px;
+.nav__logo img {
+  height: 24px;
+  width: auto;
+  display: block;
 }
-.nav__word::after {
-  content: "";
-  width: 6px;
-  height: 6px;
-  background: var(--lime-500);
-  margin-bottom: 6px;
-}
+
 .nav__links { display: flex; gap: 4px; margin-left: 56px; }
 .nav__link {
   font-weight: 500;
@@ -458,22 +446,11 @@ button { font-family: var(--font-sans); }
   flex-shrink: 0;
 }
 .bm__brand {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 22px;
-  letter-spacing: -0.022em;
-  color: var(--ink-1000);
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 5px;
+  height: 22px;
+  width: auto;
+  display: block;
 }
-.bm__brand::after {
-  content: "";
-  width: 5px;
-  height: 5px;
-  background: var(--lime-500);
-  margin-bottom: 4px;
-}
+
 .bm__close {
   width: 34px;
   height: 34px;
@@ -528,22 +505,10 @@ button { font-family: var(--font-sans); }
   font: 400 14px/1.6 var(--font-sans);
 }
 .footer__word {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 32px;
-  letter-spacing: -0.022em;
-  color: var(--bone-50);
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 6px;
+  height: 32px;
+  width: auto;
+  display: block;
   margin-bottom: 16px;
-}
-.footer__word::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  background: var(--lime-500);
-  margin-bottom: 8px;
 }
 .footer__tag { color: var(--ink-300); max-width: 280px; }
 .footer h5 { font: 600 12px/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--bone-50); margin: 0 0 16px; }
@@ -1330,7 +1295,7 @@ button { font-family: var(--font-sans); }
 /* ---------- sm: ≤ 480 ---------- */
 @media (max-width: 480px) {
   .nav { padding: 0 16px; min-height: 60px; }
-  .nav__word { font-size: 20px; }
+  .nav__logo img { height: 20px; }
   .nav__cta { display: none; }
 
   /* Hero */
