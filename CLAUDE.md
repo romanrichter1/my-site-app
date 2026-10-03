@@ -147,17 +147,17 @@ Resend, který nastavený není — je best-effort, takže požadavek projde i b
 identified_person` → **fakturuje se bez DPH**, `FAKTUROID_VAT_RATE=0`. Klíče pro Client
 Credentials se berou z **Nastavení → Uživatelský účet → API**, ne z OAuth aplikace.
 
-Ceny počítá `priceFor()` — aktivace stojí 19 900 Kč za agenta, s množstevní slevou 20 %
+Ceny počítá `priceFor()` — aktivace stojí 24 900 Kč za agenta, s množstevní slevou 20 %
 při dvou a 40 % od tří výš. Na faktuře jsou vždy dva řádky: produkt „Konzultační
 a implementační služby v oblasti automatizace procesů" a pod ním sleva.
 
 | Agentů | Před slevou | Sleva | Celkem jednorázově |
 |--------|-------------|-------|--------------------|
-| 1 | 19 900 | — | 19 900 |
-| 2 | 39 800 | 20 % | 31 840 |
-| 3 | 59 700 | 40 % | 35 820 |
-| 4 | 79 600 | 40 % | 47 760 |
-| 5 | 99 500 | 40 % | 59 700 |
+| 1 | 24 900 | — | 24 900 |
+| 2 | 49 800 | 20 % | 39 840 |
+| 3 | 74 700 | 40 % | 44 820 |
+| 4 | 99 600 | 40 % | 59 760 |
+| 5 | 124 500 | 40 % | 74 700 |
 
 U platby kartou musí tyto částky odpovídat Stripe Payment Links.
 

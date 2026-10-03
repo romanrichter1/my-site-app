@@ -2,7 +2,7 @@
 // založí ve Fakturoidu odběratele a vystaví jednorázovou aktivační fakturu.
 
 const PRODUCT_NAME = "Konzultační a implementační služby v oblasti automatizace procesů";
-const UNIT_PRICE = 19900;
+const UNIT_PRICE = 24900;
 const MAX_AGENTS = 5;
 
 // Množstevní sleva z aktivačního poplatku: 20 % u dvou agentů, 40 % od tří výš.
