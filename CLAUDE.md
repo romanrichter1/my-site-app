@@ -159,7 +159,19 @@ a implementační služby v oblasti automatizace procesů" a pod ním sleva.
 | 4 | 99 600 | 40 % | 59 760 |
 | 5 | 124 500 | 40 % | 74 700 |
 
-U platby kartou musí tyto částky odpovídat Stripe Payment Links.
+Tabulka výše platí pro **platbu fakturou** (jednorázově).
+
+**Platba kartou = měsíční předplatné přes Stripe** (ne jednorázová částka):
+
+| Agentů | Měsíčně |
+|--------|---------|
+| 1 | 2 490 Kč |
+| 2 | 4 990 Kč |
+| 3 | 7 490 Kč |
+| 4 | 9 990 Kč |
+| 5 | 12 490 Kč |
+
+Stripe Payment Links pro kartu musí být nastavené jako opakovaná měsíční platba s těmito částkami.
 
 Ochrana: jen POST, kontrola `Origin`, honeypot pole `website`, serverová validace všech polí.
 
