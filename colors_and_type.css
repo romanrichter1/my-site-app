@@ -1,37 +1,36 @@
 /* =========================================================================
    Nexivo Design Tokens
    Monochromatic warm-neutral + electric lime accent
-   Fraunces (display) + Manrope (text)
+   System font stack (Apple-style), no web fonts
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   /* ---------- PRIMITIVE COLORS ---------- */
   /* Ink — dark text and surfaces */
-  --ink-1000: #0A0A09;     /* near-black, almost-warm */
-  --ink-900:  #14140F;
-  --ink-800:  #1F1E18;
-  --ink-700:  #2D2C24;
-  --ink-600:  #3D3B30;
-  --ink-500:  #5C5A4B;
-  --ink-400:  #84826F;
-  --ink-300:  #A8A593;
-  --ink-200:  #C9C6B5;
-  --ink-100:  #E4E1D2;
-  --ink-50:   #EFEDDF;
+  --ink-1000: #0A0A0A;
+  --ink-900:  #141414;
+  --ink-800:  #1D1D1F;
+  --ink-700:  #2C2C2E;
+  --ink-600:  #3A3A3C;
+  --ink-500:  #5E5E63;
+  --ink-400:  #7A7A80;
+  --ink-300:  #A1A1A6;
+  --ink-200:  #D2D2D7;
+  --ink-100:  #E5E5E7;
+  --ink-50:   #F2F2F4;
 
   /* Bone — warm neutral background scale (paper, cream, off-white) */
-  --bone-50:  #FBFAF5;     /* primary background */
-  --bone-100: #F5F2EA;     /* card / secondary surface */
-  --bone-200: #ECE8DC;     /* hairline-tint surface */
+  --bone-50:  #F7F5EF;     /* primary background */
+  --bone-100: #EFEDE6;     /* card / secondary surface */
+  --bone-200: #E6E3DA;     /* hairline-tint surface */
   --bone-300: #DDD8C8;     /* divider on warm bg */
 
   /* Lime — electric accent */
-  --lime-300: #E4FF7A;
-  --lime-400: #D6FB4D;
-  --lime-500: #C7F230;     /* PRIMARY accent */
-  --lime-600: #A8D018;
+  --lime-300: #E3F59A;
+  --lime-400: #D3EF5E;
+  --lime-500: #C5E832;     /* PRIMARY accent */
+  --lime-600: #A9CB1C;
   --lime-700: #7FA00C;
   --lime-900: #2F3D04;
 
@@ -73,8 +72,8 @@
   --info:              var(--info-500);
 
   /* ---------- TYPOGRAPHY ---------- */
-  --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
-  --font-sans:    'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  --font-sans:    -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Type scale — modular 1.250 (major third), rounded for clarity */
@@ -98,7 +97,7 @@
   --lh-relaxed: 1.7;
 
   /* Letter spacing */
-  --tracking-display: -0.022em;  /* tighten display */
+  --tracking-display: -0.02em;
   --tracking-tight:   -0.012em;
   --tracking-normal:  0;
   --tracking-wide:    0.02em;
@@ -132,8 +131,8 @@
   --radius-none:  0px;          /* product images, hero crops */
   --radius-xs:    4px;
   --radius-sm:    8px;          /* DEFAULT buttons, inputs, badges */
-  --radius-md:    12px;         /* cards */
-  --radius-lg:    16px;         /* large surface */
+  --radius-md:    24px;         /* cards */
+  --radius-lg:    28px;         /* large surface */
   --radius-pill:  999px;        /* eyebrows, tag chips */
 
   /* ---------- SHADOW (diffused, soft, never sharp) ---------- */
@@ -153,7 +152,9 @@
     0 2px 2px rgba(20, 20, 15, 0.03);
 
   /* Focus ring */
-  --ring-accent: 0 0 0 3px rgba(199, 242, 48, 0.45);
+  --ring-accent: 0 0 0 3px rgba(197, 232, 50, 0.55);
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 18px 44px rgba(0, 0, 0, 0.10);
   --ring-focus:  0 0 0 3px rgba(42, 111, 219, 0.35);
 
   /* ---------- MOTION ---------- */
@@ -204,8 +205,7 @@ html, body {
   line-height: var(--lh-display);
   letter-spacing: var(--tracking-display);
   font-weight: var(--fw-regular);
-  font-variation-settings: "opsz" 120;
-  color: var(--fg);
+    color: var(--fg);
 }
 
 h1, .h1, [data-style="h1"] {
@@ -214,8 +214,7 @@ h1, .h1, [data-style="h1"] {
   line-height: var(--lh-display);
   letter-spacing: var(--tracking-display);
   font-weight: var(--fw-regular);
-  font-variation-settings: "opsz" 96;
-  color: var(--fg);
+    color: var(--fg);
   margin: 0;
 }
 
@@ -225,8 +224,7 @@ h2, .h2, [data-style="h2"] {
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);
   font-weight: var(--fw-regular);
-  font-variation-settings: "opsz" 72;
-  color: var(--fg);
+    color: var(--fg);
   margin: 0;
 }
 
@@ -236,8 +234,7 @@ h3, .h3, [data-style="h3"] {
   line-height: var(--lh-heading);
   letter-spacing: var(--tracking-tight);
   font-weight: var(--fw-regular);
-  font-variation-settings: "opsz" 48;
-  color: var(--fg);
+    color: var(--fg);
   margin: 0;
 }
 
@@ -296,8 +293,7 @@ p, .body, [data-style="body"] {
 
 .numeric, [data-style="numeric"] {
   font-family: var(--font-display);
-  font-variation-settings: "opsz" 96;
-  font-feature-settings: "tnum", "lnum";
+    font-feature-settings: "tnum", "lnum";
   font-weight: var(--fw-regular);
   letter-spacing: var(--tracking-display);
   line-height: 1;
