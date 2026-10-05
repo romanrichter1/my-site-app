@@ -76,43 +76,43 @@
 
   <!-- HERO -->
   <header class="hero">
-    <div>
-      <span class="hero__eyebrow">Pro majitele firem, makléře a podnikatele</span>
-      <h1 class="hero__title">AI zaměstnanec <em>na&nbsp;24/7 úvazek.</em> Nižší náklady, <em>méně starostí.</em></h1>
-      <p class="hero__sub">AI agenti, recepční a automatizace ve vašich službách. Přijímají hovory, zapisují rezervace, posílají reporty a řeší rutinu — zatímco vy se věnujete tomu, co vydělává.</p>
-      <div class="hero__cta">
-        <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
-          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <div class="hero__copy">
+      <span class="hero__eyebrow" data-reveal>Pro servisní firmy s 5+ zaměstnanci</span>
+      <h1 class="hero__title" data-reveal data-reveal-delay="1">AI agenti, kteří odpracují rutinu <em>vašeho týmu.</em></h1>
+      <p class="hero__sub" data-reveal data-reveal-delay="2">Vaši lidé přestanou řešit rutinu. Vy konečně uvidíte, co se ve firmě děje – každé pondělí v 7:00, bez jediného exportu.</p>
+      <div class="hero__cta" data-reveal data-reveal-delay="3">
+        <a class="btn btn--primary" data-cta="calendly" role="button" tabindex="0">Domluvit ukázku
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <button class="btn btn--ghost" data-calc>Spočítat úsporu</button>
+        <button class="btn btn--ghost" type="button" data-calc>Spočítat úsporu</button>
       </div>
-      <div class="hero__proof">
-        <span class="pill"><span class="dot"></span>Živý hovor &middot; 09:14</span>
-        <span>Realitní kanceláře, studia, penziony a firmy v Brně, Bratislavě, Olomouci a dál.</span>
-      </div>
+      <a class="guarantee" href="/obchodni-podminky#clanek-iii" data-reveal data-reveal-delay="4">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        <span><strong>100% vrácení peněz až do onboarding callu</strong><small>Podmínky v čl. III obchodních podmínek</small></span>
+      </a>
     </div>
 
-    <!-- live call card -->
-    <aside class="callcard">
+    <aside class="callcard" aria-label="Ukázka: agent odpovídá na poptávku z webu" data-reveal data-reveal-delay="2">
       <div class="callcard__head">
-        <span class="callcard__avatar">LH</span>
+        <span class="callcard__avatar" aria-hidden="true">JD</span>
         <div class="callcard__who">
-          <span class="callcard__name">Lucie Hájková</span>
-          <span class="callcard__meta">Příchozí hovor &middot; 02:48</span>
+          <span class="callcard__name">Jana Dvořáková</span>
+          <span class="callcard__meta">Poptávka z webového formuláře</span>
         </div>
-        <span class="callcard__status"><span class="dot"></span>Živo</span>
+        <span class="callcard__status"><span class="dot"></span><span data-timer>Odpověď za 38 s</span></span>
       </div>
       <div class="transcript">
-        <div class="bubble bubble--them">Dobrý den, chtěla bych se objednat na střih a foukanou na čtvrtek odpoledne.<small>09:14:22</small></div>
-        <div class="bubble bubble--ai">Jasně, ráda pomůžu. Mám volno ve čtvrtek ve 14:30 nebo v 16:15 u Petry. Která doba se vám hodí lépe?<small>AI recepční · 09:14:28</small></div>
-        <div class="bubble bubble--them">14:30 by bylo perfektní.<small>09:14:39</small></div>
-        <div class="bubble bubble--ai">Hotovo. Schůzku jsem zapsala a pošlu vám SMS s připomínkou den předem.<small>AI recepční · 09:14:44</small></div>
+        <div class="bubble bubble--them">Dobrý den, potřebovali bychom nacenit zakázku. Jde o větší rekonstrukci, termín nejlépe do konce měsíce.<small>18:02:04</small></div>
+        <div class="bubble bubble--ai">Dobrý den, děkujeme za poptávku. Rád vás spojím s naším obchodníkem Petrem. Hodí se vám schůzka ve čtvrtek v 9:00, nebo v pátek ve 14:00?<small>AI agent · 18:02:42</small></div>
+        <div class="bubble bubble--them">Čtvrtek v 9:00 je ideální.<small>18:05:17</small></div>
+        <div class="bubble bubble--ai">Výborně, schůzku jsem zapsal. Pozvánku s odkazem máte v e-mailu.<small>AI agent · 18:05:20</small></div>
         <div class="callcard__typing" aria-hidden="true"><span></span><span></span><span></span></div>
       </div>
       <div class="callcard__action">
-        <span>Zapsáno do Google Kalendáře</span>
-        <span class="meta">Klient: Lucie H. · čt 19. 5. · 14:30</span>
+        <span class="callcard__check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span>Schůzka zapsána do kalendáře · obchodník Petr</span>
       </div>
+      <p class="illustrative">Ilustrativní ukázka</p>
     </aside>
   </header>
 
@@ -772,49 +772,51 @@
     );
     document.querySelectorAll('[data-count]').forEach(el => counterIO.observe(el));
 
-    // ── 3. Hero callcard loop ──────────────────────────────────────
+    // ── 3. Hero demo loop ──────────────────────────────────────────
     const callcard = document.querySelector('.callcard');
     if (!callcard) return;
     const bubbles = Array.from(callcard.querySelectorAll('.bubble'));
     const typing  = callcard.querySelector('.callcard__typing');
     const action  = callcard.querySelector('.callcard__action');
+    const reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const all = bubbles.concat(action ? [action] : []);
 
-    function showEl(el) {
-      el.style.transform = 'translateY(8px)';
-      el.style.opacity = '0';
-      el.style.transition = 'none';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        el.style.transition = 'opacity 0.42s ease, transform 0.42s ease';
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      }));
+    if (reduce) { all.forEach(el => el.classList.add('is-in')); return; }
+
+    // [start, end] of typing indicator before each agent bubble
+    const STEPS = [
+      { el: bubbles[0], at: 500 },
+      { typing: [1300, 2500] },
+      { el: bubbles[1], at: 2500 },
+      { el: bubbles[2], at: 4300 },
+      { typing: [5000, 5900] },
+      { el: bubbles[3], at: 5900 },
+      { el: action,     at: 7000 },
+    ];
+    const LOOP = 13000;
+    let timers = [], running = false;
+
+    function clear() { timers.forEach(clearTimeout); timers = []; }
+    function play() {
+      clear();
+      all.forEach(el => el.classList.remove('is-in'));
+      typing && typing.classList.remove('is-in');
+      STEPS.forEach(s => {
+        if (s.el) timers.push(setTimeout(() => s.el.classList.add('is-in'), s.at));
+        if (s.typing && typing) {
+          timers.push(setTimeout(() => typing.classList.add('is-in'), s.typing[0]));
+          timers.push(setTimeout(() => typing.classList.remove('is-in'), s.typing[1]));
+        }
+      });
+      timers.push(setTimeout(() => {
+        all.forEach(el => el.classList.add('is-out'));
+        timers.push(setTimeout(() => { all.forEach(el => el.classList.remove('is-out')); if (running) play(); }, 450));
+      }, LOOP));
     }
-    function hideEl(el) {
-      el.style.transition = 'opacity 0.22s ease';
-      el.style.opacity = '0';
-    }
-
-    // Timings (ms from start)
-    const BUBBLE_T   = [600, 2400, 3700, 5100];
-    const TYPING_ON  = [1200, 4300];
-    const TYPING_OFF = [2300, 5000];
-    const ACTION_T   = 6200;
-
-    function runOnce() {
-      // Reset via opacity/transform only — no display:none, layout stays stable
-      bubbles.forEach(b => { b.style.cssText = 'opacity:0;transform:translateY(8px);transition:none'; });
-      if (typing)  typing.style.cssText  = 'opacity:0;transition:none';
-      if (action)  action.style.cssText  = 'opacity:0;transform:translateY(8px);transition:none';
-
-      bubbles.forEach((b, i) => setTimeout(() => showEl(b), BUBBLE_T[i]));
-      if (typing) {
-        TYPING_ON.forEach(t  => setTimeout(() => showEl(typing), t));
-        TYPING_OFF.forEach(t => setTimeout(() => hideEl(typing), t));
-      }
-      if (action) setTimeout(() => showEl(action), ACTION_T);
-      // No restart — animation plays once and stays in final state
-    }
-    runOnce();
+    new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting && !running) { running = true; play(); }
+      else if (!e.isIntersecting && running) { running = false; clear(); all.forEach(el => el.classList.add('is-in')); }
+    }), { threshold: 0.3 }).observe(callcard);
   })();
   </script>
 
