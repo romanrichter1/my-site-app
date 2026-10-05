@@ -247,6 +247,72 @@
     </div>
   </section>
 
+  <!-- AGENT NENÍ CHATGPT -->
+  <section class="section section--dark vs" id="jak-agent-pracuje">
+    <div class="section__head section__head--center" data-reveal>
+      <span class="section__eyebrow">Agent není ChatGPT</span>
+      <h2 class="section__title">ChatGPT vám poradí. <em>AI agent tu práci udělá.</em></h2>
+    </div>
+
+    <div class="vs__toggle" role="tablist" aria-label="Porovnání">
+      <button type="button" role="tab" aria-selected="false" data-vs="gpt">ChatGPT</button>
+      <button type="button" role="tab" aria-selected="true" data-vs="agent">AI agent</button>
+      <span class="vs__toggle-pill" aria-hidden="true"></span>
+    </div>
+
+    <div class="vs__grid" data-vs-active="agent" data-reveal>
+      <div class="vs__col vs__col--gpt">
+        <h3>ChatGPT</h3>
+        <ul>
+          <li>Čeká, až se zeptáte</li>
+          <li>Poradí, co udělat</li>
+          <li>Nevidí do vašeho CRM</li>
+          <li>Každý den začíná od nuly</li>
+        </ul>
+      </div>
+      <div class="vs__col vs__col--agent">
+        <h3>AI agent Nexivo</h3>
+        <ul>
+          <li>Hlídá vaše systémy sám</li>
+          <li>Úkol sám dokončí</li>
+          <li>Je napojený na e-mail, kalendář a CRM</li>
+          <li>Pamatuje si klienty i historii</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flow" data-flow>
+      <ol class="flow__steps">
+        <li class="flow__line" aria-hidden="true"><span></span></li>
+        <li class="flow__step">
+          <span class="flow__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="flow__num">1</span>
+          <h3>Pozoruje</h3>
+          <p>Přijde poptávka na web.</p>
+        </li>
+        <li class="flow__step">
+          <span class="flow__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3v6a6 6 0 0 0 6 6h6"/><path d="M15 12l3 3-3 3"/><path d="M6 21v-6"/></svg></span>
+          <span class="flow__num">2</span>
+          <h3>Rozhoduje</h3>
+          <p>Pozná, že jde o větší zakázku, a proto ji předá zkušenějšímu kolegovi.</p>
+        </li>
+        <li class="flow__step">
+          <span class="flow__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+          <span class="flow__num">3</span>
+          <h3>Jedná</h3>
+          <p>Odpoví klientovi, nabídne termín a zapíše schůzku.</p>
+        </li>
+        <li class="flow__step">
+          <span class="flow__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg></span>
+          <span class="flow__num">4</span>
+          <h3>Pamatuje si</h3>
+          <p>Za 30 dní se klientovi sám ozve.</p>
+        </li>
+      </ol>
+      <p class="flow__note" data-reveal>Jako nový zaměstnanec, kterého naučíte všechno jednou, a on to už nezapomene.</p>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
   <section class="section" id="jak-zacit">
     <div class="section__head" data-reveal>
@@ -1179,6 +1245,34 @@
         });
         sync();
       });
+
+
+      // ChatGPT vs agent toggle (mobile)
+      const vsGrid = document.querySelector('.vs__grid');
+      document.querySelectorAll('[data-vs]').forEach(b => b.addEventListener('click', () => {
+        vsGrid.dataset.vsActive = b.dataset.vs;
+        document.querySelectorAll('[data-vs]').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+      }));
+
+      // Flow steps light up one by one while scrolling
+      const flow = document.querySelector('[data-flow]');
+      if (flow) {
+        const steps = Array.from(flow.querySelectorAll('.flow__step'));
+        const light = n => {
+          steps.forEach((st, i) => st.classList.toggle('is-on', i < n));
+          flow.style.setProperty('--progress', steps.length > 1 ? Math.max(0, n - 1) / (steps.length - 1) : 1);
+        };
+        if (reduce) light(steps.length);
+        else {
+          let lit = 0;
+          const stepIO = new IntersectionObserver(entries => entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const i = steps.indexOf(e.target) + 1;
+            if (i > lit) { lit = i; light(lit); }
+          }), { threshold: 1, rootMargin: '0px 0px -25% 0px' });
+          steps.forEach(st => stepIO.observe(st));
+        }
+      }
 
       const nav = document.querySelector('.nav');
       if (nav) {
