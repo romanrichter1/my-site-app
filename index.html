@@ -59,10 +59,11 @@
       <img src="assets/nexivo-logo.png" alt="Nexivo" width="572" height="168">
     </a>
     <div class="nav__links">
-      <a class="nav__link" href="#voice">Voice agenti</a>
-      <a class="nav__link" href="#agent">AI agent</a>
-      <a class="nav__link" href="#pricing">Nabídka služeb</a>
-      <a class="nav__link" href="/klient">Přihlásit</a>
+      <a class="nav__link" href="#agenti">Agenti</a>
+      <a class="nav__link" href="#pro-koho">Pro koho</a>
+      <a class="nav__link" href="#jak-to-funguje">Jak to funguje</a>
+      <a class="nav__link" href="#faq">FAQ</a>
+      <a class="nav__link nav__link--mobile-only" href="/klient">Přihlásit</a>
       <a class="nav__link nav__link--mobile-cta" data-cta="calendly">Domluvit ukázku</a>
     </div>
     <div class="nav__right">
@@ -81,7 +82,7 @@
       <h1 class="hero__title" data-reveal data-reveal-delay="1">AI agenti, kteří odpracují rutinu <em>vašeho týmu.</em></h1>
       <p class="hero__sub" data-reveal data-reveal-delay="2">Vaši lidé přestanou řešit rutinu. Vy konečně uvidíte, co se ve firmě děje – každé pondělí v 7:00, bez jediného exportu.</p>
       <div class="hero__cta" data-reveal data-reveal-delay="3">
-        <a class="btn btn--primary" data-cta="calendly" role="button" tabindex="0">Domluvit ukázku
+        <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <button class="btn btn--ghost" type="button" data-calc>Spočítat úsporu</button>
@@ -679,8 +680,10 @@
     <div>
       <h5>Služby</h5>
       <ul>
-        <li><a href="/#agent">AI agenti</a></li>
-        <li><a href="/#voice">Voice agenti</a></li>
+        <li><a href="/#agenti">AI agenti</a></li>
+        <li><a href="/#pro-koho">Pro koho</a></li>
+        <li><a href="/#pricing">Nabídka služeb</a></li>
+        <li><a href="/#faq">FAQ</a></li>
       </ul>
     </div>
     <div>
@@ -947,7 +950,9 @@
       const closeBtn = modal.querySelector('.bm__close');
       let initialized = false;
 
+      let lastFocus = null;
       function open() {
+        lastFocus = document.activeElement;
         modal.classList.add('bm--open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -962,18 +967,30 @@
           if (window.Calendly) { init(); }
           else { window.addEventListener('load', init, { once: true }); }
         }
+        setTimeout(() => closeBtn.focus(), 50);
       }
       function close() {
         modal.classList.remove('bm--open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
       }
 
       document.querySelectorAll('[data-cta="calendly"]').forEach(el => {
         el.removeAttribute('href');
         el.style.cursor = 'pointer';
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
         el.addEventListener('click', e => { e.preventDefault(); open(); });
+        el.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+        });
       });
+
+      if (location.hash === '#ukazka') {
+        history.replaceState(null, '', location.pathname + location.search);
+        open();
+      }
 
       backdrop.addEventListener('click', close);
       closeBtn.addEventListener('click', close);
