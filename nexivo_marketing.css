@@ -1973,3 +1973,14 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 .timeline__step { opacity: 0.55; }
 .flow__step { opacity: 0.6; }
 .flow__step p { color: var(--ink-300); }
+
+/* ---------- Fraunces headings ---------- */
+.hero__title, .section__title, .product__copy h2, .faq-title, .closer h2, .savings h3, .feature__title,
+.showcase__result, .flow__step h3, .who__card h3, .case__num, .stat__num, .offer__title, .metric__num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  font-variation-settings: "opsz" 144;
+}
+.showcase__result, .flow__step h3, .who__card h3, .feature__title { font-variation-settings: "opsz" 48; letter-spacing: -0.012em; }
+.hero__title em, .section__title em, .product__copy h2 em, .closer h2 em { font-style: italic; }

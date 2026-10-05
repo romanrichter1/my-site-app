@@ -51,7 +51,7 @@ No build system, no package manager. All files are standalone HTML with inline o
 - `--ink-1000: #0A0A0A` — primary text (near-black), ink scale is neutral grey
 - `--lime-500: #C5E832` — accent, only for accents and CTA
 
-**Fonts:** system stack (-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif), no web fonts.
+**Fonts:** Fraunces (Google Fonts) for headings and big numbers, italic `<em>` in grey; system stack (-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif) for body text.
 
 **Design language:** Apple-inspired — lots of whitespace, big bold headings, cards with 24–28 px radius and soft shadow, sticky blurred nav, line SVG icons, no emoji, Czech "vykání".
 The "APPLE-STYLE LAYER" at the end of `nexivo_marketing.css` overrides the legacy components above it — keep new styles there.

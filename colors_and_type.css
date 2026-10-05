@@ -1,9 +1,11 @@
 /* =========================================================================
    Nexivo Design Tokens
    Monochromatic warm-neutral + electric lime accent
-   System font stack (Apple-style), no web fonts
+   Fraunces (headings) + system font stack (text)
    ========================================================================= */
 
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap');
 
 :root {
   /* ---------- PRIMITIVE COLORS ---------- */
@@ -72,7 +74,7 @@
   --info:              var(--info-500);
 
   /* ---------- TYPOGRAPHY ---------- */
-  --font-display: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
   --font-sans:    -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
