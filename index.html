@@ -116,6 +116,137 @@
     </aside>
   </header>
 
+  <!-- CO VÁM AGENT REÁLNĚ POŠLE -->
+  <section class="section showcase" id="agenti">
+    <div class="section__head section__head--center" data-reveal>
+      <span class="section__eyebrow">Co vám agent reálně pošle</span>
+      <h2 class="section__title">Nepopisujeme funkce. <em>Ukážeme vám, co vám přistane v telefonu.</em></h2>
+    </div>
+
+    <div class="showcase__track" data-carousel tabindex="0" aria-label="Ukázky výstupů agentů, posouvejte do stran">
+
+      <!-- 1. Reporting Agent -->
+      <article class="card showcase__card" data-live>
+        <span class="agent-tag"><span class="agent-tag__dot"></span>Reporting Agent · pro majitele</span>
+        <h3 class="showcase__result">Pondělí 7:00. Report je v mailu. Nikdo ho nepřipravoval.</h3>
+        <div class="mock" aria-label="Ukázka e-mailu s týdenním přehledem firmy">
+          <div class="mail">
+            <div class="mail__meta">
+              <span class="mail__from"><span class="mail__avatar" aria-hidden="true">R</span>Reporting Agent</span>
+              <span class="mail__time">Po 7:00</span>
+            </div>
+            <p class="mail__subject">Týdenní přehled firmy</p>
+            <div class="rep__hero">
+              <span class="rep__label">Tržby za týden</span>
+              <span class="rep__num">412 300 Kč</span>
+              <span class="rep__delta">↑ 8,4 % proti minulému týdnu</span>
+            </div>
+            <div class="rep__tiles">
+              <div><span class="rep__tile-num">23</span><span class="rep__label">Nové poptávky</span></div>
+              <div><span class="rep__tile-num">11</span><span class="rep__label">Nabídky</span></div>
+              <div><span class="rep__tile-num">6</span><span class="rep__label">Uzavřené zakázky</span></div>
+            </div>
+            <div class="rep__team">
+              <span class="rep__label">Schůzky za týden</span>
+              <div class="rep__row"><span>Lucie</span><span class="rep__bar"><i style="--w:90%"></i></span><b>9</b></div>
+              <div class="rep__row"><span>Tomáš</span><span class="rep__bar"><i style="--w:70%"></i></span><b>7</b></div>
+              <div class="rep__row rep__row--warn"><span>Petr</span><span class="rep__bar"><i style="--w:30%"></i></span><b>3</b></div>
+            </div>
+            <p class="rep__summary"><strong>Shrnutí agenta:</strong> u Petra třetí týden klesá počet schůzek.</p>
+          </div>
+        </div>
+        <p class="showcase__caption">Agent sám čte CRM, fakturaci a kalendář a upozorní vás na to, co byste přehlédli.</p>
+      </article>
+
+      <!-- 2. Inquiry Agent -->
+      <article class="card showcase__card" data-live>
+        <span class="agent-tag"><span class="agent-tag__dot"></span>Inquiry Agent · pro tým</span>
+        <h3 class="showcase__result">Poptávka z webu dostane odpověď do 60 vteřin.</h3>
+        <div class="mock" aria-label="Ukázka časové osy vyřízení poptávky">
+          <ol class="timeline">
+            <li class="timeline__step">
+              <span class="timeline__time">18:02</span>
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <div><strong>Nová poptávka z webu</strong><span>„Dobrý den, potřebovali bychom nacenit zakázku…“</span></div>
+            </li>
+            <li class="timeline__step">
+              <span class="timeline__time">18:02</span>
+              <span class="timeline__dot" aria-hidden="true"></span>
+              <div><strong>Odpověď agenta s nabídkou termínu</strong><span>Čtvrtek 9:00 nebo pátek 14:00 s obchodníkem</span></div>
+            </li>
+            <li class="timeline__step timeline__step--done">
+              <span class="timeline__time">18:09</span>
+              <span class="timeline__dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div><strong>Schůzka v kalendáři, kontakt uložen v CRM</strong><span>Klient potvrdil čtvrtek 9:00</span></div>
+            </li>
+          </ol>
+        </div>
+        <p class="showcase__caption">Kdo odpoví první, ten většinou vyhraje zakázku.</p>
+      </article>
+
+      <!-- 3. Follow Up Agent -->
+      <article class="card showcase__card" data-live>
+        <span class="agent-tag"><span class="agent-tag__dot"></span>Follow Up Agent · pro tým</span>
+        <h3 class="showcase__result">30 dní ticha. Agent se ozve sám.</h3>
+        <div class="mock" aria-label="Ukázka zprávy agenta k rozjednané nabídce">
+          <div class="chat">
+            <div class="chat__head"><span class="chat__avatar" aria-hidden="true">MK</span><div><strong>Martin Kovář</strong><span>Nabídka odeslána před 30 dny</span></div></div>
+            <div class="chat__msg chat__msg--out">Dobrý den, pane Kováři, před měsícem jsme vám posílali nabídku na zakázku. Je pro vás stále aktuální? Rádi ji upravíme nebo domluvíme krátký hovor.<small>Follow Up Agent · 10:15</small></div>
+            <div class="chat__msg chat__msg--in">Dobrý den, děkuji za připomenutí. Ano, chceme pokračovat, zavolejte mi prosím zítra.<small>10:42</small></div>
+            <span class="chat__badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Odpověď zapsána do CRM</span>
+          </div>
+        </div>
+        <p class="showcase__caption">Žádná nabídka už neusne jen proto, že na ni někdo zapomněl.</p>
+      </article>
+
+      <!-- 4. Calendar Manager Agent -->
+      <article class="card showcase__card" data-live>
+        <span class="agent-tag"><span class="agent-tag__dot"></span>Calendar Manager Agent · pro tým</span>
+        <h3 class="showcase__result">Přeplánuje termín bez jediného vašeho kliknutí.</h3>
+        <div class="mock mock--split" aria-label="Ukázka e-mailu s náhradními termíny a kalendáře">
+          <div class="mail mail--small">
+            <div class="mail__meta"><span class="mail__from"><span class="mail__avatar" aria-hidden="true">C</span>Komu: klient</span><span class="mail__time">Út 8:12</span></div>
+            <p class="mail__subject">Změna termínu schůzky</p>
+            <p class="mail__body">Dobrý den, váš středeční termín se bohužel uvolnil. Vyberte si prosím náhradní:</p>
+            <div class="slots">
+              <span class="slot">Čt 14. 11. · 9:00</span>
+              <span class="slot slot--picked">Pá 15. 11. · 13:30</span>
+            </div>
+          </div>
+          <div class="cal" aria-hidden="true">
+            <div class="cal__head"><span>Čt</span><span>Pá</span></div>
+            <div class="cal__grid">
+              <div class="cal__col">
+                <span class="cal__ev" style="--top:8%;--h:22%">Servis</span>
+                <span class="cal__ev" style="--top:52%;--h:26%">Zaměření</span>
+              </div>
+              <div class="cal__col">
+                <span class="cal__ev" style="--top:6%;--h:20%">Porada</span>
+                <span class="cal__ev cal__ev--new" style="--top:46%;--h:30%">Schůzka<small>Vytvořeno agentem</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="showcase__caption">Váš tým se jen řídí kalendářem.</p>
+      </article>
+
+    </div>
+
+    <div class="showcase__nav" aria-hidden="true">
+      <button type="button" class="showcase__arrow" data-carousel-prev tabindex="-1" aria-label="Předchozí"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <div class="showcase__dots"></div>
+      <button type="button" class="showcase__arrow" data-carousel-next tabindex="-1" aria-label="Další"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+    <p class="illustrative illustrative--center">Ilustrativní ukázka · jména a čísla jsou smyšlená</p>
+
+    <div class="section__foot" data-reveal>
+      <p>Agent na míru – řekněte nám, co vás nejvíc zdržuje.</p>
+      <a class="btn btn--secondary" data-cta="calendly">Domluvit ukázku
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
   <section class="section" id="jak-zacit">
     <div class="section__head" data-reveal>
@@ -996,6 +1127,67 @@
     })();
   </script>
 
+  <script>
+    // Interactions: live mockups, carousel, nav state
+    (function () {
+      'use strict';
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const liveIO = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('is-live'); liveIO.unobserve(e.target); }
+      }), { threshold: 0.25 });
+      document.querySelectorAll('[data-live]').forEach(el => reduce ? el.classList.add('is-live') : liveIO.observe(el));
+
+      document.querySelectorAll('[data-carousel]').forEach(track => {
+        const section = track.closest('section');
+        const cards = Array.from(track.children);
+        const dotsWrap = section.querySelector('.showcase__dots');
+        const prev = section.querySelector('[data-carousel-prev]');
+        const next = section.querySelector('[data-carousel-next]');
+        if (!dotsWrap) return;
+        const dots = cards.map((c, i) => {
+          const d = document.createElement('button');
+          d.type = 'button'; d.className = 'showcase__dot'; d.tabIndex = -1;
+          d.setAttribute('aria-label', 'Ukázka ' + (i + 1));
+          d.addEventListener('click', () => go(i));
+          dotsWrap.appendChild(d);
+          return d;
+        });
+        function current() {
+          const x = track.scrollLeft + 1;
+          let idx = 0;
+          cards.forEach((c, i) => { if (c.offsetLeft - track.offsetLeft - 20 <= x) idx = i; });
+          return idx;
+        }
+        function go(i) {
+          const c = cards[Math.max(0, Math.min(cards.length - 1, i))];
+          track.scrollTo({ left: c.offsetLeft - cards[0].offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+        }
+        function sync() {
+          const i = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4 ? cards.length - 1 : current();
+          dots.forEach((d, j) => d.classList.toggle('is-active', j === i));
+          if (prev) prev.disabled = i === 0;
+          if (next) next.disabled = i === cards.length - 1;
+        }
+        prev && prev.addEventListener('click', () => go(current() - 1));
+        next && next.addEventListener('click', () => go(current() + 1));
+        let raf;
+        track.addEventListener('scroll', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(sync); }, { passive: true });
+        track.addEventListener('keydown', e => {
+          if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+          if (e.key === 'ArrowLeft')  { e.preventDefault(); go(current() - 1); }
+        });
+        sync();
+      });
+
+      const nav = document.querySelector('.nav');
+      if (nav) {
+        const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 8);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      }
+    })();
+  </script>
 
 </body>
 </html>
