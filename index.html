@@ -352,8 +352,32 @@
   </section>
   <!-- /ZOBRAZIT JEN S OVĚŘENÝM SOUHLASEM KLIENTA -->
 
+  <!-- ČÍSLA (ilustrativní) -->
+  <section class="section section--tint stats" id="cisla">
+    <div class="section__head section__head--center" data-reveal>
+      <span class="section__eyebrow">Co agent zvládne</span>
+      <h2 class="section__title">Rutina, kterou dnes dělají lidé. <em>V číslech.</em></h2>
+    </div>
+    <div class="stats__grid" data-reveal>
+      <div class="stat"><span class="stat__num" data-count="19.4" data-fmt="19,4&#8239;%">19,4&#8239;%</span><span class="stat__label">konverze webu s agentem</span></div>
+      <div class="stat"><span class="stat__num" data-count="2.1" data-fmt="2,1&#8239;s">2,1&#8239;s</span><span class="stat__label">průměrná doba odpovědi</span></div>
+      <div class="stat"><span class="stat__num" data-count="86" data-fmt="86">86</span><span class="stat__label">rezervací týdně, z původních 24</span></div>
+      <div class="stat"><span class="stat__num" data-count="6.7" data-fmt="6,7&#8239;%">6,7&#8239;%</span><span class="stat__label">nedorazivších klientů, z 18 %</span></div>
+      <div class="stat"><span class="stat__num" data-count="97" data-fmt="97&#8239;%">97&#8239;%</span><span class="stat__label">zvednutých hovorů, i mimo pracovní dobu</span></div>
+      <div class="stat"><span class="stat__num" data-count="2.4" data-fmt="2,4&#8239;s">2,4&#8239;s</span><span class="stat__label">do zvednutí telefonu</span></div>
+      <div class="stat"><span class="stat__num" data-count="120" data-fmt="120">120</span><span class="stat__label">odchozích hovorů týdně</span></div>
+      <div class="stat"><span class="stat__num" data-count="4.8" data-fmt="4,8&#8239;/&#8239;5">4,8&#8239;/&#8239;5</span><span class="stat__label">hodnocení hovorů klienty</span></div>
+      <div class="stat"><span class="stat__num" data-count="12.4" data-fmt="12,4&#8239;h">12,4&#8239;h</span><span class="stat__label">ušetřeného času týdně</span></div>
+      <div class="stat stat--accent"><span class="stat__num" data-count="284800" data-fmt="284&#8239;800&#8239;Kč">284 800 Kč</span><span class="stat__label">ročně místo asistentky na poloviční úvazek</span></div>
+    </div>
+    <p class="illustrative illustrative--center">Ilustrativní ukázka</p>
+    <div class="section__foot" data-reveal>
+      <button class="btn btn--ghost" type="button" data-calc>Spočítat moji úsporu</button>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
-  <section class="section" id="jak-zacit">
+  <section class="section" id="jak-to-funguje">
     <div class="section__head" data-reveal>
       <div>
         <span class="section__eyebrow">Jak to funguje</span>
@@ -361,208 +385,44 @@
       </div>
     </div>
     <div class="features">
-      <article class="feature" data-reveal>
+      <article class="feature card" data-reveal>
         <span class="feature__num">01</span>
         <h3 class="feature__title">Bezplatná konzultace s naším AI konzultantem.</h3>
         <p class="feature__body">Domluvíme 30minutový hovor. Konzultant vás provede tím, co děláme a jak to funguje v praxi — a společně navrhnete cestu, která přesně zapadne do vašeho provozu. Žádné prezentace, žádný závazek.</p>
       </article>
-      <article class="feature" data-reveal data-reveal-delay="1">
+      <article class="feature card" data-reveal data-reveal-delay="1">
         <span class="feature__num">02</span>
         <h3 class="feature__title">Onboarding call — vše nastavíme podle vás.</h3>
-        <p class="feature__body">Náš specialista vezme všechno potřebné: informace o vašich službách, ceníku, otevírací době i tónu komunikace. Z toho nastavíme agenta nebo recepční přesně na míru vašemu byznysu.</p>
+        <p class="feature__body">Náš specialista vezme všechno potřebné: informace o vašich službách, ceníku, otevírací době i tónu komunikace. Z toho nastavíme agenty přesně na míru vašemu provozu.</p>
       </article>
-      <article class="feature" data-reveal data-reveal-delay="2">
+      <article class="feature card" data-reveal data-reveal-delay="2">
         <span class="feature__num">03</span>
         <h3 class="feature__title">Spuštění a přístup do klientského portálu.</h3>
-        <p class="feature__body">Váš AI zaměstnanec jde online. Zároveň dostanete přístup do dashboardu, kde vidíte kolik rezervací agent zapsal, kolik hovorů recepční zvládla a jak se vaše čísla vyvíjejí.</p>
+        <p class="feature__body">Agent jde online. Zároveň dostanete přístup do klientského portálu, kde vidíte, kolik práce agent odvedl a jak se vaše čísla vyvíjejí.</p>
       </article>
     </div>
     <div class="section__cta" data-reveal style="margin-top:48px;text-align:center;">
-      <a class="btn btn--primary" data-cta="calendly">Domluvit konzultaci
+      <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
         <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
   </section>
 
-  <!-- PRODUCT DETAIL: WEBSITE + CHAT -->
-  <section class="section" id="chatbot" style="background:var(--bone-100);">
-    <div class="product">
-      <div class="product__copy" data-reveal>
-        <span class="section__eyebrow">AI Chatbot</span>
-        <h2>Chatbot napojený na agenta. Odpovídá, domlouvá schůzky <em>a nezastaví se.</em></h2>
-        <p>Nejde o jednoduchý widget s připravenými odpověďmi. Náš chatbot je napojený na AI agenta — rozumí kontextu, vede skutečný rozhovor a dokončí rezervaci od A do Z bez vaší účasti.</p>
-        <ul class="product__list">
-          <li>Napojený na AI agenta — domlouvá schůzky přímo v chatu.</li>
-          <li>Rezervace zapisuje do Google Kalendáře, Reservia nebo vašeho systému.</li>
-          <li>Trénovaný na vašem ceníku, službách a otevírací době.</li>
-          <li>Čeština, slovenština, angličtina — bez nastavení.</li>
-        </ul>
-        <div class="hero__cta">
-          <a class="btn btn--secondary" data-cta="calendly">Domluvit ukázku
-            <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="product__visual" data-reveal data-reveal-delay="2">
-        <div class="metric">
-          <span class="metric__label">Konverze webu</span>
-          <span class="metric__num" data-count="19.4" data-fmt="19,4&#8239;%">19,4&#8239;%</span>
-          <span class="metric__delta">↑ 2,8&times; oproti staré stránce</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">Doba odpovědi</span>
-          <span class="metric__num" data-count="2.1" data-fmt="2,1&#8239;s">2,1&#8239;s</span>
-          <span class="metric__delta">Průměr přes 7 dní</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">Rezervací / týden</span>
-          <span class="metric__num" data-count="86" data-fmt="86">86</span>
-          <span class="metric__delta">↑ z 24 před nasazením</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">No-show</span>
-          <span class="metric__num" data-count="6.7" data-fmt="6,7&#8239;%">6,7&#8239;%</span>
-          <span class="metric__delta">↓ z 18 %</span>
-        </div>
-        <p class="illustrative">Ilustrativní ukázka</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- VOICE AGENTS -->
-  <section class="section" id="voice">
-    <div class="product">
-      <div class="product__copy" data-reveal>
-        <span class="section__eyebrow">Voice agenti</span>
-        <h2>Telefon, který nikdy neodpočívá. <em>A nezní jako robot.</em></h2>
-        <p>AI hlasoví agenti vedou přirozené telefonáty v češtině i slovenštině — zvedají příchozí hovory i sami volají klientům. Bez front, bez přesčasů, 24 hodin denně.</p>
-        <ul class="product__list">
-          <li>Příchozí hovory: zvednou do tří vteřin, vyřídí dotaz nebo zapíší rezervaci.</li>
-          <li>Odchozí hovory: obvolávají leady, potvrzují schůzky a sbírají zpětnou vazbu.</li>
-          <li>Přirozený hlas bez umělého přízvuku — klient často ani nepozná, že mluví s AI.</li>
-          <li>Každý hovor se automaticky zapíše do kalendáře nebo CRM.</li>
-        </ul>
-        <div class="hero__cta">
-          <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
-            <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </div>
-      <div class="product__visual" data-reveal data-reveal-delay="2">
-        <div class="metric">
-          <span class="metric__label">Zvednutých hovorů</span>
-          <span class="metric__num" data-count="97" data-fmt="97&#8239;%">97&#8239;%</span>
-          <span class="metric__delta">Nonstop, i mimo otevírací dobu</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">Doba do zvednutí</span>
-          <span class="metric__num" data-count="2.4" data-fmt="2,4&#8239;s">2,4&#8239;s</span>
-          <span class="metric__delta">Bez čekání ve frontě</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">Odchozí hovory / týden</span>
-          <span class="metric__num" data-count="120" data-fmt="120">120</span>
-          <span class="metric__delta">Leady a potvrzení schůzek</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">Hodnocení klientů</span>
-          <span class="metric__num" data-count="4.8" data-fmt="4,8&#8239;/&#8239;5">4,8&#8239;/&#8239;5</span>
-          <span class="metric__delta">Přirozený, klidný hlas</span>
-        </div>
-        <p class="illustrative">Ilustrativní ukázka</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI AGENT -->
-  <section class="agent-section" id="agent">
-    <div class="section__head" data-reveal style="margin-bottom:64px;">
-      <div>
-        <span class="section__eyebrow">AI agent</span>
-        <h2 class="section__title" style="color:var(--bone-50);">Rezervace dokončena. <em style="font-style:italic;color:var(--lime-500);">Vy jste u&nbsp;toho nebyli.</em></h2>
-      </div>
-      <p class="section__intro" style="color:var(--ink-300);">Váš web teď prodává i ve 2 ráno. AI agent přijme klienta přes chat, zapíše schůzku do kalendáře a pošle potvrzení — bez jediného vašeho kliknutí.</p>
-    </div>
-
-    <div class="agent-layout">
-      <div class="agent-copy" data-reveal>
-        <ul class="agent-list">
-          <li>Napojení na Google Kalendář a Reservio — rezervace v reálném čase.</li>
-          <li>Agent vezme jméno, kontakt a termín přímo v chatu.</li>
-          <li>Automatický potvrzovací e-mail ihned po rezervaci.</li>
-          <li>SMS nebo chat připomínka 2 hodiny před termínem.</li>
-          <li>Čeština, slovenština, angličtina — bez nastavení.</li>
-        </ul>
-        <div class="hero__cta">
-          <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
-            <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Animated chat mockup -->
-      <div class="agent-mock" data-reveal data-reveal-delay="2">
-        <div class="agent-mock__head">
-          <div class="agent-mock__avatar">
-            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <div class="agent-mock__who">
-            <span class="agent-mock__name">Nexivo Agent</span>
-            <span class="agent-mock__status">
-              <span class="agent-mock__status-dot"></span>Online
-            </span>
-          </div>
-        </div>
-
-        <div class="agent-chat">
-          <div class="agent-bubble agent-bubble--them">
-            Dobrý den, chtěl bych se objednat na střih.<small>10:23</small>
-          </div>
-          <div class="agent-bubble agent-bubble--agent">
-            Jasně, rád pomůžu. Na kdy byste měl zájem — máte v úterý ve 14:00 nebo ve čtvrtek v 10:00?<small>AI agent · 10:23</small>
-          </div>
-          <div class="agent-typing" aria-hidden="true">
-            <span></span><span></span><span></span>
-          </div>
-          <div class="agent-bubble agent-bubble--them">
-            Čtvrtek 10:00 mi sedí.<small>10:23</small>
-          </div>
-          <div class="agent-bubble agent-bubble--confirm">
-            Hotovo. Schůzka zapsána na čtvrtek 22. 5. v 10:00. Potvrzení přijde na váš e-mail.<small>AI agent · 10:24</small>
-          </div>
-        </div>
-
-        <div class="agent-cal">
-          <div class="agent-cal__icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <div class="agent-cal__info">
-            <span class="agent-cal__title">Střih — Jan Novák</span>
-            <span class="agent-cal__meta">Čtvrtek 22. 5. · 10:00 · Přidáno do Google Kalendáře</span>
-          </div>
-          <div class="agent-cal__check">
-            <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- REPORTING AGENT -->
-  <section class="section" id="reporting" style="background:var(--bone-100);">
+  <section class="section section--tint" id="reporting">
     <div class="product">
       <div class="product__copy" data-reveal>
         <span class="section__eyebrow">Reporting Agent · pro majitele</span>
         <h2>Každé pondělí ráno víte, kde stojí vaše firma. <em>Bez jediného exportu.</em></h2>
         <p>Reporting Agent sám čte vaše CRM, fakturaci a kalendář. Každé pondělí v 7:00 vám pošle přehled: tržby, otevřené nabídky, výkon týmu a na co se podívat jako první.</p>
         <ul class="product__list">
-          <li>Denní a týdenní přehledy tržeb automaticky na e-mail nebo Slack.</li>
+          <li>Týdenní přehled tržeb, poptávek a zakázek na e-mail nebo Slack.</li>
           <li>Sledování pipeline — agent upozorní, když se nabídka přestane hýbat.</li>
           <li>Napojení na vaše CRM, tabulky nebo účetní systém.</li>
-          <li>Upozornění na priority — co řešit dnes, co tento týden.</li>
+          <li>Výkon týmu a upozornění na problémy dřív, než přerostou.</li>
         </ul>
         <div class="hero__cta">
-          <a class="btn btn--secondary" data-cta="calendly">Domluvit konzultaci
+          <a class="btn btn--secondary" data-cta="calendly">Domluvit ukázku
             <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
         </div>
@@ -575,7 +435,7 @@
             </div>
             <div>
               <span class="report-card__title">Týdenní přehled</span>
-              <span class="report-card__meta">Pondělí 9. 6. · 08:00 · Nexivo Agent</span>
+              <span class="report-card__meta">Pondělí · 7:00 · Reporting Agent</span>
             </div>
           </div>
           <div class="report-card__stat">
@@ -609,112 +469,92 @@
             </div>
           </div>
         </div>
+        <p class="illustrative">Ilustrativní ukázka</p>
       </div>
     </div>
   </section>
 
-  <!-- SAVINGS STRIP -->
-  <section class="savings">
-    <h3 data-reveal>Místo asistentky na poloviční úvazek ušetříte přes čtvrt milionu ročně.</h3>
-    <div class="savings__stats" data-reveal data-reveal-delay="1">
-      <div class="savings__stat">
-        <span class="num" data-count="12.4" data-fmt="12,4">12,4</span>
-        <span class="label">hodin / týden</span>
-      </div>
-      <div class="savings__stat">
-        <span class="num" data-count="284800" data-fmt="284&#8239;800">284 800</span>
-        <span class="label">Kč / rok</span>
-      </div>
-      <p class="illustrative">Ilustrativní ukázka</p>
-    </div>
-    <div class="savings__cta" data-reveal data-reveal-delay="2">
-      <button class="btn btn--secondary" data-calc>Spočítat moji úsporu</button>
-    </div>
-  </section>
-
-  <!-- AGENTS CATALOG -->
+  <!-- NABÍDKA SLUŽEB -->
   <section class="section" id="pricing">
-    <div class="section__head" data-reveal>
-      <div>
-        <span class="section__eyebrow">Nabídka služeb</span>
-        <h2 class="section__title">AI agenti pro váš byznys. Každý na svém místě.</h2>
-      </div>
-      <p class="section__intro">Každý agent se zaměřuje na jednu věc a dělá ji dokonale. Napojíme je na vaše CRM, kalendář a systémy — a nastavíme přesně pro váš provoz.</p>
+    <div class="section__head section__head--center" data-reveal>
+      <span class="section__eyebrow">Nabídka služeb</span>
+      <h2 class="section__title">Agenti na míru <em>vašemu provozu.</em></h2>
+      <p class="section__intro">Každý agent dělá jednu věc pořádně. Napojíme ho na váš e-mail, kalendář a CRM a nastavíme přesně podle toho, jak pracuje váš tým.</p>
     </div>
 
     <div class="agents-grid" data-reveal>
-
       <article class="agent-card">
-        <div class="agent-card__icon">
-          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </div>
-        <h4 class="agent-card__name">Follow Up Agent</h4>
-        <p class="agent-card__desc">Automaticky osloví klienta před schůzkou, po ní a v dalších klíčových momentech. Nikdo neunikne ze sledování.</p>
-      </article>
-
-      <article class="agent-card">
-        <div class="agent-card__icon">
+        <div class="agent-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="14" x2="13" y2="14"/></svg>
         </div>
-        <h4 class="agent-card__name">Inquiry Agent</h4>
-        <p class="agent-card__desc">Jakmile klient projeví zájem o nemovitost nebo prohlídku, agent ho okamžitě osloví, zjistí potřebné informace a připraví lead pro vás.</p>
+        <h3 class="agent-card__name">Inquiry Agent</h3>
+        <p class="agent-card__desc">Odpoví na poptávku z webu, e-mailu nebo formuláře do minuty, zjistí potřebné informace a nabídne termín schůzky.</p>
       </article>
-
       <article class="agent-card">
-        <div class="agent-card__icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.41 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.14 6.14l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/><polyline points="17 2 21 2 21 6"/><line x1="17" y1="7" x2="21" y2="3"/></svg>
+        <div class="agent-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </div>
-        <h4 class="agent-card__name">Outbound Caller Agent</h4>
-        <p class="agent-card__desc">Zavolá potenciálním klientům, kteří projevili zájem. Kvalifikuje lead ještě dřív, než zvednete telefon vy.</p>
+        <h3 class="agent-card__name">Follow Up Agent</h3>
+        <p class="agent-card__desc">Ozve se klientům k rozjednaným nabídkám, před schůzkou i po ní. Žádná zakázka neusne jen proto, že se zapomnělo.</p>
       </article>
-
       <article class="agent-card">
-        <div class="agent-card__icon">
-          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <h4 class="agent-card__name">Google Review Agent</h4>
-        <p class="agent-card__desc">Po uzavření obchodu automaticky osloví klienta a požádá ho o recenzi na Googlu. Více recenzí, vyšší viditelnost, víc poptávek.</p>
-      </article>
-
-      <article class="agent-card">
-        <div class="agent-card__icon">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-        </div>
-        <h4 class="agent-card__name">Lead Scraper Agent</h4>
-        <p class="agent-card__desc">Každý den prochází Sreality, inzeráty a další zdroje. Připraví vám čerstvé leady a nové nemovitosti bez manuálního hledání.</p>
-      </article>
-
-      <article class="agent-card">
-        <div class="agent-card__icon">
+        <div class="agent-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
         </div>
-        <h4 class="agent-card__name">Calendar Manager Agent</h4>
-        <p class="agent-card__desc">Domlouvá a přesouvá schůzky napříč vaším kalendářem. Spolupracuje s ostatními agenty — nic nevypadne, nic se nepřekrývá.</p>
+        <h3 class="agent-card__name">Calendar Manager Agent</h3>
+        <p class="agent-card__desc">Domlouvá a přeplánuje termíny napříč kalendáři týmu. Nic se nepřekrývá, nic nevypadne.</p>
       </article>
-
       <article class="agent-card">
-        <div class="agent-card__icon">
+        <div class="agent-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><path d="M3 20h18"/></svg>
         </div>
-        <h4 class="agent-card__name">Reporting Agent</h4>
-        <p class="agent-card__desc">Má přístup do CRM, systémů, aplikací a inzerátů. Každý týden odešle přehled výkonu přímo na váš e-mail nebo Slack.</p>
+        <h3 class="agent-card__name">Reporting Agent</h3>
+        <p class="agent-card__desc">Čte CRM, fakturaci a kalendář. Každé pondělí pošle majiteli přehled firmy a upozorní na problémy.</p>
       </article>
-
+      <article class="agent-card">
+        <div class="agent-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.41 2 2 0 0 1 3.58 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.14 6.14l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3 class="agent-card__name">Voice Agent</h3>
+        <p class="agent-card__desc">Zvedá telefon, když váš tým nemůže. Vyřídí dotaz nebo zapíše termín a umí i odchozí hovory, třeba potvrzení schůzek.</p>
+      </article>
+      <article class="agent-card">
+        <div class="agent-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3 class="agent-card__name">Google Review Agent</h3>
+        <p class="agent-card__desc">Po dokončení zakázky požádá spokojeného klienta o recenzi na Googlu. Víc recenzí, víc důvěry, víc poptávek.</p>
+      </article>
+      <article class="agent-card">
+        <div class="agent-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+        </div>
+        <h3 class="agent-card__name">Lead Agent</h3>
+        <p class="agent-card__desc">Pravidelně prochází zdroje, které určíte, a připraví obchodníkům čerstvé kontakty bez ručního hledání.</p>
+      </article>
       <article class="agent-card agent-card--more">
-        <div class="agent-card__icon">
+        <div class="agent-card__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
         </div>
-        <h4 class="agent-card__name">A další agenti</h4>
-        <p class="agent-card__desc">Máte specifický proces, který se opakuje pořád dokola? Naprogramujeme agenta na míru přesně pro vaši potřebu.</p>
+        <h3 class="agent-card__name">Agent na míru</h3>
+        <p class="agent-card__desc">Máte proces, který se pořád opakuje? Postavíme agenta přesně pro něj.</p>
       </article>
-
     </div>
 
-    <div style="margin-top:56px;text-align:center;" data-reveal>
-      <p style="font:400 15px/1.6 var(--font-sans);color:var(--ink-500);margin-bottom:24px;">Agenti se nastavují přesně pro váš provoz a napojují na vaše stávající systémy.</p>
-      <a class="btn btn--primary" data-cta="calendly">Domluvit konzultaci
-        <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+    <div class="card card--dark card--lg offer" data-reveal>
+      <div class="offer__copy">
+        <h3 class="offer__title">Cenu připravíme na míru po 30minutové ukázce.</h3>
+        <p class="offer__text">Platíte jen za agenty, které opravdu využijete.</p>
+      </div>
+      <div class="offer__actions">
+        <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="guarantee guarantee--dark" href="/obchodni-podminky#clanek-iii">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <span><strong>100% vrácení peněz až do onboarding callu</strong><small>Podmínky v čl. III obchodních podmínek</small></span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -729,7 +569,7 @@
   </section>
 
   <!-- FAQ -->
-  <section class="section faq-section" id="faq">
+  <section class="section section--tint faq-section" id="faq">
     <div class="faq-head" data-reveal>
       <span class="section__eyebrow">Časté otázky</span>
       <h2 class="faq-title">Co vás zajímá nejčastěji.</h2>
@@ -822,7 +662,7 @@
   <!-- CLOSING CTA -->
   <section class="closer">
     <h2 data-reveal>Ten první týden už <em>neřešíte</em> rutinu sami.</h2>
-    <p data-reveal data-reveal-delay="1">30minutová ukázka. Ukážeme vám, jak by AI agenti zvládli typické situace u vás — hovory, rezervace i reporty. Bez prezentací, bez závazku.</p>
+    <p data-reveal data-reveal-delay="1">30minutová ukázka. Ukážeme vám, jak by AI agenti zvládli typické situace u vás — poptávky, termíny, follow-upy i reporty. Bez prezentací, bez závazku.</p>
     <div class="hero__cta" data-reveal data-reveal-delay="2">
       <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
         <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
