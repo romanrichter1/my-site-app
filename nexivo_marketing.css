@@ -2002,3 +2002,6 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
   .hero__title { font-size: 54px; }
   .closer h2 { font-size: 49px; }
 }
+.who { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1100px) { .who { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .who { grid-template-columns: 1fr; } }
