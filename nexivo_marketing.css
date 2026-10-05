@@ -2030,3 +2030,51 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 @media (max-width: 480px) { .trends__videos { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .trends__video, .trends__hook, .trends__tips { opacity: 1; transform: none; } }
 .trends__hook p { color: #fff; }
+
+/* ---------- social trends: interactive details ---------- */
+.trends__platforms { display: inline-flex; gap: 8px; }
+.trends__platforms span { width: 38px; height: 38px; border-radius: 12px; background: #fff; box-shadow: var(--shadow-card); display: inline-flex; align-items: center; justify-content: center; transition: transform 250ms ease; }
+.trends__platforms span:hover { transform: translateY(-3px) rotate(-4deg); }
+.trends__platforms svg, .trends__tabs svg, .trends__plat svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.trends__platforms svg { width: 20px; height: 20px; }
+.trends__scan { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-500); margin: -4px 0 10px; }
+.trends__scan b { color: var(--ink-1000); font-variant-numeric: tabular-nums; }
+.trends__pulse { width: 8px; height: 8px; border-radius: 999px; background: var(--lime-600); animation: pulse 1.6s ease-in-out infinite; }
+.trends__tabs { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bone-50); margin-bottom: 10px; }
+.trends__tabs button { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: none; background: transparent; padding: 7px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; color: var(--ink-500); cursor: pointer; transition: background 250ms ease, color 250ms ease, box-shadow 250ms ease; }
+.trends__tabs button svg { width: 15px; height: 15px; }
+.trends__tabs button:hover { color: var(--ink-1000); }
+.trends__tabs button[aria-selected="true"] { background: #fff; color: var(--ink-1000); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+.trends__videos { transition: opacity 220ms ease, transform 220ms ease; }
+.trends__videos.is-swapping { opacity: 0; transform: translateY(4px); }
+.trends__video { cursor: pointer; align-items: stretch; transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 250ms ease; }
+.trends__video:hover { background: #fff; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); }
+.trends__thumb { position: relative; width: 46px; height: 64px; overflow: hidden; }
+.trends__plat { position: absolute; top: 5px; left: 5px; width: 14px; height: 14px; color: #fff; opacity: 0.85; }
+.trends__plat svg { width: 14px; height: 14px; }
+.trends__play { width: 24px; height: 24px; border-radius: 999px; background: rgba(197, 232, 50, 0.95); display: inline-flex; align-items: center; justify-content: center; transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.trends__play svg { width: 11px; height: 11px; fill: var(--ink-1000); margin-left: 2px; }
+.trends__video:hover .trends__play { transform: scale(1.18); }
+.trends__bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--lime-500); transform-origin: left; transform: scaleX(0); }
+.trends__video:hover .trends__bar { animation: playBar 2.4s linear infinite; }
+@keyframes playBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.trends__info { display: flex; flex-direction: column; min-width: 0; }
+.trends__spark { width: 60px; height: 18px; margin-top: 4px; }
+.trends__spark path { fill: none; stroke: var(--success-500); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 80; stroke-dashoffset: 80; transition: stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s; }
+.is-live .trends__spark path { stroke-dashoffset: 0; }
+.trends__up { font-style: normal; font-size: 11px; font-weight: 700; color: #17704A; }
+.trends__type { white-space: pre-wrap; }
+.trends__caret { display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -2px; background: var(--lime-500); animation: caret 1s steps(1) infinite; }
+.is-typed .trends__caret { opacity: 0; animation: none; }
+@keyframes caret { 50% { opacity: 0; } }
+.trends__hook p { min-height: 2.7em; }
+.trends__count { margin-left: 6px; padding: 1px 7px; border-radius: 999px; background: var(--bone-50); color: var(--ink-1000); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.trends__tips li::before { display: none; }
+.trends__tips button { display: flex; align-items: flex-start; gap: 8px; width: 100%; text-align: left; border: none; background: none; padding: 4px 6px; margin: 0 -6px; border-radius: 8px; font: inherit; font-size: 12.5px; line-height: 1.4; color: var(--ink-1000); cursor: pointer; transition: background 200ms ease, color 200ms ease; }
+.trends__tips button:hover { background: var(--bone-50); }
+.trends__tips button::before { content: ""; flex-shrink: 0; width: 15px; height: 15px; margin-top: 1px; border-radius: 5px; border: 1.5px solid var(--ink-200); background: #fff center / 10px no-repeat; transition: background-color 200ms ease, border-color 200ms ease, transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.trends__tips button[aria-pressed="true"] { color: var(--ink-500); text-decoration: line-through; text-decoration-color: var(--ink-300); }
+.trends__tips button[aria-pressed="true"]::before { background-color: var(--lime-500); border-color: var(--lime-500); transform: scale(1.1); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230A0A0A' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E"); }
+@media (max-width: 480px) { .trends__tabs button { font-size: 11px; padding: 7px 4px; gap: 4px; } }
+@media (prefers-reduced-motion: reduce) { .trends__spark path { stroke-dashoffset: 0; } .trends__caret { display: none; } }
+.trends__scan { display: block; line-height: 1.5; } .trends__pulse { display: inline-block; margin-right: 6px; vertical-align: 1px; }
