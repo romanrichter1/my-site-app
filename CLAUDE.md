@@ -46,30 +46,36 @@ No build system, no package manager. All files are standalone HTML with inline o
 
 ## Design System
 
-**Colors** (defined in `colors_and_type.css` and dashboard inline):
-- `--bone-50: #FBFAF5` — primary background (cream)
-- `--ink-1000: #0A0A09` — primary text (near-black)
-- `--lime-500: #C7F230` — accent (electric lime)
+**Colors** (defined in `colors_and_type.css`; dashboard keeps its own inline vars):
+- `--bone-50: #F7F5EF` — primary background (cream)
+- `--ink-1000: #0A0A0A` — primary text (near-black), ink scale is neutral grey
+- `--lime-500: #C5E832` — accent, only for accents and CTA
 
-**Fonts:** Fraunces (display/serif, from Google Fonts) + Manrope (sans-serif)
+**Fonts:** system stack (-apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif), no web fonts.
 
-**Design language:** Editorial, premium, minimal. No rounded corners on type, no emoji, Czech "vykání" (formal address).
+**Design language:** Apple-inspired — lots of whitespace, big bold headings, cards with 24–28 px radius and soft shadow, sticky blurred nav, line SVG icons, no emoji, Czech "vykání".
+The "APPLE-STYLE LAYER" at the end of `nexivo_marketing.css` overrides the legacy components above it — keep new styles there.
 
 ---
 
 ## Marketing Landing Page (`index.html`)
 
-Single-page app with sections:
-- Hero (AI call card animation)
-- Proof bar
-- Feature triad (`#receptionist`)
-- Product detail: Weby s chatem (`#websites`)
-- AI agent section (`#agent`)
-- Savings strip
-- Pricing (`#pricing`)
-- FAQ accordion
-- Closing CTA
-- Footer
+Positioning: Nexivo sells ONLY AI agents to service firms with 5+ employees. No prices on the site.
+
+Sections in order:
+- Hero (looping inquiry demo, guarantee badge → `/obchodni-podminky#clanek-iii`)
+- Co vám agent reálně pošle (`#agenti`) — 4 HTML mockups, `[data-live]` animates on scroll, mobile carousel `[data-carousel]`
+- Agent není ChatGPT (`#jak-agent-pracuje`) — comparison + `[data-flow]` steps lighting up
+- Pro koho (`#pro-koho`)
+- Case study (`#case-study`, `.is-hidden` — show only with verified client consent)
+- Čísla (`#cisla`) — all stats labelled "Ilustrativní ukázka"
+- Jak to funguje (`#jak-to-funguje`)
+- Reporting Agent (`#reporting`)
+- Nabídka služeb (`#pricing` — id kept for old links) + price-on-request card
+- Reference (`#reference`, `.is-hidden` — placeholder [DOPLNIT])
+- FAQ (`#faq`), Closing CTA, Footer
+
+`/#ukazka` opens the booking modal on load (used by subpage nav CTAs).
 
 **Booking modal:** Custom cream overlay with `Calendly.initInlineWidget()` inside.  
 Config: `window.CALENDLY_URL = "https://calendly.com/romecrichter/nexivo"` in `<head>`.  

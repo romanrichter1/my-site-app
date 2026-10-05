@@ -1964,3 +1964,12 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 
 .nav__link--mobile-only { display: none; }
 @media (max-width: 768px) { .nav--open .nav__link--mobile-only { display: block; } }
+@media (max-width: 1024px) { .product { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .report-card__row { gap: 6px; } .report-card__mini { padding: 12px 10px; } }
+.product__list li::before { border-radius: 999px; width: 8px; height: 8px; margin: 8px 4px 0; box-shadow: 0 0 0 4px rgba(197, 232, 50, 0.25); }
+.footer .footer__h { font: 600 12px/1 var(--font-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--bone-50); margin: 0 0 16px; }
+.illustrative { color: var(--ink-500); }
+.rep__delta { color: #17704A; }
+.timeline__step { opacity: 0.55; }
+.flow__step { opacity: 0.6; }
+.flow__step p { color: var(--ink-300); }

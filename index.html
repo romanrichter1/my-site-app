@@ -678,7 +678,7 @@
       <p class="footer__tag">AI agenti pro servisní firmy v Česku a na Slovensku.</p>
     </div>
     <div>
-      <h5>Služby</h5>
+      <h2 class="footer__h">Služby</h2>
       <ul>
         <li><a href="/#agenti">AI agenti</a></li>
         <li><a href="/#pro-koho">Pro koho</a></li>
@@ -687,7 +687,7 @@
       </ul>
     </div>
     <div>
-      <h5>Firma</h5>
+      <h2 class="footer__h">Firma</h2>
       <ul>
         <li><a href="/tym">Tým</a></li>
         <li><a href="/kariera">Kariéra</a></li>
@@ -798,7 +798,7 @@
   </div>
 
   <!-- BOOKING MODAL -->
-  <div id="booking-modal" class="bm" aria-hidden="true">
+  <div id="booking-modal" class="bm" aria-hidden="true" inert>
     <div class="bm__backdrop"></div>
     <div class="bm__panel" role="dialog" aria-modal="true" aria-label="Domluvit ukázku">
       <div class="bm__head">
@@ -954,6 +954,7 @@
       function open() {
         lastFocus = document.activeElement;
         modal.classList.add('bm--open');
+        modal.removeAttribute('inert');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
         if (!initialized) {
@@ -971,6 +972,7 @@
       }
       function close() {
         modal.classList.remove('bm--open');
+        modal.setAttribute('inert', '');
         modal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
         if (lastFocus && lastFocus.focus) lastFocus.focus();
