@@ -1913,3 +1913,13 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 @media (prefers-reduced-motion: reduce) {
   .flow__step { opacity: 1; }
 }
+
+/* ---------- Pro koho ---------- */
+.who { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.who__card { display: flex; flex-direction: column; gap: 12px; }
+.who__icon { width: 56px; height: 56px; border-radius: 16px; background: var(--bone-50); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: background 250ms ease, transform 250ms ease; }
+.who__icon svg { width: 28px; height: 28px; fill: none; stroke: var(--ink-1000); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.who__card:hover .who__icon { background: var(--lime-500); transform: rotate(-4deg); }
+.who__card h3 { font: 700 21px/1.25 var(--font-display); letter-spacing: -0.015em; margin: 0; }
+.who__card p { font-size: 16px; line-height: 1.55; color: var(--ink-500); margin: 0; }
+@media (max-width: 900px) { .who { grid-template-columns: 1fr; } }
