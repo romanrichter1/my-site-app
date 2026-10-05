@@ -1480,3 +1480,6 @@ button { font-family: var(--font-sans); }
 @media (max-width: 560px) {
   .agents-grid { grid-template-columns: 1fr; }
 }
+
+.is-hidden { display: none !important; }
+.illustrative { grid-column: 1 / -1; margin: 4px 0 0; font: 400 12px/1.4 var(--font-sans); color: var(--ink-400); letter-spacing: 0.02em; }
