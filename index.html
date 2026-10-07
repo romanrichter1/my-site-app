@@ -33,26 +33,214 @@
     window.CALENDLY_URL = "https://calendly.com/romecrichter/nexivo";
   </script>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Nexivo",
-    "legalName": "RIVENTI s.r.o.",
-    "url": "https://nexivoai.cz/",
-    "logo": "https://nexivoai.cz/assets/nexivo-og.png",
-    "email": "info@nexivoai.cz",
-    "telephone": "+420602730777",
-    "taxID": "19892292",
-    "description": "AI agenti pro servisní firmy v Česku a na Slovensku.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Korunní 108",
-      "postalCode": "101 00",
-      "addressLocality": "Praha 10",
-      "addressCountry": "CZ"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://nexivoai.cz/#org",
+      "name": "Nexivo",
+      "legalName": "RIVENTI s.r.o.",
+      "url": "https://nexivoai.cz/",
+      "logo": "https://nexivoai.cz/assets/nexivo-logo.png",
+      "image": "https://nexivoai.cz/assets/nexivo-og.png",
+      "email": "info@nexivoai.cz",
+      "telephone": "+420602730777",
+      "taxID": "19892292",
+      "description": "AI agenti pro servisní firmy v Česku a na Slovensku.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Korunní 108",
+        "postalCode": "101 00",
+        "addressLocality": "Praha 10",
+        "addressCountry": "CZ"
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Česko"
+        },
+        {
+          "@type": "Country",
+          "name": "Slovensko"
+        }
+      ]
     },
-    "areaServed": ["CZ", "SK"]
-  }
+    {
+      "@type": "WebSite",
+      "@id": "https://nexivoai.cz/#website",
+      "url": "https://nexivoai.cz/",
+      "name": "Nexivo",
+      "inLanguage": "cs",
+      "publisher": {
+        "@id": "https://nexivoai.cz/#org"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://nexivoai.cz/#sluzby",
+      "name": "AI agenti na míru pro servisní firmy",
+      "serviceType": "AI agenti",
+      "provider": {
+        "@id": "https://nexivoai.cz/#org"
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Česko"
+        },
+        {
+          "@type": "Country",
+          "name": "Slovensko"
+        }
+      ],
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Servisní firmy s 5+ zaměstnanci"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI agenti",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Inquiry Agent",
+              "description": "Odpoví na poptávku z webu, e-mailu nebo formuláře do minuty, zjistí potřebné informace a nabídne termín schůzky."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Follow Up Agent",
+              "description": "Ozve se klientům k rozjednaným nabídkám, před schůzkou i po ní. Žádná zakázka neusne jen proto, že se zapomnělo."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Calendar Manager Agent",
+              "description": "Domlouvá a přeplánuje termíny napříč kalendáři týmu. Nic se nepřekrývá, nic nevypadne."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Reporting Agent",
+              "description": "Čte CRM, fakturaci a kalendář. Každé pondělí pošle majiteli přehled firmy a upozorní na problémy."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Voice Agent",
+              "description": "Zvedá telefon, když váš tým nemůže. Vyřídí dotaz nebo zapíše termín a umí i odchozí hovory, třeba potvrzení schůzek."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Google Review Agent",
+              "description": "Po dokončení zakázky požádá spokojeného klienta o recenzi na Googlu. Víc recenzí, víc důvěry, víc poptávek."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Lead Agent",
+              "description": "Pravidelně prochází zdroje, které určíte, a připraví obchodníkům čerstvé kontakty bez ručního hledání."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Agent na míru",
+              "description": "Máte proces, který se pořád opakuje? Postavíme agenta přesně pro něj."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://nexivoai.cz/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Jak začít, když nevíme, kde má AI smysl?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Začínáme bezplatnou konzultací — projdeme váš provoz a zjistíme, kde AI reálně pomůže a kde ne. Pokud dojdeme k tomu, že to pro vás dává smysl, domluvíme onboarding call, kde nastavíme vše do detailu přesně podle vašich potřeb."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak dlouho trvá, než uvidíme první výsledky?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Od podpisu smlouvy do spuštění trvá implementace 7–14 dní podle rozsahu zakázky. První výsledky — méně zmeškaných hovorů, rezervace bez vaší účasti — vidíte od prvního dne, kdy AI běží."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jsou data mých zákazníků v bezpečí?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Data zpracováváme v souladu s GDPR. Používáme podkladové AI modely třetích stran, které se na datech klientů neučí, a přístupy omezujeme na nezbytné minimum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Napojí se AI na Google Kalendář nebo Reservio, které už používám?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ano — integrace s Google Kalendářem a Reserviem je součástí každého nasazení. AI agent píše přímo do vašeho stávajícího systému. Nepotřebujete nic měnit ani přesouvat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Musíme mít vlastní datové vědce nebo programátory?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ne. Celou implementaci, nastavení a trénink AI řešíme my. Vy nám poskytnete podklady — ceník, otevírací dobu, informace o službách — a my se postaráme o zbytek."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Nahradí AI naše zaměstnance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ne. AI přebírá rutinní opakující se úkoly — zvedání telefonu, odpovídání na časté dotazy, zapisování rezervací. Vaši lidé se místo toho věnují práci, kde je člověk nenahraditelný."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak řešíte halucinace AI (vymýšlení nesmyslů)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Používáme metodu RAG (Retrieval-Augmented Generation), která AI striktně omezuje pouze na vaše ověřené dokumenty a data. AI nevymýšlí — pokud odpověď v podkladech nenajde, přizná to."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Co když se AI modely za půl roku změní?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Stavíme architektury nezávislé na konkrétním modelu. Když vyjde lepší verze, jednoduše ji vyměníme bez nutnosti předělávat celý systém. Vy to ani nepoznáte."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body data-screen-label="Marketing Landing">
