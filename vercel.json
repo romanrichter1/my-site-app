@@ -1,21 +1,58 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/nexivo_landing",  "destination": "/",        "permanent": true },
-    { "source": "/nexivo_login",    "destination": "/klient",  "permanent": true },
-    { "source": "/nexivo_register", "destination": "/klient",  "permanent": true },
-    { "source": "/ai-pro-maklere",  "destination": "/business", "permanent": true },
+    {
+      "source": "/nexivo_landing",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/nexivo_login",
+      "destination": "/klient",
+      "permanent": true
+    },
+    {
+      "source": "/nexivo_register",
+      "destination": "/klient",
+      "permanent": true
+    },
+    {
+      "source": "/ai-pro-maklere",
+      "destination": "/business",
+      "permanent": true
+    },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "nexivoagency.eu" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "nexivoagency.eu"
+        }
+      ],
       "destination": "https://nexivoai.cz/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.nexivoai.cz" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.nexivoai.cz"
+        }
+      ],
       "destination": "https://nexivoai.cz/:path*",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(business|maestro_barbershop|tictactoe|nexivo_coldemail|nexivo_email_mailchimp_penziony|og-gen)(.html)?",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ]
 }
