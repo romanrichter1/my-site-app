@@ -46,7 +46,7 @@
   ],
   "headers": [
     {
-      "source": "/(business|maestro_barbershop|tictactoe|nexivo_coldemail|nexivo_email_mailchimp_penziony|og-gen)(.html)?",
+      "source": "/(business|maestro_barbershop|tictactoe|nexivo_coldemail|nexivo_email_mailchimp_penziony|og-gen|schuzka)(.html)?",
       "headers": [
         {
           "key": "X-Robots-Tag",
