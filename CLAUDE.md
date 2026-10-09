@@ -63,7 +63,7 @@ The "APPLE-STYLE LAYER" at the end of `nexivo_marketing.css` overrides the legac
 Positioning: Nexivo sells ONLY AI agents to service firms with 5+ employees. No prices on the site.
 
 Sections in order:
-- Hero (`.hero--center`: eyebrow pill → title with lime underline `.hero__mark` → sub → 2 CTAs → `.hero__checks` trust row incl. guarantee link → looping inquiry demo below)
+- Hero (`.hero--center`: eyebrow pill → title with lime underline `.hero__mark` → sub → 2 CTAs → `.hero__checks` trust row incl. guarantee link → `.taskdemo` „Zadej úkol“ interactive demo below: 3 task chips, tool rail, steps, result card; autoplays until first click)
 - Co vám agent reálně pošle (`#agenti`) — 4 HTML mockups, `[data-live]` animates on scroll, mobile carousel `[data-carousel]`
 - Agent není ChatGPT (`#jak-agent-pracuje`) — comparison + `[data-flow]` steps lighting up
 - Pro koho (`#pro-koho`)

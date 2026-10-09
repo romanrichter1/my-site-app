@@ -286,25 +286,34 @@
       </ul>
     </div>
 
-    <aside class="callcard" aria-label="Ukázka: agent odpovídá na poptávku z webu" data-reveal data-reveal-delay="2">
-      <div class="callcard__head">
-        <span class="callcard__avatar" aria-hidden="true">JD</span>
-        <div class="callcard__who">
-          <span class="callcard__name">Jana Dvořáková</span>
-          <span class="callcard__meta">Poptávka z webového formuláře</span>
+    <aside class="taskdemo" data-taskdemo aria-label="Interaktivní ukázka: zadejte agentovi úkol" data-reveal data-reveal-delay="2">
+      <p class="taskdemo__label">Zadejte agentovi úkol</p>
+      <div class="taskdemo__chips" role="tablist">
+        <button type="button" role="tab" aria-selected="true" data-task="0">Vyřiď novou poptávku</button>
+        <button type="button" role="tab" aria-selected="false" data-task="1">Pošli mi týdenní přehled</button>
+        <button type="button" role="tab" aria-selected="false" data-task="2">Pohlídej nezaplacené faktury</button>
+      </div>
+      <div class="taskdemo__win">
+        <div class="taskdemo__bar">
+          <span class="taskdemo__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="taskdemo__title">Nexivo agent</span>
+          <span class="taskdemo__status" data-status><span class="dot"></span><span data-status-text>Hotovo za 4,1 s</span></span>
         </div>
-        <span class="callcard__status"><span class="dot"></span><span data-timer>Odpověď za 38 s</span></span>
-      </div>
-      <div class="transcript">
-        <div class="bubble bubble--them">Dobrý den, potřebovali bychom nacenit zakázku. Jde o větší rekonstrukci, termín nejlépe do konce měsíce.<small>18:02:04</small></div>
-        <div class="bubble bubble--ai">Dobrý den, děkujeme za poptávku. Rád vás spojím s naším obchodníkem Petrem. Hodí se vám schůzka ve čtvrtek v 9:00, nebo v pátek ve 14:00?<small>AI agent · 18:02:42</small></div>
-        <div class="bubble bubble--them">Čtvrtek v 9:00 je ideální.<small>18:05:17</small></div>
-        <div class="bubble bubble--ai">Výborně, schůzku jsem zapsal. Pozvánku s odkazem máte v e-mailu.<small>AI agent · 18:05:20</small></div>
-        <div class="callcard__typing" aria-hidden="true"><span></span><span></span><span></span></div>
-      </div>
-      <div class="callcard__action">
-        <span class="callcard__check" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <span>Schůzka zapsána do kalendáře · obchodník Petr</span>
+        <div class="taskdemo__prompt">
+          <span class="taskdemo__you" aria-hidden="true">Vy</span>
+          <p><span data-prompt>Přišla poptávka z webu, vyřiď ji.</span><span class="taskdemo__caret" aria-hidden="true"></span></p>
+        </div>
+        <div class="taskdemo__rail" aria-hidden="true">
+          <span class="taskdemo__packet" data-packet></span>
+          <span class="taskdemo__tool" data-tool="mail"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg><b>E-mail</b></span>
+          <span class="taskdemo__tool" data-tool="cal"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>Kalendář</b></span>
+          <span class="taskdemo__tool" data-tool="crm"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5M16 4.5a3.5 3.5 0 010 7M18.5 14.8c1.6.8 2.6 2.5 3 5.2"/></svg><b>CRM</b></span>
+          <span class="taskdemo__tool" data-tool="sheet"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M3 15h18M9 3v18"/></svg><b>Účetnictví</b></span>
+        </div>
+        <div class="taskdemo__body">
+          <ol class="taskdemo__steps" data-steps></ol>
+          <div class="taskdemo__result" data-result aria-live="polite"></div>
+        </div>
       </div>
       <p class="illustrative">Ilustrativní ukázka</p>
     </aside>
@@ -1095,51 +1104,144 @@
     );
     document.querySelectorAll('[data-count]').forEach(el => counterIO.observe(el));
 
-    // ── 3. Hero demo loop ──────────────────────────────────────────
-    const callcard = document.querySelector('.callcard');
-    if (!callcard) return;
-    const bubbles = Array.from(callcard.querySelectorAll('.bubble'));
-    const typing  = callcard.querySelector('.callcard__typing');
-    const action  = callcard.querySelector('.callcard__action');
-    const reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const all = bubbles.concat(action ? [action] : []);
-
-    if (reduce) { all.forEach(el => el.classList.add('is-in')); return; }
-
-    // [start, end] of typing indicator before each agent bubble
-    const STEPS = [
-      { el: bubbles[0], at: 500 },
-      { typing: [1300, 2500] },
-      { el: bubbles[1], at: 2500 },
-      { el: bubbles[2], at: 4300 },
-      { typing: [5000, 5900] },
-      { el: bubbles[3], at: 5900 },
-      { el: action,     at: 7000 },
+    // ── 3. Hero „Zadej úkol“ demo ──────────────────────────────────
+    const demo = document.querySelector('[data-taskdemo]');
+    if (!demo) return;
+    const CHECK = '<svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>';
+    const TASKS = [
+      {
+        prompt: 'Přišla poptávka z webu, vyřiď ji.',
+        time: '4,1 s',
+        steps: [
+          ['mail',  'Čtu poptávku od Jany Dvořákové'],
+          ['cal',   'Hledám volný termín obchodníka'],
+          ['crm',   'Zakládám kontakt a zakázku'],
+          ['mail',  'Posílám odpověď s návrhem schůzky'],
+        ],
+        result: `<div class="tr-event"><span class="tr-event__day"><small>čt</small>14</span>
+          <div><b>Schůzka: rekonstrukce</b><span>9:00–9:30 · obchodník Petr</span></div></div>
+          <p class="tr-note"><span class="tr-check">${CHECK}</span><span>Odpověď odešla za <b data-num="38">38</b> s</span></p>`,
+      },
+      {
+        prompt: 'Pošli mi přehled firmy za tento týden.',
+        time: '3,8 s',
+        steps: [
+          ['sheet', 'Stahuji tržby z účetnictví'],
+          ['crm',   'Kontroluji rozpracované zakázky'],
+          ['sheet', 'Porovnávám s minulým týdnem'],
+          ['mail',  'Posílám report do vašeho mailu'],
+        ],
+        result: `<div class="tr-kpi"><small>Tržby tento týden</small><b><span data-num="412300">412 300</span> Kč</b><em>+12 %</em></div>
+          <div class="tr-bars"><i style="--h:42%"></i><i style="--h:58%"></i><i style="--h:50%"></i><i style="--h:71%"></i><i style="--h:64%"></i><i style="--h:88%" class="is-now"></i></div>
+          <p class="tr-note tr-note--warn">3 zakázky čekají déle než 5 dní</p>`,
+      },
+      {
+        prompt: 'Pohlídej faktury po splatnosti.',
+        time: '3,5 s',
+        steps: [
+          ['sheet', 'Hledám faktury po splatnosti'],
+          ['crm',   'Dohledávám kontakty odběratelů'],
+          ['mail',  'Píšu zdvořilé připomínky'],
+          ['cal',   'Plánuji kontrolu za 7 dní'],
+        ],
+        result: `<div class="tr-kpi"><small>Připomenuto</small><b><span data-num="86400">86 400</span> Kč</b><em>4 faktury</em></div>
+          <ul class="tr-list"><li>Stavby Novák s.r.o.<span>32 000 Kč</span></li><li>Malíři Brno<span>24 900 Kč</span></li><li>+ 2 další<span>29 500 Kč</span></li></ul>`,
+      },
     ];
-    const LOOP = 13000;
-    let timers = [], running = false;
+    const chips   = Array.from(demo.querySelectorAll('[data-task]'));
+    const promptEl = demo.querySelector('[data-prompt]');
+    const stepsEl = demo.querySelector('[data-steps]');
+    const resultEl = demo.querySelector('[data-result]');
+    const statusEl = demo.querySelector('[data-status]');
+    const statusText = demo.querySelector('[data-status-text]');
+    const packet  = demo.querySelector('[data-packet]');
+    const tools   = Object.fromEntries(Array.from(demo.querySelectorAll('[data-tool]')).map(t => [t.dataset.tool, t]));
+    const reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const STEP_MS = 750;
+    let timers = [], current = 0, autoplay = !reduce, visible = false;
 
+    const later = (fn, ms) => timers.push(setTimeout(fn, ms));
     function clear() { timers.forEach(clearTimeout); timers = []; }
-    function play() {
-      clear();
-      all.forEach(el => el.classList.remove('is-in'));
-      typing && typing.classList.remove('is-in');
-      STEPS.forEach(s => {
-        if (s.el) timers.push(setTimeout(() => s.el.classList.add('is-in'), s.at));
-        if (s.typing && typing) {
-          timers.push(setTimeout(() => typing.classList.add('is-in'), s.typing[0]));
-          timers.push(setTimeout(() => typing.classList.remove('is-in'), s.typing[1]));
-        }
-      });
-      timers.push(setTimeout(() => {
-        all.forEach(el => el.classList.add('is-out'));
-        timers.push(setTimeout(() => { all.forEach(el => el.classList.remove('is-out')); if (running) play(); }, 450));
-      }, LOOP));
+    function countUp(el) {
+      const target = +el.dataset.num, t0 = performance.now(), dur = 900;
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        el.textContent = Math.round(target * easeOutCubic(p)).toLocaleString('cs-CZ');
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
     }
-    new IntersectionObserver(entries => entries.forEach(e => {
-      if (e.isIntersecting && !running) { running = true; play(); }
-      else if (!e.isIntersecting && running) { running = false; clear(); all.forEach(el => el.classList.add('is-in')); }
-    }), { threshold: 0.3 }).observe(callcard);
+    function movePacket(tool) {
+      const r = tool.getBoundingClientRect(), rail = tool.parentElement.getBoundingClientRect();
+      packet.style.transform = `translateX(${r.left - rail.left + r.width / 2}px)`;
+      packet.classList.add('is-on');
+    }
+    function render(i, instant) {
+      clear();
+      current = i;
+      const task = TASKS[i];
+      chips.forEach((c, n) => c.setAttribute('aria-selected', String(n === i)));
+      stepsEl.innerHTML = task.steps.map(([, label]) => `<li><span class="taskdemo__ic">${CHECK}</span>${label}</li>`).join('');
+      resultEl.innerHTML = task.result;
+      const items = Array.from(stepsEl.children);
+      Object.values(tools).forEach(t => t.classList.remove('is-active', 'is-used'));
+      resultEl.classList.remove('is-in');
+
+      if (instant) {
+        promptEl.textContent = task.prompt;
+        items.forEach(li => li.classList.add('is-done'));
+        task.steps.forEach(([t]) => tools[t].classList.add('is-used'));
+        resultEl.classList.add('is-in');
+        statusEl.classList.add('is-done');
+        statusText.textContent = 'Hotovo za ' + task.time;
+        packet.classList.remove('is-on');
+        return;
+      }
+
+      demo.classList.add('is-typing');
+      statusEl.classList.remove('is-done');
+      statusText.textContent = 'Čeká na úkol';
+      packet.classList.remove('is-on');
+      promptEl.textContent = '';
+      const chars = Array.from(task.prompt);
+      chars.forEach((_, n) => later(() => { promptEl.textContent = chars.slice(0, n + 1).join(''); }, 22 * n));
+      const start = 22 * chars.length + 250;
+      later(() => { demo.classList.remove('is-typing'); statusText.textContent = 'Pracuje…'; }, start);
+
+      task.steps.forEach(([tool], n) => {
+        const t0 = start + n * STEP_MS;
+        later(() => {
+          items[n].classList.add('is-active');
+          Object.values(tools).forEach(t => t.classList.remove('is-active'));
+          tools[tool].classList.add('is-active');
+          movePacket(tools[tool]);
+        }, t0);
+        later(() => {
+          items[n].classList.replace('is-active', 'is-done');
+          tools[tool].classList.add('is-used');
+        }, t0 + STEP_MS - 120);
+      });
+
+      const end = start + task.steps.length * STEP_MS;
+      later(() => {
+        Object.values(tools).forEach(t => t.classList.remove('is-active'));
+        packet.classList.remove('is-on');
+        resultEl.classList.add('is-in');
+        resultEl.querySelectorAll('[data-num]').forEach(countUp);
+        statusEl.classList.add('is-done');
+        statusText.textContent = 'Hotovo za ' + task.time;
+      }, end);
+      if (autoplay) later(() => { if (visible) render((current + 1) % TASKS.length); }, end + 3800);
+    }
+
+    chips.forEach((c, n) => c.addEventListener('click', () => { autoplay = false; render(n, reduce); }));
+    render(0, true);
+    if (!reduce) {
+      new IntersectionObserver(entries => entries.forEach(e => {
+        visible = e.isIntersecting;
+        if (visible && autoplay && !timers.length) render(current);
+        else if (!visible) { clear(); render(current, true); }
+      }), { threshold: 0.35 }).observe(demo);
+    }
   })();
   </script>
 
