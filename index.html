@@ -527,23 +527,24 @@
       <span class="vs__toggle-pill" aria-hidden="true"></span>
     </div>
 
-    <div class="vs__grid" data-vs-active="agent" data-reveal>
+    <div class="vs__grid" data-vs-active="agent" data-vs-duel data-reveal>
       <div class="vs__col vs__col--gpt">
-        <h3>ChatGPT</h3>
+        <h3>ChatGPT <span class="vs__score"><b data-score="0">0</b>/4</span></h3>
         <ul>
-          <li>Čeká, až se zeptáte</li>
-          <li>Poradí, co udělat</li>
-          <li>Nevidí do vašeho CRM</li>
-          <li>Každý den začíná od nuly</li>
+          <li><span class="vs__ic" aria-hidden="true"></span><span class="vs__t"><small>Iniciativa</small><span class="vs__x">Čeká, až se zeptáte</span></span></li>
+          <li><span class="vs__ic" aria-hidden="true"></span><span class="vs__t"><small>Výsledek</small><span class="vs__x">Poradí, co udělat</span></span></li>
+          <li><span class="vs__ic" aria-hidden="true"></span><span class="vs__t"><small>Napojení</small><span class="vs__x">Nevidí do vašeho CRM</span></span></li>
+          <li><span class="vs__ic" aria-hidden="true"></span><span class="vs__t"><small>Paměť</small><span class="vs__x">Každý den začíná od nuly</span></span></li>
         </ul>
       </div>
+      <span class="vs__badge" aria-hidden="true">vs</span>
       <div class="vs__col vs__col--agent">
-        <h3>AI agent Nexivo</h3>
+        <h3>AI agent Nexivo <span class="vs__score"><b data-score="4">4</b>/4</span></h3>
         <ul>
-          <li>Hlídá vaše systémy sám</li>
-          <li>Úkol sám dokončí</li>
-          <li>Je napojený na e-mail, kalendář a CRM</li>
-          <li>Pamatuje si klienty i historii</li>
+          <li><span class="vs__ic" aria-hidden="true"></span><span class="vs__t"><small>Iniciativa</small>Hlídá vaše systémy sám</span></li>
+          <li><span class="vs__ic" aria-hidden="true"></span><span class="vs__t"><small>Výsledek</small>Úkol sám dokončí</span></li>
+          <li><span class="vs__ic" aria-hidden="true"></span><span class="vs__t"><small>Napojení</small>Je napojený na e-mail, kalendář a CRM</span></li>
+          <li><span class="vs__ic" aria-hidden="true"></span><span class="vs__t"><small>Paměť</small>Pamatuje si klienty i historii</span></li>
         </ul>
       </div>
     </div>
@@ -1655,6 +1656,34 @@
         gsap.fromTo(win, { rotateX: 16, scale: 0.93, y: 30, transformOrigin: '50% 100%', transformPerspective: 1400 }, {
           rotateX: 0, scale: 1, y: 0, ease: 'none',
           scrollTrigger: { trigger: '.taskdemo', start: 'top bottom', end: 'center 55%', scrub: 1.4 },
+        });
+      }
+
+      // ── ChatGPT vs agent: row-by-row duel scrubbed by scroll ─────
+      const duel = document.querySelector('[data-vs-duel]');
+      if (duel) {
+        const gptRows = duel.querySelectorAll('.vs__col--gpt li');
+        const agRows = duel.querySelectorAll('.vs__col--agent li');
+        const score = duel.querySelector('.vs__col--agent [data-score]');
+        const tl = gsap.timeline({
+          defaults: { ease: 'power2.out' },
+          scrollTrigger: {
+            trigger: duel, start: 'top 80%', end: 'bottom 72%', scrub: 1.2,
+            onUpdate: self => { score.textContent = Math.min(4, Math.floor(self.progress * 4.4)); },
+          },
+        });
+        tl.fromTo('.vs__badge', { scale: 0, rotate: -120 }, { scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2)' }, 0);
+        gptRows.forEach((row, i) => {
+          const at = 0.3 + i;
+          tl.fromTo(row, { opacity: 0, x: -36 }, { opacity: 1, x: 0, duration: 0.45 }, at)
+            .fromTo(row, { '--s': 0 }, { '--s': 1, duration: 0.35, ease: 'none' }, at + 0.4)
+            .to(row, { opacity: 0.45, duration: 0.3 }, at + 0.7)
+            .fromTo(agRows[i], { opacity: 0, x: 48 }, { opacity: 1, x: 0, duration: 0.45 }, at + 0.45)
+            .fromTo(agRows[i].querySelector('.vs__ic'), { scale: 0, rotate: -90 }, { scale: 1, rotate: 0, duration: 0.4, ease: 'back.out(2.4)' }, at + 0.7);
+        });
+        mm.add('(min-width: 769px)', () => {
+          tl.to('.vs__col--gpt', { scale: 0.96, opacity: 0.7, duration: 0.6 }, 4.2)
+            .to('.vs__col--agent', { scale: 1.03, '--glow': 1, duration: 0.6 }, 4.2);
         });
       }
 

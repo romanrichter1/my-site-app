@@ -2263,3 +2263,31 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 @media (prefers-reduced-motion: reduce) {
   .hl-orb, .hl-chip__in { animation: none; }
 }
+
+/* ---------- ChatGPT vs agent duel ---------- */
+.vs__grid { position: relative; }
+.vs__col h3 { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.vs__score { font: 400 clamp(28px, 3vw, 36px)/1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.vs__score b { font-weight: 400; }
+.vs__col--gpt .vs__score { color: var(--ink-500); }
+.vs__col li::before { content: none; }
+.vs__col li { align-items: flex-start; }
+.vs__ic { flex-shrink: 0; width: 24px; height: 24px; margin-top: 18px; border-radius: 999px; background: no-repeat center / 12px; }
+.vs__col--gpt .vs__ic { border: 1.5px solid #4A4A4E; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7A80' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 6l12 12M18 6L6 18'/%3E%3C/svg%3E"); }
+.vs__col--agent .vs__ic { background-color: var(--ink-1000); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C5E832' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E"); }
+.vs__t { display: flex; flex-direction: column; gap: 4px; }
+.vs__t small { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; }
+.vs__x { position: relative; align-self: flex-start; }
+.vs__x::after { content: ""; position: absolute; left: -2px; right: -2px; top: 54%; height: 2px; border-radius: 2px; background: var(--ink-400); transform-origin: left; transform: scaleX(var(--s, 1)); }
+.vs__col--agent { box-shadow: 0 30px 80px rgba(197, 232, 50, calc(0.18 + var(--glow, 0) * 0.27)), 0 0 0 calc(var(--glow, 0) * 6px) rgba(197, 232, 50, 0.18); }
+.vs__badge {
+  position: absolute; left: 50%; top: 50%; z-index: 2; width: 64px; height: 64px; margin: -32px 0 0 -32px;
+  border-radius: 999px; background: var(--ink-1000); border: 1.5px solid rgba(255, 255, 255, 0.14);
+  display: inline-flex; align-items: center; justify-content: center;
+  font: italic 400 26px/1 var(--font-display); color: var(--lime-500); padding-bottom: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+.js-motion .vs__col, .js-motion .vs__col li { transition-property: opacity !important; }
+@media (max-width: 768px) {
+  .vs__badge { display: none; }
+}
