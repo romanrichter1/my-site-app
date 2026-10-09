@@ -2078,3 +2078,34 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 @media (max-width: 480px) { .trends__tabs button { font-size: 11px; padding: 7px 4px; gap: 4px; } }
 @media (prefers-reduced-motion: reduce) { .trends__spark path { stroke-dashoffset: 0; } .trends__caret { display: none; } }
 .trends__scan { display: block; line-height: 1.5; } .trends__pulse { display: inline-block; margin-right: 6px; vertical-align: 1px; }
+
+/* ---------- hero: centered layout (eyebrow → title → sub → CTA → checks → demo) ---------- */
+.hero--center { display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(48px, 6vw, 72px); padding-top: clamp(48px, 7vw, 104px); }
+.hero--center::before { right: auto; left: 50%; top: -260px; transform: translateX(-50%); width: 1100px; height: 760px; }
+.hero--center .hero__copy { display: flex; flex-direction: column; align-items: center; max-width: 980px; }
+.hero--center .hero__eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(197, 232, 50, 0.28); border: 1px solid rgba(160, 190, 30, 0.40); box-shadow: none; font-size: 14px; font-weight: 600; }
+.hero--center .hero__eyebrow::before { width: 7px; height: 7px; background: var(--ink-1000); }
+.hero--center .hero__title { max-width: 18ch; margin-inline: auto; font-size: clamp(46px, 7vw, 88px); line-height: 1.02; }
+.hero--center .hero__sub { margin-inline: auto; max-width: 620px; }
+.hero--center .hero__cta { justify-content: center; }
+.hero__mark { position: relative; display: inline-block; white-space: nowrap; }
+.hero__mark::after {
+  content: "";
+  position: absolute; left: -2%; right: -2%; bottom: -0.06em; height: 0.2em; z-index: -1;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14C55 5 140 3 197 9' fill='none' stroke='%23C5E832' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  transform-origin: left; transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+}
+.hero__title.is-visible .hero__mark::after, .hero__title:not([data-reveal]) .hero__mark::after { transform: scaleX(1); }
+.hero__checks { list-style: none; margin: 32px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; font-size: 15px; color: var(--ink-700, var(--ink-1000)); }
+.hero__checks li, .hero__checks a { display: inline-flex; align-items: center; gap: 8px; color: inherit; }
+.hero__checks a { text-decoration: underline; text-decoration-color: var(--ink-300); text-underline-offset: 3px; }
+.hero__checks a:hover { text-decoration-color: var(--ink-1000); }
+.hero__checks svg { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: #17704A; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.hero--center .callcard { width: 100%; max-width: 620px; text-align: left; }
+@media (max-width: 480px) {
+  .hero--center .hero__title { font-size: 44px; }
+  .hero--center .hero__cta { align-self: stretch; }
+  .hero__checks { flex-direction: column; align-items: center; gap: 10px; font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .hero__mark::after { transform: scaleX(1); } }
