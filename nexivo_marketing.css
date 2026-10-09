@@ -2093,10 +2093,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
   content: "";
   position: absolute; left: -2%; right: -2%; bottom: -0.06em; height: 0.2em; z-index: -1;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14C55 5 140 3 197 9' fill='none' stroke='%23C5E832' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
-  transform-origin: left; transform: scaleX(0);
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
 }
-.hero__title.is-visible .hero__mark::after, .hero__title:not([data-reveal]) .hero__mark::after { transform: scaleX(1); }
 .hero__checks { list-style: none; margin: 32px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; font-size: 15px; color: var(--ink-700, var(--ink-1000)); }
 .hero__checks li, .hero__checks a { display: inline-flex; align-items: center; gap: 8px; color: inherit; }
 .hero__checks a { text-decoration: underline; text-decoration-color: var(--ink-300); text-underline-offset: 3px; }
@@ -2108,7 +2105,6 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
   .hero--center .hero__cta { align-self: stretch; }
   .hero__checks { flex-direction: column; align-items: center; gap: 10px; font-size: 14px; }
 }
-@media (prefers-reduced-motion: reduce) { .hero__mark::after { transform: scaleX(1); } }
 
 /* ---------- hero: „Zadej úkol“ interactive demo ---------- */
 .taskdemo { width: 100%; max-width: 760px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: left; }
@@ -2210,7 +2206,6 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 .js-motion [data-split]:not(.is-split) { visibility: hidden; }
 .sw { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 0.07em 0.14em; margin: 0 -0.07em -0.14em; }
 .sw__i { display: inline-block; will-change: transform; }
-.hero__mark .sw { overflow: visible; }
 
 .js-motion .who__card, .js-motion .product__visual, .js-motion .stat, .js-motion .report-card,
 .js-motion [data-extend] .section__head, .js-motion [data-extend] > h2 { transition-property: opacity, background, box-shadow, border-color, color !important; }
@@ -2225,11 +2220,10 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
   -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 35%, #000 20%, transparent 75%);
           mask-image: radial-gradient(ellipse 60% 55% at 50% 35%, #000 20%, transparent 75%);
 }
-.hl-orb { position: absolute; border-radius: 999px; filter: blur(60px); animation: hlFloat 16s ease-in-out infinite alternate; }
+.hl-orb { position: absolute; border-radius: 999px; filter: blur(60px); }
 .hl-orb--a { width: 460px; height: 460px; left: 6%; top: 8%; background: rgba(197, 232, 50, 0.30); }
-.hl-orb--b { width: 380px; height: 380px; right: 4%; top: 30%; background: rgba(227, 245, 154, 0.55); animation-duration: 20s; animation-delay: -6s; }
-.hl-orb--c { width: 300px; height: 300px; left: 38%; top: 58%; background: rgba(239, 237, 230, 0.9); animation-duration: 24s; animation-delay: -12s; }
-@keyframes hlFloat { from { translate: 0 0; } to { translate: 40px -30px; } }
+.hl-orb--b { width: 380px; height: 380px; right: 4%; top: 30%; background: rgba(227, 245, 154, 0.55); }
+.hl-orb--c { width: 300px; height: 300px; left: 38%; top: 58%; background: rgba(239, 237, 230, 0.9); }
 
 .hl-chip { position: absolute; display: none; }
 .hl-chip__in {
@@ -2238,13 +2232,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
   -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.9);
-  animation: hlBob 7s ease-in-out infinite alternate;
   white-space: nowrap;
 }
-.hl-chip--2 .hl-chip__in { animation-delay: -2s; animation-duration: 8s; }
-.hl-chip--3 .hl-chip__in { animation-delay: -4s; animation-duration: 9s; }
-.hl-chip--4 .hl-chip__in { animation-delay: -1s; animation-duration: 7.5s; }
-@keyframes hlBob { from { translate: 0 -6px; } to { translate: 0 8px; } }
 .hl-chip__in b { display: block; font-size: 13px; font-weight: 600; color: var(--ink-1000); }
 .hl-chip__in small { display: block; font-size: 12px; color: var(--ink-500); }
 .hl-chip__ic { width: 34px; height: 34px; border-radius: 11px; background: var(--bone-100); display: inline-flex; align-items: center; justify-content: center; }
@@ -2258,10 +2247,6 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
   .hl-chip--2 { right: calc(50% - 650px); top: 230px; }
   .hl-chip--3 { left: calc(50% - 620px); top: 780px; }
   .hl-chip--4 { right: calc(50% - 630px); top: 900px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hl-orb, .hl-chip__in { animation: none; }
 }
 
 /* ---------- ChatGPT vs agent duel ---------- */

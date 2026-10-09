@@ -81,7 +81,7 @@ skipped for reduced motion, removed if GSAP fails to load). **Everything moves o
 no Lenis/smooth-scroll library and no pointer-driven effects (cursor follower, magnetic buttons, tilt,
 spotlight, mouse parallax were removed: Roman found trackpad control broken).
 - `[data-split]` headings → masked word reveal; `[data-extend]` sections → clip-path grows to full bleed
-- `.hero__layers [data-depth]` → scroll parallax (floating chips only ≥ 1240 px)
+- **Hero is fully static** (Roman's call): no reveal, split, parallax, float or tilt anywhere inside `header.hero`; `.hero__layers` (grid, orbs, chips ≥ 1240 px) are static decoration, `.hero__mark` underline is drawn statically. Only the `.taskdemo` internals animate.
 - Elements GSAP transforms must not have a CSS `transform` transition (see `transition-property` override)
 
 `/#ukazka` opens the booking modal on load (used by subpage nav CTAs).
