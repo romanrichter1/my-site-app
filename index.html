@@ -30,6 +30,15 @@
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script>
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('js-motion');
+      setTimeout(() => { if (!window.gsap) document.documentElement.classList.remove('js-motion'); }, 3000);
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script>
     window.CALENDLY_URL = "https://calendly.com/romecrichter/nexivo";
   </script>
   <script type="application/ld+json">
@@ -269,9 +278,19 @@
 
   <!-- HERO -->
   <header class="hero hero--center">
+    <div class="hero__layers" aria-hidden="true">
+      <span class="hl-grid" data-depth="0.08"></span>
+      <span class="hl-orb hl-orb--a" data-depth="0.18"></span>
+      <span class="hl-orb hl-orb--b" data-depth="0.3"></span>
+      <span class="hl-orb hl-orb--c" data-depth="0.42"></span>
+      <div class="hl-chip hl-chip--1" data-depth="0.55"><div class="hl-chip__in"><i class="hl-chip__ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></i><span><b>Nová poptávka</b><small>Odpovězeno za 38 s</small></span></div></div>
+      <div class="hl-chip hl-chip--2" data-depth="0.35"><div class="hl-chip__in"><i class="hl-chip__ic hl-chip__ic--lime"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></i><span><b>Faktura uhrazena</b><small>24 900 Kč · právě teď</small></span></div></div>
+      <div class="hl-chip hl-chip--3" data-depth="0.7"><div class="hl-chip__in"><i class="hl-chip__ic hl-chip__ic--dark"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></i><span><b>Report odeslán</b><small>Po 7:00 · tržby +12 %</small></span></div></div>
+      <div class="hl-chip hl-chip--4" data-depth="0.45"><div class="hl-chip__in"><i class="hl-chip__ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg></i><span><b>Zmeškaný hovor</b><small>Agent volal zpět · 18:04</small></span></div></div>
+    </div>
     <div class="hero__copy">
       <span class="hero__eyebrow" data-reveal>AI agenti pro servisní firmy</span>
-      <h1 class="hero__title" data-reveal data-reveal-delay="1">AI agenti, kteří odpracují <span class="hero__mark">rutinu</span> <em>vašeho týmu.</em></h1>
+      <h1 class="hero__title" data-reveal data-reveal-delay="1" data-split>AI agenti, kteří odpracují <span class="hero__mark">rutinu</span> <em>vašeho týmu.</em></h1>
       <p class="hero__sub" data-reveal data-reveal-delay="2">Vaši lidé přestanou řešit rutinu. Vy konečně uvidíte, co se ve firmě děje – každé pondělí v 7:00, bez jediného exportu.</p>
       <div class="hero__cta" data-reveal data-reveal-delay="3">
         <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
@@ -323,7 +342,7 @@
   <section class="section showcase" id="agenti">
     <div class="section__head section__head--center" data-reveal>
       <span class="section__eyebrow">Co vám agent reálně pošle</span>
-      <h2 class="section__title">Nepopisujeme funkce. <em>Ukážeme vám, co vám přistane v telefonu.</em></h2>
+      <h2 class="section__title" data-split>Nepopisujeme funkce. <em>Ukážeme vám, co vám přistane v telefonu.</em></h2>
     </div>
 
     <div class="showcase__track" data-carousel tabindex="0" aria-label="Ukázky výstupů agentů, posouvejte do stran">
@@ -497,10 +516,10 @@
   </section>
 
   <!-- AGENT NENÍ CHATGPT -->
-  <section class="section section--dark vs" id="jak-agent-pracuje">
+  <section class="section section--dark vs" id="jak-agent-pracuje" data-extend>
     <div class="section__head section__head--center" data-reveal>
       <span class="section__eyebrow">Agent není ChatGPT</span>
-      <h2 class="section__title">ChatGPT vám poradí. <em>AI agent tu práci udělá.</em></h2>
+      <h2 class="section__title" data-split>ChatGPT vám poradí. <em>AI agent tu práci udělá.</em></h2>
     </div>
 
     <div class="vs__toggle" role="tablist" aria-label="Porovnání">
@@ -566,7 +585,7 @@
   <section class="section" id="pro-koho">
     <div class="section__head section__head--center" data-reveal>
       <span class="section__eyebrow">Pro koho</span>
-      <h2 class="section__title">Pro firmy, kde lidé nestíhají <em>telefon, poptávky a papíry.</em></h2>
+      <h2 class="section__title" data-split>Pro firmy, kde lidé nestíhají <em>telefon, poptávky a papíry.</em></h2>
     </div>
     <div class="who">
       <article class="card who__card" data-reveal>
@@ -610,7 +629,7 @@
   <section class="section section--tint stats" id="cisla">
     <div class="section__head section__head--center" data-reveal>
       <span class="section__eyebrow">Co agent zvládne</span>
-      <h2 class="section__title">Rutina, kterou dnes dělají lidé. <em>V číslech.</em></h2>
+      <h2 class="section__title" data-split>Rutina, kterou dnes dělají lidé. <em>V číslech.</em></h2>
     </div>
     <div class="stats__grid" data-reveal>
       <div class="stat"><span class="stat__num" data-count="19.4" data-fmt="19,4&#8239;%">19,4&#8239;%</span><span class="stat__label">konverze webu s agentem</span></div>
@@ -635,7 +654,7 @@
     <div class="section__head" data-reveal>
       <div>
         <span class="section__eyebrow">Jak to funguje</span>
-        <h2 class="section__title">Jak získat zaměstnance na 24/7 úvazek <em>už za 14 dní.</em></h2>
+        <h2 class="section__title" data-split>Jak získat zaměstnance na 24/7 úvazek <em>už za 14 dní.</em></h2>
       </div>
     </div>
     <div class="features">
@@ -732,7 +751,7 @@
   <section class="section" id="pricing">
     <div class="section__head section__head--center" data-reveal>
       <span class="section__eyebrow">Nabídka služeb</span>
-      <h2 class="section__title">Agenti na míru <em>vašemu provozu.</em></h2>
+      <h2 class="section__title" data-split>Agenti na míru <em>vašemu provozu.</em></h2>
       <p class="section__intro">Každý agent dělá jednu věc pořádně. Napojíme ho na váš e-mail, kalendář a CRM a nastavíme přesně podle toho, jak pracuje váš tým.</p>
     </div>
 
@@ -817,7 +836,7 @@
     <div class="section__head">
       <div>
         <span class="section__eyebrow">Reference</span>
-        <h2 class="section__title">[DOPLNIT reálné reference se souhlasem klienta]</h2>
+        <h2 class="section__title" data-split>[DOPLNIT reálné reference se souhlasem klienta]</h2>
       </div>
     </div>
   </section>
@@ -914,8 +933,8 @@
   </section>
 
   <!-- CLOSING CTA -->
-  <section class="closer">
-    <h2 data-reveal>Ten první týden už <em>neřešíte</em> rutinu sami.</h2>
+  <section class="closer" data-extend>
+    <h2 data-reveal data-split>Ten první týden už <em>neřešíte</em> rutinu sami.</h2>
     <p data-reveal data-reveal-delay="1">30minutová ukázka. Ukážeme vám, jak by AI agenti zvládli typické situace u vás — poptávky, termíny, follow-upy i reporty. Bez prezentací, bez závazku.</p>
     <div class="hero__cta" data-reveal data-reveal-delay="2">
       <a class="btn btn--primary" data-cta="calendly">Domluvit ukázku
@@ -954,7 +973,7 @@
   </footer>
 
   <!-- CALCULATOR MODAL -->
-  <div class="calc-scrim" id="calc" role="dialog" aria-modal="true" aria-labelledby="calc-q">
+  <div class="calc-scrim" id="calc" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="calc-q">
 
     <div class="calc">
       <div class="calc__head">
@@ -1051,7 +1070,7 @@
   </div>
 
   <!-- BOOKING MODAL -->
-  <div id="booking-modal" class="bm" aria-hidden="true" inert>
+  <div id="booking-modal" class="bm" data-lenis-prevent aria-hidden="true" inert>
     <div class="bm__backdrop"></div>
     <div class="bm__panel" role="dialog" aria-modal="true" aria-label="Domluvit ukázku">
       <div class="bm__head">
@@ -1576,5 +1595,182 @@
     })();
   </script>
 
+  <script>
+    // Motion layer: Lenis smooth scroll + GSAP/ScrollTrigger depth, reveals, cursor
+    document.addEventListener('DOMContentLoaded', function () {
+      'use strict';
+      const root = document.documentElement;
+      if (!root.classList.contains('js-motion') || !window.gsap || !window.ScrollTrigger) {
+        root.classList.remove('js-motion');
+        return;
+      }
+      gsap.registerPlugin(ScrollTrigger);
+      const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const mm = gsap.matchMedia();
+
+      // ── Lenis ────────────────────────────────────────────────────
+      let lenis = null;
+      if (window.Lenis) {
+        lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.9 });
+        root.classList.add('has-lenis');
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(t => lenis.raf(t * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        new MutationObserver(() => {
+          document.body.style.overflow === 'hidden' ? lenis.stop() : lenis.start();
+        }).observe(document.body, { attributes: true, attributeFilter: ['style'] });
+
+        document.addEventListener('click', e => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a || a.getAttribute('href').length < 2) return;
+          const target = document.querySelector(a.getAttribute('href'));
+          if (!target) return;
+          e.preventDefault();
+          lenis.scrollTo(target, { offset: -76, duration: 1.6 });
+          history.replaceState(null, '', a.getAttribute('href'));
+        });
+      }
+
+      // ── Split headings into masked words ─────────────────────────
+      function split(el) {
+        (function walk(node) {
+          Array.from(node.childNodes).forEach(child => {
+            if (child.nodeType === 3) {
+              const frag = document.createDocumentFragment();
+              child.textContent.split(/(\s+)/).forEach(part => {
+                if (!part) return;
+                if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+                const w = document.createElement('span'); w.className = 'sw';
+                const i = document.createElement('span'); i.className = 'sw__i'; i.textContent = part;
+                w.appendChild(i); frag.appendChild(w);
+              });
+              child.replaceWith(frag);
+            } else if (child.nodeType === 1) walk(child);
+          });
+        })(el);
+        return el.querySelectorAll('.sw__i');
+      }
+      document.querySelectorAll('[data-split]').forEach(el => {
+        const words = split(el);
+        const isHero = el.classList.contains('hero__title');
+        gsap.set(words, { yPercent: 115, rotate: 3 });
+        el.classList.add('is-split');
+        gsap.to(words, {
+          yPercent: 0, rotate: 0, duration: 1.6, ease: 'expo.out', stagger: 0.07,
+          delay: isHero ? 0.15 : 0,
+          scrollTrigger: isHero ? null : { trigger: el, start: 'top 88%', once: true },
+        });
+      });
+
+      // ── Hero depth layers: scroll parallax + pointer parallax ────
+      const hero = document.querySelector('.hero');
+      const layers = gsap.utils.toArray('.hero__layers [data-depth]');
+      layers.forEach(l => {
+        const d = +l.dataset.depth;
+        gsap.to(l, { y: -d * 420, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 1.4 } });
+      });
+      gsap.from('.hl-chip', { opacity: 0, scale: 0.85, duration: 1.8, ease: 'expo.out', stagger: 0.18, delay: 0.9 });
+      mm.add('(min-width: 900px)', () => {
+        gsap.to('.hero__copy', { y: 70, opacity: 0.3, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: '55% top', scrub: 1.2 } });
+      });
+
+      if (fine) {
+        const movers = layers.map(l => {
+          const inner = l.querySelector('.hl-chip__in') || l;
+          return { d: +l.dataset.depth, x: gsap.quickTo(inner, 'x', { duration: 1.6, ease: 'power3' }), y: gsap.quickTo(inner, 'y', { duration: 1.6, ease: 'power3' }) };
+        });
+        hero.addEventListener('pointermove', e => {
+          const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5;
+          movers.forEach(m => { m.x(nx * m.d * 60); m.y(ny * m.d * 40); });
+        });
+        hero.addEventListener('pointerleave', () => movers.forEach(m => { m.x(0); m.y(0); }));
+      }
+
+      // ── Demo window: tilted screen flattens as it scrolls in ─────
+      const win = document.querySelector('.taskdemo__win');
+      if (win) {
+        gsap.fromTo(win, { rotateX: 16, scale: 0.93, y: 30, transformOrigin: '50% 100%', transformPerspective: 1400 }, {
+          rotateX: 0, scale: 1, y: 0, ease: 'none',
+          scrollTrigger: { trigger: '.taskdemo', start: 'top bottom', end: 'center 55%', scrub: 1.4 },
+        });
+      }
+
+      // ── Image extension: dark sections grow to full bleed ────────
+      gsap.utils.toArray('[data-extend]').forEach(sec => {
+        gsap.fromTo(sec, { clipPath: 'inset(0% 5% 0% 5% round 48px)' }, {
+          clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none',
+          scrollTrigger: { trigger: sec, start: 'top 95%', end: 'top 20%', scrub: 1.2 },
+        });
+        const inner = sec.querySelector('.section__head, h2');
+        if (inner) gsap.fromTo(inner, { y: 60 }, { y: -20, ease: 'none', scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 1.4 } });
+      });
+
+      // ── Parallax inside sections (desktop only) ──────────────────
+      mm.add('(min-width: 900px)', () => {
+        gsap.utils.toArray('.product__visual').forEach(v => {
+          gsap.fromTo(v, { y: 80 }, { y: -60, ease: 'none', scrollTrigger: { trigger: v, start: 'top bottom', end: 'bottom top', scrub: 1.4 } });
+        });
+        gsap.utils.toArray('.who__card').forEach((c, i) => {
+          gsap.fromTo(c, { y: i % 2 ? 70 : 20 }, { y: i % 2 ? -30 : -10, ease: 'none', scrollTrigger: { trigger: c.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1.6 } });
+        });
+        gsap.utils.toArray('.stats__grid .stat').forEach((c, i) => {
+          gsap.from(c, { y: 50, opacity: 0, duration: 1.4, ease: 'expo.out', delay: (i % 5) * 0.08, scrollTrigger: { trigger: c, start: 'top 92%', once: true } });
+        });
+      });
+
+      // ── Cursor follower, magnetic buttons, card spotlight + tilt ─
+      if (fine) {
+        const ring = document.createElement('div');
+        ring.className = 'cursor'; ring.setAttribute('aria-hidden', 'true');
+        ring.innerHTML = '<span class="cursor__ring"></span><span class="cursor__dot"></span>';
+        document.body.appendChild(ring);
+        const rx = gsap.quickTo(ring, 'x', { duration: 0.55, ease: 'power3' });
+        const ry = gsap.quickTo(ring, 'y', { duration: 0.55, ease: 'power3' });
+        addEventListener('pointermove', e => { rx(e.clientX); ry(e.clientY); ring.classList.add('is-on'); }, { passive: true });
+        document.addEventListener('pointerleave', () => ring.classList.remove('is-on'));
+        document.addEventListener('pointerover', e => {
+          const t = e.target;
+          ring.classList.toggle('is-link', !!t.closest('a, button, [data-cta], [data-calc], label'));
+          ring.classList.toggle('is-card', !t.closest('a, button') && !!t.closest('.card, .taskdemo__win, .report-card, .stat'));
+          ring.classList.toggle('is-dark', !!t.closest('.section--dark, .closer, .footer'));
+        });
+
+        document.querySelectorAll('.btn--primary, .nav__cta').forEach(btn => {
+          btn.classList.add('is-magnetic');
+          const mx = gsap.quickTo(btn, 'x', { duration: 0.9, ease: 'power3' });
+          const my = gsap.quickTo(btn, 'y', { duration: 0.9, ease: 'power3' });
+          btn.addEventListener('pointermove', e => {
+            const r = btn.getBoundingClientRect();
+            mx((e.clientX - r.left - r.width / 2) * 0.22);
+            my((e.clientY - r.top - r.height / 2) * 0.3);
+          });
+          btn.addEventListener('pointerleave', () => gsap.to(btn, { x: 0, y: 0, duration: 1.4, ease: 'elastic.out(1, 0.45)' }));
+        });
+
+        document.querySelectorAll('.card, .report-card, .stat').forEach(card => {
+          if (card.closest('.is-hidden')) return;
+          const spot = document.createElement('span');
+          spot.className = 'spot'; spot.setAttribute('aria-hidden', 'true');
+          card.classList.add('has-spot');
+          card.appendChild(spot);
+          const tilt = card.matches('.who__card, .report-card');
+          if (tilt) card.classList.add('is-tilt');
+          card.addEventListener('pointermove', e => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+            card.style.setProperty('--mx', px * 100 + '%');
+            card.style.setProperty('--my', py * 100 + '%');
+            if (tilt) gsap.to(card, { rotateY: (px - 0.5) * 6, rotateX: (0.5 - py) * 6, transformPerspective: 900, duration: 0.9, ease: 'power3.out' });
+          });
+          if (tilt) card.addEventListener('pointerleave', () => gsap.to(card, { rotateY: 0, rotateX: 0, duration: 1.4, ease: 'power3.out' }));
+        });
+      }
+
+      // Layout shifts (FAQ, toggles, fonts) move trigger positions
+      let rt;
+      new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => ScrollTrigger.refresh(), 200); }).observe(document.body);
+    });
+  </script>
 </body>
 </html>

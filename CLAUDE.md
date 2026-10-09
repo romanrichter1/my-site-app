@@ -75,6 +75,15 @@ Sections in order:
 - Reference (`#reference`, `.is-hidden` — placeholder [DOPLNIT])
 - FAQ (`#faq`), Closing CTA, Footer
 
+**Motion layer** (last `<script>` in `index.html`, styles at end of `nexivo_marketing.css`):
+GSAP 3.12.5 + ScrollTrigger (cdnjs) + Lenis 1.1.13 (unpkg), all `defer`. Runs only when `html.js-motion`
+is set (head script; skipped for reduced motion, removed if GSAP fails to load).
+- `[data-split]` headings → masked word reveal; `[data-extend]` sections → clip-path grows to full bleed
+- `.hero__layers [data-depth]` → scroll + pointer parallax (floating chips only ≥ 1240 px)
+- Desktop pointer only: `.cursor` follower, magnetic `.btn--primary`/`.nav__cta`, card `.spot` + tilt
+- Lenis stops when `body.style.overflow = hidden` (modals); modals carry `data-lenis-prevent`
+- Elements GSAP transforms must not have a CSS `transform` transition (see `transition-property` override)
+
 `/#ukazka` opens the booking modal on load (used by subpage nav CTAs).
 
 **Booking modal:** Custom cream overlay with `Calendly.initInlineWidget()` inside.  
