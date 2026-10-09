@@ -97,7 +97,8 @@ Calendly CSS+JS loaded from `assets.calendly.com` in `<head>`.
 
 **Social content** (`social/`, excluded from deploy via `.vercelignore`): `social/reels-prompts.md` holds
 49 Reels/FB video prompts (16 agents, from the web + Google Slides deck „AI Agenti 2026 nexivo“), shared format rules and the only allowed statistics with sources.
-Reels are built as HTML + GSAP timeline and rendered frame by frame with Playwright → ffmpeg (1080×1920, 30 fps).
+Reels are built as HTML + GSAP timeline and rendered frame by frame with Playwright → ffmpeg (1080×1920, 30 fps):
+see `social/README.md`; approved template `social/reels/inquiry-10s/`, renderer `social/tools/render-reel.js`.
 
 ---
 
