@@ -228,7 +228,7 @@ Když Roman napíše „smaž animace“ / „vrať hero“ apod., vrať přísl
 
 | Commit | Co dělá | Revert vrátí |
 |--------|---------|--------------|
-| `SCROLLONLY` | Odstraněn Lenis a všechny efekty řízené myší (kurzor, magnetická tlačítka, tilt, spotlight, parallax za myší) — trackpad nešel ovládat | Lenis + efekty myši zpět |
+| `89b2ddd` | Odstraněn Lenis a všechny efekty řízené myší (kurzor, magnetická tlačítka, tilt, spotlight, parallax za myší) — trackpad nešel ovládat | Lenis + efekty myši zpět |
 | `ee28ffa` | Motion layer: Lenis, GSAP/ScrollTrigger, parallax vrstvy v hero (mřížka, koule, plovoucí karty), word-reveal nadpisů, clip-path roztažení tmavých sekcí, kurzor, magnetická tlačítka, spotlight/tilt karet | stránku bez JS animací (CSS reveals zůstanou) |
 | `e91ef5b` | Interaktivní demo „Zadej úkol“ (`.taskdemo`) místo chatu „Jana Dvořáková“ | původní chat mockup `.callcard` |
 | `f9c068d` | Hero vycentrovaný ve stylu Everbot/Editee: pilulka, podtržené „rutinu“, řádek s fajfkami | původní dvousloupcový hero |
