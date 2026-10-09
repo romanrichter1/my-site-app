@@ -218,3 +218,18 @@ After deploy, always push to GitHub: `git push origin main`
 - **Dual file rule ABOLISHED** — `nexivo_landing.html` deleted, `index.html` is the only landing page
 - **Internal links** — always clean paths (`/`, `/nexivo_inquiry`, `/klient`), never `.html` extensions
 - **No comments** in code unless WHY is non-obvious
+
+---
+
+## Rollback log (redesign hero + motion, říjen 2026)
+
+Když Roman napíše „smaž animace“ / „vrať hero“ apod., vrať příslušný commit přes `git revert <hash>`
+(nikdy ne reset/force-push na `main`) a pushni na `main`. Revertuj odshora dolů.
+
+| Commit | Co dělá | Revert vrátí |
+|--------|---------|--------------|
+| `ee28ffa` | Motion layer: Lenis, GSAP/ScrollTrigger, parallax vrstvy v hero (mřížka, koule, plovoucí karty), word-reveal nadpisů, clip-path roztažení tmavých sekcí, kurzor, magnetická tlačítka, spotlight/tilt karet | stránku bez JS animací (CSS reveals zůstanou) |
+| `e91ef5b` | Interaktivní demo „Zadej úkol“ (`.taskdemo`) místo chatu „Jana Dvořáková“ | původní chat mockup `.callcard` |
+| `f9c068d` | Hero vycentrovaný ve stylu Everbot/Editee: pilulka, podtržené „rutinu“, řádek s fajfkami | původní dvousloupcový hero |
+
+Vše jen v `index.html`, `nexivo_marketing.css` a `CLAUDE.md`.
