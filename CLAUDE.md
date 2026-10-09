@@ -96,7 +96,7 @@ Calendly CSS+JS loaded from `assets.calendly.com` in `<head>`.
 **FAQ accordion:** `.faq__item[data-open]` toggle, `grid-template-rows` slide + opacity fade animation.
 
 **Social content** (`social/`, excluded from deploy via `.vercelignore`): `social/reels-prompts.md` holds
-36 Reels/FB video prompts (12 agents × 3), shared format rules and the only allowed statistics with sources.
+49 Reels/FB video prompts (16 agents, from the web + Google Slides deck „AI Agenti 2026 nexivo“), shared format rules and the only allowed statistics with sources.
 Reels are built as HTML + GSAP timeline and rendered frame by frame with Playwright → ffmpeg (1080×1920, 30 fps).
 
 ---

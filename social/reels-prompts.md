@@ -1,6 +1,7 @@
 # Nexivo: prompty na Reels / FB videa
 
-36 promptů, 12 agentů po 3 variantách. Každý prompt je samostatné zadání pro výrobu videa.
+49 promptů, 16 agentů po 3 variantách (Follow Up má 4: navíc skutečná případová studie).
+Podklady: web nexivoai.cz + prezentace „AI Agenti 2026 nexivo“ (Google Slides). Každý prompt je samostatné zadání pro výrobu videa.
 Použití: napište „vyrob reel podle `social/reels-prompts.md`, **Inquiry Agent B**“.
 
 ---
@@ -40,6 +41,16 @@ Použití: napište „vyrob reel podle `social/reels-prompts.md`, **Inquiry Age
 
 **CTA a komentář „AGENT“**: aby to fungovalo, je potřeba automatická odpověď do DM (ManyChat nebo Meta Business Suite → Automatizace → klíčové slovo „AGENT“). Bez ní lidi napíší a nic se nestane.
 
+**Klíčová sdělení z prezentace (používat ve výsledku / CTA části)**
+- „AI agent = zaměstnanec na 24/7 úvazek.“
+- „Naučíte ho všechno jednou a on to už nezapomene.“
+- „Nespí, nezapomíná a nikdy se nevzdá.“
+- Čtyři věci, které běžná AI neumí: **pozoruje, rozhoduje, jedná, pamatuje si**. ChatGPT poradí, agent tu práci udělá.
+- „Funguje jako super zaměstnanec, za zlomek ceny.“
+- Prezentace míří hlavně na **realitní makléře**: varianty označené *(makléři)* používají jejich scénáře (prohlídky, Sreality, majitelé nemovitostí).
+
+**Skutečná případová studie (z prezentace):** investor do nemovitostí, Follow Up Agent se pravidelně ptal majitelů neprodaných nemovitostí, v jaké fázi prodeje jsou → **deal za 3 mil. Kč**, který by jinak proklouzl. Použít jen anonymně a se souhlasem klienta (stejné pravidlo jako případová studie na webu).
+
 **Ověřené zdroje k číslům** (používat jen tyto, nebo dohledat nové):
 | Číslo | Zdroj | Poznámka |
 |---|---|---|
@@ -58,7 +69,7 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 ---
 
 ## 1. Inquiry Agent
-*Odpoví na poptávku z webu, e-mailu nebo formuláře do minuty, zjistí potřebné informace a nabídne termín schůzky.*
+*Odpoví na poptávku z webu, e-mailu nebo formuláře do minuty, zjistí potřebné informace a nabídne termín schůzky. Z prezentace: „Osloví zájemce dřív, než stihne napsat konkurenci.“ 60 s od poptávky k první zprávě. „Rozdíl mezi odpovědí za 40 vteřin a za dva dny je rozdíl mezi zakázkou a promarněným leadem.“*
 
 ### Inquiry Agent A: „Závod se stopkami“ (17 s)
 - **Hook 0–3 s:** Obrazovka rozdělená na dvě poloviny, nahoře „Vy“, dole „Konkurence“. Obě stopky startují z 0:00 a text „Kdo odpoví dřív?“ dopadne do středu.
@@ -75,22 +86,22 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 - **Výsledek 13–16 s:** „Odpověď ve 21:48. I když vy už spíte.“
 - **Popisek:** Poptávky nechodí jen v pracovní době. Napište AGENT.
 
-### Inquiry Agent C: „POV: majitel na zakázce“ (18 s)
-- **Hook 0–3 s:** „POV: Jste na stavbě. Telefon vibruje.“ Telefon v obraze se třese a notifikace se skládají na sebe (3×).
-- **Problém 3–6 s:** Notifikace „Nová poptávka“ zešednou s časem „před 4 h“. Text: „Než se k tomu dostanete, je pozdě.“
-- **Agent 6–14 s:** Přetočíme čas zpět. Inquiry Agent vyřídí všechny 3 poptávky paralelně, každá dostane odpověď do minuty, 2 z nich termín. Pod tím iPhone notifikace pro majitele: „2 nové schůzky v kalendáři“.
-- **Výsledek 14–18 s:** „Vy pracujete. Agent vyřizuje poptávky.“
-- **Popisek:** Kolik poptávek vám dnes vychladlo v telefonu? Napište AGENT.
+### Inquiry Agent C: „POV: makléř na prohlídce“ (18 s) *(makléři)*
+- **Hook 0–3 s:** „POV: Jste na prohlídce. Telefon vibruje.“ Telefon v obraze se třese a notifikace „Poptávka ze Sreality“ se skládají na sebe (3×).
+- **Problém 3–6 s:** Notifikace zešednou s časem „před 4 h“. Text: „Zájemce mezitím napsal dalším třem makléřům.“
+- **Agent 6–14 s:** Přetočíme čas zpět na 18:02. Poptávka „Jana Pokorná · byt 2+kk, Hostivice“ → 18:02 agent: „Volný termín prohlídky mám zítra v 17:00, vyhovoval by vám?“ → 18:09 „Prohlídka potvrzena, lead uložen do CRM“. Totéž u zbylých dvou.
+- **Výsledek 14–18 s:** „60 vteřin od poptávky k první zprávě. Vy ukazujete byt, agent domlouvá další.“
+- **Popisek:** Kdo odpoví první, ten ukazuje byt. Napište AGENT.
 
 ---
 
 ## 2. Follow Up Agent
-*Ozve se klientům k rozjednaným nabídkám, před schůzkou i po ní. Žádná zakázka neusne jen proto, že se zapomnělo.*
+*Ozve se klientům k rozjednaným nabídkám, před schůzkou i po ní. Z prezentace: čte stav dealu v CRM, píše přes **WhatsApp nebo e-mail**, odpověď zapíše zpátky do CRM. „Ozve se každému, na koho byste zapomněli.“*
 
 ### Follow Up Agent A: „30 dní ticha“ (17 s)
 - **Hook 0–3 s:** Trhací kalendář rychle odlistuje 30 stránek, každá s razítkem „bez odpovědi“. Text: „Nabídka odeslána. Pak ticho.“
 - **Problém 3–6 s:** Karta nabídky „Martin Kovář · 186 000 Kč“ blédne a přidá se na hromádku dalších zapomenutých nabídek. „Nikdo se neozval. Ani vy.“
-- **Agent 6–14 s:** Den 30: Follow Up Agent pošle e-mail „Je pro vás nabídka stále aktuální?“. Klient odpoví „Ano, zavolejte mi zítra“, v CRM se změní stav na „Horký“ a obchodník dostane úkol.
+- **Agent 6–14 s:** Den 30: Follow Up Agent pošle zprávu na WhatsApp „Je pro vás nabídka stále aktuální?“. Klient odpoví „Ano, zavolejte mi zítra“, v CRM se změní stav na „Horký“ a obchodník dostane úkol.
 - **Výsledek 14–17 s:** Karta 186 000 Kč se vrátí z hromádky zpátky do barvy. „Žádná nabídka už neusne.“
 - **Popisek:** Nejdražší nabídka je ta, na kterou se zapomnělo. Napište AGENT.
 
@@ -108,10 +119,18 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 - **Výsledek 14–18 s:** „Profesionální dojem bez jediné minuty vaší práce.“
 - **Popisek:** Rozdíl mezi „ozveme se“ a podpisem je follow-up. Napište AGENT.
 
+### Follow Up Agent D: „3 miliony z jednoho follow-upu“ (18 s) *(případová studie)*
+- **Hook 0–3 s:** Velké „3 000 000 Kč“ se roztočí z nuly, pod tím „z jednoho dealu, který málem proklouzl“.
+- **Problém 3–6 s:** Seznam neprodaných nemovitostí, majitelé neodpovídají, investor „to zkusí za měsíc“, a pak zapomene.
+- **Agent 6–14 s:** Follow Up Agent se pravidelně ptá majitelů i makléřů „V jaké fázi je prodej?“ (měsíc 1, 2, 3 se odlistuje), jeden majitel po 3 měsících odpoví „Cena jde dolů, máte zájem?“ a investor dostane notifikaci „Horký deal“.
+- **Výsledek 14–18 s:** „Nikdy se nevzdal. Proto našel deal, který by jinak proklouzl.“ Malý text: „Skutečný klient Nexivo, anonymizováno.“
+- **Popisek:** Nejlepší obchody vznikají z vytrvalosti, kterou člověk nemá čas mít. Napište AGENT.
+- **Poznámka:** jen se souhlasem klienta.
+
 ---
 
 ## 3. Calendar Manager Agent
-*Domlouvá a přeplánuje termíny napříč kalendáři týmu. Nic se nepřekrývá, nic nevypadne.*
+*Domlouvá a přeplánuje termíny napříč kalendáři týmu. Nic se nepřekrývá, nic nevypadne. Z prezentace: klient napíše e-mail, že chce změnit termín, agent najde v kalendáři nejlepší náhradu, sám pošle e-mail se 2 možnostmi a po odpovědi termín zapíše („Vytvořeno agentem“). „Vy se jen řídíte podle kalendáře.“*
 
 ### Calendar Manager A: „Tetris v kalendáři“ (16 s)
 - **Hook 0–3 s:** Týdenní kalendář a do něj padají bloky schůzek jako v Tetrisu a překrývají se (červené kolize). „Kdo tohle dnes přeplánuje?“
@@ -127,12 +146,12 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 - **Výsledek 14–17 s:** Židle už není prázdná. „Volný termín = ztracené peníze. Agent ho zaplní.“
 - **Popisek:** Každý nedorazivší klient vás stojí hodinu práce. Napište AGENT.
 
-### Calendar Manager C: „Nemoc v týmu“ (18 s)
-- **Hook 0–3 s:** SMS „Jsem nemocný, dnes nepřijdu“ ve 6:40 a pod ní se rozsvítí 6 schůzek technika Petra. „6 klientů. 20 minut do otevření.“
-- **Problém 3–6 s:** Majitel v pyžamu s telefonem (ilustrace), ikony „volat / psát / přeplánovat“ se množí.
-- **Agent 6–14 s:** Agent přerozdělí 4 schůzky kolegům podle kvalifikace, 2 klientům pošle omluvu s novým termínem a majiteli přijde notifikace „Hotovo · 6/6 vyřešeno“.
-- **Výsledek 14–18 s:** „Ráno začíná kávou, ne krizovým štábem.“
-- **Popisek:** Plán A rozbije první nemocenská. Agent má plán B za vás. Napište AGENT.
+### Calendar Manager C: „Přeobjedná prohlídku bez jediného kliknutí“ (18 s) *(makléři)*
+- **Hook 0–3 s:** E-mail „Dobrý den, nestihnu zítřejší prohlídku…“ a nad ním „09:12“. Text: „A teď 20 minut přeposílání termínů.“
+- **Problém 3–6 s:** Kalendář makléře plný: focení bytu Korunní 8, prohlídky, schůzky. „Kde je volno?“
+- **Agent 6–14 s:** 09:14 odeslaná pošta: „Náhradní termíny prohlídky, Vinohradská 24: čt 2. 10. 16:30 / pá 3. 10. 14:00“. Klient odepíše „čtvrtek“ a v kalendáři se objeví blok „Prohlídka, Vinohradská 24 · 16:30–17:15 · Tomáš Novák“ se štítkem „VYTVOŘENO AGENTEM“.
+- **Výsledek 14–18 s:** „2 minuty od e-mailu po nový termín. Bez jediného vašeho kliknutí.“
+- **Popisek:** Přeplánování termínu není práce pro makléře. Napište AGENT.
 
 ---
 
@@ -189,7 +208,7 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 ---
 
 ## 6. Google Review Agent
-*Po dokončení zakázky požádá spokojeného klienta o recenzi na Googlu. Víc recenzí, víc důvěry, víc poptávek.*
+*Po dokončení zakázky požádá spokojeného klienta o recenzi na Googlu. Víc recenzí, víc důvěry, víc poptávek. Z prezentace: „Po podpisu smlouvy si sám řekne o recenzi. Vy už nemusíte.“ Zpráva 2 dny po podpisu: „Dobrý den, pane Nováku, ještě jednou gratuluji k novému bytu. Kdybyste měl minutu, moc by mi pomohlo krátké hodnocení na Googlu.“ → 4,9 ★ · 68 recenzí.*
 
 ### Google Review Agent A: „4,1 vs 4,8“ (16 s)
 - **Hook 0–3 s:** Mapa Google, dva piny vedle sebe: „Vy 4,1 ★ (12)“ vs „Konkurence 4,8 ★ (230)“. Uživatel klikne na konkurenci.
@@ -201,7 +220,7 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 ### Google Review Agent B: „Ve správnou chvíli“ (17 s)
 - **Hook 0–3 s:** Šťastný klient odjíždí z autoservisu (ilustrace) a nad ním bublina „Super práce!“. Text: „A recenzi nenapíše nikdy.“
 - **Problém 3–6 s:** „Na to, abyste o ni požádali, si vzpomenete za 3 týdny.“
-- **Agent 6–14 s:** Agent pozná dokončenou zakázku ve fakturaci, pošle žádost ve chvíli, kdy je klient nejspokojenější, a nespokojené hodnocení (3 ★ a méně) pošle soukromě majiteli místo na Google.
+- **Agent 6–14 s:** Agent pozná dokončenou zakázku (podpis smlouvy / faktura) a 2 dny poté pošle osobní zprávu „…ještě jednou gratuluji k novému bytu…“ ve chvíli, kdy je klient nejspokojenější, a nespokojené hodnocení (3 ★ a méně) pošle soukromě majiteli místo na Google.
 - **Výsledek 14–17 s:** „Pochvala skončí na Googlu. Kritika u vás, ne veřejně.“
 - **Popisek:** Načasování je všechno, i u recenzí. Napište AGENT.
 
@@ -215,8 +234,8 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 
 ---
 
-## 7. Lead Agent
-*Pravidelně prochází zdroje, které určíte, a připraví obchodníkům čerstvé kontakty bez ručního hledání.*
+## 7. Lead Agent / Lead Scraper Agent
+*Pravidelně prochází zdroje, které určíte, a připraví obchodníkům čerstvé kontakty bez ručního hledání. Z prezentace: každou neděli projede **Bazoš, Bezrealitky, Sreality a Facebook Marketplace** a hledá nemovitosti a pozemky bez makléře. Lead přijde rovnou do **Telegramu** (fotka, cena, lokalita, odkaz) s tlačítkem **„Claimnout“**, lead si vezme první makléř. Jednou týdně souhrn: co přišlo a co zůstalo ležet. „Na dlouhou trať několik zakázek navíc ročně.“*
 
 ### Lead Agent A: „28 % času prodejem“ (16 s)
 - **Hook 0–3 s:** Koláčový graf pracovního týdne obchodníka, výseč „prodej“ se zmenší na **28 %**. Zdroj: Salesforce State of Sales.
@@ -225,12 +244,12 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 - **Výsledek 13–16 s:** Výseč „prodej“ naroste. „Obchodník volá. Agent hledá.“
 - **Popisek:** Platíte obchodníka za hledání v Google Mapách? Napište AGENT.
 
-### Lead Agent B: „Pondělní seznam“ (17 s)
-- **Hook 0–3 s:** iPhone notifikace „20 nových kontaktů na tento týden“ a seznam se rozjede.
-- **Problém 3–6 s:** Flashback: prázdný Excel a kurzor bliká. „Kde vzít, komu volat?“
-- **Agent 6–14 s:** Každý kontakt má kartu: firma, obor, velikost, důvod („právě otevírají 2. pobočku“) a navržená první věta hovoru. Obchodník přetáhne kartu do „Volat dnes“.
-- **Výsledek 14–17 s:** „Každé pondělí čerstvý seznam. Bez hledání.“
-- **Popisek:** Studený hovor je studený jen bez kontextu. Napište AGENT.
+### Lead Agent B: „Claimni první“ (17 s) *(makléři)*
+- **Hook 0–3 s:** Telegram notifikace „NOVÝ LEAD“ s fotkou bytu „3+1 · Brno-Líšeň · 5,9 mil. · bez makléře“ cvakne do obrazu.
+- **Problém 3–6 s:** Flashback: makléř v neděli večer projíždí Bazoš, Bezrealitky, Sreality, Marketplace (4 záložky se střídají). „2 hodiny. Každou neděli.“
+- **Agent 6–14 s:** Agent projede všechny 4 portály (loga se postupně odškrtnou), leady padají do skupiny v Telegramu, makléř Petr klepne „Claimnout“ a lead je jeho, ostatní vidí „Vzal Petr“.
+- **Výsledek 14–17 s:** Týdenní souhrn: „14 leadů · 11 vzato · 3 leží“. *(ilustrativní)* „Kdo claimne první, volá první.“
+- **Popisek:** Nemovitosti bez makléře nečekají, až budete mít čas. Napište AGENT.
 
 ### Lead Agent C: „Signál k nákupu“ (18 s)
 - **Hook 0–3 s:** „Tahle firma vás právě teď potřebuje. A neví o vás.“ Pulzující pin na mapě.
@@ -242,7 +261,7 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 ---
 
 ## 8. Social Trends Agent
-*Sleduje trendy na sociálních sítích ve vašem oboru a každé pondělí pošle hotový plán: co natočit, čím video začít a jak ho natočit lépe.*
+*Sleduje trendy na sociálních sítích ve vašem oboru a každé pondělí pošle hotový plán: co natočit, čím video začít a jak ho natočit lépe. Z prezentace („Analytik trendů na sociálních sítích“): pošle **interaktivní HTML návod**, který se otevře v telefonu: u každého trendu jak ho natočit, čím, **jak daleko stát od kamery (2,5 m, celá postava, kamera v úrovni pasu)** a co říct v prvních 5 vteřinách. Příklad: „Tour bytu za 15 sekund ↑ 340 %“, hook „Tenhle byt šel z inzerátu do rezervace za 48 hodin. Tohle rozhodlo.“*
 
 ### Social Trends Agent A: „Co natočit tento týden?“ (16 s)
 - **Hook 0–3 s:** Prázdná obrazovka natáčení s blikajícím červeným REC a text „Co mám dneska natočit?“.
@@ -261,14 +280,14 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 ### Social Trends Agent C: „Hook, který zastaví palec“ (18 s)
 - **Hook 0–3 s:** Palec scrolluje a pak se zastaví na limetkovém textu „Tady jsou 3 věci, které vám makléři neřeknou“.
 - **Problém 3–6 s:** „Rozhodují první 3 vteřiny. Většina firem je promrhá logem.“
-- **Agent 6–14 s:** Agent pošle 3 varianty hooku pro váš obor, každou s ukázkou prvního záběru (typewriter efekt textu).
-- **Výsledek 14–18 s:** „Agent píše hooky. Vy jen zmáčknete REC.“
+- **Agent 6–14 s:** V telefonu se otevře HTML návod „Trendy týdne“: trend „Tour bytu za 15 sekund ↑ 340 %“ → hook (typewriter) → schéma „kamera ← 2,5 m → vy, celá postava, kamera v úrovni pasu“ → štítky „na výšku · denní světlo · rychlé střihy“.
+- **Výsledek 14–18 s:** „Otevřete v telefonu a jdete točit.“
 - **Popisek:** Video bez hooku nikdo nedokouká. Napište AGENT.
 
 ---
 
-## 9. Social Content Agent *(na míru)*
-*Sám připraví a publikuje příspěvky: vygeneruje carousel nebo krátké video ve vašem brandu a naplánuje ho na Instagram a Facebook.*
+## 9. Marketing specialist Agent (Manažer sociálních sítí)
+*Z prezentace: „Nahrajete fotky a jednu větu. Zbytek udělá agent.“ Připraví a sdílí příspěvky na celý týden, vytvoří video nebo fotku, napíše text i hashtagy ve vašem tónu, vybere nejlepší čas a **zdůvodní proč**, publikuje na **Facebook, Instagram i YouTube**, **až 3× denně**. Klient jen schválí, nebo nechá agenta publikovat samotného.*
 
 ### Social Content Agent A: „Prázdný profil“ (16 s)
 - **Hook 0–3 s:** Instagram profil firmy a poslední příspěvek „před 47 dny“ zčervená.
@@ -280,7 +299,7 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 ### Social Content Agent B: „Ze zakázky video“ (17 s)
 - **Hook 0–3 s:** Tři fotky z telefonu (před / během / po) vyletí z galerie. „Z tohohle bude reel.“
 - **Problém 3–6 s:** „Natočit, sestříhat, napsat popisek… nikdy na to není čas.“
-- **Agent 6–14 s:** Agent fotky seřadí, přidá text, přechody a brand barvy a renderuje 15s video (progress bar) → „Publikováno na Instagram a Facebook“.
+- **Agent 6–14 s:** Majitel nahraje 3 fotky a napíše jednu větu „Hotová koupelna v Líšni“. Agent fotky seřadí, přidá text, přechody a brand barvy, renderuje 15s video (progress bar), připíše popisek a hashtagy a navrhne čas „čt 18:00, protože vaši sledující jsou nejaktivnější večer“ → „Publikováno · Facebook + Instagram + YouTube“.
 - **Výsledek 14–17 s:** „Každá zakázka = obsah. Automaticky.“
 - **Popisek:** Nejlepší obsah už máte v galerii. Napište AGENT.
 - **Poznámka:** tohle video je samo ukázkou té služby, v popisku to klidně řekněte: „Tohle video vyrobil agent.“
@@ -289,7 +308,7 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 - **Hook 0–3 s:** „Tohle video jsem nenatočil já.“ Text se přepíše na „Vyrobil ho AI agent.“
 - **Problém 3–6 s:** „Majitel firmy nemá čas být influencer.“
 - **Agent 6–14 s:** Split screen: vlevo podklady (web, ceník, recenze), vpravo agent z nich skládá týdenní plán (3 carousely + 2 reely) v kalendáři obsahu a stav „Ke schválení“ → majitel klepne „Schválit vše“.
-- **Výsledek 14–18 s:** „Vy schválíte. Agent publikuje.“
+- **Výsledek 14–18 s:** „Až 3 příspěvky denně. Vy jen schválíte.“
 - **Popisek:** 2 minuty týdně na schválení, zbytek za vás. Napište AGENT.
 
 ---
@@ -372,7 +391,111 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 
 ---
 
+## 13. Chat Agent
+*Z prezentace: píše si s klienty **24/7 přes SMS, WhatsApp, web i Instagram**, i ve 22:40, když vy spíte. A dá vám vědět, když klient chce bližší informace.*
+
+### Chat Agent A: „22:40“ (16 s)
+- **Hook 0–3 s:** Tmavá obrazovka, hodiny 22:40 a zpráva na Instagramu „Dobrý den, máte ještě volný ten byt?“ cvakne do obrazu.
+- **Problém 3–6 s:** „Vy spíte. Klient čeká. Ráno už píše jinam.“
+- **Agent 6–13 s:** Chat Agent odpoví za pár vteřin, doptá se (rozpočet, termín), pošle fotky a nabídne prohlídku. Ráno majitel vidí notifikaci „Klient chce prohlídku · čt 17:00“.
+- **Výsledek 13–16 s:** „Odpovídá ve 22:40. A ráno vám řekne, co klient chce.“
+- **Popisek:** Zákazníci píšou, když mají čas oni, ne vy. Napište AGENT.
+
+### Chat Agent B: „4 kanály, jeden agent“ (17 s)
+- **Hook 0–3 s:** 4 ikony (SMS, WhatsApp, web chat, Instagram) a z každé letí zprávy najednou. „Kdo tohle všechno odpoví?“
+- **Problém 3–6 s:** Recepční přepíná mezi 4 aplikacemi, zprávy se ztrácejí.
+- **Agent 6–14 s:** Všechny zprávy se slijí do jednoho proudu a agent odpovídá v každém kanálu ve stejném tónu firmy. Zprávy, kde klient chce víc, dostanou limetkový štítek „Pro vás“.
+- **Výsledek 14–17 s:** „Jeden agent. Všechny kanály. 24/7.“
+- **Popisek:** Klient si vybere kanál. Vy nemusíte hlídat žádný. Napište AGENT.
+
+### Chat Agent C: „Jen to důležité“ (18 s)
+- **Hook 0–3 s:** Počítadlo „47 zpráv dnes“ a pod ním „Vy jste odpověděli na 0.“
+- **Problém 3–6 s:** „Většina jsou stejné otázky: cena, termín, kde parkovat.“
+- **Agent 6–14 s:** Agent odpoví na 44 rutinních dotazů (fajfky padají) a 3 konverzace, kde klient chce nabídku, předá majiteli s krátkým shrnutím na iPhonu.
+- **Výsledek 14–18 s:** „Ze 47 zpráv řešíte 3. Ty, co vydělávají.“
+- **Popisek:** Na „kolik to stojí“ nemusíte odpovídat stokrát. Napište AGENT.
+
+---
+
+## 14. Hledač smluv *(na míru)*
+*Z prezentace: prohledá celou e-mailovou schránku a najde zapomenutý dokument.*
+
+### Hledač smluv A: „Kde je ta smlouva?“ (16 s)
+- **Hook 0–3 s:** Vyhledávací pole ve schránce „smlouva“ → „2 847 výsledků“. Text: „Kde je ta smlouva z roku 2023?“
+- **Problém 3–6 s:** Scrollování, přílohy, „FW: RE: RE: smlouva final_v3“. „30 minut hledání.“
+- **Agent 6–13 s:** Majitel napíše agentovi jednu větu „smlouva s Novákem na Korunní“, agent projede schránku a vrátí PDF s datem, odesílatelem a zvýrazněnou klauzulí o výpovědi.
+- **Výsledek 13–16 s:** „Za 10 vteřin. I to, co jste zapomněli, že máte.“
+- **Popisek:** Vaše schránka ví všechno. Jen se v ní nikdo nevyzná. Napište AGENT.
+
+### Hledač smluv B: „Termín, který propadne“ (17 s)
+- **Hook 0–3 s:** Kalendář a červené „Za 5 dní končí výpovědní lhůta“. „Věděli jste o tom?“
+- **Problém 3–6 s:** „Byla to příloha e-mailu z loňského března.“
+- **Agent 6–14 s:** Agent najde všechny smlouvy ve schránce, vytáhne z nich data (konec, výpověď, prodloužení) a založí připomínky do kalendáře. iPhone notifikace „Za 30 dní: výpověď smlouvy s dodavatelem X“.
+- **Výsledek 14–17 s:** „Žádná lhůta už neproklouzne.“
+- **Popisek:** Automatické prodloužení smlouvy stojí peníze. Napište AGENT.
+
+### Hledač smluv C: „Přílohy na jednom místě“ (18 s)
+- **Hook 0–3 s:** Rozsypané PDF ikonky po celé obrazovce. „Smlouvy, faktury, předávací protokoly… všude.“
+- **Problém 3–6 s:** „Účetní chce podklady. Vy hledáte celý večer.“
+- **Agent 6–14 s:** Agent projde schránku, PDF se samy seřadí do složek „Smlouvy / Faktury / Protokoly“ podle klienta a roku a účetní dostane sdílený odkaz.
+- **Výsledek 14–18 s:** „Večer zpátky. Účetní spokojená.“
+- **Popisek:** Papírování, které se uklidí samo. Napište AGENT.
+
+---
+
+## 15. Onboarding klienta *(na míru)*
+*Z prezentace: pošle podklady, hlídá podpisy, připomene chybějící dokumenty.*
+
+### Onboarding A: „Chybí podpis“ (16 s)
+- **Hook 0–3 s:** Checklist nového klienta „Smlouva ✗ · Plná moc ✗ · Kopie OP ✗“. „Týden po domluvě. Pořád nic.“
+- **Problém 3–6 s:** „Urgovat podklady je nepříjemné. Tak se to odkládá.“
+- **Agent 6–13 s:** Agent pošle uvítací e-mail s podklady, za 2 dny připomene, co chybí, a položky se odškrtávají, jak klient dokumenty posílá. Majitel dostane „Onboarding hotový · Novák“.
+- **Výsledek 13–16 s:** „Klient je připravený, než si na to vzpomenete.“
+- **Popisek:** První dojem klienta dělá onboarding. Napište AGENT.
+
+### Onboarding B: „První den klienta“ (17 s)
+- **Hook 0–3 s:** „Podepsáno.“ Konfety se zastaví a nápis: „A co teď?“
+- **Problém 3–6 s:** Klient čeká na instrukce. Vy máte další schůzku.
+- **Agent 6–14 s:** Do 5 minut po podpisu odejde e-mail „Vítejte, tady je, co bude dál“, kalendářová pozvánka na úvodní schůzku a seznam podkladů s nahrávacím odkazem.
+- **Výsledek 14–17 s:** „Profesionální start. Pokaždé stejně dobrý.“
+- **Popisek:** Klient pozná kvalitu v prvních 24 hodinách. Napište AGENT.
+
+### Onboarding C: „10 klientů, 10 checklistů“ (18 s)
+- **Hook 0–3 s:** 10 karet klientů, každá s jiným počtem chybějících dokumentů (červená čísla).
+- **Problém 3–6 s:** „Kdo co poslal? Kdo co podepsal?“ Excel s barevnými buňkami.
+- **Agent 6–14 s:** Agent hlídá všech 10 najednou, posílá jen těm, komu něco chybí, a čísla se postupně mění na zelené fajfky. Majitel v pondělí dostane přehled „8 hotovo · 2 čekají na OP“.
+- **Výsledek 14–18 s:** „Vy řešíte klienty. Ne papíry.“
+- **Popisek:** Urgování dokumentů zvládne agent líp než vy. Napište AGENT.
+
+---
+
+## 16. Cenový hlídač *(na míru, makléři)*
+*Z prezentace: upozorní, když v lokalitě spadnou ceny podobných nemovitostí.*
+
+### Cenový hlídač A: „Cena spadla“ (16 s)
+- **Hook 0–3 s:** iPhone notifikace „Brno-Žabovřesky: 3+1 zlevnilo o 400 000 Kč“ cvakne do obrazu.
+- **Problém 3–6 s:** „Kupující to ví dřív než vy? Pak prodáváte naslepo.“
+- **Agent 6–13 s:** Agent denně sleduje inzeráty v lokalitě, graf ceny za m² se vykresluje a zlevnění bliká. Makléř dostane shrnutí: „3 podobné byty zlevnily, váš je nad trhem o 6 %“. *(ilustrativní)*
+- **Výsledek 13–16 s:** „Cenu nastavíte podle trhu. Ne podle pocitu.“
+- **Popisek:** Trh se hýbe každý den. Vy se nemusíte dívat. Napište AGENT.
+
+### Cenový hlídač B: „Argument pro majitele“ (17 s)
+- **Hook 0–3 s:** Majitel bytu: „Za 7 milionů to prodáme.“ A pod tím razítko „?“.
+- **Problém 3–6 s:** „Přesvědčit majitele o reálné ceně je nejtěžší část prodeje.“
+- **Agent 6–14 s:** Agent připraví jednostránkový přehled: podobné byty v lokalitě, jejich ceny, jak dlouho visí a kolik zlevnily. Makléř ho pošle majiteli jedním klepnutím.
+- **Výsledek 14–17 s:** „Data místo dohadování.“
+- **Popisek:** Nejlepší argument je ten, který nemusíte vymýšlet. Napište AGENT.
+
+### Cenový hlídač C: „Příležitost pro kupce“ (18 s)
+- **Hook 0–3 s:** Radar přes mapu Brna, jeden pin zezelená. „Tenhle byt právě zlevnil pod tržní cenu.“
+- **Problém 3–6 s:** „Takové příležitosti zmizí do 48 hodin.“
+- **Agent 6–14 s:** Agent porovná nové ceny s průměrem lokality a pošle makléři (nebo investorovi) okamžitou notifikaci se seznamem kupců z CRM, pro které by byt byl vhodný.
+- **Výsledek 14–18 s:** „Zavoláte kupci dřív, než to uvidí ostatní.“
+- **Popisek:** Rychlost je v realitách všechno. Napište AGENT.
+
+---
+
 ## Pořadí výroby (doporučení)
-1. Inquiry A, Voice A, Chief of Staff A: nejsilnější bolesti, nejširší publikum.
-2. Fakturační A, Reporting A, Follow Up A: peníze a čísla.
+1. Follow Up D (3 mil. Kč, se souhlasem klienta), Inquiry A, Chat Agent A: skutečný výsledek + nejsilnější bolesti.
+2. Voice A, Chief of Staff A, Fakturační A, Reporting A: peníze a čísla.
 3. Zbytek po týdnech, vždy 1 varianta na agenta, ať se vizuál neopakuje.
