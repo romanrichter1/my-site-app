@@ -76,12 +76,12 @@ Sections in order:
 - FAQ (`#faq`), Closing CTA, Footer
 
 **Motion layer** (last `<script>` in `index.html`, styles at end of `nexivo_marketing.css`):
-GSAP 3.12.5 + ScrollTrigger (cdnjs) + Lenis 1.1.13 (unpkg), all `defer`. Runs only when `html.js-motion`
-is set (head script; skipped for reduced motion, removed if GSAP fails to load).
+GSAP 3.12.5 + ScrollTrigger (cdnjs), `defer`. Runs only when `html.js-motion` is set (head script;
+skipped for reduced motion, removed if GSAP fails to load). **Everything moves only with native scroll** —
+no Lenis/smooth-scroll library and no pointer-driven effects (cursor follower, magnetic buttons, tilt,
+spotlight, mouse parallax were removed: Roman found trackpad control broken).
 - `[data-split]` headings → masked word reveal; `[data-extend]` sections → clip-path grows to full bleed
-- `.hero__layers [data-depth]` → scroll + pointer parallax (floating chips only ≥ 1240 px)
-- Desktop pointer only: `.cursor` follower, magnetic `.btn--primary`/`.nav__cta`, card `.spot` + tilt
-- Lenis stops when `body.style.overflow = hidden` (modals); modals carry `data-lenis-prevent`
+- `.hero__layers [data-depth]` → scroll parallax (floating chips only ≥ 1240 px)
 - Elements GSAP transforms must not have a CSS `transform` transition (see `transition-property` override)
 
 `/#ukazka` opens the booking modal on load (used by subpage nav CTAs).
@@ -228,6 +228,7 @@ Když Roman napíše „smaž animace“ / „vrať hero“ apod., vrať přísl
 
 | Commit | Co dělá | Revert vrátí |
 |--------|---------|--------------|
+| `SCROLLONLY` | Odstraněn Lenis a všechny efekty řízené myší (kurzor, magnetická tlačítka, tilt, spotlight, parallax za myší) — trackpad nešel ovládat | Lenis + efekty myši zpět |
 | `ee28ffa` | Motion layer: Lenis, GSAP/ScrollTrigger, parallax vrstvy v hero (mřížka, koule, plovoucí karty), word-reveal nadpisů, clip-path roztažení tmavých sekcí, kurzor, magnetická tlačítka, spotlight/tilt karet | stránku bez JS animací (CSS reveals zůstanou) |
 | `e91ef5b` | Interaktivní demo „Zadej úkol“ (`.taskdemo`) místo chatu „Jana Dvořáková“ | původní chat mockup `.callcard` |
 | `f9c068d` | Hero vycentrovaný ve stylu Everbot/Editee: pilulka, podtržené „rutinu“, řádek s fajfkami | původní dvousloupcový hero |

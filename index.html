@@ -37,7 +37,6 @@
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
   <script>
     window.CALENDLY_URL = "https://calendly.com/romecrichter/nexivo";
   </script>
@@ -973,7 +972,7 @@
   </footer>
 
   <!-- CALCULATOR MODAL -->
-  <div class="calc-scrim" id="calc" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="calc-q">
+  <div class="calc-scrim" id="calc" role="dialog" aria-modal="true" aria-labelledby="calc-q">
 
     <div class="calc">
       <div class="calc__head">
@@ -1070,7 +1069,7 @@
   </div>
 
   <!-- BOOKING MODAL -->
-  <div id="booking-modal" class="bm" data-lenis-prevent aria-hidden="true" inert>
+  <div id="booking-modal" class="bm" aria-hidden="true" inert>
     <div class="bm__backdrop"></div>
     <div class="bm__panel" role="dialog" aria-modal="true" aria-label="Domluvit ukázku">
       <div class="bm__head">
@@ -1596,7 +1595,7 @@
   </script>
 
   <script>
-    // Motion layer: Lenis smooth scroll + GSAP/ScrollTrigger depth, reveals, cursor
+    // Motion layer: GSAP/ScrollTrigger depth and reveals, driven only by native scroll
     document.addEventListener('DOMContentLoaded', function () {
       'use strict';
       const root = document.documentElement;
@@ -1605,32 +1604,7 @@
         return;
       }
       gsap.registerPlugin(ScrollTrigger);
-      const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
       const mm = gsap.matchMedia();
-
-      // ── Lenis ────────────────────────────────────────────────────
-      let lenis = null;
-      if (window.Lenis) {
-        lenis = new Lenis({ lerp: 0.075, wheelMultiplier: 0.9 });
-        root.classList.add('has-lenis');
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add(t => lenis.raf(t * 1000));
-        gsap.ticker.lagSmoothing(0);
-
-        new MutationObserver(() => {
-          document.body.style.overflow === 'hidden' ? lenis.stop() : lenis.start();
-        }).observe(document.body, { attributes: true, attributeFilter: ['style'] });
-
-        document.addEventListener('click', e => {
-          const a = e.target.closest('a[href^="#"]');
-          if (!a || a.getAttribute('href').length < 2) return;
-          const target = document.querySelector(a.getAttribute('href'));
-          if (!target) return;
-          e.preventDefault();
-          lenis.scrollTo(target, { offset: -76, duration: 1.6 });
-          history.replaceState(null, '', a.getAttribute('href'));
-        });
-      }
 
       // ── Split headings into masked words ─────────────────────────
       function split(el) {
@@ -1663,7 +1637,7 @@
         });
       });
 
-      // ── Hero depth layers: scroll parallax + pointer parallax ────
+      // ── Hero depth layers: scroll parallax ───────────────────────
       const hero = document.querySelector('.hero');
       const layers = gsap.utils.toArray('.hero__layers [data-depth]');
       layers.forEach(l => {
@@ -1674,18 +1648,6 @@
       mm.add('(min-width: 900px)', () => {
         gsap.to('.hero__copy', { y: 70, opacity: 0.3, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: '55% top', scrub: 1.2 } });
       });
-
-      if (fine) {
-        const movers = layers.map(l => {
-          const inner = l.querySelector('.hl-chip__in') || l;
-          return { d: +l.dataset.depth, x: gsap.quickTo(inner, 'x', { duration: 1.6, ease: 'power3' }), y: gsap.quickTo(inner, 'y', { duration: 1.6, ease: 'power3' }) };
-        });
-        hero.addEventListener('pointermove', e => {
-          const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5;
-          movers.forEach(m => { m.x(nx * m.d * 60); m.y(ny * m.d * 40); });
-        });
-        hero.addEventListener('pointerleave', () => movers.forEach(m => { m.x(0); m.y(0); }));
-      }
 
       // ── Demo window: tilted screen flattens as it scrolls in ─────
       const win = document.querySelector('.taskdemo__win');
@@ -1718,54 +1680,6 @@
           gsap.from(c, { y: 50, opacity: 0, duration: 1.4, ease: 'expo.out', delay: (i % 5) * 0.08, scrollTrigger: { trigger: c, start: 'top 92%', once: true } });
         });
       });
-
-      // ── Cursor follower, magnetic buttons, card spotlight + tilt ─
-      if (fine) {
-        const ring = document.createElement('div');
-        ring.className = 'cursor'; ring.setAttribute('aria-hidden', 'true');
-        ring.innerHTML = '<span class="cursor__ring"></span><span class="cursor__dot"></span>';
-        document.body.appendChild(ring);
-        const rx = gsap.quickTo(ring, 'x', { duration: 0.55, ease: 'power3' });
-        const ry = gsap.quickTo(ring, 'y', { duration: 0.55, ease: 'power3' });
-        addEventListener('pointermove', e => { rx(e.clientX); ry(e.clientY); ring.classList.add('is-on'); }, { passive: true });
-        document.addEventListener('pointerleave', () => ring.classList.remove('is-on'));
-        document.addEventListener('pointerover', e => {
-          const t = e.target;
-          ring.classList.toggle('is-link', !!t.closest('a, button, [data-cta], [data-calc], label'));
-          ring.classList.toggle('is-card', !t.closest('a, button') && !!t.closest('.card, .taskdemo__win, .report-card, .stat'));
-          ring.classList.toggle('is-dark', !!t.closest('.section--dark, .closer, .footer'));
-        });
-
-        document.querySelectorAll('.btn--primary, .nav__cta').forEach(btn => {
-          btn.classList.add('is-magnetic');
-          const mx = gsap.quickTo(btn, 'x', { duration: 0.9, ease: 'power3' });
-          const my = gsap.quickTo(btn, 'y', { duration: 0.9, ease: 'power3' });
-          btn.addEventListener('pointermove', e => {
-            const r = btn.getBoundingClientRect();
-            mx((e.clientX - r.left - r.width / 2) * 0.22);
-            my((e.clientY - r.top - r.height / 2) * 0.3);
-          });
-          btn.addEventListener('pointerleave', () => gsap.to(btn, { x: 0, y: 0, duration: 1.4, ease: 'elastic.out(1, 0.45)' }));
-        });
-
-        document.querySelectorAll('.card, .report-card, .stat').forEach(card => {
-          if (card.closest('.is-hidden')) return;
-          const spot = document.createElement('span');
-          spot.className = 'spot'; spot.setAttribute('aria-hidden', 'true');
-          card.classList.add('has-spot');
-          card.appendChild(spot);
-          const tilt = card.matches('.who__card, .report-card');
-          if (tilt) card.classList.add('is-tilt');
-          card.addEventListener('pointermove', e => {
-            const r = card.getBoundingClientRect();
-            const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-            card.style.setProperty('--mx', px * 100 + '%');
-            card.style.setProperty('--my', py * 100 + '%');
-            if (tilt) gsap.to(card, { rotateY: (px - 0.5) * 6, rotateX: (0.5 - py) * 6, transformPerspective: 900, duration: 0.9, ease: 'power3.out' });
-          });
-          if (tilt) card.addEventListener('pointerleave', () => gsap.to(card, { rotateY: 0, rotateX: 0, duration: 1.4, ease: 'power3.out' }));
-        });
-      }
 
       // Layout shifts (FAQ, toggles, fonts) move trigger positions
       let rt;
