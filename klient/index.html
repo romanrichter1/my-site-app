@@ -233,6 +233,15 @@
     .login__activate:active { transform: scale(0.99); }
     .login__activate svg { width: 16px; height: 16px; stroke: var(--ink); flex-shrink: 0; }
 
+    .login__trial {
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
+    }
+    .login__cta:disabled { opacity: 0.6; cursor: default; }
+
     .login__foot {
       margin-top: 32px;
       display: flex;
@@ -385,6 +394,7 @@
           Aktivovat účet
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
+        <span class="login__note-label">Ještě nejste klient? <a href="/vyzkouset" class="login__trial">Vyzkoušejte AI agenty 3 dny zdarma</a></span>
       </div>
     </div>
 
@@ -420,6 +430,7 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.0/dist/umd/supabase.js"></script>
 <script>
   // remember checkbox toggle
   const rememberLabel = document.getElementById('remember-label');
@@ -427,24 +438,45 @@
     rememberLabel.classList.toggle('checked');
   });
 
-  // login form — demo: any credentials pass
+  // Real sign-in to the client portal (nexivoai.cz/portal). Same origin and storage key as the
+  // portal, so the session carries over and the portal opens already signed in.
+  const portal = window.supabase.createClient(
+    'https://portal-api.nexivoagency.eu',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzkxOTk3NjE0LCJleHAiOjIxMDczNTc2MTR9.mLyRES5Rj7to7MGvxF9BV0nyIjA10EZcZA69y_WvozY',
+    { auth: { persistSession: true, autoRefreshToken: false, storageKey: 'nexivo-portal-auth' } }
+  );
   const form = document.getElementById('login-form');
   const errEl = document.getElementById('login-err');
+  const submitBtn = form.querySelector('.login__cta');
 
-  form.addEventListener('submit', (e) => {
+  portal.auth.getSession().then(({ data }) => {
+    if (data.session) window.location.replace('/portal/');
+  });
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = form.elements['email'].value.trim();
-    const password = form.elements['password'].value.trim();
+    const password = form.elements['password'].value;
 
     if (!email || !password) {
+      errEl.textContent = 'Vyplňte e-mail i heslo.';
       errEl.classList.add('visible');
       if (!email) form.elements['email'].classList.add('err-input');
       if (!password) form.elements['password'].classList.add('err-input');
       return;
     }
 
-    // demo: redirect to dashboard on any credentials
-    window.location.href = '/klient/dashboard';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Přihlašuji…';
+    const { error } = await portal.auth.signInWithPassword({ email, password });
+    if (error) {
+      errEl.textContent = 'Nesprávný e-mail nebo heslo.';
+      errEl.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Přihlásit se';
+      return;
+    }
+    window.location.href = '/portal/';
   });
 
   form.querySelectorAll('input').forEach(input => {

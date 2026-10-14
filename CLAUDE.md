@@ -133,9 +133,18 @@ Page is `noindex` (form page, not for search engines).
 
 **Login** (`klient/index.html`):
 - Split layout: form left, stats panel right (cream + dark)
-- Any credentials accepted (demo mode — no real auth yet)
-- On submit: redirects to `/klient/dashboard`
+- Real sign-in to the client portal: supabase-js (UMD, jsdelivr, pinned) against `portal-api.nexivoagency.eu`
+  with the public anon key and `storageKey: 'nexivo-portal-auth'` — the same key the portal uses, so the session
+  carries over to `/portal/` (same origin). Already signed in → straight to `/portal/`.
+- Links: „Aktivovat účet“ (`/klient/aktivovat`) and „Vyzkoušejte AI agenty 3 dny zdarma“ (`/vyzkouset`)
 - `noindex, nofollow`
+
+**Portal + free trial (proxied, `vercel.json` rewrites):** `/portal/*` and `/vyzkouset` are served by the
+separate Vite app `nikec17/nexivo-portal` (nexivo-portal.vercel.app, built with `base: '/portal/'`).
+Trial clients and paying clients share the same portal; it adapts to the account's plan.
+CTAs „Vyzkoušet zdarma“ (nav + hero) link to `/vyzkouset`.
+
+`klient/dashboard.html` is the old demo dashboard, no longer linked from the login.
 
 **Dashboard** (`klient/dashboard.html`):
 - React 18 via CDN + Babel standalone (JSX inline)
