@@ -65,6 +65,10 @@
       "destination": "https://nexivo-portal.vercel.app/portal/"
     },
     {
+      "source": "/portal/",
+      "destination": "https://nexivo-portal.vercel.app/portal/"
+    },
+    {
       "source": "/portal/:path*",
       "destination": "https://nexivo-portal.vercel.app/portal/:path*"
     }
