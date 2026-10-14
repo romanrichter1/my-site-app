@@ -204,6 +204,15 @@
       border-radius: 8px;
     }
     .login__err.visible { display: block; }
+    .login__ok {
+      font: 500 13px/1.5 var(--font-sans);
+      color: var(--ink);
+      display: none;
+      padding: 10px 14px;
+      background: rgba(199,242,48,0.25);
+      border-radius: 8px;
+    }
+    .login__ok.visible { display: block; }
 
     .login__note {
       margin-top: 24px;
@@ -377,13 +386,12 @@
           <input id="f-password" name="password" type="password" placeholder="••••••••••••" autocomplete="current-password">
         </div>
         <div class="field--row">
-          <label class="checkbox" id="remember-label">
-            <span></span> Pamatovat tento prohlížeč
-          </label>
-          <a>Zapomenuté heslo?</a>
+          <span></span>
+          <a href="#" id="forgot">Zapomenuté heslo?</a>
         </div>
 
         <div class="login__err" id="login-err">Nesprávný e-mail nebo heslo.</div>
+        <div class="login__ok" id="login-ok"></div>
 
         <button type="submit" class="login__cta">Přihlásit se</button>
       </form>
@@ -406,24 +414,24 @@
 
   <!-- RIGHT: stats artwork -->
   <div class="login__r">
-    <div class="login__r-eyebrow">Tento týden · Váš provoz</div>
-    <div class="login__r-big">62&nbsp;480<span class="u">Kč</span></div>
+    <div class="login__r-eyebrow">Váš AI tým</div>
+    <div class="login__r-big">24/7</div>
     <div class="login__r-cap">
-      ušetřeno díky <em>AI recepční</em> a chatbotu.
-      Přihlaste se, abyste viděli detail.
+      Agenti pracují, i když <em>vy</em> ne.
+      Přihlaste se a schvalte, co pro vás připravili.
     </div>
     <div class="login__r-stamp">
       <div class="login__r-mini">
-        <div class="l">Hovorů</div>
-        <div class="v">184</div>
+        <div class="l">Odpovědi</div>
+        <div class="v">po <em>schválení</em></div>
       </div>
       <div class="login__r-mini">
-        <div class="l">Rezervací</div>
-        <div class="v">57</div>
+        <div class="l">Data</div>
+        <div class="v">v EU</div>
       </div>
       <div class="login__r-mini">
-        <div class="l">Ušetřeno</div>
-        <div class="v"><em>38 h</em></div>
+        <div class="l">Podpora</div>
+        <div class="v"><em>česky</em></div>
       </div>
     </div>
   </div>
@@ -432,12 +440,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.0/dist/umd/supabase.js"></script>
 <script>
-  // remember checkbox toggle
-  const rememberLabel = document.getElementById('remember-label');
-  rememberLabel.addEventListener('click', () => {
-    rememberLabel.classList.toggle('checked');
-  });
-
   // Real sign-in to the client portal (nexivoai.cz/portal). Same origin and storage key as the
   // portal, so the session carries over and the portal opens already signed in.
   const portal = window.supabase.createClient(
@@ -477,6 +479,22 @@
       return;
     }
     window.location.href = '/portal/';
+  });
+
+  const okEl = document.getElementById('login-ok');
+  document.getElementById('forgot').addEventListener('click', async (e) => {
+    e.preventDefault();
+    errEl.classList.remove('visible');
+    const email = form.elements['email'].value.trim();
+    if (!email) {
+      errEl.textContent = 'Vyplňte nahoře svůj e-mail a klikněte znovu na „Zapomenuté heslo?“.';
+      errEl.classList.add('visible');
+      form.elements['email'].classList.add('err-input');
+      return;
+    }
+    await portal.auth.resetPasswordForEmail(email, { redirectTo: 'https://nexivoai.cz/portal/' });
+    okEl.textContent = 'Pokud u nás účet s tímto e-mailem máte, poslali jsme na něj odkaz pro nastavení nového hesla.';
+    okEl.classList.add('visible');
   });
 
   form.querySelectorAll('input').forEach(input => {

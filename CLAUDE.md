@@ -33,8 +33,8 @@ No build system, no package manager. All files are standalone HTML with inline o
 │   ├── nexivo-mark.svg         ← Geometric N mark, nepoužívá se
 │   └── ...
 └── klient/
-    ├── index.html              ← Login page (nexivoai.cz/klient)
-    └── dashboard.html          ← Client dashboard (nexivoai.cz/klient/dashboard)
+    ├── index.html              ← Login page (nexivoai.cz/klient) → real portal at /portal
+    └── aktivovat.html          ← Account activation + invoice
 ```
 
 **Deleted files** (redirects in vercel.json):
@@ -144,7 +144,9 @@ separate Vite app `nikec17/nexivo-portal` (nexivo-portal.vercel.app, built with 
 Trial clients and paying clients share the same portal; it adapts to the account's plan.
 CTAs „Vyzkoušet zdarma“ (nav + hero) link to `/vyzkouset`.
 
-`klient/dashboard.html` is the old demo dashboard, no longer linked from the login.
+„Zapomenuté heslo?“ calls `resetPasswordForEmail` (redirect to `/portal/`, the portal shows the new-password form).
+Czech auth e-mail templates for the portal (GoTrue fetches them by URL): `email/potvrzeni-emailu.html`, `email/reset-hesla.html`, `email/zmena-emailu.html` (Go template, `{{ .ConfirmationURL }}`).
+Legal: VOP článek IIIa (`#zkusebni-verze`) covers the trial and the subscription; gdpr.html lists Stripe, OpenRouter/Anthropic, Hetzner, Google.
 
 **Dashboard** (`klient/dashboard.html`):
 - React 18 via CDN + Babel standalone (JSX inline)
