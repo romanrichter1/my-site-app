@@ -28,6 +28,13 @@ Použití: napište „vyrob reel podle `social/reels-prompts.md`, **Inquiry Age
 | 14–17 s | **Výsledek** | Jedna věta / jedno číslo, co majitel získá. |
 | posledních 3–3,5 s | **CTA** | Tmavá karta se dvěma volbami: **„nexivoai.cz · agent na 3 dny zdarma“** NEBO **„Napište do komentáře AGENT a domluvte si AI konzultaci zdarma“** + logo (vzor: `reels/inquiry-a/`) |
 
+**Vizuální styl (Romanova zpětná vazba, platí pro všechna videa, vzor `reels/followup-a/`)**
+- **25 s.** Jedna myšlenka na obrazovce, max ~6 slov.
+- **Velké písmo:** nadpisy 130–150 px, zprávy v bublinách ~76 px, nic menšího než ~44 px.
+- **Žádné složité UI:** místo celé chatovací karty nebo CRM tabulky jen jedna velká bublina / jeden štítek.
+- **Plynulé přechody:** měkké prolínání (power3.out / power2.inOut, 0,6–0,8 s), žádné poskakování, třesení ani hromádky karet.
+- CTA: „Vyzkoušejte zdarma.“ + „nexivoai.cz · agent na 3 dny zdarma“ + „Komentář AGENT · AI konzultace zdarma“ + logo.
+
 **Co funguje na IG/FB (dodržovat)**
 1. **Žádné prázdné úvodní snímky.** 1. snímek už obsahuje text a pohyb. Žádné fade-in z prázdna.
 2. **Hook v horní třetině**, max 7 slov, velké písmo (110–150 px).

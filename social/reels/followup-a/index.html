@@ -10,230 +10,89 @@
   body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; color: var(--ink); position: relative; }
   .disp { font-family: 'Fraunces', Georgia, serif; font-weight: 400; letter-spacing: -0.025em; font-variation-settings: "opsz" 144; }
   em { font-style: italic; color: var(--ink5); }
-  .glow { position: absolute; width: 1400px; height: 1400px; left: -160px; top: -300px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.33), rgba(197,232,50,0)); }
-  .grid { position: absolute; inset: 0; background-image: radial-gradient(rgba(10,10,10,.10) 1.5px, transparent 1.8px); background-size: 40px 40px;
-          -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 40%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 55% at 50% 40%, #000 20%, transparent 75%); }
-  .scene { position: absolute; inset: 0; }
+  .glow { position: absolute; width: 1400px; height: 1400px; left: -160px; top: -200px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.30), rgba(197,232,50,0)); }
+  .scene { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 80px 120px; }
   .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .14em; margin: 0 -.06em -.14em; }
   .w > span { display: inline-block; }
+  .t1 { font-size: 150px; line-height: 1.0; }
+  .t2 { font-size: 132px; line-height: 1.02; }
 
-  /* race */
-  .lane { position: absolute; left: 70px; right: 70px; height: 640px; border-radius: 56px; background: #fff; box-shadow: 0 40px 100px rgba(0,0,0,.10); padding: 56px 60px; overflow: hidden; }
-  #you { top: 230px; }
-  #them { top: 1010px; }
-  .lane .who { display: flex; align-items: center; gap: 16px; font-size: 40px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink5); }
-  .lane .who i { width: 18px; height: 18px; border-radius: 50%; background: var(--ink3); }
-  .lane .meta { margin-top: 14px; font-size: 36px; color: var(--ink5); }
-  .clock { margin-top: 36px; font-size: 260px; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
-  .clock small { font-size: .32em; letter-spacing: 0; margin-left: 10px; color: var(--ink5); }
-  .status { position: absolute; left: 60px; bottom: 56px; display: inline-flex; align-items: center; gap: 14px; padding: 18px 30px; border-radius: 999px; font-size: 40px; font-weight: 700; }
-  .status .ck { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); display: inline-flex; align-items: center; justify-content: center; }
-  .status .ck svg { width: 22px; height: 22px; fill: none; stroke: var(--lime); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
-  #themOk { background: var(--lime); }
-  #them.won { background: #F4FBD9; }
-  #you.lost .clock { color: var(--red); }
-  #s1b { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 70px; text-align: center; }
-  .notif { width: 100%; display: flex; align-items: center; gap: 28px; padding: 34px 40px; border-radius: 44px; background: rgba(255,255,255,.92); box-shadow: 0 40px 100px rgba(0,0,0,.14); text-align: left; }
-  .notif .av { flex-shrink: 0; }
-  .notif small { display: block; font-size: 30px; color: var(--ink5); }
-  .notif b { display: block; font-size: 40px; }
-  .bigmsg { margin-top: 60px; padding: 56px 60px; border-radius: 64px 64px 16px 64px; background: var(--ink); color: #fff; font-size: 96px; line-height: 1.06; text-align: left; box-shadow: 0 50px 120px rgba(0,0,0,.22); }
-  .bigmsg em { color: var(--lime); }
-  .lostline { margin-top: 90px; font-size: 92px; line-height: 1.05; }
-  .lostline em { color: var(--red); }
-  #s2t { display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 80px; }
-  #s2t h3 { font-size: 132px; line-height: 1.02; }
-  .vs { position: absolute; left: 50%; top: 960px; transform: translate(-50%, -50%); z-index: 5; padding: 28px 54px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 76px; white-space: nowrap; box-shadow: 0 24px 60px rgba(0,0,0,.25); }
-  .vs em { color: var(--lime); }
+  /* 1: days counter */
+  .count { font-size: 520px; line-height: .9; letter-spacing: -0.05em; font-variant-numeric: tabular-nums; }
+  .countl { margin-top: 30px; font-size: 120px; line-height: 1; }
+  .countl em { color: var(--red); }
 
-  /* agent */
-  #s2 { padding: 150px 70px 0; }
-  .card { position: absolute; left: 60px; right: 60px; top: 200px; height: 1440px; border-radius: 64px; background: #fff; box-shadow: 0 50px 120px rgba(0,0,0,.12); overflow: hidden; display: flex; flex-direction: column; }
-  .bar { display: flex; align-items: center; gap: 22px; padding: 50px 50px 34px; border-bottom: 2px solid #EEE; }
-  .av { width: 88px; height: 88px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; }
-  .nm b { display: block; font-size: 42px; } .nm small { font-size: 30px; color: var(--ink5); }
-  .timer { margin-left: auto; display: flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px; background: var(--bone2); font-size: 44px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .timer i { width: 16px; height: 16px; border-radius: 50%; background: #D98A1F; }
-  .timer.done { background: var(--lime); } .timer.done i { background: #1F8A5B; }
-  .tag { margin: 30px 50px 0; align-self: flex-start; padding: 12px 24px; border-radius: 999px; background: var(--lime); font-size: 28px; font-weight: 700; }
-  .msgs { padding: 34px 50px 0; display: flex; flex-direction: column; gap: 30px; }
-  .b { max-width: 86%; padding: 34px 40px; border-radius: 42px; font-size: 44px; line-height: 1.3; }
-  .b small { display: block; margin-top: 12px; font-size: 26px; opacity: .55; }
-  .them { background: var(--bone2); border-bottom-left-radius: 10px; }
-  .ai { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 10px; }
-  .typing { align-self: flex-end; display: flex; gap: 10px; padding: 28px 32px; border-radius: 38px; background: var(--ink); }
-  .typing span { width: 15px; height: 15px; border-radius: 50%; background: #fff; opacity: .5; }
-  .opts { align-self: flex-end; display: flex; gap: 18px; }
-  .opt { position: relative; padding: 26px 42px; border-radius: 999px; border: 3px solid var(--ink); font-size: 44px; font-weight: 700; background: #fff; }
-  .opt.pick { background: var(--lime); border-color: var(--lime); }
-  .tap { position: absolute; left: 50%; top: 50%; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%; background: rgba(10,10,10,.18); border: 4px solid rgba(10,10,10,.35); pointer-events: none; }
-  .cal { margin: auto 50px 0; padding: 30px; border-radius: 34px; background: var(--bone); display: flex; align-items: center; gap: 26px; border-left: 10px solid var(--lime); }
-  .day { min-width: 110px; text-align: center; font-size: 72px; line-height: 1; }
-  .day small { display: block; font: 700 24px/1.4 -apple-system, "Inter", sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--ink5); }
-  .cal b { display: block; font-size: 44px; } .cal span { font-size: 32px; color: var(--ink5); }
-  .done-row { margin: 26px 50px 50px; display: flex; align-items: center; gap: 18px; padding: 24px 30px; border-radius: 28px; background: rgba(197,232,50,.4); font-size: 38px; font-weight: 700; }
-  .ck2 { width: 46px; height: 46px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .ck2 svg { width: 24px; height: 24px; fill: none; stroke: var(--lime); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+  /* 2: offer goes grey */
+  .offer { width: 100%; padding: 60px 64px; border-radius: 64px; background: #fff; box-shadow: 0 40px 100px rgba(0,0,0,.10); }
+  .offer small { display: block; font-size: 48px; font-weight: 600; color: var(--ink5); }
+  .offer .amt { font-size: 160px; line-height: 1; margin-top: 14px; letter-spacing: -0.04em; white-space: nowrap; }
+  #s2 .t2 { margin-top: 120px; }
 
-  /* stat */
-  #s3 { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 90px; }
-  #s3 .k { font-size: 44px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink5); }
-  #s3 .k b { display: inline-block; padding: 4px 16px; border-radius: 12px; background: var(--lime); color: var(--ink); }
-  #s3 .big { font-size: 330px; line-height: .95; letter-spacing: -0.045em; margin-top: 40px; }
-  #s3 .big sup { font-size: .42em; vertical-align: .62em; }
-  #s3 p { font-size: 80px; line-height: 1.15; margin-top: 30px; }
-  #s3 .src { position: absolute; bottom: 330px; font-size: 30px; color: var(--ink5); }
+  /* 4–5: one big bubble at a time */
+  .chip { display: inline-flex; align-items: center; gap: 18px; padding: 20px 36px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 48px; font-weight: 700; }
+  .chip i { width: 22px; height: 22px; border-radius: 50%; background: #25D366; }
+  .bubble { margin-top: 70px; width: 100%; padding: 60px 64px; border-radius: 64px; font-size: 76px; line-height: 1.16; font-weight: 600; text-align: left; }
+  .bubble.agent { background: var(--ink); color: #fff; border-bottom-right-radius: 18px; }
+  .bubble.client { background: #fff; border-bottom-left-radius: 18px; box-shadow: 0 40px 100px rgba(0,0,0,.10); }
+  .who { margin-top: 30px; font-size: 44px; font-weight: 600; color: var(--ink5); }
+  .crm { margin-top: 90px; display: inline-flex; align-items: center; gap: 26px; padding: 30px 46px; border-radius: 999px; background: var(--lime); font-size: 64px; font-weight: 700; }
+  .ck { width: 70px; height: 70px; border-radius: 50%; background: var(--ink); display: inline-flex; align-items: center; justify-content: center; }
+  .ck svg { width: 38px; height: 38px; fill: none; stroke: var(--lime); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* cta */
-  #s4 { background: var(--ink); color: #fff; display: flex; flex-direction: column; align-items: center; padding: 330px 80px 0; text-align: center; }
-  #s4 h2 { font-size: 104px; line-height: 1.04; }
-  #s4 h2 em { color: var(--lime); }
-  .ctas { margin-top: 70px; width: 100%; display: flex; flex-direction: column; gap: 30px; }
-  .cta { display: flex; align-items: center; gap: 30px; padding: 40px 44px; border-radius: 44px; text-align: left; }
-  .cta.web { background: var(--lime); color: var(--ink); }
-  .cta.cmt { background: #1D1D1F; border: 2px solid rgba(255,255,255,.14); }
-  .cta .ic { width: 96px; height: 96px; border-radius: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-  .cta.web .ic { background: var(--ink); } .cta.cmt .ic { background: var(--lime); }
-  .cta .ic svg { width: 48px; height: 48px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .cta.web .ic svg { stroke: var(--lime); } .cta.cmt .ic svg { stroke: var(--ink); }
-  .cta b { display: block; font-size: 46px; line-height: 1.15; }
-  .cta span { display: block; margin-top: 8px; font-size: 32px; opacity: .75; }
-  .cta .ic { margin: 0; opacity: 1; }
-  .cta b .kw { display: inline-block; margin: 0; font-size: inherit; opacity: 1; padding: 2px 16px; border-radius: 12px; background: var(--lime); color: var(--ink); letter-spacing: .04em; }
-  .or { font-size: 30px; font-weight: 700; letter-spacing: .14em; color: var(--ink3); }
-  #s4 .logo { width: 380px; margin-top: 90px; }
+  /* 6: back in play */
+  #s6 .offer { border: 8px solid var(--lime); }
+  #s6 .t2 { margin-top: 120px; }
 
-  #s1 { background: #0B0B0F; color: #fff; display: flex; flex-direction: column; align-items: center; padding-top: 260px; text-align: center; }
-  #s1 .moon { width: 120px; height: 120px; }
-  #s1 .moon path { fill: none; stroke: var(--lime); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-  #s1 .date { margin-top: 40px; font-size: 40px; color: var(--ink3); font-weight: 600; }
-  #s1 .bigclock { font-size: 330px; line-height: .95; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
-  .ig { position: absolute; left: 60px; right: 60px; top: 1080px; display: flex; gap: 28px; align-items: center; padding: 38px 40px; border-radius: 48px; background: rgba(255,255,255,.12); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); text-align: left; }
-  .ig .app { width: 96px; height: 96px; border-radius: 26px; flex-shrink: 0; background: radial-gradient(circle at 30% 110%, #FFD776 0 25%, #F05A5A 45%, #C13584 70%, #5B51D8 100%); display: flex; align-items: center; justify-content: center; }
-  .ig .app svg { width: 54px; height: 54px; fill: none; stroke: #fff; stroke-width: 1.8; }
-  .ig small { display: block; font-size: 30px; color: var(--ink3); }
-  .ig b { display: block; font-size: 46px; line-height: 1.25; margin-top: 6px; font-weight: 600; }
-  #s1b { background: #0B0B0F; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 80px; }
-  #s1b h3 { font-size: 140px; line-height: 1.02; }
-  #s1b h3 em { color: var(--ink3); }
-  #s1b .l2 { margin-top: 110px; font-size: 120px; line-height: 1.02; }
-  #s1b .l2 em { color: #F87171; }
-  #s2t { display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 80px; }
-  #s2t h3 { font-size: 132px; line-height: 1.02; }
-  .ch { display: flex; gap: 12px; margin-left: auto; }
-  .ch span { padding: 10px 18px; border-radius: 999px; background: var(--bone2); font-size: 26px; font-weight: 700; color: var(--ink5); }
-  .ch span.on { background: var(--lime); color: var(--ink); }
-  #s5 { display: flex; flex-direction: column; align-items: center; padding: 240px 60px 0; text-align: center; }
-  #s5 .lock { font-size: 260px; line-height: .95; letter-spacing: -0.04em; }
-  #s5 .lockd { font-size: 40px; color: var(--ink5); font-weight: 600; margin-top: 10px; }
-  .morning { margin-top: 90px; width: 100%; display: flex; gap: 28px; align-items: flex-start; padding: 40px; border-radius: 48px; background: #fff; box-shadow: 0 40px 100px rgba(0,0,0,.12); text-align: left; }
-  .morning .app2 { width: 96px; height: 96px; border-radius: 26px; background: var(--ink); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-  .morning .app2 svg { width: 50px; height: 50px; fill: none; stroke: var(--lime); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .morning small { display: block; font-size: 30px; color: var(--ink5); }
-  .morning b { display: block; font-size: 46px; line-height: 1.2; margin-top: 6px; }
-  .morning .rows { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; font-size: 38px; }
-  .morning .rows i { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: var(--lime); margin-right: 14px; vertical-align: 4px; }
-  #s5 h3 { margin-top: 90px; font-size: 104px; line-height: 1.04; }
-
-  #f1 { display: flex; flex-direction: column; align-items: center; padding-top: 200px; text-align: center; }
-  #f1 h1 { font-size: 112px; line-height: 1.02; }
-  #f1 h1 em { color: var(--ink5); }
-  .tear { position: relative; margin-top: 160px; width: 640px; height: 700px; }
-  .page { position: absolute; inset: 0; border-radius: 56px; background: #fff; box-shadow: 0 40px 100px rgba(0,0,0,.12); overflow: hidden; display: flex; flex-direction: column; align-items: center; }
-  .page .top { width: 100%; height: 150px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 44px; font-weight: 700; letter-spacing: .08em; }
-  .page .num { font-size: 380px; line-height: 1.05; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
-  .page .lbl { font-size: 38px; color: var(--ink5); font-weight: 600; margin-top: -20px; }
-  .stamp { position: absolute; left: 50%; top: 58%; transform: translate(-50%, -50%) rotate(-12deg); padding: 18px 34px; border: 8px solid var(--red); border-radius: 22px; color: var(--red); font-size: 64px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; background: rgba(255,255,255,.85); }
-  #f2 { display: flex; flex-direction: column; align-items: center; padding-top: 170px; text-align: center; }
-  .pile { position: relative; width: 900px; height: 700px; }
-  .offer { position: absolute; left: 0; right: 0; padding: 44px 50px; border-radius: 48px; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.10); text-align: left; }
-  .offer small { display: block; font-size: 32px; color: var(--ink5); font-weight: 600; }
-  .offer b { display: block; font-size: 52px; margin-top: 8px; }
-  .offer .amt { font-size: 120px; line-height: 1; margin-top: 18px; letter-spacing: -0.03em; }
-  .offer.ghost { background: #ECEAE3; color: #A9A69C; box-shadow: none; }
-  .offer.ghost small { color: #B8B5AB; }
-  #f2 h3 { margin-top: 100px; font-size: 128px; line-height: 1.02; }
-  #f2 h3 em { color: var(--red); }
-  .wa { padding: 10px 20px; border-radius: 999px; background: #25D366; color: #fff; font-size: 28px; font-weight: 700; margin-left: auto; }
-  .daychip { margin: 34px 50px 0; align-self: flex-start; padding: 14px 26px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 32px; font-weight: 700; }
-  .daychip b { color: var(--lime); }
-  .crm { margin: auto 50px 0; padding: 32px 34px; border-radius: 34px; background: var(--bone); }
-  .crm .row { display: flex; align-items: center; justify-content: space-between; font-size: 38px; font-weight: 600; }
-  .crm .row + .row { margin-top: 20px; padding-top: 20px; border-top: 2px solid #E6E3DA; font-weight: 500; font-size: 34px; color: var(--ink5); }
-  .st { padding: 10px 26px; border-radius: 999px; font-size: 34px; font-weight: 700; background: #E6E3DA; color: var(--ink5); }
-  .st.hot { background: var(--lime); color: var(--ink); }
-  #f5 { display: flex; flex-direction: column; align-items: center; padding-top: 330px; text-align: center; }
-  #f5 .offer { position: relative; width: 900px; }
-  #f5 .ill { margin-top: 26px; font-size: 28px; color: var(--ink5); }
-  #f5 h3 { margin-top: 90px; font-size: 120px; line-height: 1.02; }
+  /* 7: CTA */
+  #s7 { background: var(--ink); color: #fff; }
+  #s7 .t2 em { color: var(--lime); }
+  .opt { width: 100%; margin-top: 60px; padding: 50px 56px; border-radius: 56px; text-align: left; }
+  .opt.web { background: var(--lime); color: var(--ink); margin-top: 100px; }
+  .opt.cmt { background: #1D1D1F; border: 3px solid rgba(255,255,255,.16); }
+  .opt b { display: block; font-size: 84px; line-height: 1.05; letter-spacing: -0.01em; }
+  .opt span { display: block; margin-top: 12px; font-size: 50px; font-weight: 600; opacity: .8; }
+  .opt b .kw { display: inline; margin: 0; font-size: inherit; opacity: 1; color: var(--lime); }
+  .logo { width: 380px; margin-top: 110px; }
 </style>
 </head>
 <body>
   <div class="glow" id="glow"></div>
-  <div class="grid"></div>
 
-  <section class="scene" id="f1">
-    <h1 class="disp" id="h1">Nabídka odeslána.<br><em>Pak ticho.</em></h1>
-    <div class="tear">
-      <div class="page" id="pageBack"><div class="top">ŘÍJEN</div><div class="num disp" id="numBack">2</div><div class="lbl">den po nabídce</div></div>
-      <div class="page" id="page"><div class="top">ŘÍJEN</div><div class="num disp" id="num">1</div><div class="lbl">den po nabídce</div></div>
-      <div class="stamp" id="stamp">BEZ ODPOVĚDI</div>
-    </div>
-  </section>
-
-  <section class="scene" id="f2">
-    <div class="pile">
-      <div class="offer ghost" style="top:0; transform: rotate(-4deg) translateX(-30px)"><small>Nabídka · před 45 dny</small><b>Novák s.r.o.</b><div class="amt disp">94 000 Kč</div></div>
-      <div class="offer ghost" style="top:160px; transform: rotate(3deg) translateX(30px)"><small>Nabídka · před 38 dny</small><b>Byty Líšeň</b><div class="amt disp">212 000 Kč</div></div>
-      <div class="offer" id="mk" style="top:320px"><small>Nabídka · před 30 dny</small><b>Martin Kovář · rekonstrukce</b><div class="amt disp">186 000 Kč</div></div>
-    </div>
-    <h3 class="disp" id="f2h">Nikdo se neozval.<br><em>Ani vy.</em></h3>
-  </section>
-
-  <section class="scene" id="s2t">
-    <h3 class="disp" id="s2h">Teď totéž<br><em>s Follow Up Agentem.</em></h3>
+  <section class="scene" id="s1">
+    <div class="count disp" id="count">1</div>
+    <div class="countl disp">dní <em>ticha.</em></div>
   </section>
 
   <section class="scene" id="s2">
-    <div class="card" id="card">
-      <div class="bar">
-        <span class="av">MK</span>
-        <span class="nm"><b>Martin Kovář</b><small>Nabídka 186 000 Kč</small></span>
-        <span class="wa">WhatsApp</span>
-      </div>
-      <span class="daychip" id="chip">Den <b>30</b> · Follow Up Agent</span>
-      <div class="msgs">
-        <div class="b ai" id="m1">Dobrý den, pane Kováři, je pro vás nabídka na rekonstrukci stále aktuální?<small>Follow Up Agent · 10:15</small></div>
-        <div class="typing" id="typ" style="align-self:flex-start;background:var(--bone2)"><span style="background:var(--ink)"></span><span style="background:var(--ink)"></span><span style="background:var(--ink)"></span></div>
-        <div class="b them" id="m2">Ano, chceme pokračovat. Zavolejte mi zítra.<small>10:42</small></div>
-      </div>
-      <div class="crm" id="crm">
-        <div class="row"><span>CRM · stav</span><span class="st" id="st">Ticho</span></div>
-        <div class="row" id="task"><span>Úkol: zavolat zítra 10:00</span><span>Petr</span></div>
-      </div>
-      <div class="done-row" id="done"><span class="ck2"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>Odpověď zapsána do CRM</div>
-    </div>
+    <div class="offer" id="offer"><small>Odeslaná nabídka</small><div class="amt disp">186 000 Kč</div></div>
+    <div class="t2 disp" id="s2t">Nikdo se <em>neozval.</em></div>
   </section>
 
-  <section class="scene" id="f5">
-    <div class="offer" id="back"><small>Nabídka · znovu v jednání</small><b>Martin Kovář · rekonstrukce</b><div class="amt disp">186 000 Kč</div></div>
-    <div class="ill">Ilustrativní ukázka</div>
-    <h3 class="disp" id="f5h">Žádná nabídka<br><em>už neusne.</em></h3>
+  <section class="scene" id="s3">
+    <div class="t1 disp" id="s3t">Pak přišel<br><em>Follow Up Agent.</em></div>
   </section>
 
   <section class="scene" id="s4">
-    <h2 class="disp">Vyzkoušejte si<br><em>Follow Up Agenta.</em></h2>
-    <div class="ctas">
-      <div class="cta web" id="c1">
-        <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span>
-        <div><b>nexivoai.cz</b><span>Agent na 3 dny zdarma</span></div>
-      </div>
-      <div class="or" id="or">NEBO</div>
-      <div class="cta cmt" id="c2">
-        <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1121 12z"/></svg></span>
-        <div><b>Napište do komentáře <span class="kw">AGENT</span></b><span>a domluvte si AI konzultaci zdarma</span></div>
-      </div>
-    </div>
+    <span class="chip"><i></i>Den 30 · WhatsApp</span>
+    <div class="bubble agent" id="b1">Je pro vás nabídka stále aktuální?</div>
+    <div class="who">Follow Up Agent</div>
+  </section>
+
+  <section class="scene" id="s5">
+    <div class="bubble client" id="b2">Ano! Zavolejte mi zítra.</div>
+    <div class="who">Klient</div>
+    <div class="crm" id="crm"><span class="ck"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>Zapsáno do CRM</div>
+  </section>
+
+  <section class="scene" id="s6">
+    <div class="offer" id="back"><small>Zpátky ve hře</small><div class="amt disp">186 000 Kč</div></div>
+    <div class="t2 disp" id="s6t">Žádná nabídka<br><em>už neusne.</em></div>
+  </section>
+
+  <section class="scene" id="s7">
+    <div class="t2 disp" id="s7t">Vyzkoušejte<br><em>zdarma.</em></div>
+    <div class="opt web" id="o1"><b>nexivoai.cz</b><span>agent na 3 dny zdarma</span></div>
+    <div class="opt cmt" id="o2"><b>Komentář <span class="kw">AGENT</span></b><span>AI konzultace zdarma</span></div>
     <img class="logo" id="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
   </section>
 
@@ -257,76 +116,59 @@
     return el.querySelectorAll('.w > span');
   }
   const $ = s => document.querySelector(s);
-  const fmt = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
-  const setClock = (el, txt, unit) => { el.innerHTML = txt + (unit ? '<small>' + unit + '</small>' : ''); };
-
+  const IN = { duration: .8, ease: 'power3.out' };
+  const OUT = { autoAlpha: 0, y: -40, duration: .6, ease: 'power2.inOut' };
+  const words = s => split($(s));
   const tl = gsap.timeline({ paused: true });
-  const h1 = split($('#h1')), f2W = split($('#f2h')), s2W = split($('#s2h')), f5W = split($('#f5h')), h2 = split($('#s4 h2'));
-  gsap.set(['#f2', '#s2t', '#s2', '#f5', '#s4'], { autoAlpha: 0 });
-  gsap.set('#stamp', { autoAlpha: 0 });
-  tl.to('#glow', { x: 120, y: 260, duration: 25, ease: 'none' }, 0);
+  gsap.set(['#s2', '#s3', '#s4', '#s5', '#s6', '#s7'], { autoAlpha: 0 });
+  tl.to('#glow', { x: 140, y: 240, duration: 25, ease: 'none' }, 0);
 
-  // 0–4.6 s: 30 days tear off. Pages flip from frame 0.
-  const day = { v: 1 };
-  tl.from(h1, { yPercent: 115, duration: .5, ease: 'expo.out', stagger: .06 }, 0)
-    .to(day, { v: 30, duration: 2.6, ease: 'power2.in', onUpdate: () => {
-        const d = Math.round(day.v);
-        $('#num').textContent = d; $('#numBack').textContent = Math.min(30, d + 1);
-        const f = day.v % 1; gsap.set('#page', { rotate: -f * 7, y: -f * 50, x: -f * 40, transformOrigin: '0% 0%' });
-      } }, .2)
-    .set('#page', { rotate: 0, y: 0 }, 2.82)
-    .call(() => { $('#num').textContent = 30; }, null, 2.83)
-    .fromTo('#stamp', { scale: 2.4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .3, ease: 'power4.in' }, 2.9)
-    .to('.tear', { x: 12, duration: .05, repeat: 5, yoyo: true, ease: 'none' }, 3.2)
-    .to('#f1', { autoAlpha: 0, duration: .35, ease: 'power2.in' }, 4.4);
+  // 0–4.4 s: days count up from frame 0
+  const d = { v: 1 };
+  tl.to(d, { v: 30, duration: 2.8, ease: 'power2.inOut', onUpdate: () => { $('#count').textContent = Math.round(d.v); } }, 0)
+    .from('#s1 .countl', { y: 40, autoAlpha: 0, ...IN }, .2)
+    .to('#count', { color: '#C2410C', duration: .5 }, 2.8)
+    .to('#s1', OUT, 3.9);
 
-  // 4.8–8.4 s: forgotten offer drops onto the pile
-  tl.set('#f2', { autoAlpha: 1 }, 4.75)
-    .from('#mk', { y: -500, rotate: -8, duration: .6, ease: 'bounce.out' }, 4.8)
-    .to('#mk', { backgroundColor: '#ECEAE3', color: '#A9A69C', boxShadow: '0 0 0 rgba(0,0,0,0)', duration: .8 }, 5.6)
-    .to('#mk small', { color: '#B8B5AB', duration: .8 }, 5.6)
-    .from(f2W, { yPercent: 115, duration: .6, ease: 'expo.out', stagger: .08 }, 6.0)
-    .to('#f2', { autoAlpha: 0, y: -80, duration: .35, ease: 'power2.in' }, 8.1);
+  // 4.4–8.4 s: the offer fades out of mind
+  tl.set('#s2', { autoAlpha: 1 }, 4.4)
+    .from('#offer', { y: 60, autoAlpha: 0, ...IN }, 4.4)
+    .from(words('#s2t'), { yPercent: 110, stagger: .08, ...IN }, 5.0)
+    .to('#offer', { backgroundColor: '#E9E7E0', color: '#A9A69C', boxShadow: '0 0 0 rgba(0,0,0,0)', duration: 1.4, ease: 'power1.inOut' }, 5.6)
+    .to('#offer small', { color: '#B8B5AB', duration: 1.4 }, 5.6)
+    .to('#s2', OUT, 7.8);
 
-  // 8.5–10.2 s: title card
-  tl.set('#s2t', { autoAlpha: 1 }, 8.5)
-    .from(s2W, { yPercent: 115, duration: .6, ease: 'expo.out', stagger: .07 }, 8.5)
-    .to('#s2t', { autoAlpha: 0, scale: .96, duration: .3, ease: 'power2.in' }, 9.95);
+  // 8.4–10.8 s: turn
+  tl.set('#s3', { autoAlpha: 1 }, 8.4)
+    .from(words('#s3t'), { yPercent: 110, stagger: .08, ...IN }, 8.4)
+    .to('#s3', OUT, 10.2);
 
-  // 10.3–18 s: day 30, agent writes, client answers, CRM updates
-  tl.set('#s2', { autoAlpha: 1 }, 10.3)
-    .from('#card', { y: 260, scale: .92, duration: .7, ease: 'expo.out' }, 10.3)
-    .from('#chip', { x: -30, autoAlpha: 0, duration: .35, ease: 'expo.out' }, 10.8)
-    .from('#m1', { y: 30, autoAlpha: 0, scale: .96, transformOrigin: '100% 100%', duration: .45, ease: 'back.out(1.6)' }, 11.2)
-    .from('#typ', { autoAlpha: 0, duration: .15 }, 12.3)
-    .to('#typ span', { opacity: 1, y: -6, duration: .18, stagger: { each: .08, repeat: 5, yoyo: true } }, 12.35)
-    .to('#typ', { autoAlpha: 0, height: 0, padding: 0, margin: 0, duration: .12 }, 13.45)
-    .from('#m2', { y: 30, autoAlpha: 0, scale: .96, transformOrigin: '0% 100%', duration: .45, ease: 'back.out(1.6)' }, 13.5)
-    .from('#crm', { y: 60, autoAlpha: 0, duration: .45, ease: 'expo.out' }, 14.4)
-    .call(() => { $('#st').textContent = 'Ticho'; $('#st').classList.remove('hot'); }, null, 15.19)
-    .call(() => { $('#st').textContent = 'Horký'; $('#st').classList.add('hot'); }, null, 15.2)
-    .fromTo('#st', { scale: 1.35 }, { scale: 1, duration: .4, ease: 'back.out(2.2)' }, 15.2)
-    .from('#task', { autoAlpha: 0, y: 20, duration: .35 }, 15.6)
-    .from('#done', { y: 30, autoAlpha: 0, duration: .4, ease: 'back.out(1.8)' }, 16.3)
-    .to('#s2', { autoAlpha: 0, scale: .96, duration: .35, ease: 'power2.in' }, 17.85);
+  // 10.8–14.4 s: agent writes on day 30
+  tl.set('#s4', { autoAlpha: 1 }, 10.8)
+    .from('#s4 .chip', { y: 30, autoAlpha: 0, ...IN }, 10.8)
+    .from('#b1', { y: 60, autoAlpha: 0, scale: .96, transformOrigin: '100% 100%', ...IN }, 11.2)
+    .from('#s4 .who', { autoAlpha: 0, duration: .5 }, 11.7)
+    .to('#s4', OUT, 13.8);
 
-  // 18.3–21.3 s: the offer is back
-  tl.set('#f5', { autoAlpha: 1 }, 18.3)
-    .fromTo('#back', { backgroundColor: '#ECEAE3', scale: .92, y: 40 }, { backgroundColor: '#FFFFFF', scale: 1, y: 0, duration: .7, ease: 'back.out(1.5)' }, 18.3)
-    .fromTo('#back', { boxShadow: '0 0 0 0 rgba(197,232,50,0)' }, { boxShadow: '0 0 0 16px rgba(197,232,50,.55)', duration: .5, yoyo: true, repeat: 1 }, 18.7)
-    .from('#f5 .ill', { autoAlpha: 0, duration: .3 }, 19.0)
-    .from(f5W, { yPercent: 115, duration: .6, ease: 'expo.out', stagger: .07 }, 19.3)
-    .to('#f5', { autoAlpha: 0, y: -60, duration: .3, ease: 'power2.in' }, 21.0);
+  // 14.4–18.2 s: client answers, CRM updated
+  tl.set('#s5', { autoAlpha: 1 }, 14.4)
+    .from('#b2', { y: 60, autoAlpha: 0, scale: .96, transformOrigin: '0% 100%', ...IN }, 14.4)
+    .from('#s5 .who', { autoAlpha: 0, duration: .5 }, 14.9)
+    .from('#crm', { y: 50, autoAlpha: 0, scale: .9, ...IN }, 15.6)
+    .to('#s5', OUT, 17.6);
 
-  // 21.3–25 s: CTA
-  tl.set('#s4', { autoAlpha: 1 }, 21.3)
-    .from('#s4', { clipPath: 'circle(0% at 50% 50%)', duration: .5, ease: 'power3.inOut' }, 21.3)
-    .from(h2, { yPercent: 115, duration: .55, ease: 'expo.out', stagger: .05 }, 21.55)
-    .from('#c1', { y: 50, autoAlpha: 0, duration: .45, ease: 'back.out(1.6)' }, 22.0)
-    .from('#or', { autoAlpha: 0, duration: .3 }, 22.35)
-    .from('#c2', { y: 50, autoAlpha: 0, duration: .45, ease: 'back.out(1.6)' }, 22.5)
-    .from('#logo', { y: 20, autoAlpha: 0, duration: .4 }, 22.9)
-    .to('#c2 .kw', { scale: 1.12, duration: .25, yoyo: true, repeat: 1, ease: 'power1.inOut' }, 23.6)
+  // 18.2–21.6 s: the offer is back
+  tl.set('#s6', { autoAlpha: 1 }, 18.2)
+    .fromTo('#back', { backgroundColor: '#E9E7E0', borderColor: 'rgba(197,232,50,0)', y: 40, autoAlpha: 0 }, { backgroundColor: '#FFFFFF', borderColor: 'rgba(197,232,50,1)', y: 0, autoAlpha: 1, duration: 1.0, ease: 'power3.out' }, 18.2)
+    .from(words('#s6t'), { yPercent: 110, stagger: .08, ...IN }, 18.8)
+    .to('#s6', OUT, 21.0);
+
+  // 21.6–25 s: CTA
+  tl.fromTo('#s7', { autoAlpha: 0 }, { autoAlpha: 1, duration: .5, ease: 'power2.out' }, 21.6)
+    .from(words('#s7t'), { yPercent: 110, stagger: .08, ...IN }, 21.8)
+    .from('#o1', { y: 50, autoAlpha: 0, ...IN }, 22.3)
+    .from('#o2', { y: 50, autoAlpha: 0, ...IN }, 22.6)
+    .from('#logo', { autoAlpha: 0, duration: .6 }, 23.0)
     .to({}, { duration: .01 }, 25);
 
   window.TL = tl;
