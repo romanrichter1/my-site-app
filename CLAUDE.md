@@ -25,8 +25,10 @@ No build system, no package manager. All files are standalone HTML with inline o
 ├── colors_and_type.css         ← Design tokens: colors, typography, spacing
 ├── og-gen.html                 ← OG image generator (open in browser to download PNG)
 ├── vercel.json                 ← cleanUrls + redirects
+├── favicon.ico, apple-touch-icon.png, site.webmanifest ← app icon „n.“ (root, absolute paths)
+├── icons/                      ← nexivo-16/32/48/180/192/512.png (rounded corners transparent; 180 opaque for iOS)
 ├── assets/
-│   ├── nexivo-favicon.svg      ← Favicon: "n" + lime dot on cream bg
+│   ├── nexivo-favicon.svg      ← Starý favicon, už se nepoužívá (nahrazen /favicon.ico + /icons/)
 │   ├── nexivo-logo.png         ← Logo — používá se všude na světlém pozadí
 │   ├── nexivo-logo-inverse.png ← Totéž pro tmavé pozadí (patička)
 │   ├── nexivo-wordmark.svg     ← Starý wordmark, nikde se nepoužívá
@@ -221,6 +223,7 @@ After deploy, always push to GitHub: `git push origin main`
 - **No build system** — edit HTML/CSS directly, no transpilation
 - **CSS tokens** — use `colors_and_type.css` variables for marketing pages, inline `:root` vars for dashboard
 - **Dual file rule ABOLISHED** — `nexivo_landing.html` deleted, `index.html` is the only landing page
+- **Icons** — every Nexivo page head carries the same 6-line block: `/favicon.ico`, `/icons/nexivo-32.png`, `/apple-touch-icon.png`, `/site.webmanifest`, `theme-color #F7F5EF`, `apple-mobile-web-app-title`. Copy it to new pages.
 - **Internal links** — always clean paths (`/`, `/nexivo_inquiry`, `/klient`), never `.html` extensions
 - **No comments** in code unless WHY is non-obvious
 
