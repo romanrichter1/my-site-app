@@ -35,8 +35,8 @@ No build system, no package manager. All files are standalone HTML with inline o
 │   ├── nexivo-mark.svg         ← Geometric N mark, nepoužívá se
 │   └── ...
 └── klient/
-    ├── index.html              ← Login page (nexivoai.cz/klient)
-    └── dashboard.html          ← Client dashboard (nexivoai.cz/klient/dashboard)
+    ├── index.html              ← Login page (nexivoai.cz/klient) → real portal at /portal
+    └── aktivovat.html          ← Account activation + invoice
 ```
 
 **Deleted files** (redirects in vercel.json):
@@ -135,9 +135,20 @@ Page is `noindex` (form page, not for search engines).
 
 **Login** (`klient/index.html`):
 - Split layout: form left, stats panel right (cream + dark)
-- Any credentials accepted (demo mode — no real auth yet)
-- On submit: redirects to `/klient/dashboard`
+- Real sign-in to the client portal: supabase-js (UMD, jsdelivr, pinned) against `portal-api.nexivoagency.eu`
+  with the public anon key and `storageKey: 'nexivo-portal-auth'` — the same key the portal uses, so the session
+  carries over to `/portal/` (same origin). Already signed in → straight to `/portal/`.
+- Links: „Aktivovat účet“ (`/klient/aktivovat`) and „Vyzkoušejte AI agenty 3 dny zdarma“ (`/vyzkouset`)
 - `noindex, nofollow`
+
+**Portal + free trial (proxied, `vercel.json` rewrites):** `/portal/*` and `/vyzkouset` are served by the
+separate Vite app `nikec17/nexivo-portal` (nexivo-portal.vercel.app, built with `base: '/portal/'`).
+Trial clients and paying clients share the same portal; it adapts to the account's plan.
+CTAs „Vyzkoušet zdarma“ (nav + hero) link to `/vyzkouset`.
+
+„Zapomenuté heslo?“ calls `resetPasswordForEmail` (redirect to `/portal/`, the portal shows the new-password form).
+Czech auth e-mail templates for the portal (GoTrue fetches them by URL): `email/potvrzeni-emailu.html`, `email/reset-hesla.html`, `email/zmena-emailu.html` (Go template, `{{ .ConfirmationURL }}`).
+Legal: VOP článek IIIa (`#zkusebni-verze`) covers the trial and the subscription; gdpr.html lists Stripe, OpenRouter/Anthropic, Hetzner, Google.
 
 **Dashboard** (`klient/dashboard.html`):
 - React 18 via CDN + Babel standalone (JSX inline)
@@ -236,7 +247,7 @@ Když Roman napíše „smaž animace“ / „vrať hero“ apod., vrať přísl
 
 | Commit | Co dělá | Revert vrátí |
 |--------|---------|--------------|
-| `3a813b3` | Nová ikona „n.“: favicon, ikona na plochu iPhonu, manifest aplikace na 12 stránkách | starý SVG favicon |
+| `3a813b3` | Nová ikona „n.“: favicon, ikona na plochu iPhonu, manifest aplikace na 11 stránkách (+ dashboard, který byl mezitím smazán) | starý SVG favicon |
 | `18d6fce` | Hero úplně statický: nadpis, texty a vrstvy se nehýbou (žádný reveal, rozpad na slova, parallax, plovoucí karty, naklonění dema) | animace v hero zpět |
 | `b4f654b` | Srovnání ChatGPT vs agent jako souboj při scrollu (přeškrtávání, skóre 4/4, odznak vs, kategorie řádků) | původní statické dva sloupce |
 | `89b2ddd` | Odstraněn Lenis a všechny efekty řízené myší (kurzor, magnetická tlačítka, tilt, spotlight, parallax za myší) — trackpad nešel ovládat | Lenis + efekty myši zpět |
