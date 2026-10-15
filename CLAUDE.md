@@ -236,6 +236,7 @@ Když Roman napíše „smaž animace“ / „vrať hero“ apod., vrať přísl
 
 | Commit | Co dělá | Revert vrátí |
 |--------|---------|--------------|
+| `3a813b3` | Nová ikona „n.“: favicon, ikona na plochu iPhonu, manifest aplikace na 12 stránkách | starý SVG favicon |
 | `18d6fce` | Hero úplně statický: nadpis, texty a vrstvy se nehýbou (žádný reveal, rozpad na slova, parallax, plovoucí karty, naklonění dema) | animace v hero zpět |
 | `b4f654b` | Srovnání ChatGPT vs agent jako souboj při scrollu (přeškrtávání, skóre 4/4, odznak vs, kategorie řádků) | původní statické dva sloupce |
 | `89b2ddd` | Odstraněn Lenis a všechny efekty řízené myší (kurzor, magnetická tlačítka, tilt, spotlight, parallax za myší) — trackpad nešel ovládat | Lenis + efekty myši zpět |
@@ -243,4 +244,4 @@ Když Roman napíše „smaž animace“ / „vrať hero“ apod., vrať přísl
 | `e91ef5b` | Interaktivní demo „Zadej úkol“ (`.taskdemo`) místo chatu „Jana Dvořáková“ | původní chat mockup `.callcard` |
 | `f9c068d` | Hero vycentrovaný ve stylu Everbot/Editee: pilulka, podtržené „rutinu“, řádek s fajfkami | původní dvousloupcový hero |
 
-Vše jen v `index.html`, `nexivo_marketing.css` a `CLAUDE.md`.
+Vše v `index.html`, `nexivo_marketing.css` a `CLAUDE.md`; ikona navíc v hlavičkách 12 stránek, `icons/`, `favicon.ico`, `apple-touch-icon.png`, `site.webmanifest`.
