@@ -10,7 +10,7 @@ Použití: napište „vyrob reel podle `social/reels-prompts.md`, **Inquiry Age
 
 **Formát**
 - 1080 × 1920, 30 fps, **15–20 s**, MP4 H.264, bez zvuku (hudbu přidat v Instagramu / FB).
-- Výroba: HTML + GSAP timeline, render po snímcích (jako `nexivo-inquiry-reel.mp4`).
+- Výroba: HTML + GSAP timeline, render po snímcích (vzor `reels/inquiry-a/`, postup v `README.md`). Bez voiceoveru; ke každému reelu `voiceover.md` s textem podle časů scén.
 - Bezpečná zóna: důležitý text mezi **y 250–1500 px**, nic podstatného do pravých 140 px (ikony IG).
 
 **Brand**
@@ -26,7 +26,7 @@ Použití: napište „vyrob reel podle `social/reels-prompts.md`, **Inquiry Age
 | 3–6 s | **Problém** | Rozvést bolest na konkrétní situaci z provozu. |
 | 6–14 s | **Agent v akci** | Co agent reálně udělá: notifikace na iPhonu, e-mail, zápis do kalendáře, faktura, report… |
 | 14–17 s | **Výsledek** | Jedna věta / jedno číslo, co majitel získá. |
-| posledních 2,5–3 s | **CTA** | Tmavá karta: **„Napište do komentáře AGENT a zjistěte, jak tohoto pomocníka získat.“** + logo + `nexivoai.cz` |
+| posledních 3–3,5 s | **CTA** | Tmavá karta se dvěma volbami: **„nexivoai.cz · agent na 3 dny zdarma“** NEBO **„Napište do komentáře AGENT a domluvte si AI konzultaci zdarma“** + logo (vzor: `reels/inquiry-a/`) |
 
 **Co funguje na IG/FB (dodržovat)**
 1. **Žádné prázdné úvodní snímky.** 1. snímek už obsahuje text a pohyb. Žádné fade-in z prázdna.

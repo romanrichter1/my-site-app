@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=block">
+<style>
+  :root { --bone: #F7F5EF; --bone2: #EFEDE6; --ink: #0A0A0A; --ink5: #5E5E63; --ink3: #A1A1A6; --lime: #C5E832; --red: #C2410C; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bone); }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; color: var(--ink); position: relative; }
+  .disp { font-family: 'Fraunces', Georgia, serif; font-weight: 400; letter-spacing: -0.025em; font-variation-settings: "opsz" 144; }
+  em { font-style: italic; color: var(--ink5); }
+  .glow { position: absolute; width: 1400px; height: 1400px; left: -160px; top: -300px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.33), rgba(197,232,50,0)); }
+  .grid { position: absolute; inset: 0; background-image: radial-gradient(rgba(10,10,10,.10) 1.5px, transparent 1.8px); background-size: 40px 40px;
+          -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 40%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 55% at 50% 40%, #000 20%, transparent 75%); }
+  .scene { position: absolute; inset: 0; }
+  .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .14em; margin: 0 -.06em -.14em; }
+  .w > span { display: inline-block; }
+
+  /* race */
+  .lane { position: absolute; left: 70px; right: 70px; height: 640px; border-radius: 56px; background: #fff; box-shadow: 0 40px 100px rgba(0,0,0,.10); padding: 56px 60px; overflow: hidden; }
+  #you { top: 230px; }
+  #them { top: 1010px; }
+  .lane .who { display: flex; align-items: center; gap: 16px; font-size: 34px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink5); }
+  .lane .who i { width: 18px; height: 18px; border-radius: 50%; background: var(--ink3); }
+  .lane .meta { margin-top: 14px; font-size: 30px; color: var(--ink5); }
+  .clock { margin-top: 40px; font-size: 230px; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+  .clock small { font-size: .32em; letter-spacing: 0; margin-left: 10px; color: var(--ink5); }
+  .status { position: absolute; left: 60px; bottom: 56px; display: inline-flex; align-items: center; gap: 14px; padding: 16px 26px; border-radius: 999px; font-size: 32px; font-weight: 700; }
+  .status .ck { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); display: inline-flex; align-items: center; justify-content: center; }
+  .status .ck svg { width: 22px; height: 22px; fill: none; stroke: var(--lime); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+  #themOk { background: var(--lime); }
+  #them.won { background: #F4FBD9; }
+  #you.lost .clock { color: var(--red); }
+  .lostmsg { position: absolute; right: 50px; bottom: 50px; max-width: 640px; padding: 26px 30px; border-radius: 34px 34px 10px 34px; background: var(--bone2); font-size: 32px; line-height: 1.35; box-shadow: 0 16px 40px rgba(0,0,0,.08); }
+  .lostmsg small { display: block; margin-top: 10px; font-size: 22px; color: var(--ink5); }
+  .vs { position: absolute; left: 50%; top: 960px; transform: translate(-50%, -50%); z-index: 5; padding: 26px 48px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 64px; white-space: nowrap; box-shadow: 0 24px 60px rgba(0,0,0,.25); }
+  .vs em { color: var(--lime); }
+  .kicker { position: absolute; left: 0; right: 0; top: 1700px; text-align: center; font-size: 62px; }
+
+  /* agent */
+  #s2 { padding: 150px 70px 0; }
+  .rewind { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-size: 46px; font-weight: 700; color: var(--ink5); }
+  .rewind b { color: var(--ink); }
+  .card { position: absolute; left: 70px; right: 70px; top: 250px; height: 1390px; border-radius: 64px; background: #fff; box-shadow: 0 50px 120px rgba(0,0,0,.12); overflow: hidden; display: flex; flex-direction: column; }
+  .bar { display: flex; align-items: center; gap: 22px; padding: 50px 50px 34px; border-bottom: 2px solid #EEE; }
+  .av { width: 88px; height: 88px; border-radius: 50%; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; }
+  .nm b { display: block; font-size: 38px; } .nm small { font-size: 27px; color: var(--ink5); }
+  .timer { margin-left: auto; display: flex; align-items: center; gap: 12px; padding: 14px 24px; border-radius: 999px; background: var(--bone2); font-size: 34px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .timer i { width: 16px; height: 16px; border-radius: 50%; background: #D98A1F; }
+  .timer.done { background: var(--lime); } .timer.done i { background: #1F8A5B; }
+  .tag { margin: 30px 50px 0; align-self: flex-start; padding: 12px 24px; border-radius: 999px; background: var(--lime); font-size: 28px; font-weight: 700; }
+  .msgs { padding: 34px 50px 0; display: flex; flex-direction: column; gap: 30px; }
+  .b { max-width: 84%; padding: 30px 34px; border-radius: 38px; font-size: 35px; line-height: 1.38; }
+  .b small { display: block; margin-top: 12px; font-size: 23px; opacity: .55; }
+  .them { background: var(--bone2); border-bottom-left-radius: 10px; }
+  .ai { align-self: flex-end; background: var(--ink); color: #fff; border-bottom-right-radius: 10px; }
+  .typing { align-self: flex-end; display: flex; gap: 10px; padding: 28px 32px; border-radius: 38px; background: var(--ink); }
+  .typing span { width: 15px; height: 15px; border-radius: 50%; background: #fff; opacity: .5; }
+  .opts { align-self: flex-end; display: flex; gap: 18px; }
+  .opt { position: relative; padding: 22px 34px; border-radius: 999px; border: 3px solid var(--ink); font-size: 34px; font-weight: 700; background: #fff; }
+  .opt.pick { background: var(--lime); border-color: var(--lime); }
+  .tap { position: absolute; left: 50%; top: 50%; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%; background: rgba(10,10,10,.18); border: 4px solid rgba(10,10,10,.35); pointer-events: none; }
+  .cal { margin: auto 50px 0; padding: 30px; border-radius: 34px; background: var(--bone); display: flex; align-items: center; gap: 26px; border-left: 10px solid var(--lime); }
+  .day { min-width: 110px; text-align: center; font-size: 72px; line-height: 1; }
+  .day small { display: block; font: 700 24px/1.4 -apple-system, "Inter", sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--ink5); }
+  .cal b { display: block; font-size: 36px; } .cal span { font-size: 28px; color: var(--ink5); }
+  .done-row { margin: 26px 50px 50px; display: flex; align-items: center; gap: 18px; padding: 24px 30px; border-radius: 28px; background: rgba(197,232,50,.4); font-size: 31px; font-weight: 700; }
+  .ck2 { width: 46px; height: 46px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ck2 svg { width: 24px; height: 24px; fill: none; stroke: var(--lime); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* stat */
+  #s3 { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 90px; }
+  #s3 .k { font-size: 44px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink5); }
+  #s3 .k b { display: inline-block; padding: 4px 16px; border-radius: 12px; background: var(--lime); color: var(--ink); }
+  #s3 .big { font-size: 330px; line-height: .95; letter-spacing: -0.045em; margin-top: 40px; }
+  #s3 .big sup { font-size: .42em; vertical-align: .62em; }
+  #s3 p { font-size: 66px; line-height: 1.15; margin-top: 30px; }
+  #s3 .src { position: absolute; bottom: 330px; font-size: 26px; color: var(--ink5); }
+
+  /* cta */
+  #s4 { background: var(--ink); color: #fff; display: flex; flex-direction: column; align-items: center; padding: 330px 80px 0; text-align: center; }
+  #s4 h2 { font-size: 104px; line-height: 1.04; }
+  #s4 h2 em { color: var(--lime); }
+  .ctas { margin-top: 70px; width: 100%; display: flex; flex-direction: column; gap: 30px; }
+  .cta { display: flex; align-items: center; gap: 30px; padding: 40px 44px; border-radius: 44px; text-align: left; }
+  .cta.web { background: var(--lime); color: var(--ink); }
+  .cta.cmt { background: #1D1D1F; border: 2px solid rgba(255,255,255,.14); }
+  .cta .ic { width: 96px; height: 96px; border-radius: 28px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .cta.web .ic { background: var(--ink); } .cta.cmt .ic { background: var(--lime); }
+  .cta .ic svg { width: 48px; height: 48px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .cta.web .ic svg { stroke: var(--lime); } .cta.cmt .ic svg { stroke: var(--ink); }
+  .cta b { display: block; font-size: 46px; line-height: 1.15; }
+  .cta span { display: block; margin-top: 8px; font-size: 32px; opacity: .75; }
+  .cta .ic { margin: 0; opacity: 1; }
+  .cta b .kw { display: inline-block; margin: 0; font-size: inherit; opacity: 1; padding: 2px 16px; border-radius: 12px; background: var(--lime); color: var(--ink); letter-spacing: .04em; }
+  .or { font-size: 30px; font-weight: 700; letter-spacing: .14em; color: var(--ink3); }
+  #s4 .logo { width: 380px; margin-top: 90px; }
+</style>
+</head>
+<body>
+  <div class="glow" id="glow"></div>
+  <div class="grid"></div>
+
+  <section class="scene" id="s1">
+    <div class="lane" id="you">
+      <div class="who"><i></i>Vy</div>
+      <div class="meta">Poptávka z webu · 18:02</div>
+      <div class="clock disp" id="youClock">0:00</div>
+      <div class="lostmsg" id="lost">Díky, už jsme se domluvili jinde.<small>Jana Dvořáková · 20:31</small></div>
+    </div>
+    <div class="lane" id="them">
+      <div class="who"><i></i>Konkurence</div>
+      <div class="meta">Stejná poptávka · 18:02</div>
+      <div class="clock disp" id="themClock">0:00</div>
+      <div class="status" id="themOk"><span class="ck"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>Odpovězeno · termín domluven</div>
+    </div>
+    <div class="vs disp" id="vs">Kdo odpoví <em>dřív?</em></div>
+    <div class="kicker disp" id="kick">Zákazník už má <em>termín jinde.</em></div>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="rewind" id="rw">Teď totéž <b>s Inquiry Agentem</b></div>
+    <div class="card" id="card">
+      <div class="bar">
+        <span class="av">JD</span>
+        <span class="nm"><b>Jana Dvořáková</b><small>Formulář na webu</small></span>
+        <span class="timer" id="timer"><i></i><span id="tt">0:00</span></span>
+      </div>
+      <span class="tag" id="tag">Inquiry Agent odpovídá</span>
+      <div class="msgs">
+        <div class="b them" id="m1">Dobrý den, potřebovali bychom nacenit rekonstrukci koupelny. Ideálně do konce měsíce.<small>18:02:04</small></div>
+        <div class="typing" id="typ"><span></span><span></span><span></span></div>
+        <div class="b ai" id="m2">Dobrý den, děkujeme! Rádi se přijedeme podívat. Hodí se vám obhlídka:<small>Inquiry Agent · 18:02:42</small></div>
+        <div class="opts" id="opts"><span class="opt" id="o1">Čt 9:00<span class="tap" id="tap"></span></span><span class="opt" id="o2">Pá 14:00</span></div>
+      </div>
+      <div class="cal" id="cal"><span class="day disp"><small>čt</small>14</span><div><b>Obhlídka koupelny</b><span>9:00–9:45 · technik Petr · Jana Dvořáková</span></div></div>
+      <div class="done-row" id="done"><span class="ck2"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>Odpověď za 38 s · zapsáno do kalendáře i CRM</div>
+    </div>
+  </section>
+
+  <section class="scene" id="s3">
+    <div class="k">Odpověď <b>do 1 minuty</b></div>
+    <div class="big disp">až <span id="pct">0</span><sup>&#8239;%</sup></div>
+    <p class="disp">vyšší šance <em>na obchod.</em></p>
+    <span class="src">Zdroj: Velocify, analýza 3,5 mil. poptávek</span>
+  </section>
+
+  <section class="scene" id="s4">
+    <h2 class="disp">Vyzkoušejte si<br><em>Inquiry Agenta.</em></h2>
+    <div class="ctas">
+      <div class="cta web" id="c1">
+        <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span>
+        <div><b>nexivoai.cz</b><span>Agent na 3 dny zdarma</span></div>
+      </div>
+      <div class="or" id="or">NEBO</div>
+      <div class="cta cmt" id="c2">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1121 12z"/></svg></span>
+        <div><b>Napište do komentáře <span class="kw">AGENT</span></b><span>a domluvte si AI konzultaci zdarma</span></div>
+      </div>
+    </div>
+    <img class="logo" id="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  </section>
+
+<script src="../../tools/gsap.min.js"></script>
+<script>
+  function split(el) {
+    (function walk(n) {
+      Array.from(n.childNodes).forEach(c => {
+        if (c.nodeType === 3) {
+          const f = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(p => {
+            if (!p) return;
+            if (/^\s+$/.test(p)) return f.appendChild(document.createTextNode(p));
+            const w = document.createElement('span'); w.className = 'w';
+            const i = document.createElement('span'); i.textContent = p; w.appendChild(i); f.appendChild(w);
+          });
+          c.replaceWith(f);
+        } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
+      });
+    })(el);
+    return el.querySelectorAll('.w > span');
+  }
+  const $ = s => document.querySelector(s);
+  const fmt = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+  const setClock = (el, txt, unit) => { el.innerHTML = txt + (unit ? '<small>' + unit + '</small>' : ''); };
+
+  const tl = gsap.timeline({ paused: true });
+  const kick = split($('#kick'));
+  const h2 = split($('#s4 h2'));
+  gsap.set(['#s2', '#s3', '#s4'], { autoAlpha: 0 });
+  gsap.set(['#themOk', '#lost'], { autoAlpha: 0 });
+  tl.to('#glow', { x: 120, y: 260, duration: 19.5, ease: 'none' }, 0);
+
+  // 0–6 s: race. Clocks already ticking in frame 0.
+  const race = { v: 0 };
+  tl.from('#you', { x: -30, duration: .5, ease: 'expo.out' }, 0)
+    .from('#them', { x: 30, duration: .5, ease: 'expo.out' }, 0)
+    .fromTo('#vs', { scale: 2.2, rotate: -8, autoAlpha: 0 }, { scale: 1, rotate: 0, autoAlpha: 1, duration: .45, ease: 'back.out(2)' }, .25)
+    .to(race, { v: 38, duration: 1.6, ease: 'none', onUpdate: () => { setClock($('#youClock'), fmt(race.v)); setClock($('#themClock'), fmt(race.v)); } }, 0)
+    .call(() => $('#them').classList.add('won'), null, 1.62)
+    .call(() => $('#them').classList.remove('won'), null, 1.61)
+    .fromTo('#themOk', { autoAlpha: 0, y: 30, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .4, ease: 'back.out(2)' }, 1.62)
+    .to('#them', { scale: 1.02, duration: .2, yoyo: true, repeat: 1 }, 1.62)
+    .call(() => setClock($('#youClock'), '2', 'h'), null, 2.3)
+    .call(() => setClock($('#youClock'), '5', 'h'), null, 2.8)
+    .call(() => { setClock($('#youClock'), '18', 'h'); $('#you').classList.add('lost'); }, null, 3.3)
+    .call(() => { setClock($('#youClock'), '0:38'); $('#you').classList.remove('lost'); }, null, 2.29)
+    .fromTo('#youClock', { scale: 1.12 }, { scale: 1, duration: .25, transformOrigin: 'left center' }, 2.3)
+    .fromTo('#youClock', { scale: 1.12 }, { scale: 1, duration: .25 }, 2.8)
+    .fromTo('#youClock', { scale: 1.16 }, { scale: 1, duration: .3 }, 3.3)
+    .to('#vs', { autoAlpha: 0, scale: .8, duration: .3 }, 3.6)
+    .fromTo('#lost', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .45, ease: 'back.out(1.6)' }, 3.75)
+    .from(kick, { yPercent: 115, duration: .6, ease: 'expo.out', stagger: .06 }, 4.1)
+    .to('#s1', { autoAlpha: 0, scale: .94, duration: .4, ease: 'power2.in' }, 5.8);
+
+  // 6.2–13.8 s: same inquiry, now with the agent
+  const t = { v: 0 };
+  tl.set('#s2', { autoAlpha: 1 }, 6.2)
+    .from('#rw', { y: 30, autoAlpha: 0, duration: .4, ease: 'expo.out' }, 6.2)
+    .from('#card', { y: 260, scale: .92, duration: .7, ease: 'expo.out' }, 6.2)
+    .from('#tag', { autoAlpha: 0, x: -20, duration: .3 }, 6.7)
+    .from('#m1', { y: 30, autoAlpha: 0, duration: .4, ease: 'expo.out' }, 6.9)
+    .from('#typ', { autoAlpha: 0, duration: .15 }, 7.5)
+    .to('#typ span', { opacity: 1, y: -6, duration: .16, stagger: { each: .08, repeat: 6, yoyo: true } }, 7.55)
+    .to(t, { v: 38, duration: 1.6, ease: 'none', onUpdate: () => { $('#tt').textContent = fmt(t.v); } }, 7.5)
+    .to('#typ', { autoAlpha: 0, height: 0, padding: 0, margin: 0, duration: .12 }, 9.05)
+    .call(() => $('#timer').classList.remove('done'), null, 9.09)
+    .call(() => $('#timer').classList.add('done'), null, 9.1)
+    .from('#m2', { y: 30, autoAlpha: 0, scale: .96, transformOrigin: '100% 100%', duration: .45, ease: 'back.out(1.6)' }, 9.1)
+    .from('#o1, #o2', { y: 24, autoAlpha: 0, duration: .35, stagger: .1, ease: 'back.out(2)' }, 9.6)
+    .fromTo('#tap', { scale: 0, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: .25 }, 10.6)
+    .call(() => $('#o1').classList.remove('pick'), null, 10.79)
+    .call(() => $('#o1').classList.add('pick'), null, 10.8)
+    .to('#tap', { scale: 1.8, autoAlpha: 0, duration: .4 }, 10.85)
+    .from('#cal', { y: 60, autoAlpha: 0, scale: .9, duration: .5, ease: 'back.out(1.7)' }, 11.2)
+    .from('#done', { y: 30, autoAlpha: 0, duration: .4, ease: 'back.out(1.8)' }, 11.9)
+    .to('#s2', { autoAlpha: 0, scale: .96, duration: .35, ease: 'power2.in' }, 13.45);
+
+  // 13.8–16 s: stat
+  const pct = { v: 0 };
+  tl.set('#s3', { autoAlpha: 1 }, 13.8)
+    .from('#s3 .k', { y: 30, autoAlpha: 0, duration: .4, ease: 'expo.out' }, 13.8)
+    .from('#s3 .big', { y: 60, autoAlpha: 0, duration: .45, ease: 'expo.out' }, 13.95)
+    .to(pct, { v: 391, duration: .9, ease: 'power3.out', onUpdate: () => { $('#pct').textContent = Math.round(pct.v); } }, 14.0)
+    .from('#s3 p', { y: 30, autoAlpha: 0, duration: .4, ease: 'expo.out' }, 14.4)
+    .from('#s3 .src', { autoAlpha: 0, duration: .3 }, 14.6)
+    .to('#s3', { autoAlpha: 0, y: -60, duration: .3, ease: 'power2.in' }, 15.75);
+
+  // 16–19.5 s: CTA
+  tl.set('#s4', { autoAlpha: 1 }, 16.05)
+    .from('#s4', { clipPath: 'circle(0% at 50% 50%)', duration: .5, ease: 'power3.inOut' }, 16.05)
+    .from(h2, { yPercent: 115, duration: .55, ease: 'expo.out', stagger: .05 }, 16.3)
+    .from('#c1', { y: 50, autoAlpha: 0, duration: .45, ease: 'back.out(1.6)' }, 16.7)
+    .from('#or', { autoAlpha: 0, duration: .3 }, 16.95)
+    .from('#c2', { y: 50, autoAlpha: 0, duration: .45, ease: 'back.out(1.6)' }, 17.05)
+    .from('#logo', { y: 20, autoAlpha: 0, duration: .4 }, 17.4)
+    .to('#c2 .kw', { scale: 1.12, duration: .25, yoyo: true, repeat: 1, ease: 'power1.inOut' }, 18.1)
+    .to({}, { duration: .01 }, 19.5);
+
+  window.TL = tl;
+  window.READY = document.fonts.ready.then(() => true);
+</script>
+</body>
+</html>
