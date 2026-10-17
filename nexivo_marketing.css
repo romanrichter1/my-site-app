@@ -2088,7 +2088,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 .hero--center .hero__title { max-width: 18ch; margin-inline: auto; font-size: clamp(46px, 7vw, 88px); line-height: 1.02; }
 .hero--center .hero__sub { margin-inline: auto; max-width: 620px; }
 .hero--center .hero__line { display: block; }
-.hero--center .hero__title:has(.hero__line) { max-width: none; font-size: clamp(40px, 7vw, 84px); }
+.hero--center .hero__title:has(.hero__line) { max-width: none; font-size: clamp(40px, 7vw, 88px); }
 .hero--center .hero__cta { justify-content: center; }
 .hero__mark { position: relative; display: inline-block; white-space: nowrap; }
 .hero__mark::after {
