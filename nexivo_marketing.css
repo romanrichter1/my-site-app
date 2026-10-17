@@ -2087,6 +2087,8 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 .hero--center .hero__eyebrow::before { width: 7px; height: 7px; background: var(--ink-1000); }
 .hero--center .hero__title { max-width: 18ch; margin-inline: auto; font-size: clamp(46px, 7vw, 88px); line-height: 1.02; }
 .hero--center .hero__sub { margin-inline: auto; max-width: 620px; }
+.hero--center .hero__line { display: block; }
+.hero--center .hero__title:has(.hero__line) { max-width: none; font-size: clamp(40px, 7vw, 84px); }
 .hero--center .hero__cta { justify-content: center; }
 .hero__mark { position: relative; display: inline-block; white-space: nowrap; }
 .hero__mark::after {
@@ -2102,6 +2104,7 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 .hero--center .callcard { width: 100%; max-width: 620px; text-align: left; }
 @media (max-width: 480px) {
   .hero--center .hero__title { font-size: 44px; }
+  .hero--center .hero__title:has(.hero__line) { font-size: clamp(34px, 11.4vw, 44px); }
   .hero--center .hero__cta { align-self: stretch; }
   .hero__checks { flex-direction: column; align-items: center; gap: 10px; font-size: 14px; }
 }
