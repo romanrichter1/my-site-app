@@ -8,6 +8,8 @@ Nenasazuje se na web (`.vercelignore`).
 | Hotový reel Inquiry Agent (10 s): zdroj + MP4 | `reels/inquiry-10s/` |
 | GSAP pro offline render | `tools/gsap.min.js` |
 | Render HTML → MP4 1080×1920 / 30 fps | `tools/render-reel.js` |
+| Strategie IG/FB, napojení Meta API, náklady | `STRATEGIE.md` |
+| Publikace reelů a carouselů na IG + FB (Graph API) | `tools/publish-meta.js` |
 
 ## Jak vyrobit nový reel
 1. Zkopírovat `reels/inquiry-10s/` do `reels/<agent>-<varianta>/` a přepsat scény podle promptu v `reels-prompts.md`.
