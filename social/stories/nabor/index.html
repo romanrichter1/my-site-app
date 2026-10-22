@@ -1,0 +1,51 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=block">
+<style>
+  :root { --bone: #F7F5EF; --bone2: #EFEDE6; --ink: #0A0A0A; --ink5: #5E5E63; --ink3: #A1A1A6; --lime: #C5E832; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #999; font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; }
+  .disp { font-family: 'Fraunces', Georgia, serif; font-weight: 400; letter-spacing: -0.025em; font-variation-settings: "opsz" 144; }
+  .slide { position: relative; width: 1080px; height: 1920px; overflow: hidden; padding: 300px 90px 0; display: flex; flex-direction: column; }
+  .slide + .slide { margin-top: 20px; }
+  .dark { background: var(--ink); color: #fff; }
+  .light { background: var(--bone); color: var(--ink); }
+  .glow { position: absolute; width: 1500px; height: 1500px; right: -700px; top: -600px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.35), rgba(197,232,50,0)); }
+  .logo { position: absolute; left: 90px; top: 150px; height: 56px; }
+  .pill { position: relative; align-self: flex-start; display: inline-flex; align-items: center; gap: 16px; padding: 20px 36px; border-radius: 999px; background: var(--lime); color: var(--ink); font-size: 40px; font-weight: 700; }
+  .pill i { width: 18px; height: 18px; border-radius: 50%; background: var(--ink); }
+  .h { position: relative; margin-top: 50px; font-size: 200px; line-height: .92; }
+  .dark .h em { color: var(--lime); font-style: italic; }
+  .light .h em { color: var(--ink5); font-style: italic; }
+  .role { margin-top: 40px; font-size: 64px; line-height: 1.1; }
+  .dark .role { color: rgba(255,255,255,.7); } .light .role { color: var(--ink5); }
+  .role b { font-weight: 500; font-style: italic; }
+  .dark .role b { color: #fff; } .light .role b { color: var(--ink); }
+  ul { list-style: none; margin-top: 70px; display: grid; gap: 30px; }
+  li { display: flex; align-items: flex-start; gap: 28px; font-size: 46px; line-height: 1.25; font-weight: 600; }
+  li span { flex: 0 0 64px; height: 64px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--lime); }
+  li svg { width: 36px; height: 36px; fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .cta { margin-top: 80px; padding: 46px 52px; border-radius: 48px; }
+  .dark .cta { background: #1D1D1F; border: 3px solid rgba(255,255,255,.14); }
+  .light .cta { background: var(--ink); color: #fff; }
+  .cta b { display: block; font-size: 60px; line-height: 1.1; color: var(--lime); }
+  .cta span { display: block; margin-top: 14px; font-size: 36px; font-weight: 600; opacity: .75; }
+</style></head><body>
+<section class="slide dark">
+  <div class="glow"></div>
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <span class="pill"><i></i>Telefonista / telefonistka</span>
+  <div class="h disp">Nabíráme<br><em>do týmu.</em></div>
+  <div class="role disp">Pozice: <b>Telefonista</b></div>
+  <ul><li><span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Voláte firmám, kterým AI ušetří desítky hodin</li><li><span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Domlouváte schůzky, prodej dotáhneme my</li><li><span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Skript a zaškolení dostanete hotové</li><li><span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Fixní odměna + bonus za každou schůzku</li></ul>
+  <div class="cta"><b>Napište do DM „TELEFON“</b><span>nebo na roman@nexivoai.cz · Brno i na dálku</span></div>
+</section>
+<section class="slide light">
+  <div class="glow"></div>
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <span class="pill"><i></i>Obchodník / obchodnice</span>
+  <div class="h disp">Nabíráme<br><em>do týmu.</em></div>
+  <div class="role disp">Pozice: <b>Obchodník</b></div>
+  <ul><li><span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Vedete schůzky s majiteli firem</li><li><span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Prodáváte AI agenty, které firmy opravdu potřebují</li><li><span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Konzultační prodej: problém → řešení</li><li><span><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Provize z každého uzavřeného obchodu</li></ul>
+  <div class="cta"><b>Napište do DM „OBCHOD“</b><span>nebo na roman@nexivoai.cz · Brno i na dálku</span></div>
+</section>
+</body></html>
