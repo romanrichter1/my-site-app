@@ -30,6 +30,7 @@ Stav k 22. 10. 2026.
 |---|---|---|
 | 1 | ChatGPT vám poradí, agent to udělá (**hotový**) | Edukace |
 | 2 | Google Review Agent: spokojení recenze nepíšou (**hotový**) | Důvěra |
+| 2c | Kalkulační agent pro stavební firmy: nabídka za 5 minut (**hotový**) | Agent v akci |
 | 2b | 5 věcí, které vaše recepční dělá zbytečně | Bolest |
 | 3 | Co se stane s poptávkou, která přijde v neděli ve 22:00 | Bolest |
 | 4 | Den v salonu s AI recepční: 8:00 → 18:00 | Agent v akci |
