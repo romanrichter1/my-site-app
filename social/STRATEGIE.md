@@ -1,7 +1,60 @@
 # Instagram + Facebook: strategie, napojení, náklady
 
-Stav k 22. 10. 2026. Publikuje Claude přes Meta Graph API skriptem `tools/publish-meta.js`;
-nic nejde ven bez Romanova schválení.
+Stav k 22. 10. 2026.
+
+- **Fáze 1 (teď):** Claude vyrábí carousely + popisky, Roman je stáhne a publikuje ručně. Bez napojení na Meta.
+- **Fáze 2 (až fáze 1 ukáže výsledky):** reely + publikace přes Meta Graph API (`tools/publish-meta.js`), sekce 2–5 níže.
+
+---
+
+## Fáze 1: carousely, publikace ručně
+
+### Rytmus a výroba
+- **3 carousely týdně** (po, st, pá, 11:30 nebo 19:30), tj. 12 měsíčně.
+- **Jedna session týdně** (třeba neděle večer nebo pondělí 7:00): napíšeš „vyrob 3 carousely na tento týden“.
+  Vyrobím je, pošlu náhled, ty dáš jedno kolo oprav, pak ti pošlu hotové JPEGy + text.
+- Každý carousel leží v `social/carousels/<nazev>/`: `index.html` (zdroj), `01.jpg … 07.jpg`, `caption.txt`.
+  Render: `NODE_PATH=$(npm root -g) node social/tools/render-carousel.js social/carousels/<nazev>/index.html`.
+- Formát: 1080 × 1350 (4:5), 6–8 slidů, JPEG. Slide 1 = hook, předposlední = důkaz/číslo se zdrojem, poslední = CTA.
+  Vzor: `carousels/chatgpt-vs-agent/`.
+
+### Publikace (Roman, ~5 min na příspěvek)
+1. Ulož slidy z chatu do galerie (v pořadí 01 → 07).
+2. Instagram → nový příspěvek → vybrat víc fotek → vložit text z `caption.txt`.
+3. Zapnout **„Sdílet také na Facebooku“** (Centrum účtů propojí IG s FB stránkou). Jedno nahrání = obě sítě.
+4. Komentáře „AGENT“ v 1. měsíci **odpovídej ručně** do DM. Při téhle velikosti je to prodejní rozhovor, ne support;
+   automatizaci řešit až nad ~10 za týden.
+
+### Témata na první 4 týdny
+| # | Carousel | Pilíř |
+|---|---|---|
+| 1 | ChatGPT vám poradí, agent to udělá (**hotový**) | Edukace |
+| 2 | 5 věcí, které vaše recepční dělá zbytečně | Bolest |
+| 3 | Co se stane s poptávkou, která přijde v neděli ve 22:00 | Bolest |
+| 4 | Den v salonu s AI recepční: 8:00 → 18:00 | Agent v akci |
+| 5 | 23 % firem na poptávku z webu nikdy neodpoví (HBR) | Důkaz |
+| 6 | Follow Up Agent: nabídka za 186 000 Kč, 30 dní ticha | Agent v akci |
+| 7 | AI agent vs. brigádník na recepci: srovnání | Edukace |
+| 8 | Připomínky snižují počet nedorazivších o ~25 % | Důkaz |
+| 9 | 3 otázky, podle kterých poznáte, že vám agent ušetří čas | Edukace |
+| 10 | Jak nastavujeme agenta: 4 kroky od hovoru po spuštění | Zákulisí |
+| 11 | Mýty o AI ve firmě (zabere to měsíce, je to drahé, klienti to poznají) | Edukace |
+| 12 | Co agent pošle majiteli každé pondělí ráno (Reporting Agent) | Agent v akci |
+
+Čísla jen z ověřené tabulky v `reels-prompts.md`, vždy se zdrojem na slidu.
+
+### Náklady fáze 1
+| Položka | Měsíčně |
+|---|---|
+| Meta, publikace | 0 Kč |
+| Claude: 12 carouselů (à 15–30 Kč při API cenách Opus 5.5) + 4 týdenní dávky | **~200–400 Kč** |
+| Na předplatném Claude (Pro/Max) | v rámci limitu, nic navíc |
+| Tvůj čas | ~30 min schvalování + 3 × 5 min publikace týdně |
+| Placená podpora (volitelně od 2. měsíce, jen nejlepší carousel) | 1 500–3 000 Kč |
+
+### Vyhodnocení po 4 týdnech
+Uložení + sdílení na příspěvek (hlavní signál, že obsah má hodnotu), komentáře/DM „AGENT“, domluvené konzultace.
+Pokud přijdou **≥ 2 konzultace** → přidat reely a automatizaci (fáze 2). Pokud 0 → měnit témata a hooky, ne frekvenci.
 
 ---
 
@@ -20,7 +73,7 @@ Dosah bez konverze je zbytečný. Každý příspěvek končí jedním CTA.
 
 ---
 
-## 2. Obsah
+## 2. Obsah (fáze 2)
 
 ### Rytmus (týdně, totéž na IG i FB)
 | Den | Formát | Pilíř |
@@ -55,7 +108,7 @@ Nastavit v **Meta Business Suite → Automatizace** (zdarma) nebo ManyChat. Bez 
 
 ---
 
-## 3. Jednorázové napojení (Roman, ~30 min)
+## 3. Fáze 2: jednorázové napojení (Roman, ~30 min)
 
 1. **Instagram → profesionální (firemní) účet** a propojit s FB stránkou Nexivo (Meta Business Suite → Nastavení → Účty).
 2. **developers.facebook.com → Create app** (typ Business). Přidat produkty *Facebook Login for Business* a *Instagram Graph API*.
@@ -75,7 +128,7 @@ Token stránky odvozený z dlouhodobého user tokenu nevyprší. Zneplatní ho z
 
 ---
 
-## 4. Jak to poběží
+## 4. Fáze 2: jak to poběží
 
 1. **Pondělí ráno, jedna session (~45 min tvého času):** napíšeš „vyrob týden“ → vyrobím 3 reely + 2 carousely + popisky.
 2. Pošlu náhledy, ty schválíš / opravíš (jedno kolo).
@@ -94,7 +147,7 @@ reel 3 s – 15 min, MP4 H.264, 9:16.
 
 ---
 
-## 5. Náklady
+## 5. Náklady fáze 2
 
 ### Meta a nástroje
 | Položka | Cena |
