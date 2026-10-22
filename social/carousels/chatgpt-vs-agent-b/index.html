@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=block">
+<style>
+  :root { --bone: #F7F5EF; --bone2: #EFEDE6; --ink: #0A0A0A; --ink5: #5E5E63; --ink3: #A1A1A6; --lime: #C5E832; --red: #C2410C; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #ccc; font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; color: var(--ink); }
+  .disp { font-family: 'Fraunces', Georgia, serif; font-weight: 400; letter-spacing: -0.025em; font-variation-settings: "opsz" 144; }
+  em { font-style: italic; color: var(--ink5); }
+
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: var(--bone); padding: 120px 96px; display: flex; flex-direction: column; justify-content: center; }
+  .slide + .slide { margin-top: 20px; }
+  .glow { position: absolute; width: 1200px; height: 1200px; left: -300px; top: -420px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.28), rgba(197,232,50,0)); pointer-events: none; }
+  .logo { position: absolute; left: 96px; top: 84px; height: 46px; }
+  .num { position: absolute; right: 96px; top: 90px; font-size: 32px; font-weight: 600; color: var(--ink3); font-variant-numeric: tabular-nums; }
+  .swipe { position: absolute; right: 96px; bottom: 84px; display: inline-flex; align-items: center; gap: 16px; font-size: 34px; font-weight: 600; color: var(--ink5); }
+  .swipe svg { width: 44px; height: 44px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .src { position: absolute; left: 96px; bottom: 84px; font-size: 26px; color: var(--ink3); max-width: 640px; }
+
+  .pill { align-self: flex-start; display: inline-flex; align-items: center; gap: 14px; padding: 16px 30px; border-radius: 999px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.06); font-size: 34px; font-weight: 600; }
+  .pill i { width: 16px; height: 16px; border-radius: 50%; background: var(--lime); }
+  .h1 { font-size: 140px; line-height: .98; margin-top: 50px; }
+  .h2 { font-size: 104px; line-height: 1.02; }
+  .lead { margin-top: 44px; font-size: 48px; line-height: 1.3; color: var(--ink5); max-width: 860px; }
+  .mark { background: linear-gradient(transparent 62%, var(--lime) 62%, var(--lime) 92%, transparent 92%); font-style: normal; color: var(--ink); }
+
+  .card { margin-top: 56px; padding: 48px 52px; border-radius: 44px; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.08); }
+  .card small { display: block; font-size: 30px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink3); }
+  .card p { margin-top: 18px; font-size: 50px; line-height: 1.25; font-weight: 600; }
+  .steps { margin-top: 48px; display: grid; gap: 22px; }
+  .step { display: flex; align-items: center; gap: 26px; font-size: 46px; font-weight: 600; }
+  .step b { flex: 0 0 64px; height: 64px; border-radius: 50%; background: var(--bone2); display: inline-flex; align-items: center; justify-content: center; font-size: 32px; color: var(--ink5); }
+  .step s { color: var(--ink3); text-decoration-thickness: 4px; }
+
+  .verb { font-size: 230px; line-height: .9; letter-spacing: -0.04em; }
+  .verb em { color: var(--ink); font-style: italic; }
+  .idx { display: inline-flex; align-items: center; justify-content: center; width: 96px; height: 96px; border-radius: 50%; background: var(--lime); font-size: 44px; font-weight: 700; }
+  .ex { margin-top: 64px; display: flex; gap: 26px; align-items: flex-start; padding: 40px 46px; border-radius: 40px; background: var(--ink); color: #fff; }
+  .ex svg { flex: 0 0 56px; width: 56px; height: 56px; fill: none; stroke: var(--lime); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; margin-top: 4px; }
+  .ex p { font-size: 44px; line-height: 1.3; font-weight: 500; }
+  .ex p b { color: var(--lime); font-weight: 600; }
+
+  .big { font-size: 400px; line-height: .85; letter-spacing: -0.05em; }
+  .big span { font-size: 200px; }
+
+  .dark { background: var(--ink); color: #fff; }
+  .dark em { color: var(--lime); }
+  .dark .num { color: rgba(255,255,255,.4); }
+  .opt { margin-top: 36px; padding: 44px 52px; border-radius: 44px; }
+  .opt.cmt { background: var(--lime); color: var(--ink); margin-top: 80px; }
+  .opt.web { background: #1D1D1F; border: 3px solid rgba(255,255,255,.14); }
+  .opt b { display: block; font-size: 70px; line-height: 1.05; letter-spacing: -0.01em; }
+  .opt span { display: block; margin-top: 12px; font-size: 40px; font-weight: 600; opacity: .75; }
+
+  .cover { background: var(--ink); color: #fff; justify-content: center; padding-bottom: 170px; }
+  .cover .ctag { position: absolute; left: 96px; bottom: 90px; font-size: 26px; color: rgba(255,255,255,.35); }
+  .cover .num { color: rgba(255,255,255,.4); }
+  .cover .swipe { color: rgba(255,255,255,.75); }
+  .cover .glowd { position: absolute; width: 1300px; height: 1300px; right: -520px; bottom: -560px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.30), rgba(197,232,50,0)); }
+  .ch { font-size: 146px; line-height: .97; }
+  .ch em { color: var(--lime); }
+  .ch s { text-decoration-thickness: 10px; text-decoration-color: var(--red); color: rgba(255,255,255,.5); }
+  .clead { margin-top: 34px; font-size: 44px; line-height: 1.3; color: rgba(255,255,255,.72); max-width: 860px; }
+  .notif { position: relative; transform: rotate(-1.6deg); margin-top: 80px; padding: 34px 38px 38px; border-radius: 48px; background: rgba(255,255,255,.94); color: var(--ink); box-shadow: 0 40px 120px rgba(0,0,0,.5); }
+  .notif .top { display: flex; align-items: center; gap: 18px; font-size: 30px; font-weight: 600; color: var(--ink5); }
+  .notif .app { width: 56px; height: 56px; border-radius: 14px; background: var(--ink); display: inline-flex; align-items: center; justify-content: center; color: var(--lime); font-family: 'Fraunces', serif; font-size: 40px; line-height: 1; }
+  .notif .app.g { background: #fff; border: 2px solid var(--bone2); color: #4285F4; font-family: inherit; font-weight: 800; font-size: 34px; }
+  .notif .app.m { background: #2F7CF6; color: #fff; }
+  .notif .top time { margin-left: auto; color: var(--ink3); }
+  .notif b { display: block; margin-top: 22px; font-size: 44px; }
+  .notif p { margin-top: 10px; font-size: 42px; line-height: 1.3; }
+  .notif + .notif { margin-top: 24px; }
+  .notif.dim { opacity: .5; transform: scale(.94); }
+  .stars { display: inline-flex; gap: 4px; vertical-align: -4px; }
+  .stars svg { width: 36px; height: 36px; }
+  .stars .on { fill: #F5B400; } .stars .off { fill: #DADCE0; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><path id="st2" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></defs></svg>
+
+<!-- 1 · cover -->
+<section class="slide cover">
+  <div class="glowd"></div>
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">1/7</div>
+  <div class="ch disp">Tohle ChatGPT<br><em>neudělá.</em></div>
+  <div class="notif">
+    <div class="top"><span class="app">n.</span>AI agent<time>22:41</time></div>
+    <b>Nová poptávka vyřízena</b>
+    <p>Odpověděl jsem paní Novákové a zapsal ji na úterý 10:00 do kalendáře.</p>
+  </div>
+  <div class="clead">Zatímco jste spali. Bez kopírování, bez vás.</div>
+  <div class="swipe">Posuňte <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+  <div class="ctag">Ilustrativní ukázka</div>
+</section>
+
+<!-- 2 · problem -->
+<section class="slide">
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">2/7</div>
+  <div class="h2 disp">Přijde poptávka.<br><em>S ChatGPT je to takhle:</em></div>
+  <div class="steps">
+    <div class="step"><b>1</b>Zkopírujete e-mail do ChatGPT</div>
+    <div class="step"><b>2</b>Necháte napsat odpověď</div>
+    <div class="step"><b>3</b>Zkopírujete ji zpět a odešlete</div>
+    <div class="step"><b>4</b>Ručně zapíšete termín do kalendáře</div>
+    <div class="step"><b>5</b>Za týden zapomenete připomenout</div>
+  </div>
+  <div class="card"><small>Výsledek</small><p>Napsal text. Celou práci jste ale stejně udělali vy.</p></div>
+</section>
+
+<!-- 3 · observes -->
+<section class="slide">
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">3/7</div>
+  <span class="idx">1</span>
+  <div class="verb disp" style="margin-top:40px">Pozoruje.</div>
+  <div class="lead">Agent sám hlídá e-mail, web i formuláře. Nečeká, až mu něco vložíte.</div>
+  <div class="ex">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+    <p>Neděle <b>22:40</b>, nová poptávka z webu. Agent ji vidí do minuty.</p>
+  </div>
+</section>
+
+<!-- 4 · decides + acts -->
+<section class="slide">
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">4/7</div>
+  <span class="idx">2</span>
+  <div class="verb disp" style="font-size:190px;margin-top:40px">Rozhoduje<br><em>a jedná.</em></div>
+  <div class="lead">Pozná, co klient chce. Odpoví, nabídne volný termín a zapíše ho do kalendáře.</div>
+  <div class="ex">
+    <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>
+    <p>„Úterý v 10:00 máme volno, zapsal jsem vás.“ <b>Bez vás.</b></p>
+  </div>
+</section>
+
+<!-- 5 · remembers -->
+<section class="slide">
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">5/7</div>
+  <span class="idx">3</span>
+  <div class="verb disp" style="margin-top:40px">Pamatuje<br><em>si.</em></div>
+  <div class="lead">Naučíte ho všechno jednou a on to už nezapomene. Ani klienta, který se neozval.</div>
+  <div class="ex">
+    <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+    <p>Po 7 dnech ticha se klientovi <b>sám připomene.</b></p>
+  </div>
+</section>
+
+<!-- 6 · why it matters (HBR 2011) -->
+<section class="slide">
+  <div class="glow"></div>
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">6/7</div>
+  <div class="h2 disp">Proč na rychlosti<br><em>záleží:</em></div>
+  <div class="big disp" style="margin-top:60px">7<span>×</span></div>
+  <div class="lead" style="margin-top:30px">vyšší šance na skutečný rozhovor s klientem, když odpovíte <b style="color:var(--ink)">do hodiny</b> místo později.</div>
+  <div class="src">Zdroj: Harvard Business Review, The Short Life of Online Sales Leads (2011)</div>
+</section>
+
+<!-- 7 · CTA -->
+<section class="slide dark">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">7/7</div>
+  <div class="h2 disp">Chcete agenta,<br>který tu práci<br><em>udělá za vás?</em></div>
+  <div class="opt cmt"><b>Napište AGENT</b><span>do komentáře · AI konzultace zdarma</span></div>
+  <div class="opt web"><b>nexivoai.cz</b><span>vyzkoušejte agenta 3 dny zdarma</span></div>
+</section>
+
+</body>
+</html>

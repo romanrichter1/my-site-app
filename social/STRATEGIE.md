@@ -18,6 +18,15 @@ Stav k 22. 10. 2026.
 - Formát: 1080 × 1350 (4:5), 6–8 slidů, JPEG. Slide 1 = hook, předposlední = důkaz/číslo se zdrojem, poslední = CTA.
   Vzor: `carousels/chatgpt-vs-agent/`.
 
+### Úvodní slide (rozhoduje o všem)
+V feedu je vidět jen 1. slide, takže ten rozhoduje, jestli člověk posune dál. Varianty `*-b` jsou postavené takhle:
+- **Tmavé pozadí, velké písmo, limetkové zvýraznění.** Ve světlém feedu Instagramu vystoupí. Nadpis max ~8 slov, 130–150 px.
+- **Nadpis vyvolá napětí:** ztráta („Prohraná o 3 dny“), provokace („spokojení klienti vám škodí“) nebo výzva („Tohle ChatGPT neudělá“). Ne popis produktu.
+- **Reálně vypadající důkaz:** notifikace z telefonu, e-mail nebo recenze, lehce natočená. Vypadá jako výřez z reality, ne jako reklama.
+- Jedna věta pod tím, šipka „Posuňte →“, malé „Ilustrativní ukázka“.
+- Text drž do 1012 px šířky: profil Instagramu ořezává náhledy na 3:4.
+- 1. řádek popisku = stejný háček jako na slidu.
+
 ### Publikace (Roman, ~5 min na příspěvek)
 1. Ulož slidy z chatu do galerie (v pořadí 01 → 07).
 2. Instagram → nový příspěvek → vybrat víc fotek → vložit text z `caption.txt`.
