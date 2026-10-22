@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=block">
+<style>
+  :root { --bone: #F7F5EF; --bone2: #EFEDE6; --ink: #0A0A0A; --ink5: #5E5E63; --ink3: #A1A1A6; --lime: #C5E832; --red: #C2410C; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #ccc; font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; color: var(--ink); }
+  .disp { font-family: 'Fraunces', Georgia, serif; font-weight: 400; letter-spacing: -0.025em; font-variation-settings: "opsz" 144; }
+  em { font-style: italic; color: var(--ink5); }
+
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: var(--bone); padding: 120px 96px; display: flex; flex-direction: column; justify-content: center; }
+  .slide + .slide { margin-top: 20px; }
+  .glow { position: absolute; width: 1200px; height: 1200px; left: -300px; top: -420px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.28), rgba(197,232,50,0)); pointer-events: none; }
+  .logo { position: absolute; left: 96px; top: 84px; height: 46px; }
+  .num { position: absolute; right: 96px; top: 90px; font-size: 32px; font-weight: 600; color: var(--ink3); font-variant-numeric: tabular-nums; }
+  .swipe { position: absolute; right: 96px; bottom: 84px; display: inline-flex; align-items: center; gap: 16px; font-size: 34px; font-weight: 600; color: var(--ink5); }
+  .swipe svg { width: 44px; height: 44px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .src { position: absolute; left: 96px; bottom: 84px; font-size: 26px; color: var(--ink3); max-width: 640px; }
+
+  .pill { align-self: flex-start; display: inline-flex; align-items: center; gap: 14px; padding: 16px 30px; border-radius: 999px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.06); font-size: 34px; font-weight: 600; }
+  .pill i { width: 16px; height: 16px; border-radius: 50%; background: var(--lime); }
+  .h1 { font-size: 140px; line-height: .98; margin-top: 50px; }
+  .h2 { font-size: 104px; line-height: 1.02; }
+  .lead { margin-top: 44px; font-size: 48px; line-height: 1.3; color: var(--ink5); max-width: 860px; }
+  .mark { background: linear-gradient(transparent 62%, var(--lime) 62%, var(--lime) 92%, transparent 92%); font-style: normal; color: var(--ink); }
+
+  .card { margin-top: 56px; padding: 48px 52px; border-radius: 44px; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.08); }
+  .card small { display: block; font-size: 30px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink3); }
+  .card p { margin-top: 18px; font-size: 50px; line-height: 1.25; font-weight: 600; }
+  .steps { margin-top: 48px; display: grid; gap: 22px; }
+  .step { display: flex; align-items: center; gap: 26px; font-size: 46px; font-weight: 600; }
+  .step b { flex: 0 0 64px; height: 64px; border-radius: 50%; background: var(--bone2); display: inline-flex; align-items: center; justify-content: center; font-size: 32px; color: var(--ink5); }
+  .step s { color: var(--ink3); text-decoration-thickness: 4px; }
+
+  .verb { font-size: 230px; line-height: .9; letter-spacing: -0.04em; }
+  .verb em { color: var(--ink); font-style: italic; }
+  .idx { display: inline-flex; align-items: center; justify-content: center; width: 96px; height: 96px; border-radius: 50%; background: var(--lime); font-size: 44px; font-weight: 700; }
+  .ex { margin-top: 64px; display: flex; gap: 26px; align-items: flex-start; padding: 40px 46px; border-radius: 40px; background: var(--ink); color: #fff; }
+  .ex svg { flex: 0 0 56px; width: 56px; height: 56px; fill: none; stroke: var(--lime); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; margin-top: 4px; }
+  .ex p { font-size: 44px; line-height: 1.3; font-weight: 500; }
+  .ex p b { color: var(--lime); font-weight: 600; }
+
+  .big { font-size: 400px; line-height: .85; letter-spacing: -0.05em; }
+  .big span { font-size: 200px; }
+
+  .dark { background: var(--ink); color: #fff; }
+  .dark em { color: var(--lime); }
+  .dark .num { color: rgba(255,255,255,.4); }
+  .opt { margin-top: 36px; padding: 44px 52px; border-radius: 44px; }
+  .opt.cmt { background: var(--lime); color: var(--ink); margin-top: 80px; }
+  .opt.web { background: #1D1D1F; border: 3px solid rgba(255,255,255,.14); }
+  .opt b { display: block; font-size: 70px; line-height: 1.05; letter-spacing: -0.01em; }
+  .opt span { display: block; margin-top: 12px; font-size: 40px; font-weight: 600; opacity: .75; }
+
+  .stars { display: inline-flex; gap: 6px; vertical-align: middle; }
+  .stars svg { width: 1em; height: 1em; }
+  .stars .on { fill: #F5B400; } .stars .off { fill: #DADCE0; }
+
+  .gcard { display: flex; align-items: center; gap: 30px; padding: 40px 44px; border-radius: 40px; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.08); }
+  .gcard + .gcard { margin-top: 28px; }
+  .gcard .pic { flex: 0 0 120px; height: 120px; border-radius: 28px; background: var(--bone2); display: inline-flex; align-items: center; justify-content: center; }
+  .gcard .pic svg { width: 60px; height: 60px; fill: none; stroke: var(--ink3); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .gcard h4 { font-size: 46px; font-weight: 700; }
+  .gcard .r { margin-top: 10px; display: flex; align-items: center; gap: 14px; font-size: 40px; font-weight: 600; color: var(--ink5); }
+  .gcard .r b { color: var(--ink); }
+  .gcard.win { outline: 8px solid var(--lime); }
+  .gcard.lose { opacity: .55; }
+  .tag { margin-top: 26px; font-size: 26px; color: var(--ink3); }
+
+  .mail { margin-top: 56px; border-radius: 44px; background: #fff; box-shadow: 0 30px 80px rgba(0,0,0,.10); overflow: hidden; }
+  .mail .hd { padding: 34px 48px; border-bottom: 2px solid var(--bone2); }
+  .mail .hd small { display: block; font-size: 28px; color: var(--ink3); font-weight: 600; }
+  .mail .hd b { display: block; margin-top: 8px; font-size: 40px; }
+  .mail .bd { padding: 40px 48px 48px; font-size: 38px; line-height: 1.38; color: #2a2a2d; }
+  .mail .btn { display: inline-flex; align-items: center; gap: 16px; margin-top: 34px; padding: 24px 38px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 36px; font-weight: 700; }
+  .mail .btn .stars svg { width: 34px; height: 34px; }
+
+  .flow { margin-top: 50px; display: grid; gap: 26px; }
+  .flow div { display: flex; gap: 28px; align-items: flex-start; padding: 34px 40px; border-radius: 36px; background: #fff; box-shadow: 0 16px 40px rgba(0,0,0,.05); }
+  .flow b { flex: 0 0 64px; height: 64px; border-radius: 50%; background: var(--lime); display: inline-flex; align-items: center; justify-content: center; font-size: 32px; }
+  .flow p { font-size: 42px; line-height: 1.25; font-weight: 600; padding-top: 6px; }
+  .flow p span { display: block; margin-top: 6px; font-size: 32px; font-weight: 500; color: var(--ink5); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><path id="st" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></defs></svg>
+
+<!-- 1 · hook -->
+<section class="slide">
+  <div class="glow"></div>
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">1/7</div>
+  <span class="pill"><i></i>Google Review Agent</span>
+  <div class="h1 disp">Spokojení klienti<br>recenze nepíšou.<br><em class="mark">Nespokojení ano.</em></div>
+  <div class="lead">Proto má spousta skvělých firem na Googlu horší hodnocení, než si zaslouží.</div>
+  <div class="swipe">Posuňte <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+</section>
+
+<!-- 2 · trust weight -->
+<section class="slide">
+  <div class="glow"></div>
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">2/7</div>
+  <div class="h2 disp">Recenze na Googlu<br><em>jsou nová výloha.</em></div>
+  <div class="big disp" style="margin-top:60px">83<span>%</span></div>
+  <div class="lead" style="margin-top:30px">lidí hledá recenze místních firem právě <b style="color:var(--ink)">na Googlu</b>. Dřív, než vám zavolají.</div>
+  <div class="src">Zdroj: BrightLocal, Local Consumer Review Survey 2025</div>
+</section>
+
+<!-- 3 · comparison -->
+<section class="slide">
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">3/7</div>
+  <div class="h2 disp">Kam byste<br><em>zavolali vy?</em></div>
+  <div style="margin-top:60px">
+    <div class="gcard lose">
+      <span class="pic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span>
+      <div><h4>Salon A</h4><div class="r"><b>4,1</b><span class="stars"><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg><svg class="off" viewBox="0 0 24 24"><use href="#st"/></svg></span>(12)</div></div>
+    </div>
+    <div class="gcard win">
+      <span class="pic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span>
+      <div><h4>Salon B</h4><div class="r"><b>4,8</b><span class="stars"><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg></span>(147)</div></div>
+    </div>
+  </div>
+  <div class="lead">Stejná ulice, stejné ceny. Rozhodne počet hvězdiček a recenzí.</div>
+  <div class="tag">Ilustrativní ukázka</div>
+</section>
+
+<!-- 4 · why it happens -->
+<section class="slide">
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">4/7</div>
+  <div class="h2 disp">Proč recenze<br><em>nepřibývají?</em></div>
+  <div class="steps">
+    <div class="step"><b>1</b>Klient odchází spokojený</div>
+    <div class="step"><b>2</b>„Napíšu vám recenzi,“ slíbí</div>
+    <div class="step"><b>3</b>Doma na to zapomene</div>
+    <div class="step"><b>4</b>Vy nemáte čas mu to připomenout</div>
+  </div>
+  <div class="card"><small>Výsledek</small><p>Ozve se jen ten, kdo byl nespokojený.</p></div>
+</section>
+
+<!-- 5 · the email -->
+<section class="slide">
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">5/7</div>
+  <div class="h2 disp" style="font-size:96px">Agent se zeptá<br><em>za vás. Každého.</em></div>
+  <div class="mail">
+    <div class="hd"><small>Den po návštěvě · e-mail</small><b>Děkujeme za návštěvu, paní Novotná</b></div>
+    <div class="bd">
+      Dobrý den, děkujeme, že jste včera přišla. Pokud jste byla spokojená, moc by nám pomohlo krátké hodnocení na Googlu. Zabere to 30 vteřin.
+      <div><span class="btn">Napsat recenzi <span class="stars"><svg class="on" viewBox="0 0 24 24"><use href="#st"/></svg></span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · how it works -->
+<section class="slide">
+  <img class="logo" src="../../../assets/nexivo-logo.png" alt="">
+  <div class="num">6/7</div>
+  <div class="h2 disp" style="font-size:96px">Jak to funguje</div>
+  <div class="flow">
+    <div><b>1</b><p>Zakázka nebo návštěva skončí<span>agent to vidí v rezervacích nebo v CRM</span></p></div>
+    <div><b>2</b><p>Druhý den odejde osobní e-mail<span>s přímým odkazem na vaši recenzi na Googlu</span></p></div>
+    <div><b>3</b><p>Když klient nereaguje, jedna slušná připomínka<span>a dál už neotravuje</span></p></div>
+    <div><b>4</b><p>Vy jen sledujete, jak přibývají hvězdičky</p></div>
+  </div>
+</section>
+
+<!-- 7 · CTA -->
+<section class="slide dark">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">7/7</div>
+  <div class="h2 disp">Chcete víc recenzí<br>a nemuset<br><em>o ně prosit?</em></div>
+  <div class="opt cmt"><b>Napište AGENT</b><span>do komentáře · AI konzultace zdarma</span></div>
+  <div class="opt web"><b>nexivoai.cz</b><span>vyzkoušejte agenta 3 dny zdarma</span></div>
+</section>
+
+</body>
+</html>

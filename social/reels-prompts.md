@@ -70,6 +70,7 @@ Použití: napište „vyrob reel podle `social/reels-prompts.md`, **Inquiry Age
 | **~11 h týdně** tráví majitelé malých firem administrativou | American Express SME Barometer (UK) | |
 | **10 h týdně** tráví firmy vymáháním pozdních plateb | Intrum, European Payment Report 2024 | Evropa |
 | **88 %** lidí zvolí firmu, která odpovídá na všechny recenze (vs. 47 %) | BrightLocal, Local Consumer Review Survey 2024 | |
+| **83 %** lidí hledá recenze místních firem na Googlu | BrightLocal, Local Consumer Review Survey 2025 | Google zdaleka nejpoužívanější platforma |
 
 Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavolá zpět“. Kolují jen po blozích prodejců bez primární studie.
 
@@ -220,7 +221,7 @@ Nepoužívat: „62 % hovorů zůstane nezvednutých“ a „85 % lidí nezavol�
 ### Google Review Agent A: „4,1 vs 4,8“ (16 s)
 - **Hook 0–3 s:** Mapa Google, dva piny vedle sebe: „Vy 4,1 ★ (12)“ vs „Konkurence 4,8 ★ (230)“. Uživatel klikne na konkurenci.
 - **Problém 3–6 s:** „Spokojení zákazníci recenze nepíšou. Nespokojení ano.“
-- **Agent 6–13 s:** Zakázka označena „Hotovo“ → za 2 h SMS klientovi „Jak jste byl spokojen?“ → 5 hvězd → rovnou odkaz na Google recenzi. Počítadlo recenzí roste 12 → 47, hodnocení 4,1 → 4,7. *(ilustrativní)*
+- **Agent 6–13 s:** Zakázka označena „Hotovo“ → za 2 h SMS klientovi „Jak jste byl spokojen?“ → odkaz na Google recenzi **všem klientům** (ne jen spokojeným: filtrování podle hodnocení zakazují pravidla Googlu). Počítadlo recenzí roste 12 → 47, hodnocení 4,1 → 4,7. *(ilustrativní)*
 - **Výsledek 13–16 s:** Teď klikají na váš pin. „Recenze přicházejí samy.“
 - **Popisek:** Lidé si vybírají podle hvězdiček dřív, než vám zavolají. Napište AGENT.
 

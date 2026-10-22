@@ -29,7 +29,8 @@ Stav k 22. 10. 2026.
 | # | Carousel | Pilíř |
 |---|---|---|
 | 1 | ChatGPT vám poradí, agent to udělá (**hotový**) | Edukace |
-| 2 | 5 věcí, které vaše recepční dělá zbytečně | Bolest |
+| 2 | Google Review Agent: spokojení recenze nepíšou (**hotový**) | Důvěra |
+| 2b | 5 věcí, které vaše recepční dělá zbytečně | Bolest |
 | 3 | Co se stane s poptávkou, která přijde v neděli ve 22:00 | Bolest |
 | 4 | Den v salonu s AI recepční: 8:00 → 18:00 | Agent v akci |
 | 5 | 23 % firem na poptávku z webu nikdy neodpoví (HBR) | Důkaz |
