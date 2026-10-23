@@ -23,12 +23,11 @@ No build system, no package manager. All files are standalone HTML with inline o
 ├── nexivo_inquiry.html         ← Poptávkový formulář (nexivoai.cz/nexivo_inquiry)
 ├── nexivo_marketing.css        ← Shared CSS for all marketing pages
 ├── colors_and_type.css         ← Design tokens: colors, typography, spacing
-├── og-gen.html                 ← OG image generator (open in browser to download PNG)
 ├── vercel.json                 ← cleanUrls + redirects
 ├── favicon.ico, favicon.svg, apple-touch-icon.png, site.webmanifest ← app icon „n.“ (root, absolute paths)
 ├── icons/                      ← android-chrome-192/512.png (rounded, transparent corners), maskable-512.png (80 % safe zone on #C5E832)
 ├── brand/                      ← logo.svg = vector MASTER of the app icon (1024 viewBox); icon-4096/2048/1024.png,
-│                                  icon-1024-appstore.png (opaque, square), og-image.png (icon + wordmark on #1C1C1C)
+│                                  icon-1024-appstore.png (opaque, square), og-image.png = OG/Twitter náhled odkazu na všech stránkách (icon + wordmark on #1C1C1C)
 ├── assets/
 │   ├── nexivo-logo.png         ← Logo (wordmark) — používá se všude na světlém pozadí
 │   ├── nexivo-logo-inverse.png ← Totéž pro tmavé pozadí (patička)
@@ -247,7 +246,7 @@ Když Roman napíše „smaž animace“ / „vrať hero“ apod., vrať přísl
 
 | Commit | Co dělá | Revert vrátí |
 |--------|---------|--------------|
-| _(feat/new-logo)_ | Ikona „n.“ překreslená do vektoru (`brand/logo.svg`), nové exporty (favicon.svg/ico, apple-touch, android, maskable, App Store, OG), manifest `theme_color #C5E832`, smazané staré ikony a nepoužívané SVG značky | rastrovou ikonu `icons/nexivo-*.png` |
+| _(feat/new-logo)_ | Ikona „n.“ překreslená do vektoru (`brand/logo.svg`), nové exporty (favicon.svg/ico, apple-touch, android, maskable, App Store, OG), manifest `theme_color #C5E832`, OG náhled na všech stránkách = `brand/og-image.png` (smazán hero screenshot, `nexivo-og.png` i `og-gen.html`), smazané staré ikony a nepoužívané SVG značky | rastrovou ikonu `icons/nexivo-*.png` |
 | `3a813b3` | Nová ikona „n.“: favicon, ikona na plochu iPhonu, manifest aplikace na 11 stránkách (+ dashboard, který byl mezitím smazán) | starý SVG favicon |
 | `18d6fce` | Hero úplně statický: nadpis, texty a vrstvy se nehýbou (žádný reveal, rozpad na slova, parallax, plovoucí karty, naklonění dema) | animace v hero zpět |
 | `b4f654b` | Srovnání ChatGPT vs agent jako souboj při scrollu (přeškrtávání, skóre 4/4, odznak vs, kategorie řádků) | původní statické dva sloupce |
