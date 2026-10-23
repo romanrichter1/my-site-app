@@ -25,6 +25,13 @@
 - **Text min. 14 pt** v manuálu; u nás **≥ 38 px**. Menší písmo lidi přestanou číst.
 - Málo textu na slide. Jedna myšlenka na jeden slide.
 
+## 3a. Romanova preference (23. 10. 2026, platí od dalšího carouselu)
+**Velké písmo a obrázky jsou to hlavní.** Oproti `*-v3` ještě větší a méně textu:
+- nadpisy slidů 2–10 **≥ 130 px** (dosud 100–112), háček 150–170 px
+- běžný text **≥ 46 px**, max ~15 slov na slide, raději jedna věta
+- **každý slide má výrazný vizuál** (notifikace, karta, číslo, objekt), text ho jen doplňuje
+- kde to jde, klíčová slova VELKÝMI PÍSMENY / zvýrazněná limetkou
+
 ## 4. Struktura AIDA (8–10 slidů)
 | Slide | Fáze | Úkol | U Nexiva |
 |---|---|---|---|

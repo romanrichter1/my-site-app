@@ -103,7 +103,7 @@ Reels are built as HTML + GSAP timeline and rendered frame by frame with Playwri
 see `social/README.md`; approved template `social/reels/inquiry-10s/`, renderer `social/tools/render-reel.js`.
 Posting to IG + FB: `social/tools/publish-meta.js` (Meta Graph API, dry run unless `--publish`; env `META_PAGE_TOKEN`, `META_PAGE_ID`, `META_IG_USER_ID`).
 Carousels (phase 1, Roman posts manually): `social/carousels/<name>/`, render with `social/tools/render-carousel.js`.
-**Every new carousel follows `social/CAROUSEL-MANUAL.md`** (1080×1440, safe zone 180/50/120, AIDA 8–10 slides, keyword CTA, remind Roman to add music).
+**Every new carousel follows `social/CAROUSEL-MANUAL.md`** — incl. section 3a: Roman wants bigger type (headings ≥130 px, body ≥46 px), less text, strong visual on every slide; no personal name on any graphic, logo only. (1080×1440, safe zone 180/50/120, AIDA 8–10 slides, keyword CTA, remind Roman to add music).
 Strategy, cadence, one-time Meta setup and cost estimates: `social/STRATEGIE.md`. Never publish without Roman's explicit approval of the exact post.
 
 ---
