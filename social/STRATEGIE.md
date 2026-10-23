@@ -39,6 +39,7 @@ V feedu je vidět jen 1. slide, takže ten rozhoduje, jestli člověk posune dá
 |---|---|---|
 | 1 | ChatGPT vám poradí, agent to udělá (**hotový**) | Edukace |
 | 2 | Google Review Agent: spokojení recenze nepíšou (**hotový**) | Důvěra |
+| 2d | Verze podle manuálu (10 slidů, 3:4): `*-v2` u všech tří agentů (**hotové**) | — |
 | 2c | Kalkulační agent pro stavební firmy: nabídka za 5 minut (**hotový**) | Agent v akci |
 | 2b | 5 věcí, které vaše recepční dělá zbytečně | Bolest |
 | 3 | Co se stane s poptávkou, která přijde v neděli ve 22:00 | Bolest |

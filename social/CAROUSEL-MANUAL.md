@@ -60,6 +60,10 @@ Klíčové slovo v CTA, v popisku i v automatické DM musí být stejné („AGE
 
 Nexivo drží **monochrom (krémová / černá) + limetkový akcent** = soudržnost a jasný brand. Limetka jen na zvýraznění.
 
+## 5a. Šablona
+Generátor `social/tools/carousel-v2/` (`common.py` = styly, bezpečná zóna, slide 10 podle 4a; `build.py` = obsah).
+Vzorové carousely: `carousels/*-v2/`. Nový carousel = nový blok v `build.py`, pak `python3 social/tools/carousel-v2/build.py` a render.
+
 ## 6. Kontrolní seznam před odesláním Romanovi
 - [ ] 1080 × 1440, JPEG, 8–10 slidů
 - [ ] Nadpis i číslo na úvodním slidu uvnitř bezpečné zóny (180/50/120)
