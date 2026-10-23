@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>nexivo.</title>
+  <defs>
+    <clipPath id="nx-clip">
+      <rect width="1024" height="1024" rx="230" ry="230"/>
+    </clipPath>
+    <linearGradient id="nx-lime" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#CDEC44"/>
+      <stop offset="0.5" stop-color="#C5E832"/>
+      <stop offset="1" stop-color="#B7DB24"/>
+    </linearGradient>
+    <linearGradient id="nx-well" gradientUnits="userSpaceOnUse" x1="430" y1="400" x2="700" y2="660">
+      <stop offset="0" stop-color="#C0E22E"/>
+      <stop offset="0.32" stop-color="#D3EE62"/>
+      <stop offset="0.66" stop-color="#E9EFCB"/>
+      <stop offset="1" stop-color="#EEEEE6"/>
+    </linearGradient>
+    <radialGradient id="nx-glow" gradientUnits="userSpaceOnUse" cx="548" cy="500" r="150">
+      <stop offset="0" stop-color="#E6F79A" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#E6F79A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="nx-cream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6F5EF"/>
+      <stop offset="1" stop-color="#EAE9E0"/>
+    </linearGradient>
+    <linearGradient id="nx-pillar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F3F2EB"/>
+      <stop offset="0.86" stop-color="#EEEDE6"/>
+      <stop offset="1" stop-color="#D6D8C0"/>
+    </linearGradient>
+    <filter id="nx-lift" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#2E3D00" flood-opacity="0.45"/>
+    </filter>
+    <filter id="nx-shadow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="12" dy="8" stdDeviation="14" flood-color="#3A4C00" flood-opacity="0.30"/>
+    </filter>
+    <filter id="nx-inset" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feOffset in="SourceAlpha" dx="0" dy="8" result="off"/>
+      <feGaussianBlur in="off" stdDeviation="9" result="blur"/>
+      <feComposite in="SourceAlpha" in2="blur" operator="out" result="inv"/>
+      <feFlood flood-color="#000000" flood-opacity="0.8"/>
+      <feComposite in2="inv" operator="in" result="shade"/>
+      <feOffset in="SourceAlpha" dx="0" dy="-4" result="off2"/>
+      <feGaussianBlur in="off2" stdDeviation="3" result="blur2"/>
+      <feComposite in="SourceAlpha" in2="blur2" operator="out" result="inv2"/>
+      <feFlood flood-color="#FFFFFF" flood-opacity="0.12"/>
+      <feComposite in2="inv2" operator="in" result="hl"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="shade"/>
+        <feMergeNode in="hl"/>
+      </feMerge>
+    </filter>
+    <filter id="nx-square-drop" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#2F4000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <g clip-path="url(#nx-clip)">
+    <rect x="-200" y="-200" width="1424" height="1424" fill="url(#nx-well)"/>
+    <rect x="-200" y="-200" width="1424" height="1424" fill="url(#nx-glow)"/>
+    <path filter="url(#nx-lift)" fill="url(#nx-lime)" fill-rule="evenodd" d="M-200 -200 H1224 V1224 H-200 Z M150 540 C214 424 326 344 460 344 C560 344 640 400 700 502 L1000 1324 H150 Z"/>
+    <g filter="url(#nx-square-drop)">
+      <rect x="686" y="160" width="200" height="200" rx="32" fill="#1C1C1C" filter="url(#nx-inset)"/>
+    </g>
+    <path filter="url(#nx-shadow)" fill="url(#nx-cream)" d="M150 1224 L150 562 C150 482 236 442 320 442 C384 442 436 478 458 540 L680 1224 Z"/>
+    <path filter="url(#nx-shadow)" fill="url(#nx-pillar)" d="M-200 1224 L-200 486 L136 308 C158 297 176 306 176 330 L176 1224 Z"/>
+  </g>
+</svg>
