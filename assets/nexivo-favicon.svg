@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#FBFAF5"/>
-  <text x="2" y="26" font-family="Fraunces,serif"
-        font-weight="500" font-size="28"
-        letter-spacing="-1.1" fill="#0A0A09">n</text>
-  <circle cx="22" cy="24" r="3" fill="#C7F230"/>
-</svg>

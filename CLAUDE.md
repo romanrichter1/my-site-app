@@ -23,16 +23,14 @@ No build system, no package manager. All files are standalone HTML with inline o
 ├── nexivo_inquiry.html         ← Poptávkový formulář (nexivoai.cz/nexivo_inquiry)
 ├── nexivo_marketing.css        ← Shared CSS for all marketing pages
 ├── colors_and_type.css         ← Design tokens: colors, typography, spacing
-├── og-gen.html                 ← OG image generator (open in browser to download PNG)
 ├── vercel.json                 ← cleanUrls + redirects
-├── favicon.ico, apple-touch-icon.png, site.webmanifest ← app icon „n.“ (root, absolute paths)
-├── icons/                      ← nexivo-16/32/48/180/192/512.png (rounded corners transparent; 180 opaque for iOS)
+├── favicon.ico, favicon.svg, apple-touch-icon.png, site.webmanifest ← app icon „n.“ (root, absolute paths)
+├── icons/                      ← android-chrome-192/512.png (rounded, transparent corners), maskable-512.png (80 % safe zone on #C5E832)
+├── brand/                      ← logo.svg = vector MASTER of the app icon (1024 viewBox); icon-4096/2048/1024.png,
+│                                  icon-1024-appstore.png (opaque, square), og-image.png = OG/Twitter náhled odkazu na všech stránkách (icon + wordmark on #1C1C1C)
 ├── assets/
-│   ├── nexivo-favicon.svg      ← Starý favicon, už se nepoužívá (nahrazen /favicon.ico + /icons/)
-│   ├── nexivo-logo.png         ← Logo — používá se všude na světlém pozadí
+│   ├── nexivo-logo.png         ← Logo (wordmark) — používá se všude na světlém pozadí
 │   ├── nexivo-logo-inverse.png ← Totéž pro tmavé pozadí (patička)
-│   ├── nexivo-wordmark.svg     ← Starý wordmark, nikde se nepoužívá
-│   ├── nexivo-mark.svg         ← Geometric N mark, nepoužívá se
 │   └── ...
 └── klient/
     ├── index.html              ← Login page (nexivoai.cz/klient) → real portal at /portal
@@ -234,7 +232,8 @@ After deploy, always push to GitHub: `git push origin main`
 - **No build system** — edit HTML/CSS directly, no transpilation
 - **CSS tokens** — use `colors_and_type.css` variables for marketing pages, inline `:root` vars for dashboard
 - **Dual file rule ABOLISHED** — `nexivo_landing.html` deleted, `index.html` is the only landing page
-- **Icons** — every Nexivo page head carries the same 6-line block: `/favicon.ico`, `/icons/nexivo-32.png`, `/apple-touch-icon.png`, `/site.webmanifest`, `theme-color #F7F5EF`, `apple-mobile-web-app-title`. Copy it to new pages.
+- **Icons** — every Nexivo page head carries the same 6-line block: `/favicon.ico?v=2`, `/favicon.svg?v=2`, `/apple-touch-icon.png?v=2`, `/site.webmanifest?v=2`, `theme-color #F7F5EF`, `apple-mobile-web-app-title`. Copy it to new pages.
+  Every icon PNG/ICO is exported from `brand/logo.svg` (resvg + sharp); change the SVG, re-export all sizes, bump `?v=`. Never edit the PNGs by hand.
 - **Internal links** — always clean paths (`/`, `/nexivo_inquiry`, `/klient`), never `.html` extensions
 - **No comments** in code unless WHY is non-obvious
 
@@ -247,6 +246,7 @@ Když Roman napíše „smaž animace“ / „vrať hero“ apod., vrať přísl
 
 | Commit | Co dělá | Revert vrátí |
 |--------|---------|--------------|
+| _(feat/new-logo)_ | Ikona „n.“ překreslená do vektoru (`brand/logo.svg`), nové exporty (favicon.svg/ico, apple-touch, android, maskable, App Store, OG), manifest `theme_color #C5E832`, OG náhled na všech stránkách = `brand/og-image.png` (smazán hero screenshot, `nexivo-og.png` i `og-gen.html`), smazané staré ikony a nepoužívané SVG značky | rastrovou ikonu `icons/nexivo-*.png` |
 | `3a813b3` | Nová ikona „n.“: favicon, ikona na plochu iPhonu, manifest aplikace na 11 stránkách (+ dashboard, který byl mezitím smazán) | starý SVG favicon |
 | `18d6fce` | Hero úplně statický: nadpis, texty a vrstvy se nehýbou (žádný reveal, rozpad na slova, parallax, plovoucí karty, naklonění dema) | animace v hero zpět |
 | `b4f654b` | Srovnání ChatGPT vs agent jako souboj při scrollu (přeškrtávání, skóre 4/4, odznak vs, kategorie řádků) | původní statické dva sloupce |
