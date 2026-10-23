@@ -10,7 +10,7 @@
 7. Umí toho víc: Kalkulace a poptávky · Správa kalendáře · Kontrola e-mailů
 8. Pro koho? Kadeřnictví · Barbershopy · Autoservisy · Realitky · Stavební firmy
 9. ~~2 490 Kč~~ 990 Kč měsíčně · první 3 měsíce · Kód NEXIVOAGENT60 · Nastavíš si ho sám.
-10. NAPIŠ „AGENT“ DO KOMENTÁŘŮ. Pošlu ti kód. · logo · „Tenhle příspěvek vytvořil AI agent Nexivo.“
+10. JDI NA [nexivoai.cz ↗] a nastav si svého AI agenta hned. · logo · „Tenhle příspěvek vytvořil AI agent Nexivo.“
 
 ## B) Reels · scénář po sekundách (1080 × 1920, 20 s, bez zvuku)
 | Čas | Obraz | Text |
@@ -28,8 +28,8 @@ Hudbu (dynamická, bez vokálů) přidej v Instagramu při publikaci.
 ## C) Popisek ke karuselu
 Tenhle příspěvek nenapsal člověk.
 Majitel nahrál 3 fotky a napsal jednu větu. Text, grafiku, hashtagy i naplánování udělal AI agent Nexivo. Za pár vteřin místo hodiny práce.
-Teď ho můžeš mít i ty: 990 Kč měsíčně místo 2 490 Kč na první 3 měsíce.
-Napiš do komentářů AGENT a pošlu ti kód.
+Teď ho můžeš mít i ty: 990 Kč měsíčně místo 2 490 Kč na první 3 měsíce s kódem NEXIVOAGENT60.
+Jdi na nexivoai.cz a nastav si svého AI agenta hned.
 
 ## D) Popisek k Reelsu
 Tohle video nenatočil člověk. Udělal ho AI agent Nexivo.
