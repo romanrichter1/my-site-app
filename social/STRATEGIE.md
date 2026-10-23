@@ -15,7 +15,7 @@ Stav k 22. 10. 2026.
   Vyrobím je, pošlu náhled, ty dáš jedno kolo oprav, pak ti pošlu hotové JPEGy + text.
 - Každý carousel leží v `social/carousels/<nazev>/`: `index.html` (zdroj), `01.jpg … 07.jpg`, `caption.txt`.
   Render: `NODE_PATH=$(npm root -g) node social/tools/render-carousel.js social/carousels/<nazev>/index.html`.
-- Formát: 1080 × 1350 (4:5), 6–8 slidů, JPEG. Slide 1 = hook, předposlední = důkaz/číslo se zdrojem, poslední = CTA.
+- Formát a struktura: **`CAROUSEL-MANUAL.md`** (1080 × 1440, 8–10 slidů, AIDA, bezpečná zóna). Starší carousely jsou 4:5.
   Vzor: `carousels/chatgpt-vs-agent/`.
 
 ### Úvodní slide (rozhoduje o všem)
@@ -108,7 +108,7 @@ Jedno 30s video s tváří týdně bude mít větší dopad na konzultace než t
 za 10 minut, střih udělám já (titulky, zkrácení), pokud video nahraješ do repa.
 
 ### Carousely
-- 1080 × 1350 (4:5), **JPEG** (Instagram přes API PNG nebere), 6–8 slidů, max 10.
+- 1080 × 1440 (3:4), **JPEG** (Instagram přes API PNG nebere), 8–10 slidů. Detail v `CAROUSEL-MANUAL.md`.
 - Slide 1 = hook (max 7 slov, Fraunces), poslední slide = CTA.
 - Vyrábím je stejně jako reely: HTML ve značkovém stylu → screenshot přes Playwright → JPEG.
   Ukládají se do `social/carousels/<nazev>/01.jpg …`.

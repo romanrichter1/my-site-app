@@ -9,6 +9,7 @@ Nenasazuje se na web (`.vercelignore`).
 | GSAP pro offline render | `tools/gsap.min.js` |
 | Render HTML → MP4 1080×1920 / 30 fps | `tools/render-reel.js` |
 | Carousely: zdroj + JPEG slidy + popisek (render `tools/render-carousel.js`) | `carousels/` |
+| **Manuál virálních carouselů (závazný):** rozměr, bezpečná zóna, AIDA | `CAROUSEL-MANUAL.md` |
 | Strategie IG/FB, napojení Meta API, náklady | `STRATEGIE.md` |
 | Publikace reelů a carouselů na IG + FB (Graph API) | `tools/publish-meta.js` |
 
