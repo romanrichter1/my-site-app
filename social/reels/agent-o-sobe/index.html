@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<style>
+  :root { --ink: #0A0A0A; --off: #F7F5EF; --lime: #C5E832; --g: #8E8E93; --card: #1A1A1C; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+  body { font-family: "Inter", -apple-system, sans-serif; color: var(--off); position: relative; }
+  .d { font-family: "Inter Display", "Inter", sans-serif; font-weight: 900; letter-spacing: -0.045em; }
+  .lime { color: var(--lime); }
+  #glow { position: absolute; width: 1600px; height: 1600px; left: -300px; top: 900px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.25), rgba(197,232,50,0)); }
+  .scene { position: absolute; inset: 0; padding: 300px 160px 420px 80px; display: flex; flex-direction: column; justify-content: center; }
+
+  /* 1 hook */
+  #s1 .k { display: block; font-size: 172px; line-height: .98; text-transform: uppercase; }
+
+  /* 2 input → agent works */
+  .photos { display: flex; gap: 26px; }
+  .photos span { width: 260px; height: 330px; border-radius: 40px; display: inline-flex; align-items: center; justify-content: center; }
+  .photos svg { width: 120px; height: 120px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  #p1 { background: linear-gradient(150deg, #3a3a3d, #1c1c1e); } #p1 svg { stroke: var(--off); }
+  #p2 { background: linear-gradient(150deg, #C5E832, #8fae12); } #p2 svg { stroke: var(--ink); }
+  #p3 { background: linear-gradient(150deg, #F7F5EF, #cfccc2); } #p3 svg { stroke: var(--ink); }
+  .bub { margin-top: 50px; padding: 40px 46px; border-radius: 44px 44px 44px 14px; background: var(--off); color: var(--ink); font-size: 66px; line-height: 1.15; font-weight: 800; min-height: 240px; }
+  .caret { display: inline-block; width: 6px; height: 64px; background: var(--ink); vertical-align: -8px; margin-left: 4px; }
+  .work { margin-top: 56px; }
+  .work .lbl { display: flex; align-items: center; gap: 20px; font-size: 52px; font-weight: 800; color: var(--lime); }
+  .work .lbl i { width: 26px; height: 26px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 30px var(--lime); }
+  .bar { margin-top: 26px; height: 22px; border-radius: 99px; background: #26262a; overflow: hidden; }
+  .bar b { display: block; height: 100%; width: 100%; background: var(--lime); transform-origin: 0 50%; }
+  .chk { margin-top: 34px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .chk span { display: inline-flex; align-items: center; gap: 14px; padding: 18px 28px; border-radius: 999px; background: var(--card); border: 3px solid rgba(197,232,50,.4); font-size: 44px; font-weight: 800; }
+  .chk svg, .ok svg { width: 40px; height: 40px; fill: none; stroke: var(--lime); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* 3 phone */
+  #s3 { align-items: center; padding-right: 120px; padding-left: 120px; }
+  #s3 .t { font-size: 104px; line-height: 1; text-align: center; }
+  .phone { margin-top: 50px; width: 640px; padding: 22px; border-radius: 84px; background: #1d1d1f; border: 4px solid #333; box-shadow: 0 50px 140px rgba(0,0,0,.7); }
+  .scr { border-radius: 64px; overflow: hidden; background: var(--off); color: var(--ink); }
+  .ph { display: flex; align-items: center; gap: 16px; padding: 24px 30px; font-size: 30px; font-weight: 700; }
+  .ph img { height: 34px; }
+  .pimg { height: 420px; background: var(--lime); padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; }
+  .pimg b { font-family: "Inter Display", "Inter", sans-serif; font-weight: 900; font-size: 62px; letter-spacing: -0.03em; line-height: 1; }
+  .pimg b.big { font-size: 170px; letter-spacing: -0.05em; }
+  .pimg small { font-size: 38px; font-weight: 700; }
+  .pcap { padding: 24px 32px; font-size: 30px; line-height: 1.3; }
+  .pub { margin: 6px 30px 34px; padding: 26px; border-radius: 999px; background: var(--ink); color: #fff; text-align: center; font-size: 40px; font-weight: 800; position: relative; }
+  .pub .done { position: absolute; inset: 0; border-radius: 999px; background: var(--lime); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .pub .done svg { width: 40px; height: 40px; fill: none; stroke: var(--ink); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+  .oks { margin-top: 40px; display: flex; gap: 20px; }
+  .ok { display: inline-flex; align-items: center; gap: 14px; padding: 20px 32px; border-radius: 999px; background: var(--card); border: 3px solid rgba(197,232,50,.5); font-size: 46px; font-weight: 800; }
+
+  /* 4 price */
+  #s4 .t { font-size: 104px; line-height: 1; }
+  .old { position: relative; display: inline-block; margin-top: 50px; font-size: 130px; font-weight: 800; color: rgba(247,245,239,.5); align-self: flex-start; }
+  .old i { position: absolute; left: -10px; right: -10px; top: 52%; height: 14px; border-radius: 8px; background: #E5484D; transform-origin: 0 50%; }
+  .new { font-size: 270px; line-height: .9; color: var(--lime); white-space: nowrap; }
+  .per { margin-top: 20px; font-size: 64px; font-weight: 800; }
+  .per span { color: var(--g); }
+
+  /* 5 CTA */
+  #s5 .w { display: block; font-size: 170px; line-height: 1; text-transform: uppercase; }
+  #s5 .w.sm { font-size: 112px; margin-top: 10px; }
+  #logo { margin-top: 80px; height: 90px; align-self: flex-start; }
+  #made { position: absolute; left: 80px; right: 160px; bottom: 300px; font-size: 34px; color: rgba(247,245,239,.5); }
+</style>
+</head>
+<body>
+  <div id="glow"></div>
+
+  <section class="scene" id="s1">
+    <span class="k d">Tohle</span><span class="k d">video</span><span class="k d">nenatočil</span><span class="k d lime">člověk.</span>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="photos">
+      <span id="p1"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1L20 20M8.1 15.9L20 4"/></svg></span>
+      <span id="p2"><svg viewBox="0 0 24 24"><path d="M7 4h10v7H7zM5 11h14v4H5zM8 15v5M16 15v5M12 15v5"/></svg></span>
+      <span id="p3"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg></span>
+    </div>
+    <div class="bub" id="bub"><span id="typed"></span><span class="caret" id="caret"></span></div>
+    <div class="work" id="work">
+      <div class="lbl"><i></i>AI agent pracuje…</div>
+      <div class="bar"><b id="barb"></b></div>
+      <div class="chk">
+        <span id="c1"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Text</span>
+        <span id="c2"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Grafika</span>
+        <span id="c3"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Hashtagy</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="s3">
+    <div class="t d" id="s3t">Hotovo <span class="lime">za pár vteřin.</span></div>
+    <div class="phone" id="phone"><div class="scr">
+      <div class="ph"><img src="../../../assets/nexivo-logo.png" alt="">Váš salon · příspěvek</div>
+      <div class="pimg"><b>PODZIM</b><b class="big">−20&nbsp;%</b><small>střih + barva</small></div>
+      <div class="pcap"><b>Podzimní proměna je tady.</b> Střih a barva o 20 % levněji.</div>
+      <div class="pub" id="pub">Zveřejnit<div class="done" id="done"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Zveřejněno</div></div>
+    </div></div>
+    <div class="oks"><span class="ok" id="ig"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Instagram</span><span class="ok" id="fb"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Facebook</span></div>
+  </section>
+
+  <section class="scene" id="s4">
+    <div class="t d" id="s4t">Pro tvoji firmu za</div>
+    <div class="old" id="old">2 490 Kč<i id="strike"></i></div>
+    <div class="new d" id="new">990 Kč</div>
+    <div class="per" id="per">měsíčně <span>· první 3 měsíce</span></div>
+  </section>
+
+  <section class="scene" id="s5">
+    <span class="w d">Napiš</span><span class="w d lime">„AGENT“</span><span class="w d sm">do komentářů.</span>
+    <img id="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+    <div id="made">Video vytvořil AI agent Nexivo</div>
+  </section>
+
+<script src="../../tools/gsap.min.js"></script>
+<script>
+  const $ = s => document.querySelector(s);
+  const IN = { duration: .45, ease: 'power3.out' };
+  const CUT = { autoAlpha: 0, duration: .2, ease: 'power2.in' };
+  const tl = gsap.timeline({ paused: true });
+  gsap.set(['#s2', '#s3', '#s4', '#s5'], { autoAlpha: 0 });
+  tl.to('#glow', { x: 260, y: -700, duration: 20, ease: 'none' }, 0);
+
+  // 0–3 s: hook, first word already on frame 0
+  const ks = gsap.utils.toArray('#s1 .k');
+  gsap.set(ks.slice(1), { autoAlpha: 0 });
+  tl.from(ks[0], { scale: 1.25, transformOrigin: '0% 50%', duration: .35, ease: 'power4.out' }, 0);
+  ks.slice(1).forEach((k, i) => tl.fromTo(k, { autoAlpha: 0, scale: 1.5, transformOrigin: '0% 50%' }, { autoAlpha: 1, scale: 1, duration: .3, ease: 'power4.out' }, .45 + i * .45));
+  tl.to('#s1 .lime', { scale: 1.06, transformOrigin: '0% 50%', yoyo: true, repeat: 1, duration: .2 }, 1.9)
+    .to('#s1', CUT, 2.8);
+
+  // 3–8 s: photos + one sentence → agent works
+  const sentence = 'Udělej post na podzimní akci.';
+  const ty = { n: 0 };
+  tl.set('#s2', { autoAlpha: 1 }, 3.0)
+    .from('#p1', { y: 300, rotation: -14, autoAlpha: 0, ...IN }, 3.0)
+    .from('#p2', { y: 300, autoAlpha: 0, ...IN }, 3.12)
+    .from('#p3', { y: 300, rotation: 14, autoAlpha: 0, ...IN }, 3.24)
+    .from('#bub', { y: 60, autoAlpha: 0, ...IN }, 3.5)
+    .to(ty, { n: sentence.length, duration: 1.3, ease: 'none', onUpdate: () => { $('#typed').textContent = sentence.slice(0, Math.round(ty.n)); } }, 3.75)
+    .to('#caret', { autoAlpha: 0, duration: .1 }, 5.1)
+    .from('#work', { y: 40, autoAlpha: 0, ...IN }, 5.2)
+    .fromTo('#barb', { scaleX: 0 }, { scaleX: 1, duration: 2.0, ease: 'power1.inOut' }, 5.35)
+    .from('#c1', { scale: .6, autoAlpha: 0, duration: .3, ease: 'back.out(2)' }, 5.9)
+    .from('#c2', { scale: .6, autoAlpha: 0, duration: .3, ease: 'back.out(2)' }, 6.4)
+    .from('#c3', { scale: .6, autoAlpha: 0, duration: .3, ease: 'back.out(2)' }, 6.9)
+    .to('#s2', CUT, 7.8);
+
+  // 8–13 s: finished post appears and publishes itself
+  tl.set('#s3', { autoAlpha: 1 }, 8.0)
+    .from('#s3t', { y: 40, autoAlpha: 0, ...IN }, 8.0)
+    .from('#phone', { y: 500, rotation: 6, duration: .6, ease: 'power3.out' }, 8.1)
+    .from('#done', { autoAlpha: 0, duration: .01 }, 9.9)
+    .to('#pub', { scale: .94, duration: .12, yoyo: true, repeat: 1 }, 9.75)
+    .from('#done', { scaleX: 0, transformOrigin: '0% 50%', duration: .35, ease: 'power2.out' }, 9.9)
+    .from('#ig', { y: 40, autoAlpha: 0, scale: .8, duration: .35, ease: 'back.out(2)' }, 10.5)
+    .from('#fb', { y: 40, autoAlpha: 0, scale: .8, duration: .35, ease: 'back.out(2)' }, 10.8)
+    .to('#s3', CUT, 12.8);
+
+  // 13–17 s: price
+  tl.set('#s4', { autoAlpha: 1 }, 13.0)
+    .from('#s4t', { y: 40, autoAlpha: 0, ...IN }, 13.0)
+    .from('#old', { y: 40, autoAlpha: 0, ...IN }, 13.35)
+    .fromTo('#strike', { scaleX: 0 }, { scaleX: 1, duration: .35, ease: 'power2.inOut' }, 13.9)
+    .from('#new', { scale: 1.6, autoAlpha: 0, transformOrigin: '0% 50%', duration: .4, ease: 'power4.out' }, 14.35)
+    .from('#per', { y: 30, autoAlpha: 0, ...IN }, 14.9)
+    .to('#s4', CUT, 16.8);
+
+  // 17–20 s: CTA + quiet credit
+  const ws = gsap.utils.toArray('#s5 .w');
+  tl.set('#s5', { autoAlpha: 1 }, 17.0);
+  ws.forEach((w, i) => tl.from(w, { autoAlpha: 0, scale: 1.4, transformOrigin: '0% 50%', duration: .3, ease: 'power4.out' }, 17.0 + i * .3));
+  tl.from('#logo', { autoAlpha: 0, y: 20, duration: .4 }, 18.1)
+    .from('#made', { autoAlpha: 0, duration: .5 }, 18.5)
+    .to({}, { duration: .01 }, 20);
+
+  window.TL = tl;
+  window.READY = document.fonts.ready.then(() => true);
+</script>
+</body>
+</html>

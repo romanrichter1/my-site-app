@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<style>
+:root { --ink: #0A0A0A; --off: #F7F5EF; --lime: #C5E832; --g: #8E8E93; --card: #1A1A1C; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #555; font-family: "Inter", -apple-system, sans-serif; color: var(--off); }
+.slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: var(--ink); padding: 180px 120px 180px 90px; display: flex; flex-direction: column; justify-content: center; }
+.slide::before { content: ""; position: absolute; width: 1300px; height: 1300px; right: -620px; bottom: -700px; border-radius: 50%; background: radial-gradient(closest-side, rgba(197,232,50,.22), rgba(197,232,50,0)); }
+.slide > * { position: relative; flex-shrink: 0; }
+.slide + .slide { margin-top: 20px; }
+.logo { position: absolute; left: 90px; top: 76px; height: 48px; }
+.num { position: absolute; right: 120px; top: 84px; font-size: 32px; font-weight: 600; color: rgba(247,245,239,.4); }
+.hl { color: var(--lime); }
+.h { font-family: "Inter Display", "Inter", sans-serif; font-weight: 900; font-size: 132px; line-height: .98; letter-spacing: -0.04em; }
+.h.sm { font-size: 88px; margin-top: 50px; }
+.ht { font-family: "Inter Display", "Inter", sans-serif; font-weight: 900; text-transform: uppercase; font-size: 146px; line-height: 1.03; letter-spacing: -0.045em; }
+.hook .ht .hl { color: var(--lime); }
+.tag { margin-top: 60px; align-self: flex-start; display: inline-flex; align-items: center; gap: 18px; padding: 22px 34px; border-radius: 999px; border: 3px solid rgba(197,232,50,.5); font-size: 46px; font-weight: 700; color: var(--lime); }
+.tag i { width: 22px; height: 22px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 24px var(--lime); }
+.swipe { position: absolute; right: 120px; bottom: 96px; display: inline-flex; align-items: center; gap: 14px; font-size: 40px; font-weight: 700; color: rgba(247,245,239,.75); }
+.swipe svg { width: 48px; height: 48px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+
+.photos { margin-top: 60px; display: flex; gap: 20px; }
+.photos span { width: 270px; height: 340px; border-radius: 40px; display: inline-flex; align-items: center; justify-content: center; }
+.photos .p1 { background: linear-gradient(150deg, #3a3a3d, #1c1c1e); transform: rotate(-5deg); }
+.photos .p2 { background: linear-gradient(150deg, #C5E832, #8fae12); transform: translateY(-20px); }
+.photos .p3 { background: linear-gradient(150deg, #F7F5EF, #cfccc2); transform: rotate(5deg); }
+.photos svg { width: 120px; height: 120px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.photos .p1 svg { stroke: var(--off); } .photos .p2 svg, .photos .p3 svg { stroke: var(--ink); }
+
+.chat { margin-top: 60px; padding: 44px 48px; border-radius: 48px; background: var(--card); border: 3px solid rgba(255,255,255,.08); }
+.chd { display: flex; align-items: center; gap: 20px; font-size: 36px; font-weight: 600; color: var(--g); }
+.chd .av { width: 64px; height: 64px; border-radius: 50%; background: var(--off); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; font-weight: 800; }
+.chd time { margin-left: auto; }
+.bub { margin-top: 30px; padding: 36px 42px; border-radius: 40px 40px 40px 12px; background: var(--off); color: var(--ink); font-size: 56px; line-height: 1.2; font-weight: 700; }
+.att { margin-top: 26px; display: flex; gap: 18px; }
+.att span { width: 120px; height: 120px; border-radius: 26px; background: #2a2a2d; display: inline-flex; align-items: center; justify-content: center; }
+.att svg { width: 56px; height: 56px; fill: none; stroke: var(--lime); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tagl { margin-top: 24px; font-size: 26px; color: rgba(247,245,239,.35); }
+
+.list { margin-top: 60px; display: grid; gap: 26px; }
+.list div { display: flex; align-items: center; gap: 34px; font-family: "Inter Display", "Inter", sans-serif; font-weight: 900; font-size: 92px; letter-spacing: -0.03em; }
+.list i { flex: 0 0 96px; height: 96px; border-radius: 50%; background: var(--lime); display: inline-flex; align-items: center; justify-content: center; }
+.list svg, .plat svg { fill: none; stroke: var(--ink); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.list svg { width: 54px; height: 54px; }
+
+.post { margin-top: 40px; border-radius: 44px; overflow: hidden; background: var(--off); color: var(--ink); width: 720px; transform: rotate(-2deg); box-shadow: 0 40px 120px rgba(0,0,0,.6); }
+.pimg { height: 300px; background: var(--lime); padding: 44px 50px; display: flex; flex-direction: column; justify-content: center; }
+.pimg b { font-family: "Inter Display", "Inter", sans-serif; font-weight: 900; font-size: 64px; letter-spacing: -0.03em; line-height: 1; }
+.pimg b.big { font-size: 170px; letter-spacing: -0.05em; }
+.pimg small { font-size: 40px; font-weight: 700; }
+.pcap { padding: 30px 40px 36px; font-size: 32px; line-height: 1.3; }
+.vs { margin-top: 44px; align-self: flex-start; padding: 18px 32px; border-radius: 999px; background: var(--off); color: var(--ink); font-size: 46px; font-weight: 800; }
+
+.plat { margin-top: 60px; display: grid; gap: 26px; }
+.plat div { display: flex; justify-content: space-between; align-items: center; padding: 40px 48px; border-radius: 44px; background: var(--card); border: 3px solid rgba(255,255,255,.08); }
+.plat .pl { font-size: 64px; font-weight: 800; letter-spacing: -0.02em; }
+.plat .st { display: inline-flex; align-items: center; gap: 18px; font-size: 46px; font-weight: 700; color: var(--lime); }
+.plat i { width: 64px; height: 64px; border-radius: 50%; background: var(--lime); display: inline-flex; align-items: center; justify-content: center; }
+.plat svg { width: 36px; height: 36px; }
+
+.rows { margin-top: 60px; display: grid; gap: 26px; }
+.rows div { display: flex; align-items: center; gap: 34px; padding: 40px 46px; border-radius: 44px; background: var(--card); border: 3px solid rgba(255,255,255,.08); font-size: 60px; font-weight: 800; letter-spacing: -0.02em; }
+.rows span { flex: 0 0 104px; height: 104px; border-radius: 30px; background: var(--lime); display: inline-flex; align-items: center; justify-content: center; }
+.rows svg { width: 58px; height: 58px; fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.obory { margin-top: 60px; display: flex; flex-wrap: wrap; gap: 22px; }
+.obory span { padding: 30px 44px; border-radius: 999px; background: var(--off); color: var(--ink); font-size: 60px; font-weight: 800; letter-spacing: -0.02em; }
+.obory span:nth-child(odd) { background: var(--lime); }
+
+.price { display: flex; flex-direction: column; }
+.price .old { font-size: 96px; font-weight: 800; color: rgba(247,245,239,.45); text-decoration: line-through; text-decoration-color: #E5484D; text-decoration-thickness: 10px; }
+.price .new { font-family: "Inter Display", "Inter", sans-serif; font-weight: 900; font-size: 250px; line-height: .9; letter-spacing: -0.05em; color: var(--lime); }
+.price .per { margin-top: 18px; font-size: 50px; font-weight: 700; }
+.code { margin-top: 56px; align-self: flex-start; display: inline-flex; align-items: center; gap: 26px; padding: 30px 44px; border-radius: 30px; border: 5px dashed var(--lime); }
+.code small { font-size: 40px; font-weight: 700; color: var(--g); }
+.code b { font-size: 68px; font-weight: 900; letter-spacing: .01em; }
+
+.ht.cta { font-size: 140px; }
+.by { position: absolute; left: 90px; right: 120px; bottom: 120px; display: flex; flex-direction: column; gap: 18px; }
+.by img { height: 56px; align-self: flex-start; }
+.by span { font-size: 32px; color: rgba(247,245,239,.55); }
+</style>
+</head>
+<body>
+<section class="slide hook">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">1/10</div>
+  <div class="ht">Tenhle<br>příspěvek<br><span class="hl">nenapsal<br>člověk.</span></div>
+  <div class="tag"><i></i>Vytvořil ho AI agent Nexivo</div>
+  <div class="swipe">Posuň <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+</section>
+
+<section class="slide ">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">2/10</div>
+  <div class="h">Majitel nahrál<br><span class="hl">3 fotky.</span></div>
+  <div class="photos"><span class="p1"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1L20 20M8.1 15.9L20 4"/></svg></span><span class="p2"><svg viewBox="0 0 24 24"><path d="M7 4h10v7H7zM5 11h14v4H5zM8 15v5M16 15v5M12 15v5"/></svg></span><span class="p3"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg></span></div>
+  <div class="h sm">A napsal <span class="hl">jednu větu.</span></div>
+</section>
+
+<section class="slide ">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">3/10</div>
+  <div class="h">Celé zadání:</div>
+  <div class="chat">
+    <div class="chd"><span class="av">K</span>Ty → AI agent<time>9:02</time></div>
+    <div class="bub">Udělej post na podzimní akci: střih a barva −20&nbsp;%.</div>
+    <div class="att"><span><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.1 8.1L20 20M8.1 15.9L20 4"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M7 4h10v7H7zM5 11h14v4H5zM8 15v5M16 15v5M12 15v5"/></svg></span><span><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg></span></div>
+  </div>
+  <div class="tagl">Ilustrativní ukázka</div>
+</section>
+
+<section class="slide ">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">4/10</div>
+  <div class="h">Agent<br><span class="hl">udělal:</span></div>
+  <div class="list">
+    <div><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>TEXT</div>
+    <div><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>GRAFIKU</div>
+    <div><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>HASHTAGY</div>
+    <div><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>NAPLÁNOVÁNÍ</div>
+  </div>
+</section>
+
+<section class="slide ">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">5/10</div>
+  <div class="h" style="font-size:120px">Hotovo. <span class="hl">Za pár vteřin.</span></div>
+  <div class="post">
+    <div class="pimg"><b>PODZIM</b><b class="big">−20 %</b><small>střih + barva</small></div>
+    <div class="pcap"><b>Podzimní proměna je tady.</b> Střih a barva o 20 % levněji, jen do konce listopadu.</div>
+  </div>
+  <div class="vs">místo hodiny práce</div>
+</section>
+
+<section class="slide ">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">6/10</div>
+  <div class="h">Zveřejní ho<br><span class="hl">sám.</span></div>
+  <div class="plat">
+    <div><span class="pl">Instagram</span><span class="st"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>čt 18:30</span></div>
+    <div><span class="pl">Facebook</span><span class="st"><i><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i>čt 18:30</span></div>
+  </div>
+  <div class="h sm">Ve správný čas.</div>
+</section>
+
+<section class="slide ">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">7/10</div>
+  <div class="h">Umí toho<br><span class="hl">víc:</span></div>
+  <div class="rows">
+    <div><span><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M8 18h2M12 18h2"/></svg></span>Kalkulace a poptávky</div>
+    <div><span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>Správa kalendáře</div>
+    <div><span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>Kontrola e-mailů</div>
+  </div>
+</section>
+
+<section class="slide ">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">8/10</div>
+  <div class="h">Pro koho?</div>
+  <div class="obory">
+    <span>Kadeřnictví</span><span>Barbershopy</span><span>Autoservisy</span><span>Realitky</span><span>Stavební firmy</span>
+  </div>
+</section>
+
+<section class="slide ">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">9/10</div>
+  <div class="price"><span class="old">2 490 Kč</span><span class="new">990 Kč</span><span class="per">měsíčně · první 3 měsíce</span></div>
+  <div class="code"><small>Kód</small><b>NEXIVOAGENT60</b></div>
+  <div class="h sm">Nastavíš si ho <span class="hl">sám.</span></div>
+</section>
+
+<section class="slide hook">
+  <img class="logo" src="../../../assets/nexivo-logo-inverse.png" alt="">
+  <div class="num">10/10</div>
+  <div class="ht cta">Napiš<br><span class="hl">„AGENT“</span><br>do komentářů.</div>
+  <div class="h sm">Pošlu ti kód.</div>
+  <div class="by"><img src="../../../assets/nexivo-logo-inverse.png" alt=""><span>Tenhle příspěvek vytvořil AI agent Nexivo.</span></div>
+</section>
+</body>
+</html>
