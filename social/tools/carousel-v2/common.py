@@ -172,6 +172,26 @@ CSS = r'''
   .scr li { display: flex; align-items: center; gap: 14px; font-size: 28px; font-weight: 600; color: rgba(255,255,255,.85); }
   .scr li i { width: 30px; height: 30px; border-radius: 50%; background: var(--lime); display: inline-flex; align-items: center; justify-content: center; }
   .scr li svg { width: 18px; height: 18px; fill: none; stroke: var(--ink); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* typographic hook (cover) */
+  .hook { justify-content: center; padding-bottom: 260px; }
+  .hook.lime { background: var(--lime); color: var(--ink); }
+  .hook.lime .num { color: rgba(10,10,10,.45); }
+  .hook .ht { position: relative; font-family: "Inter Display", "Inter", sans-serif; font-weight: 900; text-transform: uppercase; font-size: 158px; line-height: .96; letter-spacing: -0.04em; }
+  .dark.hook .ht { color: var(--bone); }
+  .hook .ht .hl { color: var(--lime); }
+  .hook .ht .xmark { display: inline-block; width: .95em; height: .95em; vertical-align: -0.12em; margin-left: .12em; }
+  .hook.lime .ht .hl { display: inline-block; margin-top: .1em; line-height: .92; background: var(--ink); color: var(--lime); padding: .02em .1em 0; border-radius: .08em; }
+  .hook .ht .xmark path { fill: none; stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; }
+  .hook.lime .xmark path { stroke: var(--ink); }
+  .dark.hook .xmark path { stroke: var(--lime); }
+  .hook .hs { margin-top: 56px; font-family: 'Fraunces', serif; font-style: italic; font-size: 48px; line-height: 1.2; }
+  .hook.lime .hs { color: rgba(10,10,10,.7); }
+  .dark.hook .hs { color: rgba(247,245,239,.7); }
+  .hook .by { position: absolute; left: 90px; bottom: 190px; display: flex; align-items: center; gap: 18px; font-size: 34px; font-weight: 600; }
+  .hook .by img { height: 40px; }
+  .hook.lime .by { color: var(--ink); }
+  .dark.hook .by { color: rgba(255,255,255,.75); }
 '''
 ARROW = '<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 CHECK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
@@ -201,6 +221,16 @@ def cta(i, screen_label, screen_title, screen_items):
     <div class="row"><div class="co"><b>Odhad úspory</b>kolik hodin týdně</div><div class="co"><b>Agent na 3 dny</b>zdarma, nexivoai.cz</div></div>
   </div>'''
     return slide(i, body, cls='cta')
+XMARK = '<svg class="xmark" viewBox="0 0 100 100"><path d="M14 18 C 34 36, 58 62, 86 84"/><path d="M84 14 C 66 34, 40 60, 18 88"/></svg>'
+def hook(lines, sub, dark=False, x=True, size=None):
+    t = '<br>'.join(lines[:-1] + [lines[-1] + (XMARK if x else '')])
+    by_logo = 'nexivo-logo-inverse.png' if dark else 'nexivo-logo.png'
+    st = f' style="font-size:{size}px"' if size else ''
+    body = (f'  <div class="ht"{st}>{t}</div>\n  <div class="hs">{sub}</div>\n'
+            f'  <div class="by">Roman Richter · <img src="../../../assets/{by_logo}" alt=""></div>')
+    c = 'slide hook ' + ('dark' if dark else 'lime')
+    return (f'<section class="{c}">\n  <div class="num">1/{TOTAL}</div>\n{body}\n'
+            f'  <div class="swipe">Posuňte {ARROW}</div>\n</section>')
 def page(slides):
     return ('<!doctype html>\n<html lang="cs">\n<head>\n<meta charset="utf-8">\n'
             '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=block">\n'

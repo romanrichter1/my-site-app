@@ -173,6 +173,19 @@ slide(9, f'''  <div class="h2 disp">A rovnou<br><em>domluví obhlídku.</em></di
 cta(10, 'Ukázka agenta', 'Kalkulační agent', ['Nabídka do 5 minut', 'Počítá podle vašich cen', 'Rovnou domluví obhlídku']),
 ]
 
+HOOKS = {
+  'A_stop':   hook(['Přestaňte', 'odpovídat', 'na poptávky', '<span class="hl">ručně.</span>'], '(pokud o ně nechcete přicházet)'),
+  'A_nobody': hook(['AI, kterou', 've firmách', 'skoro', '<span class="hl">nevidím.</span>'], '(a přitom vrací desítky hodin týdně)', dark=True, x=False, size=146),
+  'B_stop':   hook(['Přestaňte', 'prosit o', '<span class="hl">recenze.</span>'], '(dělá to za vás agent, a lépe)', size=140),
+  'B_nobody': hook(['Trik na', 'recenze, který', 'skoro nikdo', '<span class="hl">nepoužívá.</span>'], '(a je podle pravidel Googlu)', dark=True, x=False, size=146),
+  'C_stop':   hook(['Přestaňte', 'počítat', 'nabídky', '<span class="hl">ručně.</span>'], '(konkurence je pošle za 5 minut)'),
+  'C_nobody': hook(['Tohle ve', 'stavebnictví', 'skoro nikdo', '<span class="hl">nedělá.</span>'], '(nabídka klientovi do 5 minut)', dark=True, x=False, size=124),
+}
+d = f'{ROOT}/hooky'; os.makedirs(d, exist_ok=True)
+open(f'{d}/index.html', 'w').write(page(list(HOOKS.values())))
+for name, slides in [('poptavkovy-agent-v3', [HOOKS['A_stop']] + A[1:]), ('google-review-agent-v3', [HOOKS['B_stop']] + B[1:]), ('kalkulacni-agent-v3', [HOOKS['C_stop']] + C[1:])]:
+    dd = f'{ROOT}/{name}'; os.makedirs(dd, exist_ok=True)
+    open(f'{dd}/index.html', 'w').write(page(slides))
 for name, slides in [('poptavkovy-agent-v2', A), ('google-review-agent-v2', B), ('kalkulacni-agent-v2', C)]:
     d = f'{ROOT}/{name}'; os.makedirs(d, exist_ok=True)
     open(f'{d}/index.html', 'w').write(page(slides))
