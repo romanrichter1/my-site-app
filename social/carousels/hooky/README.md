@@ -1,7 +1,7 @@
 # Háčky (úvodní slidy) pro carousely
 
-Styl podle Romanem dodaných příkladů (@rishi): jedna plná barva, obří tučné verzálky, ručně kreslený křížek, malá věta v závorce, podpis autora.
-V barvách Nexiva: limetková / černá, Inter Display Black + Fraunces italic, „Roman Richter · nexivo“.
+Styl podle Romanem dodaných příkladů (@rishi): jedna plná barva, obří tučné verzálky, ručně kreslený křížek, malá věta v závorce.
+V barvách Nexiva: limetková / černá, Inter Display Black + Fraunces italic, dole jen logo (žádné jméno).
 
 | Soubor | Agent | Vzorec |
 |---|---|---|

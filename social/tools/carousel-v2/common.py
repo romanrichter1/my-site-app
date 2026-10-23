@@ -189,7 +189,7 @@ CSS = r'''
   .hook.lime .hs { color: rgba(10,10,10,.7); }
   .dark.hook .hs { color: rgba(247,245,239,.7); }
   .hook .by { position: absolute; left: 90px; bottom: 190px; display: flex; align-items: center; gap: 18px; font-size: 34px; font-weight: 600; }
-  .hook .by img { height: 40px; }
+  .hook .by img { height: 52px; }
   .hook.lime .by { color: var(--ink); }
   .dark.hook .by { color: rgba(255,255,255,.75); }
 '''
@@ -227,7 +227,7 @@ def hook(lines, sub, dark=False, x=True, size=None):
     by_logo = 'nexivo-logo-inverse.png' if dark else 'nexivo-logo.png'
     st = f' style="font-size:{size}px"' if size else ''
     body = (f'  <div class="ht"{st}>{t}</div>\n  <div class="hs">{sub}</div>\n'
-            f'  <div class="by">Roman Richter · <img src="../../../assets/{by_logo}" alt=""></div>')
+            f'  <div class="by"><img src="../../../assets/{by_logo}" alt=""></div>')
     c = 'slide hook ' + ('dark' if dark else 'lime')
     return (f'<section class="{c}">\n  <div class="num">1/{TOTAL}</div>\n{body}\n'
             f'  <div class="swipe">Posuňte {ARROW}</div>\n</section>')

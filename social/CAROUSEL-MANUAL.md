@@ -39,7 +39,7 @@
 - **„[Věc], kterou skoro nikdo nepoužívá / nedělá“** (3,2 mil. a 2,9 mil. zhlédnutí)
 - **„[N] věci, které musíte v roce 2027 udělat (ve vašem oboru)“**
 Provedení: plná limetková nebo černá plocha, Inter Display Black verzálky 140–158 px, klíčové slovo zvýrazněné,
-malá věta v závorce (Fraunces italic), podpis „Roman Richter · nexivo“. Vzory: `carousels/hooky/`.
+malá věta v závorce (Fraunces italic), logo nexivo (bez jména). Vzory: `carousels/hooky/`.
 
 ## 4a. Poslední slide (CTA) – vzor
 Podle Romanem dodaného příkladu (@marketingharry, slide 11/11). Skladba odshora:
