@@ -34,6 +34,21 @@
 | **8–9** | **Desire · Vrchol** | „Aha moment“ | Velké odhalení: agent v akci, výsledek, citovatelná věta („ChatGPT poradí, agent to udělá.“). |
 | **10** | **Action · Akce** | Jasný další krok | Jedna výzva s klíčovým slovem: **„Napište do komentáře AGENT“** + co za to dostanou. Volitelně „Uložte si to na později“. |
 
+## 4a. Poslední slide (CTA) – vzor
+Podle Romanem dodaného příkladu (@marketingharry, slide 11/11). Skladba odshora:
+
+1. **Věta důvěryhodnosti** (menší písmo): proč nás poslouchat. Jen pravdivě, např. „AI agenty stavíme pro firmy, které nestíhají telefony a poptávky.“ Žádná vymyšlená čísla klientů ani let.
+2. **Obří výzva s klíčovým slovem:** **NAPIŠTE „AGENT“** – klíčové slovo limetkově, největší text na slidu (≥ 160 px), pod tím menší „a pošleme vám ukázku na míru“.
+3. **Vizuál toho, co dostanou** (mockup notebooku/telefonu s ukázkou agenta nebo konzultace), uprostřed slidu.
+4. **3–4 popisky kolem vizuálu spojené čárkou s tečkou**, každý = jedna hodnota. Pro Nexivo:
+   - AI konzultace zdarma (30 min)
+   - Ukázka agenta pro váš obor
+   - Odhad, kolik hodin týdně ušetříte
+   - Agent na 3 dny zdarma
+5. **Štítek naléhavosti** jen pokud je pravdivý (např. „Tento měsíc 5 volných konzultací“). Vymyšlená naléhavost = ztráta důvěry, nepoužívat.
+
+Klíčové slovo v CTA, v popisku i v automatické DM musí být stejné („AGENT“).
+
 ## 5. Barvy (psychologie)
 | Paleta | Vyvolává |
 |---|---|
@@ -52,6 +67,6 @@ Nexivo drží **monochrom (krémová / černá) + limetkový akcent** = soudržn
 - [ ] Slide 2 říká, co čtenář získá nebo čemu se vyhne
 - [ ] Čísla jen ověřená, se zdrojem na slidu; ilustrace označené „Ilustrativní ukázka“
 - [ ] Vrchol (aha moment) před CTA
-- [ ] Poslední slide = jedna výzva „AGENT“
+- [ ] Poslední slide podle vzoru 4a: důvěra → obří „AGENT“ → vizuál → 3–4 hodnoty
 - [ ] 1. řádek popisku = stejný háček jako slide 1
 - [ ] Připomenout Romanovi: přidat hudbu při publikaci
