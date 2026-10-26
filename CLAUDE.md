@@ -64,7 +64,7 @@ Positioning: Nexivo sells ONLY AI agents to service firms with 5+ employees. No 
 
 Sections in order:
 - Hero (`.hero--center`: eyebrow pill → title with lime underline `.hero__mark` → sub → 2 CTAs → `.hero__checks` trust row incl. guarantee link → `.taskdemo` „Zadej úkol“ interactive demo below: 3 task chips, tool rail, steps, result card; autoplays until first click)
-- Co vám agent reálně pošle (`#agenti`) — 4 HTML mockups, `[data-live]` animates on scroll, mobile carousel `[data-carousel]`
+- Agenti v akci (`#agenti`) — `[data-agtabs]` tabs, one agent at a time (Czech names as in the portal): result + 3 bullets left, HTML mockup right, `[data-live]` animates when shown; tabs scroll sideways on mobile
 - Agent není ChatGPT (`#jak-agent-pracuje`) — `[data-vs-duel]` comparison scrubbed by scroll (GPT rows strike through, agent rows + checks pop in, score 0→4/4, `.vs__badge`), mobile toggle kept; `[data-flow]` steps lighting up
 - Pro koho (`#pro-koho`)
 - Case study (`#case-study`, `.is-hidden` — show only with verified client consent)
@@ -89,8 +89,6 @@ spotlight, mouse parallax were removed: Roman found trackpad control broken).
 Config: `window.CALENDLY_URL = "https://calendly.com/romecrichter/nexivo"` in `<head>`.  
 Trigger: all `[data-cta="calendly"]` elements. **No href/target on these elements** — JS handles clicks only.  
 Calendly CSS+JS loaded from `assets.calendly.com` in `<head>`.
-
-**Calculator modal:** `#calc` — multi-step savings calculator, opens via `[data-calc]` buttons.
 
 **FAQ accordion:** `.faq__item[data-open]` toggle, `grid-template-rows` slide + opacity fade animation.
 
