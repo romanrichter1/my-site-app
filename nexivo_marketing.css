@@ -2279,3 +2279,23 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overf
 @media (max-width: 768px) {
   .vs__badge { display: none; }
 }
+
+/* Jak to funguje: two ways to start (S námi / Sami) */
+.path + .path { margin-top: 72px; padding-top: 56px; border-top: 1px solid var(--ink-100, rgba(10,10,10,.08)); }
+.path__head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: 28px; }
+.path__tag { display: inline-flex; align-items: center; height: 34px; padding: 0 16px; border-radius: 999px; background: var(--ink-1000); color: var(--bone-50); font: 600 14px/1 var(--font-sans); letter-spacing: .01em; }
+.path__tag--lime { background: var(--lime-500); color: var(--ink-1000); }
+.path__lead { margin: 0; max-width: 640px; font: 400 17px/1.5 var(--font-sans); color: var(--ink-500); }
+.path__lead strong { color: var(--ink-1000); font-weight: 600; }
+.path__foot { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+.path__checks { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 15px; color: var(--ink-1000); }
+.path__checks li, .path__checks a { display: inline-flex; align-items: center; gap: 8px; color: inherit; }
+.path__checks a { text-decoration: underline; text-decoration-color: var(--ink-300); text-underline-offset: 3px; }
+.path__checks svg { width: 18px; height: 18px; flex-shrink: 0; fill: none; stroke: #17704A; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.path__note { flex-basis: 100%; margin: 0; font-size: 13px; color: var(--ink-400); }
+@media (max-width: 640px) {
+  .path + .path { margin-top: 48px; padding-top: 40px; }
+  .path__foot { flex-direction: column; align-items: stretch; }
+  .path__foot .btn { justify-content: center; }
+  .path__checks { flex-direction: column; gap: 10px; font-size: 14px; }
+}
