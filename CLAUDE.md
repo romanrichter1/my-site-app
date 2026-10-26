@@ -68,7 +68,6 @@ Sections in order:
 - Agent není ChatGPT (`#jak-agent-pracuje`) — `[data-vs-duel]` comparison scrubbed by scroll (GPT rows strike through, agent rows + checks pop in, score 0→4/4, `.vs__badge`), mobile toggle kept; `[data-flow]` steps lighting up
 - Pro koho (`#pro-koho`)
 - Case study (`#case-study`, `.is-hidden` — show only with verified client consent)
-- Čísla (`#cisla`) — all stats labelled "Ilustrativní ukázka"
 - Jak to funguje (`#jak-to-funguje`)
 - Reporting Agent (`#reporting`)
 - Nabídka služeb (`#pricing` — id kept for old links) + price-on-request card
