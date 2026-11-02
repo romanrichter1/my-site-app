@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<title>Vítejte v Nexivu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&display=swap">
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --bone-50:#F7F5EF; --bone-100:#EFEDE6; --bone-300:#DDD8C8;
+    --ink-1000:#0A0A0A; --ink-500:#5E5E63; --ink-400:#7A7A80;
+    --lime-500:#C5E832;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { width:210mm; height:297mm; background:var(--bone-50); }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Helvetica,Arial,sans-serif; color:var(--ink-1000); -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page { width:210mm; height:297mm; padding:16mm 18mm 14mm; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+  .top { display:flex; justify-content:space-between; align-items:center; }
+  .top img { height:9mm; }
+  .pill { font-size:9pt; font-weight:600; letter-spacing:.04em; text-transform:uppercase; padding:2mm 4mm; border-radius:99px; background:var(--ink-1000); color:var(--bone-50); }
+  h1 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:34pt; line-height:1.05; letter-spacing:-.02em; margin-top:14mm; }
+  h1 em { font-style:italic; font-weight:400; color:var(--ink-400); }
+  .mark { background:linear-gradient(transparent 62%, var(--lime-500) 62%, var(--lime-500) 92%, transparent 92%); }
+  .lead { font-size:11.5pt; line-height:1.5; color:var(--ink-500); margin-top:5mm; max-width:150mm; }
+  .card { margin-top:8mm; background:var(--ink-1000); color:var(--bone-50); border-radius:7mm; padding:6mm 8mm; display:grid; grid-template-columns:1fr 1fr; gap:6mm; }
+  .card .k { font-size:8.5pt; letter-spacing:.06em; text-transform:uppercase; color:#A1A1A6; }
+  .card .v { font-family:"Fraunces",Georgia,serif; font-size:17pt; margin-top:1.5mm; line-height:1.2; }
+  .card .v.lime { color:var(--lime-500); }
+  h2 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:18pt; margin-top:9mm; letter-spacing:-.01em; }
+  .steps { margin-top:5mm; display:grid; gap:3mm; }
+  .step { display:grid; grid-template-columns:10mm 1fr; gap:5mm; align-items:start; background:#fff; border-radius:5mm; padding:4mm 6mm; box-shadow:0 1px 2px rgba(10,10,10,.04), 0 6px 18px rgba(10,10,10,.05); }
+  .num { width:10mm; height:10mm; border-radius:50%; background:var(--lime-500); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11pt; }
+  .step b { display:block; font-size:11.5pt; margin-bottom:1mm; }
+  .step span { font-size:10pt; line-height:1.5; color:var(--ink-500); }
+  .foot { margin-top:auto; padding-top:8mm; border-top:1px solid var(--bone-300); display:flex; justify-content:space-between; align-items:flex-end; font-size:9.5pt; color:var(--ink-500); line-height:1.6; }
+  .foot strong { color:var(--ink-1000); }
+  .sign { font-family:"Fraunces",Georgia,serif; font-style:italic; font-size:14pt; color:var(--ink-1000); }
+  .orb { position:absolute; right:-40mm; top:-40mm; width:110mm; height:110mm; border-radius:50%; background:radial-gradient(circle, rgba(197,232,50,.45), rgba(197,232,50,0) 65%); pointer-events:none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="orb"></div>
+  <div class="top">
+    <img src="../assets/nexivo-logo.png" alt="Nexivo">
+    <span class="pill">Vítejte na palubě</span>
+  </div>
+
+  <h1>Vítejte v Nexivu,<br><span class="mark">paní Oborníková</span>.<br><em>Rutinu teď přebíráme my.</em></h1>
+  <p class="lead">Děkujeme za důvěru. Od dnešního dne pro vás pracuje AI agent, který se stará o vaše sociální sítě — vy jen schválíte, co se vám líbí, a věnujete se tomu, co vás baví.</p>
+
+  <div class="card">
+    <div><div class="k">Klientka</div><div class="v">Radka Oborníková</div></div>
+    <div><div class="k">Produkt</div><div class="v lime">Agent Manažer sociálních sítí</div></div>
+  </div>
+
+  <h2>Co bude následovat</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><div><b>Úvodní nastavení</b><span>Projdeme spolu vaši značku, tón komunikace a sítě, na kterých chcete být vidět. Agent se naučí váš styl.</span></div></div>
+    <div class="step"><div class="num">2</div><div><b>První plán příspěvků</b><span>Agent připraví příspěvky s popisky a vizuály ve vašem stylu. Najdete je v klientském portálu.</span></div></div>
+    <div class="step"><div class="num">3</div><div><b>Schválíte a publikujete</b><span>Každý příspěvek můžete upravit, schválit nebo zamítnout. Nic nevychází bez vašeho souhlasu.</span></div></div>
+    <div class="step"><div class="num">4</div><div><b>Každé pondělí nový plán</b><span>Agent pak pravidelně každý týden připraví další várku obsahu — bez porad a bez psaní od nuly.</span></div></div>
+  </div>
+
+  <div class="foot">
+    <div>
+      <strong>Klientský portál:</strong> nexivoai.cz/klient<br>
+      <strong>Kontakt:</strong> roman@nexivoai.cz
+    </div>
+    <div style="text-align:right">
+      <div class="sign">Roman Richter</div>
+      zakladatel Nexivo
+    </div>
+  </div>
+</div>
+</body>
+</html>
