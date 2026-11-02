@@ -1,0 +1,18 @@
+{
+  "salutation": "paní Oborníková",
+  "name": "Radka Oborníková",
+  "label": "Klientka",
+  "product": "Agent Manažer sociálních sítí",
+  "lead": "Děkujeme za důvěru. Od dnešního dne se o vaše sociální sítě stará AI agent — vy jen schválíte, co se vám líbí.",
+  "call": {
+    "title": "Doporučujeme: zavolejte nám",
+    "text": "Agent teď umí obsluhovat <b>1 profil</b>. Zavolejte prosím Romanovi, domluví vám krátký hovor s kolegou, který vám nastaví sdílení pro <b>oba vaše profily</b>. Hovor proběhne přes Google Meet a zabere maximálně 15 minut.",
+    "phone": "+420 602 730 777"
+  },
+  "steps": [
+    ["Úvodní nastavení", "Projdeme vaši značku, tón komunikace a sítě. Agent se naučí váš styl."],
+    ["První plán příspěvků", "Příspěvky s popisky a vizuály ve vašem stylu najdete v klientském portálu."],
+    ["Schválíte a publikujete", "Příspěvek upravíte, schválíte, nebo zamítnete. Nic nevyjde bez vašeho souhlasu."],
+    ["Každé pondělí nový plán", "Každý týden další várka obsahu — bez porad a psaní od nuly."]
+  ]
+}

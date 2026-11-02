@@ -210,6 +210,27 @@ Volitelné, zatím nenastavené: `RESEND_API_KEY`, `MAIL_FROM` — bez nich se j
 
 ---
 
+## Welcome PDF pro nové klienty (`welcome/`)
+
+**Kdykoli Roman napíše, že uzavřel klienta (nebo chce „welcome PDF“), vytvoř ho tímhle postupem — vždy stejná struktura, výstup PNG + PDF (1 strana A4).**
+
+1. Zkopíruj `welcome/clients/radka-obornikova.json` → `welcome/clients/<jmeno-prijmeni>.json` (slug bez diakritiky).
+2. Vyplň: `salutation` („paní X“ / „pane X“ — 5. pád), `name`, `label` (Klientka/Klient), `product`
+   (název agenta tak, jak ho Roman napíše), `lead` (1 věta: co agent pro klienta dělá), `steps` (4 kroky
+   podle produktu — jen to, co agent v portálu reálně umí), `call` (volitelný limetkový blok s výzvou zavolat;
+   když není potřeba, klíč smaž). Když Roman neřekl rozdíl od standardu, `call` vynech.
+3. `node welcome/make.js welcome/clients/<slug>.json` → `welcome/out/welcome-<slug>.png` + `.pdf`.
+   Skript skončí chybou, když obsah přeteče A4 — pak zkrať texty (ne písmo).
+4. Pošli Romanovi oba soubory, commitni JSON i výstupy.
+
+Struktura stránky (`welcome/template.html`, tokeny z design systému): logo + pilulka „Vítejte na palubě“ →
+nadpis „Vítejte v Nexivu, {oslovení}. *Rutinu teď přebíráme my.*“ → lead → tmavá karta Klient/Produkt →
+(limetkový blok s telefonem) → „Co bude následovat“ 4 kroky → patička portál nexivoai.cz/klient,
+roman@nexivoai.cz, podpis Roman Richter. Telefon pro klienty: +420 602 730 777 (z kontakt.html).
+`welcome/` je ve `.vercelignore` — nenasazuje se.
+
+---
+
 ## Vercel Deployment
 
 ```bash

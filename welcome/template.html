@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
 <meta charset="utf-8">
-<title>Vítejte v Nexivu</title>
+<title>Vítejte v Nexivu – {{name}}</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400&display=swap">
 <style>
   @page { size: A4; margin: 0; }
@@ -46,33 +46,22 @@
 <div class="page">
   <div class="orb"></div>
   <div class="top">
-    <img src="../assets/nexivo-logo.png" alt="Nexivo">
+    <img src="{{assets}}/nexivo-logo.png" alt="Nexivo">
     <span class="pill">Vítejte na palubě</span>
   </div>
 
-  <h1>Vítejte v Nexivu,<br><span class="mark">paní Oborníková</span>.<br><em>Rutinu teď přebíráme my.</em></h1>
-  <p class="lead">Děkujeme za důvěru. Od dnešního dne se o vaše sociální sítě stará AI agent — vy jen schválíte, co se vám líbí.</p>
+  <h1>Vítejte v Nexivu,<br><span class="mark">{{salutation}}</span>.<br><em>Rutinu teď přebíráme my.</em></h1>
+  <p class="lead">{{lead}}</p>
 
   <div class="card">
-    <div><div class="k">Klientka</div><div class="v">Radka Oborníková</div></div>
-    <div><div class="k">Produkt</div><div class="v lime">Agent Manažer sociálních sítí</div></div>
+    <div><div class="k">{{label}}</div><div class="v">{{name}}</div></div>
+    <div><div class="k">Produkt</div><div class="v lime">{{product}}</div></div>
   </div>
 
-  <div class="call">
-    <div>
-      <div class="t">Doporučujeme: zavolejte nám</div>
-      <p>Agent teď umí obsluhovat <b>1 profil</b>. Zavolejte prosím Romanovi, domluví vám krátký hovor s kolegou, který vám nastaví sdílení pro <b>oba vaše profily</b>. Hovor proběhne přes Google Meet a zabere maximálně 15 minut.</p>
-    </div>
-    <div class="tel">+420 602 730 777</div>
-  </div>
-
+{{call}}
   <h2>Co bude následovat</h2>
   <div class="steps">
-    <div class="step"><div class="num">1</div><div><b>Úvodní nastavení</b><span>Projdeme vaši značku, tón komunikace a sítě. Agent se naučí váš styl.</span></div></div>
-    <div class="step"><div class="num">2</div><div><b>První plán příspěvků</b><span>Příspěvky s popisky a vizuály ve vašem stylu najdete v klientském portálu.</span></div></div>
-    <div class="step"><div class="num">3</div><div><b>Schválíte a publikujete</b><span>Příspěvek upravíte, schválíte, nebo zamítnete. Nic nevyjde bez vašeho souhlasu.</span></div></div>
-    <div class="step"><div class="num">4</div><div><b>Každé pondělí nový plán</b><span>Každý týden další várka obsahu — bez porad a psaní od nuly.</span></div></div>
-  </div>
+{{steps}}  </div>
 
   <div class="foot">
     <div>
