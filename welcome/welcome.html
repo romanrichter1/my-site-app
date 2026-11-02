@@ -18,23 +18,27 @@
   .top { display:flex; justify-content:space-between; align-items:center; }
   .top img { height:9mm; }
   .pill { font-size:9pt; font-weight:600; letter-spacing:.04em; text-transform:uppercase; padding:2mm 4mm; border-radius:99px; background:var(--ink-1000); color:var(--bone-50); }
-  h1 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:34pt; line-height:1.05; letter-spacing:-.02em; margin-top:14mm; }
+  h1 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:30pt; line-height:1.05; letter-spacing:-.02em; margin-top:8mm; }
   h1 em { font-style:italic; font-weight:400; color:var(--ink-400); }
   .mark { background:linear-gradient(transparent 62%, var(--lime-500) 62%, var(--lime-500) 92%, transparent 92%); }
   .lead { font-size:11.5pt; line-height:1.5; color:var(--ink-500); margin-top:5mm; max-width:150mm; }
-  .card { margin-top:8mm; background:var(--ink-1000); color:var(--bone-50); border-radius:7mm; padding:6mm 8mm; display:grid; grid-template-columns:1fr 1fr; gap:6mm; }
+  .card { margin-top:6mm; background:var(--ink-1000); color:var(--bone-50); border-radius:7mm; padding:6mm 8mm; display:grid; grid-template-columns:1fr 1fr; gap:6mm; }
   .card .k { font-size:8.5pt; letter-spacing:.06em; text-transform:uppercase; color:#A1A1A6; }
   .card .v { font-family:"Fraunces",Georgia,serif; font-size:17pt; margin-top:1.5mm; line-height:1.2; }
   .card .v.lime { color:var(--lime-500); }
-  h2 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:18pt; margin-top:9mm; letter-spacing:-.01em; }
-  .steps { margin-top:5mm; display:grid; gap:3mm; }
-  .step { display:grid; grid-template-columns:10mm 1fr; gap:5mm; align-items:start; background:#fff; border-radius:5mm; padding:4mm 6mm; box-shadow:0 1px 2px rgba(10,10,10,.04), 0 6px 18px rgba(10,10,10,.05); }
+  h2 { font-family:"Fraunces",Georgia,serif; font-weight:500; font-size:18pt; margin-top:7mm; letter-spacing:-.01em; }
+  .steps { margin-top:4mm; display:grid; gap:2.5mm; }
+  .step { display:grid; grid-template-columns:10mm 1fr; gap:5mm; align-items:start; background:#fff; border-radius:5mm; padding:3mm 6mm; box-shadow:0 1px 2px rgba(10,10,10,.04), 0 6px 18px rgba(10,10,10,.05); }
   .num { width:10mm; height:10mm; border-radius:50%; background:var(--lime-500); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:11pt; }
   .step b { display:block; font-size:11.5pt; margin-bottom:1mm; }
-  .step span { font-size:10pt; line-height:1.5; color:var(--ink-500); }
-  .foot { margin-top:auto; padding-top:8mm; border-top:1px solid var(--bone-300); display:flex; justify-content:space-between; align-items:flex-end; font-size:9.5pt; color:var(--ink-500); line-height:1.6; }
+  .step span { font-size:9.5pt; line-height:1.4; color:var(--ink-500); }
+  .foot { margin-top:auto; padding-top:5mm; border-top:1px solid var(--bone-300); display:flex; justify-content:space-between; align-items:flex-end; font-size:9.5pt; color:var(--ink-500); line-height:1.6; }
   .foot strong { color:var(--ink-1000); }
   .sign { font-family:"Fraunces",Georgia,serif; font-style:italic; font-size:14pt; color:var(--ink-1000); }
+  .call { margin-top:6mm; background:var(--lime-500); border-radius:6mm; padding:5mm 7mm; display:grid; grid-template-columns:1fr auto; gap:6mm; align-items:center; }
+  .call .t { font-size:8.5pt; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+  .call p { font-size:10.5pt; line-height:1.45; margin-top:1.5mm; }
+  .call .tel { font-family:"Fraunces",Georgia,serif; font-weight:600; font-size:19pt; white-space:nowrap; background:var(--ink-1000); color:var(--lime-500); padding:3mm 5mm; border-radius:99px; }
   .orb { position:absolute; right:-40mm; top:-40mm; width:110mm; height:110mm; border-radius:50%; background:radial-gradient(circle, rgba(197,232,50,.45), rgba(197,232,50,0) 65%); pointer-events:none; }
 </style>
 </head>
@@ -47,19 +51,27 @@
   </div>
 
   <h1>Vítejte v Nexivu,<br><span class="mark">paní Oborníková</span>.<br><em>Rutinu teď přebíráme my.</em></h1>
-  <p class="lead">Děkujeme za důvěru. Od dnešního dne pro vás pracuje AI agent, který se stará o vaše sociální sítě — vy jen schválíte, co se vám líbí, a věnujete se tomu, co vás baví.</p>
+  <p class="lead">Děkujeme za důvěru. Od dnešního dne se o vaše sociální sítě stará AI agent — vy jen schválíte, co se vám líbí.</p>
 
   <div class="card">
     <div><div class="k">Klientka</div><div class="v">Radka Oborníková</div></div>
     <div><div class="k">Produkt</div><div class="v lime">Agent Manažer sociálních sítí</div></div>
   </div>
 
+  <div class="call">
+    <div>
+      <div class="t">Doporučujeme: zavolejte nám</div>
+      <p>Agent teď umí obsluhovat <b>1 profil</b>. Zavolejte prosím Romanovi, domluví vám krátký hovor s kolegou, který vám nastaví sdílení pro <b>oba vaše profily</b>. Hovor proběhne přes Google Meet a zabere maximálně 15 minut.</p>
+    </div>
+    <div class="tel">+420 602 730 777</div>
+  </div>
+
   <h2>Co bude následovat</h2>
   <div class="steps">
-    <div class="step"><div class="num">1</div><div><b>Úvodní nastavení</b><span>Projdeme spolu vaši značku, tón komunikace a sítě, na kterých chcete být vidět. Agent se naučí váš styl.</span></div></div>
-    <div class="step"><div class="num">2</div><div><b>První plán příspěvků</b><span>Agent připraví příspěvky s popisky a vizuály ve vašem stylu. Najdete je v klientském portálu.</span></div></div>
-    <div class="step"><div class="num">3</div><div><b>Schválíte a publikujete</b><span>Každý příspěvek můžete upravit, schválit nebo zamítnout. Nic nevychází bez vašeho souhlasu.</span></div></div>
-    <div class="step"><div class="num">4</div><div><b>Každé pondělí nový plán</b><span>Agent pak pravidelně každý týden připraví další várku obsahu — bez porad a bez psaní od nuly.</span></div></div>
+    <div class="step"><div class="num">1</div><div><b>Úvodní nastavení</b><span>Projdeme vaši značku, tón komunikace a sítě. Agent se naučí váš styl.</span></div></div>
+    <div class="step"><div class="num">2</div><div><b>První plán příspěvků</b><span>Příspěvky s popisky a vizuály ve vašem stylu najdete v klientském portálu.</span></div></div>
+    <div class="step"><div class="num">3</div><div><b>Schválíte a publikujete</b><span>Příspěvek upravíte, schválíte, nebo zamítnete. Nic nevyjde bez vašeho souhlasu.</span></div></div>
+    <div class="step"><div class="num">4</div><div><b>Každé pondělí nový plán</b><span>Každý týden další várka obsahu — bez porad a psaní od nuly.</span></div></div>
   </div>
 
   <div class="foot">
