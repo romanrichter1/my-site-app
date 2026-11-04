@@ -172,6 +172,42 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:now
 .dead .dt span{font-size:10px;color:var(--ink-3);text-transform:uppercase}
 .dead p{font-size:12.5px;color:var(--ink-3)}
 
+/* archiv */
+.arch{display:grid;grid-template-columns:290px 1fr;gap:16px;align-items:start}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px}
+.seg button{padding:7px 12px;border-radius:8px;font-size:12.5px;font-weight:500;color:var(--ink-2)}
+.seg button.on{background:var(--navy);color:#fff}
+.search{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;min-width:220px}
+.tree button{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:8px 10px;border-radius:8px;font-size:13px;color:var(--ink)}
+.tree button:hover{background:var(--navy-50)}
+.tree button.on{background:var(--navy-100);color:var(--navy);font-weight:600}
+.tree button small{margin-left:auto;color:var(--ink-3);font-size:11.5px;font-weight:500;white-space:nowrap}
+.tree .q{font-weight:600;margin-top:4px}
+.tree .m{padding-left:28px}
+.tree .lvl{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink-3);font-weight:600;padding:12px 10px 4px}
+.tree svg{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:var(--navy)}
+.tree .mini{display:block;height:4px;border-radius:4px;background:#EEF1F6;margin:2px 10px 6px 34px;overflow:hidden}
+.tree .mini i{display:block;height:100%}
+.folder{margin-bottom:14px}
+.folder__h{display:flex;align-items:center;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer;user-select:none}
+.folder__h svg{width:20px;height:20px;stroke:var(--navy);fill:var(--navy-100);stroke-width:1.6;stroke-linejoin:round;flex:none}
+.folder__h b{font-weight:600;color:var(--navy-900)}
+.folder__h small{color:var(--ink-3);font-size:12px}
+.folder__h .sum{margin-left:auto;font-weight:600;font-variant-numeric:tabular-nums}
+.folder__h .chev{transition:transform .2s;color:var(--ink-3);font-size:12px}
+.folder.shut .chev{transform:rotate(-90deg)}
+.folder.shut .folder__b{display:none}
+.frow{display:grid;grid-template-columns:auto 1.3fr 1.2fr auto auto;gap:12px;align-items:center;padding:9px 4px;border-bottom:1px solid #EEF1F6;cursor:pointer}
+.frow:hover{background:var(--navy-50)}
+.frow .p b{display:block;font-weight:500;font-size:13px}
+.frow .p small,.frow .it small{color:var(--ink-3);font-size:11.5px}
+.frow .it{font-size:12.5px;color:var(--ink-2)}
+.frow .amt{font-weight:600;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ct{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;background:var(--bg);color:var(--fg)}
+.viewer{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2)}
+.viewer button{width:32px;height:32px;border-radius:8px;background:var(--navy-50);font-size:16px;color:var(--navy)}
+@media (max-width:900px){.arch{grid-template-columns:1fr}.frow{grid-template-columns:auto 1fr auto}.frow .it,.frow .ctc{display:none}.search{min-width:0;flex:1}}
+
 /* drawer */
 .ov{position:fixed;inset:0;background:rgba(18,43,87,.35);opacity:0;pointer-events:none;transition:.25s;z-index:40}
 .ov.on{opacity:1;pointer-events:auto}
@@ -179,6 +215,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:now
 .drawer.on{transform:none}
 .drawer__h{display:flex;align-items:center;gap:12px;padding:16px 22px;background:#fff;border-bottom:1px solid var(--line)}
 .drawer__h b{font-weight:600}
+#dTag{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .x{margin-left:auto;width:36px;height:36px;border-radius:10px;background:var(--navy-50);font-size:20px;color:var(--ink-2)}
 .drawer__b{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:20px 22px;overflow:auto}
 .paper{background:#fff;border-radius:6px;box-shadow:0 2px 14px rgba(18,43,87,.12);padding:24px;font-size:11px;color:#333;position:relative;min-height:440px}
@@ -236,6 +273,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:now
     <button class="nav on" data-go="prehled"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Přehled</button>
     <button class="nav" data-go="doklady"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 13h4l2 3h4l2-3h4"/></svg>Doručené doklady<span class="cnt" id="navCnt">6</span></button>
     <button class="nav" data-go="klienti"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.7 3.1 2.4 3.5 5.2"/></svg>Klienti</button>
+    <button class="nav" data-go="archiv"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Archiv dokladů</button>
     <button class="nav" data-go="dph"><svg viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>DPH a hlášení</button>
     <button class="nav" data-go="exporty"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>Exporty a sdílení</button>
     <div class="side__foot"><b>Schránka doklady@tax-tabor.cz</b>Připojeno · kontrola každých 5 min</div>
@@ -344,6 +382,28 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:now
       </div>
     </section>
 
+    <!-- ARCHIV -->
+    <section class="view" id="v-archiv">
+      <div class="top">
+        <button class="burger" data-burger><i></i></button>
+        <div><h1>Archiv dokladů</h1><div class="sub" id="aSub">Všechny soubory a faktury, roztříděné automaticky</div></div>
+        <div class="top__r">
+          <button class="btn btn--g" data-zip><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>Stáhnout ZIP</button>
+          <button class="btn btn--n" data-openall><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Otevřít vše</button>
+        </div>
+      </div>
+      <div class="filters" style="align-items:center">
+        <select class="sel" id="aClient"></select>
+        <div class="seg" id="aGroup"><button data-g="period" class="on">Kvartál / měsíc</button><button data-g="supplier">Dodavatel</button><button data-g="cat">Druh nákladu</button></div>
+        <select class="sel" id="aSide"><option value="P">Přijaté (náklady)</option><option value="all">Přijaté i vydané</option><option value="V">Jen vydané (výnosy)</option></select>
+        <input class="search" id="aQ" placeholder="Hledat: dodavatel, položka, soubor…">
+      </div>
+      <div class="arch">
+        <div class="card tree" id="aTree"></div>
+        <div class="card" id="aList"></div>
+      </div>
+    </section>
+
     <!-- DPH -->
     <section class="view" id="v-dph">
       <div class="top">
@@ -447,10 +507,75 @@ const NEW_DOCS=[
   {id:15,client:'eshop',file:'UPS_import_dph.pdf',type:'pdf',side:'P',party:'Swiss Garden Tools AG',vat:'CHE-112.554.991',c:'CH',kind:'Z',date:'30.10.2026',cur:'EUR',base:980,rate:21,conf:84,from:'faktury@lesnizahrada.cz',subj:'Dovoz Švýcarsko'},
   {id:16,client:'dvorak',file:'scan0091.pdf',type:'pdf',side:'P',party:'Neznámý dodavatel',vat:'?',c:'CZ',kind:'S',date:'30.10.2026',cur:'CZK',base:2100,rate:21,conf:61,from:'m.dvorak@projekce-td.cz',subj:'(bez předmětu)'}
 ];
+const CATS={
+  mat:{n:'Materiál na stavbu',acc:'501.100',bg:'#E6EDF8',fg:'#1C3F7C',why:'Materiál spotřebovaný přímo na zakázce. Účtuje se jako spotřeba materiálu a přiřadí se ke stavbě, aby šla spočítat marže zakázky.'},
+  off:{n:'Vybavení kanceláře',acc:'501.300',bg:'#FFF3DF',fg:'#B86E00',why:'Provozní vybavení (spotřebič, kancelářské potřeby). Nesouvisí se zakázkou, jde do režijních nákladů. Do 80 000 Kč je to drobný majetek, rovnou do nákladů, bez odpisů.'},
+  fuel:{n:'PHM a doprava',acc:'501.200',bg:'#E5F5EC',fg:'#178A50',why:'Pohonné hmoty firemních vozidel. Kontroluje se kniha jízd a rozdělení soukromé/služební.'},
+  svc:{n:'Subdodávky a služby',acc:'518.100',bg:'#EFEAFB',fg:'#5B3FB8',why:'Práce dodavatele na zakázce (subdodávka). U stavebních prací s přenesenou daňovou povinností.'},
+  sw:{n:'Software a marketing',acc:'518.200',bg:'#E3F4F8',fg:'#0E6E85',why:'Licence, cloud a reklama. Často od zahraničních dodavatelů → reverse charge nebo služba ze 3. země.'},
+  goods:{n:'Zboží k prodeji',acc:'504 / 132',bg:'#FDECEE',fg:'#C21F31',why:'Zboží nakoupené za účelem dalšího prodeje. Účtuje se přes sklad, náklad vzniká až při prodeji.'},
+  pack:{n:'Obaly a expedice',acc:'501.500',bg:'#F1F1EE',fg:'#5C5A50',why:'Obalový materiál a doprava zásilek k zákazníkům.'},
+  food:{n:'Suroviny a potraviny',acc:'501.400',bg:'#E5F5EC',fg:'#2F7A2A',why:'Suroviny na výrobu (káva, mléko, pečivo). Snížená sazba DPH 12 %.'},
+  energy:{n:'Energie a nájem',acc:'502 / 518',bg:'#FFF8D6',fg:'#8A6A00',why:'Elektřina, plyn a nájem provozovny – pravidelné měsíční náklady.'},
+  rev:{n:'Tržby',acc:'602 / 604',bg:'#DFF3E8',fg:'#0F6B3D',why:'Vydaná faktura nebo souhrn tržeb – výnos.'},
+  unk:{n:'Nezařazeno',acc:'?',bg:'#EEF1F6',fg:'#4A5672',why:'Doklad je špatně čitelný – druh nákladu potvrdí účetní.'}
+};
+const ITEMS={1:['mat','Cihly Porotherm 30 – 4 palety'],2:['rev','Stavební práce – fakturace dle SOD'],3:['goods','Zahradní nůžky a pily – 120 ks'],4:['sw','Cloud hosting e-shopu'],5:['goods','Zavlažovací sady – 300 ks'],6:['food','Mléko, cukr, pečivo'],7:['food','Zrnková káva 12 kg'],8:['sw','Licence projekčního SW'],9:['rev','Projektová dokumentace – rodinný dům'],10:['fuel','Nafta – vozový park'],11:['food','Suroviny – týdenní nákup'],12:['sw','Reklama Facebook/Instagram'],13:['mat','Beton C25/30 – 18 m³'],14:['svc','Subdodávka elektroinstalace'],15:['goods','Akumulátorové nůžky – 40 ks'],16:['unk','Nečitelná položka'],17:['off','Mikrovlnná trouba 20 l + konvice']};
+const SUPS={
+  novak:[['Stavmat Jih s.r.o.','CZ27612345','CZ','Z','mat',['Cihly Porotherm 30 – 4 palety','Cement CEM II 25 kg × 120','Armovací ocel 12 mm – 2 t'],[30000,140000]],
+    ['Betonárna Planá s.r.o.','CZ25198811','CZ','Z','mat',['Beton C25/30 – 18 m³','Beton C20/25 – 9 m³'],[40000,170000]],
+    ['Stavebniny Tábor s.r.o.','CZ46678120','CZ','Z','mat',['Sádrokarton a profily','Lepidlo a stěrka','Izolace EPS 100 – 60 m²'],[6000,45000]],
+    ['ElektroDům s.r.o.','CZ49241257','CZ','Z','off',['Mikrovlnná trouba 20 l','Lednice do kanceláře','Kávovar do zasedačky'],[2500,14000],3],
+    ['Papírnictví Na Kopci','CZ62531221','CZ','Z','off',['Papír A4 a tonery','Šanony a kancelářské potřeby'],[800,4500],4],
+    ['Pohonné hmoty – karta CCS','CZ47115041','CZ','Z','fuel',['Nafta – vozový park'],[7000,16000]],
+    ['Elektro Kos s.r.o.','CZ03344120','CZ','S','svc',['Subdodávka elektroinstalace'],[20000,90000],5,'rc'],
+    ['Půjčovna strojů Sezimovo Ústí','CZ27744911','CZ','S','svc',['Pronájem minibagru 3 dny','Pronájem lešení'],[6000,22000],4],
+    ['Jihostav Development a.s.','CZ26071231','CZ','S','rev',['Stavební práce – fakturace dle SOD'],[180000,520000],0,'rcV']],
+  eshop:[['Nordwerk Gartentechnik GmbH','DE314887651','DE','Z','goods',['Zahradní nůžky a pily','Hadice a spojky'],[1500,4200],0,'EUR'],
+    ['Hongda Trading Co., Ltd.','—','CN','Z','goods',['Zavlažovací sady','Rukavice – 2 000 párů'],[900,2600],4,'USD'],
+    ['CloudNest Inc.','US 84-2219871','US','S','sw',['Cloud hosting e-shopu'],[249,249],0,'USD'],
+    ['Meta Platforms Ireland Ltd.','IE9692928F','IE','S','sw',['Reklama Facebook/Instagram'],[250,600],0,'EUR'],
+    ['Obaly Morava s.r.o.','CZ28311457','CZ','Z','pack',['Krabice a výplně','Lepicí pásky'],[3000,9000],5],
+    ['ElektroDům s.r.o.','CZ49241257','CZ','Z','off',['Monitor 27\" do kanceláře','Tiskárna štítků'],[3000,8000],2],
+    ['Tržby e-shop – souhrn','—','CZ','Z','rev',['Prodej zboží koncovým zákazníkům'],[120000,260000],0,'V']],
+  brana:[['Makro Cash & Carry ČR','CZ26450691','CZ','Z','food',['Mléko, cukr, pečivo','Nápoje a sirupy'],[3000,9000],0,'r12'],
+    ['Pražírna Kafe Tábor','CZ08812233','CZ','Z','food',['Zrnková káva 12 kg'],[3500,5500],0,'r12'],
+    ['E.ON Energie, a.s.','CZ26078201','CZ','S','energy',['Elektřina – záloha'],[4200,4200]],
+    ['Kávovary Pro s.r.o.','CZ05561200','CZ','Z','off',['Mlýnek na kávu','Servis kávovaru'],[2800,16000],2],
+    ['Tržby – pokladna','—','CZ','Z','rev',['Měsíční tržby z pokladny'],[160000,230000],0,'V12']],
+  dvorak:[['CADsoft Ireland Ltd.','IE6388047V','IE','S','sw',['Licence projekčního SW'],[310,310],0,'EUR'],
+    ['Lumio s.r.o.','SK2121456789','SK','S','sw',['Vizualizace a rendering'],[300,900],4,'EUR'],
+    ['Papírnictví Na Kopci','CZ62531221','CZ','Z','off',['Plotrový papír a tonery','Kancelářská židle'],[900,7000],3],
+    ['Pohonné hmoty – karta CCS','CZ47115041','CZ','Z','fuel',['Benzín – služební auto'],[2500,5000]],
+    ['Bauplan Linz GmbH','ATU68123456','AT','S','rev',['Projektová dokumentace'],[1800,4200],4,'EURV'],
+    ['Atelier Stach s.r.o.','CZ27080633','CZ','S','rev',['Statický posudek','Projektová dokumentace'],[18000,65000],5,'V']]
+};
+const MN=['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'];
+function genArchive(){
+  let seed=7, id=100; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647, out=[];
+  for(const [cl,list] of Object.entries(SUPS)) for(const [party,vat,c,kind,cat,items,[lo,hi],skip=0,flag=''] of list){
+    for(let m=1;m<=9;m++){
+      if(skip&&rnd()*skip>1.4) continue;
+      const n=cat==='mat'&&rnd()>.5?2:1;
+      for(let k=0;k<n;k++){
+        const cur=flag.startsWith('EUR')?'EUR':flag==='USD'?'USD':'CZK', day=1+Math.floor(rnd()*27);
+        const base=Math.round((lo+rnd()*(hi-lo))/(cur==='CZK'?10:1))*(cur==='CZK'?10:1);
+        const side=flag.includes('V')?'V':'P', short=party.split(/[ ,–]/)[0].toLowerCase().normalize('NFD').replace(/[^a-z]/g,'');
+        out.push({id:id++,client:cl,arch:true,status:'done',file:`${side==='V'?'FV':'FA'}_${short}_2026${String(m).padStart(2,'0')}${String(day).padStart(2,'0')}.pdf`,type:rnd()>.85?'img':'pdf',side,party,vat,c,kind,cat,item:items[Math.floor(rnd()*items.length)],
+          date:`${String(day).padStart(2,'0')}.${String(m).padStart(2,'0')}.2026`,cur,base,rate:cat==='rev'&&c!=='CZ'?0:flag.includes('12')?12:21,conf:88+Math.floor(rnd()*12),rc:flag.startsWith('rc')});
+      }
+    }
+  }
+  return out;
+}
 const EU=['AT','BE','BG','HR','CY','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
 const CNAMES={CZ:'Česko',DE:'Německo',SK:'Slovensko',AT:'Rakousko',IE:'Irsko',US:'USA',CN:'Čína',CH:'Švýcarsko'};
 
-let docs=BASE_DOCS.map(d=>({...d,status:'done'}));
+BASE_DOCS.push({id:17,client:'novak',file:'FA_elektrodum_2026-1188.pdf',type:'pdf',side:'P',party:'ElektroDům s.r.o.',vat:'CZ49241257',c:'CZ',kind:'Z',date:'14.10.2026',cur:'CZK',base:4290,rate:21,conf:97});
+const withCat=d=>({...d,cat:ITEMS[d.id][0],item:ITEMS[d.id][1]});
+let docs=[...genArchive(),...BASE_DOCS.map(d=>({...withCat(d),status:'done'}))];
+const NEWC=NEW_DOCS.map(withCat);
+let arch={client:'all',group:'period',sel:null,side:'P',q:''}, viewList=[], shut=new Set();
 let filter='all', curClient='eshop', processing=false;
 
 const fmt=n=>Math.round(n).toLocaleString('cs-CZ')+' Kč';
@@ -482,10 +607,13 @@ function statusTag(d){
 }
 const zoneTag=d=>{const z=zone(d);return `<span class="flag">${d.c}</span><span class="tag ${z==='CZ'?'t-cz':z==='EU'?'t-eu':'t-non'}">${z==='CZ'?'Česko':z==='EU'?'EU':'Mimo EU'}</span>`};
 const cName=id=>CLIENTS.find(c=>c.id===id).name;
-const done=()=>docs.filter(d=>d.status==='done');
+const done=()=>docs.filter(d=>d.status==='done'&&!d.arch);
+const allDone=()=>docs.filter(d=>d.status==='done');
+const month=d=>+d.date.split('.')[1];
+const catTag=d=>{const k=CATS[d.cat||'unk'];return `<span class="ct" style="--bg:${k.bg};--fg:${k.fg}">${k.n}</span>`};
 
 function renderDocs(){
-  let list=docs.slice().sort((a,b)=>b.id-a.id);
+  let list=docs.filter(d=>!d.arch).slice().sort((a,b)=>b.id-a.id);
   if(filter==='check') list=list.filter(d=>d.status==='done'&&(d.conf<80||d.flag));
   else if(filter!=='all') list=list.filter(d=>zone(d)===filter);
   document.getElementById('docs').innerHTML=list.map(d=>{
@@ -500,13 +628,13 @@ function renderDocs(){
       <td class="num">${ready?fmt(tax):''}</td>
       <td class="hide-m">${ready?`<span class="conf"><u style="--w:${d.conf}%"></u>${d.conf} %</span>`:''}</td>
       <td>${statusTag(d)}</td></tr>`}).join('');
-  const pending=docs.filter(d=>d.status!=='done').length+(processing?0:NEW_DOCS.filter(n=>!docs.find(d=>d.id===n.id)).length);
+  const pending=docs.filter(d=>d.status!=='done').length+(processing?0:NEWC.filter(n=>!docs.find(d=>d.id===n.id)).length);
   document.getElementById('navCnt').textContent=pending||'';
   document.getElementById('navCnt').style.display=pending?'':'none';
 }
 
 function renderMails(){
-  const left=NEW_DOCS.filter(n=>!docs.find(d=>d.id===n.id&&d.status==='done'));
+  const left=NEWC.filter(n=>!docs.find(d=>d.id===n.id&&d.status==='done'));
   const groups={};left.forEach(n=>{(groups[n.from+n.subj]=groups[n.from+n.subj]||[]).push(n)});
   const el=document.getElementById('mails');
   document.getElementById('mailInfo').textContent=left.length?`${left.length} nezpracovaných příloh`:'vše zpracováno';
@@ -541,7 +669,7 @@ function renderClients(){
         <div class="bar"><div class="t"><span>EU</span><b>${fmt(s.byZ.EU)}</b></div><div class="tr"><i style="--w:${s.byZ.EU/tot*100}%;background:var(--violet)"></i></div></div>
         <div class="bar"><div class="t"><span>Mimo EU</span><b>${fmt(s.byZ.NON)}</b></div><div class="tr"><i style="--w:${s.byZ.NON/tot*100}%;background:var(--amber)"></i></div></div>
       </div>
-      <div class="share mt"><button class="btn btn--p" data-share="mail">Poslat přehled</button><button class="btn btn--g" data-csv>Excel</button><button class="btn btn--g" data-print>PDF</button></div>
+      <div class="share mt"><button class="btn btn--p" data-share="mail">Poslat přehled</button><button class="btn btn--g" data-csv>Excel</button><button class="btn btn--g" data-print>PDF</button><button class="btn btn--g" data-aclient="${c.id}">Archiv klienta</button></div>
     </div>
     <div class="card mt"><h3>Doklady klienta <small>${s.ds.length}</small></h3>
       ${s.ds.map(d=>`<div class="mail row" data-doc="${d.id}" style="cursor:pointer"><div class="file"><i class="${d.type==='img'?'img':''}">${d.type==='img'?'IMG':'PDF'}</i></div><div class="m"><b>${d.party}</b><p>${d.date} · ${regime(d).txt}</p></div><span class="att">${fmt(czk(d))}</span></div>`).join('')||'<p class="muted">Zatím žádné doklady.</p>'}
@@ -567,18 +695,59 @@ function renderDph(){
   document.getElementById('dphSub').textContent=`${cName(id)} · říjen 2026 · ${s.ds.length} dokladů`;
 }
 
+function archFiltered(ignoreSel){
+  const q=arch.q.toLowerCase();
+  return allDone().filter(d=>(arch.client==='all'||d.client===arch.client)&&(arch.side==='all'||d.side===arch.side)
+    &&(!q||(d.party+' '+d.item+' '+d.file+' '+CATS[d.cat].n).toLowerCase().includes(q))
+    &&(ignoreSel||!arch.sel||selMatch(d,arch.sel)))
+    .sort((a,b)=>month(b)-month(a)||b.date.localeCompare(a.date));
+}
+function selMatch(d,sel){const [k,v]=sel.split(':');const m=month(d);
+  return k==='q'?Math.ceil(m/3)===+v:k==='m'?m===+v:k==='s'?d.party===v:k==='c'?d.cat===v:true}
+function renderArchive(){
+  const base=archFiltered(true), list=archFiltered(false), sum=a=>a.reduce((x,d)=>x+czk(d),0);
+  const fold='<svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
+  const btn=(sel,label,arr,cls='')=>`<button class="${cls} ${arch.sel===sel?'on':''}" data-asel="${sel}">${label}<small>${arr.length} · ${fmt(sum(arr))}</small></button>`;
+  let tree=btn('','<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Rok 2026 – vše',base,'q');
+  if(arch.group==='period'){
+    tree+='<div class="lvl">Kvartály a měsíce</div>';
+    for(let q=4;q>=1;q--){const qa=base.filter(d=>Math.ceil(month(d)/3)===q); if(!qa.length) continue;
+      tree+=btn('q:'+q,fold+q+'. kvartál',qa,'q');
+      for(let m=q*3;m>q*3-3;m--){const ma=qa.filter(d=>month(d)===m); if(ma.length) tree+=btn('m:'+m,MN[m-1],ma,'m')}}
+  } else if(arch.group==='supplier'){
+    tree+='<div class="lvl">Dodavatelé a odběratelé</div>';
+    const g={};base.forEach(d=>(g[d.party]=g[d.party]||[]).push(d));
+    Object.entries(g).sort((a,b)=>sum(b[1])-sum(a[1])).forEach(([p,a])=>tree+=btn('s:'+p,`<span style="width:10px;height:10px;border-radius:3px;background:${CATS[a[0].cat].fg};flex:none" title="${CATS[a[0].cat].n}"></span>${p}`,a));
+  } else {
+    tree+='<div class="lvl">Druh nákladu</div>';
+    const g={};base.forEach(d=>(g[d.cat]=g[d.cat]||[]).push(d));const mx=Math.max(...Object.values(g).filter((a,i)=>Object.keys(g)[i]!=='rev').map(sum),1);
+    Object.entries(g).sort((a,b)=>sum(b[1])-sum(a[1])).forEach(([c,a])=>tree+=btn('c:'+c,`<span style="width:10px;height:10px;border-radius:3px;background:${CATS[c].fg};flex:none"></span>${CATS[c].n}`,a)+(c!=='rev'?`<span class="mini"><i style="width:${sum(a)/mx*100}%;background:${CATS[c].fg}"></i></span>`:''));
+  }
+  document.getElementById('aTree').innerHTML=tree;
+  const key=d=>arch.group==='period'?'m:'+month(d):arch.group==='supplier'?'s:'+d.party:'c:'+d.cat;
+  const label=k=>{const [t,v]=k.split(':');return t==='m'?`${MN[v-1][0].toUpperCase()+MN[v-1].slice(1)} 2026 <small>· Q${Math.ceil(v/3)}</small>`:t==='s'?v:CATS[v].n};
+  const groups={};list.forEach(d=>(groups[key(d)]=groups[key(d)]||[]).push(d));
+  const keys=Object.keys(groups); if(arch.group!=='period') keys.sort((a,b)=>sum(groups[b])-sum(groups[a]));
+  const exp=list.filter(d=>d.side==='P'), inc=list.filter(d=>d.side==='V');
+  document.getElementById('aList').innerHTML=`<h3>${!arch.sel?'Všechny doklady':arch.sel.startsWith('q:')?arch.sel.slice(2)+'. kvartál 2026':label(arch.sel)}<small>${list.length} souborů · náklady ${fmt(sum(exp))} · výnosy ${fmt(sum(inc))}</small></h3>`
+    + (keys.map(k=>{const a=groups[k];return `<div class="folder ${shut.has(k)?'shut':''}" data-fold="${k}"><div class="folder__h" data-fold="${k}">${fold}<span class="chev">▼</span><div><b>${label(k)}</b><br><small>${a.length} ${a.length===1?'doklad':a.length<5?'doklady':'dokladů'}</small></div><span class="sum">${fmt(sum(a))}</span></div><div class="folder__b">
+      ${a.map(d=>`<div class="frow" data-doc="${d.id}" data-from-arch><div class="file"><i class="${d.type==='img'?'img':''}">${d.type==='img'?'IMG':'PDF'}</i></div><div class="p"><b>${arch.group==='supplier'?d.item:d.party}</b><small>${d.date} · ${arch.client==='all'?cName(d.client):d.file}</small></div><div class="it">${arch.group==='supplier'?MN[month(d)-1]+' · '+Math.ceil(month(d)/3)+'. kvartál':d.item}<br><small>${d.side==='V'?'Vydaná':'Přijatá'} · ${CNAMES[d.c]||d.c}</small></div><div class="ctc">${catTag(d)}</div><div class="amt" style="color:${d.side==='V'?'var(--green)':'inherit'}">${d.side==='V'?'+':''}${fmt(czk(d))}</div></div>`).join('')}</div></div>`}).join('')||'<p class="muted" style="padding:30px 0;text-align:center">Nic nenalezeno.</p>');
+  document.getElementById('aSub').textContent=`${arch.client==='all'?'Všichni klienti':cName(arch.client)} · ${base.length} souborů v roce 2026`;
+}
+
 function openDoc(id){
   const d=docs.find(x=>x.id===id); if(!d||d.status!=='done') return;
   const r=regime(d), c=CLIENTS.find(x=>x.id===d.client), b=czk(d), tax=r.out||r.in;
   const hasVat=zone(d)==='CZ'&&!d.rc&&d.rate>0;
+  const vi=viewList.indexOf(id); document.getElementById('drawer').dataset.cur=id;
   document.getElementById('dTitle').textContent=d.file;
-  document.getElementById('dTag').innerHTML=zoneTag(d);
+  document.getElementById('dTag').innerHTML=zoneTag(d)+(vi>-1?` <span class="viewer"><button data-nav="-1">‹</button>${vi+1} / ${viewList.length}<button data-nav="1">›</button></span>`:'');
   document.getElementById('dPaper').innerHTML=`<div class="paper">${d.conf>=80?'<span class="stamp">VYTĚŽENO</span>':''}
     <h4>${d.c==='CZ'?'FAKTURA – DAŇOVÝ DOKLAD':'INVOICE'}</h4><p>č. <span class="hl">${d.file.replace(/\.\w+$/,'').replace(/\D/g,'').slice(-6)||'0091'}</span></p><br>
     <table><tr><td><b>${d.side==='P'?'Dodavatel':'Odběratel'}</b><br><span class="hl">${d.party}</span><br>${d.c==='CZ'?'DIČ':'VAT ID'}: <span class="hl">${d.vat}</span><br>${CNAMES[d.c]||d.c}</td>
     <td><b>${d.side==='P'?'Odběratel':'Dodavatel'}</b><br><span class="hl">${c.name}</span><br>IČO: ${c.ico}<br>Česká republika</td></tr></table><br>
     <p>Datum uskutečnění plnění: <span class="hl">${d.date}</span></p><br>
-    <table><tr><td>${d.kind==='Z'?'Dodávka zboží dle objednávky':'Poskytnuté služby'}</td><td style="text-align:right"><span class="hl">${d.base.toLocaleString('cs-CZ')} ${d.cur}</span></td></tr>
+    <table><tr><td><span class="hl">${d.item}</span></td><td style="text-align:right"><span class="hl">${d.base.toLocaleString('cs-CZ')} ${d.cur}</span></td></tr>
     <tr><td>DPH ${hasVat?d.rate+' %':'—'}</td><td style="text-align:right">${hasVat?(d.base*d.rate/100).toLocaleString('cs-CZ')+' '+d.cur:(d.c==='CZ'?'daň odvede zákazník':'reverse charge')}</td></tr>
     <tr><td><b>Celkem</b></td><td style="text-align:right"><b>${(hasVat?d.base*(1+d.rate/100):d.base).toLocaleString('cs-CZ')} ${d.cur}</b></td></tr></table></div>
     <p class="muted mt">Přišlo z ${c.mail} · ${d.date}</p>`;
@@ -591,6 +760,8 @@ function openDoc(id){
     ${checks.join('')}
     <div class="card">
       <div class="field"><span>Klient</span><b>${c.name}</b></div>
+      <div class="field"><span>Položka</span><b>${d.item}</b></div>
+      <div class="field"><span>Druh nákladu</span><b>${catTag(d)}</b></div>
       <div class="field"><span>Typ</span><b>${d.side==='P'?'Přijatá faktura':'Vydaná faktura'} · ${d.kind==='Z'?'zboží':'služba'}</b></div>
       <div class="field"><span>Protistrana</span><b>${d.party}</b></div>
       <div class="field"><span>DIČ / VAT</span><b>${d.vat}</b></div>
@@ -600,9 +771,11 @@ function openDoc(id){
       <div class="field"><span>DPH</span><b>${fmt(tax)}</b></div>
       <div class="field"><span>Režim</span><b>${r.txt}</b></div>
       <div class="field"><span>Přiznání / KH</span><b>ř. ${r.row} · ${r.kh==='—'?'mimo KH':'oddíl '+r.kh}</b></div>
-      <div class="field"><span>Předkontace</span><b>${d.side==='V'?'311 / 602':d.kind==='Z'?'501 / 321':'518 / 321'}</b></div>
+      <div class="field"><span>Předkontace</span><b>${d.side==='V'?'311 / '+CATS[d.cat].acc.split(' / ')[0]:CATS[d.cat].acc+' / 321'}</b></div>
     </div>
-    <div class="why"><b>Proč tento režim</b>${r.why}</div>
+    <div class="why"><b>Proč tento režim DPH</b>${r.why}</div>
+    <div class="why" style="border-color:${CATS[d.cat].fg}"><b style="color:${CATS[d.cat].fg}">Proč „${CATS[d.cat].n}“</b>${CATS[d.cat].why}</div>
+    <div class="share mt"><button class="btn btn--g" data-asupplier="${d.party}" data-aclient="${d.client}">Všechny doklady od ${d.party.split(' ')[0]}</button></div>
     <div class="share mt"><button class="btn btn--n" data-toast="Doklad schválen a předán do účetnictví." data-close>Schválit</button><button class="btn btn--g" data-toast="Klient obdrží dotaz k dokladu e-mailem.">Doptat se klienta</button></div>`;
   document.getElementById('drawer').classList.add('on');document.getElementById('ov').classList.add('on');
 }
@@ -615,13 +788,13 @@ function go(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
   document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('on',x.dataset.go===v));
   closeAll(); window.scrollTo(0,0);
-  if(v==='klienti') renderClients(); if(v==='dph') renderDph(); if(v==='prehled') animateBars();
+  if(v==='klienti') renderClients(); if(v==='archiv') renderArchive(); if(v==='dph') renderDph(); if(v==='prehled') animateBars();
 }
 function animateBars(){requestAnimationFrame(()=>document.querySelectorAll('.view.on .bar i').forEach(i=>{i.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>i.style.width=getComputedStyle(i).getPropertyValue('--w')))}))}
 
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 async function run(){
-  const todo=NEW_DOCS.filter(n=>!docs.find(d=>d.id===n.id));
+  const todo=NEWC.filter(n=>!docs.find(d=>d.id===n.id));
   if(processing) return; if(!todo.length){toast('Žádné nové doklady – vše je zpracováno.');return}
   processing=true; document.querySelectorAll('[data-run]').forEach(b=>b.disabled=true);
   go('doklady'); filter='all'; document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.dataset.f==='all'));
@@ -641,9 +814,9 @@ async function run(){
 
 function download(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function exportCsv(){
-  const id=document.getElementById('exClient').value, ds=id==='all'?done():done().filter(d=>d.client===id);
-  const head=['Klient','Soubor','Typ','Datum','Protistrana','DIČ','Země','Původ','Měna','Částka v měně','Základ Kč','Sazba','DPH Kč','Režim DPH','Řádek přiznání','Oddíl KH','Jistota %'];
-  const lines=ds.map(d=>{const r=regime(d);return [cName(d.client),d.file,d.side==='P'?'Přijatá':'Vydaná',d.date,d.party,d.vat,CNAMES[d.c]||d.c,{CZ:'Česko',EU:'EU',NON:'Mimo EU'}[zone(d)],d.cur,d.base,Math.round(czk(d)),d.rate+' %',Math.round(r.out||r.in),r.txt,r.row,r.kh,d.conf]});
+  const id=document.getElementById('exClient').value, onArch=document.getElementById('v-archiv').classList.contains('on'), ds=onArch?archFiltered(false):(id==='all'?done():done().filter(d=>d.client===id));
+  const head=['Klient','Soubor','Typ','Datum','Protistrana','DIČ','Země','Původ','Měna','Částka v měně','Základ Kč','Sazba','DPH Kč','Položka','Druh nákladu','Účet','Režim DPH','Řádek přiznání','Oddíl KH','Jistota %'];
+  const lines=ds.map(d=>{const r=regime(d);return [cName(d.client),d.file,d.side==='P'?'Přijatá':'Vydaná',d.date,d.party,d.vat,CNAMES[d.c]||d.c,{CZ:'Česko',EU:'EU',NON:'Mimo EU'}[zone(d)],d.cur,d.base,Math.round(czk(d)),d.rate+' %',Math.round(r.out||r.in),d.item,CATS[d.cat].n,CATS[d.cat].acc,r.txt,r.row,r.kh,d.conf]});
   const csv='﻿'+[head,...lines].map(l=>l.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(';')).join('\r\n');
   download(`prehled-dokladu-${id}-2026-10.csv`,csv,'text/csv;charset=utf-8');toast('Excel přehled stažen.');
 }
@@ -682,13 +855,20 @@ document.getElementById('exClient').innerHTML='<option value="all">Všichni klie
 document.getElementById('dphClient').onchange=renderDph;
 document.getElementById('mSend').onclick=()=>{closeAll();toast('Přehled odeslán klientovi.')};
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-go],[data-run],[data-doc],[data-close],[data-toast],[data-csv],[data-xml],[data-print],[data-share],[data-client],[data-burger],.chip,#ov');
+  const t=e.target.closest('[data-go],[data-run],[data-doc],[data-close],[data-toast],[data-csv],[data-xml],[data-print],[data-share],[data-client],[data-burger],.chip,#ov,[data-asel],[data-g],[data-fold],[data-openall],[data-zip],[data-nav],[data-aclient]');
   if(!t) return;
   if(t.id==='ov') return closeAll();
   if(t.dataset.toast) toast(t.dataset.toast);
   if(t.dataset.go) go(t.dataset.go);
   if('run' in t.dataset) run();
-  if(t.dataset.doc) openDoc(+t.dataset.doc);
+  if(t.dataset.doc){if(!('fromArch' in t.dataset)) viewList=[]; openDoc(+t.dataset.doc)}
+  if('asel' in t.dataset){arch.sel=t.dataset.asel||null;renderArchive();if(innerWidth<900)document.getElementById('aList').scrollIntoView({behavior:'smooth'})}
+  if(t.dataset.g){arch.group=t.dataset.g;arch.sel=null;shut.clear();document.querySelectorAll('#aGroup button').forEach(b=>b.classList.toggle('on',b===t));renderArchive()}
+  if(t.dataset.fold&&t.classList.contains('folder__h')){const k=t.dataset.fold;shut.has(k)?shut.delete(k):shut.add(k);t.parentElement.classList.toggle('shut')}
+  if('openall' in t.dataset){viewList=archFiltered(false).map(d=>d.id);if(viewList.length)openDoc(viewList[0])}
+  if('zip' in t.dataset){const n=archFiltered(false).length;toast(`ZIP se ${n} soubory se připravuje – složky podle ${arch.group==='period'?'kvartálů a měsíců':arch.group==='supplier'?'dodavatelů':'druhu nákladu'}.`)}
+  if(t.dataset.nav){const i=viewList.indexOf(+document.querySelector('[data-nav]').closest('.drawer').dataset.cur);openDoc(viewList[(i+ +t.dataset.nav+viewList.length)%viewList.length])}
+  if(t.dataset.aclient){arch={...arch,client:t.dataset.aclient,sel:t.dataset.asupplier?'s:'+t.dataset.asupplier:null,group:t.dataset.asupplier?'supplier':arch.group};document.getElementById('aClient').value=arch.client;document.querySelectorAll('#aGroup button').forEach(b=>b.classList.toggle('on',b.dataset.g===arch.group));go('archiv')}
   if('close' in t.dataset) closeAll();
   if('csv' in t.dataset) exportCsv();
   if(t.dataset.xml) exportXml(t.dataset.xml);
@@ -698,7 +878,12 @@ document.addEventListener('click',e=>{
   if('burger' in t.dataset){document.getElementById('side').classList.add('on');document.getElementById('ov').classList.add('on')}
   if(t.classList.contains('chip')){filter=t.dataset.f;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===t));renderDocs()}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();
+  if(document.getElementById('drawer').classList.contains('on')&&viewList.length&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){const i=viewList.indexOf(+document.getElementById('drawer').dataset.cur);openDoc(viewList[(i+(e.key==='ArrowRight'?1:-1)+viewList.length)%viewList.length])}});
+document.getElementById('aClient').innerHTML='<option value="all">Všichni klienti</option>'+opts;
+document.getElementById('aClient').onchange=e=>{arch.client=e.target.value;arch.sel=null;renderArchive()};
+document.getElementById('aSide').onchange=e=>{arch.side=e.target.value;renderArchive()};
+document.getElementById('aQ').oninput=e=>{arch.q=e.target.value;renderArchive()};
 renderDocs();renderMails();animateBars();
 </script>
 </body>
