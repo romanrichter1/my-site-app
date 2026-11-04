@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Agent pro doklady – TAX Tábor (ukázka)</title>
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1C3F7C;--navy-900:#122B57;--navy-100:#E6EDF8;--navy-50:#F3F6FB;
+  --red:#E3263A;--red-50:#FDECEE;--green:#178A50;--green-50:#E5F5EC;--amber:#B86E00;--amber-50:#FFF3DF;
+  --violet:#5B3FB8;--violet-50:#EFEAFB;--ink:#14213D;--ink-2:#4A5672;--ink-3:#8590A8;--line:#DDE3EE;
+  --shadow:0 1px 2px rgba(18,43,87,.06),0 8px 24px rgba(18,43,87,.07);
+  --g-red:#D93025;--g-blue:#1A73E8;--g-yellow:#F9AB00;--g-green:#188038;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--navy-50);color:var(--ink);font-size:14px;line-height:1.45}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{color:inherit}
+svg.i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+.bar{background:var(--navy-900);color:#C9D5EC}
+.bar__in{max-width:1380px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand b{display:block;font-size:22px;font-weight:800;color:#fff;line-height:1}
+.brand span{font-size:10.5px;color:#9FB2D6}
+.bar__t{border-left:1px solid rgba(255,255,255,.15);padding-left:18px}
+.bar__t b{color:#fff;font-weight:600;display:block}
+.bar__t small{font-size:12px}
+.bar__r{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:20px;font-size:12.5px;font-weight:600;background:rgba(255,255,255,.1);color:#fff}
+.pill i{width:8px;height:8px;border-radius:50%;background:#F9AB00;animation:pulse 1.2s infinite}
+.pill.done i{background:#5BE08F;animation:none}
+@keyframes pulse{50%{opacity:.3}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;font-weight:600;font-size:13.5px;white-space:nowrap;text-decoration:none}
+.btn--p{background:var(--red);color:#fff;box-shadow:0 6px 16px rgba(227,38,58,.25)}
+.btn--w{background:#fff;color:var(--navy)}
+.btn--g{background:#fff;border:1px solid var(--line);color:var(--navy)}
+.btn[disabled]{opacity:.5;pointer-events:none}
+
+.wrap{max-width:1380px;margin:0 auto;padding:22px 24px 60px}
+.card{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:18px 20px}
+.card h3{font-size:15px;font-weight:600;color:var(--navy-900);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h3 small{margin-left:auto;font-weight:500;color:var(--ink-3);font-size:12px}
+.muted{color:var(--ink-3);font-size:12.5px}
+
+/* how it works */
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.step{padding:16px 18px;border-radius:14px;position:relative;transition:.3s;border:2px solid transparent}
+.step+.step::before{content:"";position:absolute;left:-14px;top:34px;width:20px;height:2px;background:var(--line)}
+.step .ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.step .ic svg{width:22px;height:22px}
+.step b{display:block;font-weight:600;color:var(--navy-900)}
+.step p{font-size:12.5px;color:var(--ink-2)}
+.step .n{position:absolute;right:16px;top:14px;font-size:11px;font-weight:700;color:var(--ink-3)}
+.step.on{border-color:var(--navy);background:var(--navy-50)}
+.step.done .n{color:var(--green)}
+
+.cols{display:grid;grid-template-columns:1fr 1.1fr 1.15fr;gap:16px;margin-top:16px;align-items:stretch}
+.col{display:flex;flex-direction:column;min-height:520px}
+.col__h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.col__h .logo{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}
+.col__h b{font-weight:600;color:var(--navy-900);display:block;line-height:1.2}
+.col__h small{font-size:12px;color:var(--ink-3)}
+
+/* gmail */
+.mail{padding:11px 12px;border-radius:10px;border:1px solid transparent;transition:.25s;margin-bottom:4px}
+.mail.on{border-color:var(--g-blue);background:#F1F6FE}
+.mail__t{display:flex;gap:8px;align-items:baseline}
+.mail__t b{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail__t span{margin-left:auto;font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+.mail p{font-size:12.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.atts{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.att{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;border:1px solid var(--line);border-radius:7px;padding:3px 8px;background:#fff;transition:.25s}
+.att i{font-style:normal;font-size:9px;font-weight:700;color:var(--g-red)}
+.att.img i{color:var(--g-blue)}.att.zip i{color:var(--amber)}
+.att.on{border-color:var(--g-blue);box-shadow:0 0 0 3px #D7E6FD}
+.att.ok{border-color:#B9E2C9;background:var(--green-50)}
+.att.skip{opacity:.5;text-decoration:line-through}
+.lbl{display:none;margin-top:7px;font-size:11px;font-weight:600;color:var(--g-green);background:#E6F4EA;border-radius:5px;padding:2px 7px;width:max-content}
+.mail.ok .lbl{display:inline-block}
+
+/* drive */
+.tree{font-size:13px;flex:1}
+.node{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:7px;animation:pop .35s ease}
+.node svg{width:17px;height:17px;flex:none}
+.node .path{color:var(--ink-3);font-size:12px}
+.node.file{padding-left:calc(var(--d)*18px + 6px)}
+.node.dir{padding-left:calc(var(--d)*18px + 6px);font-weight:500}
+.node.file span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.node.file small{margin-left:auto;color:var(--ink-3);font-size:11px;white-space:nowrap}
+.node.new{background:#FEF7E0}
+@keyframes pop{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+.empty{color:var(--ink-3);font-size:12.5px;padding:24px 0;text-align:center}
+
+/* console */
+.con{background:#0F1B33;border-radius:12px;padding:14px;font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:11.8px;color:#C6D2EA;flex:1;overflow:auto;max-height:560px;line-height:1.6}
+.con div{animation:pop .25s ease;white-space:pre-wrap;word-break:break-word}
+.con .t{color:#5F7299}
+.con .ok{color:#6EE7A0}.con .w{color:#FFC861}.con .e{color:#FF8A8A}.con .k{color:#8DB7FF}.con .v{color:#fff}
+.cursor{display:inline-block;width:7px;height:13px;background:#8DB7FF;vertical-align:-2px;animation:pulse 1s infinite}
+
+/* output */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:16px 0}
+.kpi{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:14px 16px}
+.kpi .l{color:var(--ink-3);font-size:12px}
+.kpi .v{font-size:24px;font-weight:700;color:var(--navy-900);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:11.5px;color:var(--ink-3)}
+.tw{overflow-x:auto;margin:0 -20px;padding:0 20px}
+table{width:100%;border-collapse:collapse;min-width:1020px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink-3);font-weight:600;text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 8px;border-bottom:1px solid #EEF1F6;font-size:13px;vertical-align:middle}
+tr.in{animation:pop .4s ease}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td .s{display:block;font-size:11.5px;color:var(--ink-3)}
+.tag{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.t-cz{background:var(--navy-100);color:var(--navy)}.t-eu{background:var(--violet-50);color:var(--violet)}.t-non{background:var(--amber-50);color:var(--amber)}
+.t-ok{background:var(--green-50);color:var(--green)}.t-warn{background:var(--amber-50);color:var(--amber)}
+.mono{font-family:"JetBrains Mono",monospace;font-size:11.5px}
+.g2{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-top:16px}
+.json{background:#0F1B33;color:#C6D2EA;border-radius:12px;padding:14px;font-family:"JetBrains Mono",monospace;font-size:11.5px;line-height:1.55;overflow:auto;white-space:pre}
+.json .k{color:#8DB7FF}.json .s{color:#A5E3B5}.json .n{color:#FFC861}
+.alert{display:flex;gap:12px;padding:12px;border-radius:12px;margin-bottom:10px;align-items:flex-start;font-size:12.5px}
+.alert b{display:block;font-size:13px}
+.alert p{color:var(--ink-2)}
+.a-warn{background:var(--amber-50)}.a-warn b{color:var(--amber)}
+.a-ok{background:var(--green-50)}.a-ok b{color:var(--green)}
+.a-info{background:var(--navy-50)}.a-info b{color:var(--navy)}
+.final{display:none;margin-top:16px;background:linear-gradient(120deg,var(--navy-900),var(--navy));color:#fff;border-radius:16px;padding:22px 24px;align-items:center;gap:20px;flex-wrap:wrap}
+.final.on{display:flex;animation:pop .4s ease}
+.final b{font-size:18px;display:block}
+.final p{color:#C9D5EC;font-size:13px}
+.final .btn{margin-left:auto}
+
+@media (max-width:1100px){.cols{grid-template-columns:1fr 1fr}.cols .col:last-child{grid-column:1/-1}.kpis{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr}}
+@media (max-width:760px){
+  .wrap,.bar__in{padding-left:16px;padding-right:16px}
+  .how{grid-template-columns:1fr 1fr;gap:8px}.step+.step::before{display:none}
+  .cols{grid-template-columns:1fr}.col{min-height:0}
+  .kpis{grid-template-columns:1fr 1fr}
+  .bar__t{border:0;padding:0}.bar__r{margin-left:0;width:100%}
+  .final .btn{margin-left:0}
+}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar__in">
+  <div class="brand"><b>TAX Tábor</b><span>Kompletní účetní a daňové služby</span></div>
+  <div class="bar__t"><b>Agent pro doklady</b><small id="runInfo">Běh 4. 11. 2026 · 07:00 · spouští se automaticky každých 15 minut</small></div>
+  <div class="bar__r">
+    <span class="pill" id="pill"><i></i><span>Agent pracuje…</span></span>
+    <button class="btn btn--w" id="again"><svg class="i" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Spustit znovu</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <div class="card">
+    <h3>Co agent dělá <small>bez zásahu účetní, ta jen kontroluje výsledek</small></h3>
+    <div class="how" id="how">
+      <div class="step" data-s="0"><span class="n">1</span><div class="ic" style="background:#FCE8E6;color:var(--g-red)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div><b>Gmail</b><p>Hlídá schránku doklady@tax-tabor.cz a bere jen přílohy, které jsou doklady.</p></div>
+      <div class="step" data-s="1"><span class="n">2</span><div class="ic" style="background:#FEF7E0;color:var(--g-yellow)"><svg class="i" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div><b>Google Disk</b><p>Uloží originál do složky klienta → rok → kvartál → měsíc a jednotně ho přejmenuje.</p></div>
+      <div class="step" data-s="2"><span class="n">3</span><div class="ic" style="background:var(--violet-50);color:var(--violet)"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6M8 14h8M8 17h5"/></svg></div><b>Čtení a výpočet</b><p>Z Disku doklad přečte, určí původ CZ / EU / mimo EU, režim DPH, druh nákladu a přepočte měnu.</p></div>
+      <div class="step" data-s="3"><span class="n">4</span><div class="ic" style="background:var(--navy-100);color:var(--navy)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div><b>Systém TAX Tábor</b><p>Vloží hotová data k dokladu, odkaz na originál v Disku a označí, co je potřeba zkontrolovat.</p></div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="card col">
+      <div class="col__h"><span class="logo" style="background:#FCE8E6;color:var(--g-red)"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><b>Gmail · doklady@tax-tabor.cz</b><small id="mailCnt">Doručená pošta</small></div></div>
+      <div id="mails"></div>
+    </div>
+    <div class="card col">
+      <div class="col__h"><span class="logo" style="background:#FEF7E0;color:var(--g-yellow)"><svg class="i" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><div><b>Google Disk · Doklady TAX Tábor</b><small id="driveCnt">Sdílený disk kanceláře</small></div></div>
+      <div class="tree" id="tree"><div class="empty">Čeká na první doklad…</div></div>
+    </div>
+    <div class="card col">
+      <div class="col__h"><span class="logo" style="background:#0F1B33;color:#8DB7FF"><svg class="i" viewBox="0 0 24 24"><path d="m4 17 6-5-6-5M12 19h8"/></svg></span><div><b>Záznam práce agenta</b><small>Co přesně dělá, krok po kroku</small></div></div>
+      <div class="con" id="con"></div>
+    </div>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="card">
+    <h3>Výstup agenta – vloženo do systému <small id="outCnt"></small></h3>
+    <div class="tw"><table>
+      <thead><tr><th>Originál z e-mailu</th><th>Uloženo v Google Disku</th><th>Klient</th><th>Dodavatel</th><th>Původ</th><th>Režim DPH</th><th>Druh nákladu</th><th class="num">Základ</th><th class="num">DPH</th><th>Stav</th></tr></thead>
+      <tbody id="out"><tr><td colspan="10" class="empty">Výsledky se objeví, jakmile agent zpracuje první doklad.</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <h3>Co agent předá systému <small>ukázka jednoho záznamu</small></h3>
+      <div class="json" id="json">—</div>
+    </div>
+    <div class="card">
+      <h3>Agent vyřešil sám / předává účetní</h3>
+      <div id="notes"><p class="muted">Po dokončení běhu se zde objeví shrnutí.</p></div>
+    </div>
+  </div>
+
+  <div class="final" id="final">
+    <div><b id="finT">Hotovo</b><p id="finP"></p></div>
+    <a class="btn btn--p" href="/demo/tax-tabor">Otevřít v systému TAX Tábor →</a>
+  </div>
+</main>
+
+<script>
+const RATE={EUR:24.35,USD:22.9};
+const CL={brana:'Kavárna U Brány',eshop:'Lesní zahrada e-shop s.r.o.',novak:'Novák stavby s.r.o.',dvorak:'Ing. Martin Dvořák – projekce'};
+const MAILS=[
+  {id:'m1',who:'Lucie Marková',from:'brana.kavarna@email.cz',subj:'účtenky z týdne',time:'6:12',body:'Dobrý den, posílám účtenky za tento týden. Lucie',att:[
+    {f:'uctenka_lidl.jpg',k:'img',kb:842,doc:{cl:'brana',party:'Lidl Česká republika',vat:'CZ26178541',c:'CZ',date:'2026-10-28',cur:'CZK',base:1287,rate:12,cat:'Suroviny a potraviny',reg:'Tuzemský nákup',kh:'B.3',row:'41',conf:93}},
+    {f:'podpis_logo.png',k:'img',kb:14,skip:'Logo v podpisu e-mailu – není doklad'}]},
+  {id:'m2',who:'Tomáš Beneš',from:'faktury@lesnizahrada.cz',subj:'Fwd: Your receipt from Meta',time:'6:31',body:'Přeposílám fakturu za reklamu.',att:[
+    {f:'Receipt_2026-10.pdf',k:'pdf',kb:96,doc:{cl:'eshop',party:'Meta Platforms Ireland Ltd.',vat:'IE9692928F',c:'IE',date:'2026-10-31',cur:'EUR',base:410,rate:21,cat:'Software a marketing',reg:'Služba z EU – reverse charge',kh:'A.2',row:'5 + 43',conf:97,rcv:true}}]},
+  {id:'m3',who:'Jan Novák',from:'ucetni@novakstavby.cz',subj:'Faktury beton + elektro',time:'6:48',body:'Dobrý den, faktury za říjen ze stavby Planá.',att:[
+    {f:'FA_2610055.pdf',k:'pdf',kb:188,doc:{cl:'novak',party:'Betonárna Planá s.r.o.',vat:'CZ25198811',c:'CZ',date:'2026-10-27',cur:'CZK',base:156400,rate:21,cat:'Materiál na stavbu',reg:'Tuzemský nákup',kh:'B.2',row:'40',conf:99}},
+    {f:'subdodavka_elektro.pdf',k:'pdf',kb:143,doc:{cl:'novak',party:'Elektro Kos s.r.o.',vat:'CZ03344120',c:'CZ',date:'2026-10-29',cur:'CZK',base:48000,rate:21,cat:'Subdodávky a služby',reg:'Přenesená daň. pov. § 92e',kh:'B.1',row:'10 + 43',conf:96,rcv:true}}]},
+  {id:'m4',who:'Tomáš Beneš',from:'faktury@lesnizahrada.cz',subj:'Dovoz Švýcarsko – doklady',time:'7:02',body:'V zipu je faktura a celní doklad od UPS.',att:[
+    {f:'dovoz_CH.zip',k:'zip',kb:412,zip:[
+      {f:'Invoice_SGT_5521.pdf',k:'pdf',kb:121,doc:{cl:'eshop',party:'Swiss Garden Tools AG',vat:'CHE-112.554.991',c:'CH',date:'2026-10-30',cur:'EUR',base:980,rate:21,cat:'Zboží k prodeji',reg:'Dovoz zboží (JSD)',kh:'—',row:'7 + 42',conf:91}},
+      {f:'JSD_UPS_10-2026.pdf',k:'pdf',kb:233,pair:'Celní doklad JSD spárován s fakturou Swiss Garden Tools – DPH 5 011 Kč k odpočtu'}]}]},
+  {id:'m5',who:'Martin Dvořák',from:'m.dvorak@projekce-td.cz',subj:'(bez předmětu)',time:'7:05',body:'',att:[
+    {f:'scan0091.pdf',k:'pdf',kb:1320,doc:{cl:'dvorak',party:'Nečitelný dodavatel',vat:'?',c:'CZ',date:'2026-10-30',cur:'CZK',base:2100,rate:21,cat:'Nezařazeno',reg:'Tuzemský nákup',kh:'B.3',row:'40',conf:61,low:true}}]},
+  {id:'m6',who:'Jan Novák',from:'ucetni@novakstavby.cz',subj:'do kanceláře',time:'7:09',body:'Ještě mikrovlnka do kanceláře.',att:[
+    {f:'FA_elektrodum_1188.pdf',k:'pdf',kb:77,doc:{cl:'novak',party:'ElektroDům s.r.o.',vat:'CZ49241257',c:'CZ',date:'2026-10-14',cur:'CZK',base:4290,rate:21,cat:'Vybavení kanceláře',reg:'Tuzemský nákup',kh:'B.3',row:'40',conf:97}}]}
+];
+const EU=['AT','BE','BG','HR','CY','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
+const MN=['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'];
+const $=id=>document.getElementById(id);
+const fmt=n=>Math.round(n).toLocaleString('cs-CZ')+' Kč';
+const zone=c=>c==='CZ'?'CZ':EU.includes(c)?'EU':'NON';
+const czk=d=>d.base*(RATE[d.cur]||1);
+const tax=d=>czk(d)*d.rate/100;
+const slug=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,'').split('-').slice(0,2).join('-');
+const newName=(d,f)=>`${d.date}_${slug(d.party)}_${d.base}${d.cur==='CZK'?'Kc':d.cur}.${f.split('.').pop()}`;
+const folder=d=>{const m=+d.date.slice(5,7);return [CL[d.cl],'2026',`Q${Math.ceil(m/3)}`,`${String(m).padStart(2,'0')} ${MN[m-1]}`,'Přijaté']};
+const wait=ms=>new Promise(r=>setTimeout(r,ms*SPEED));
+let SPEED=1, run=0, state;
+
+const ICON={dir:'<svg viewBox="0 0 24 24" fill="#F9AB00" stroke="#E08E00" stroke-width="1"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+  pdf:'<svg viewBox="0 0 24 24" fill="#FCE8E6" stroke="#D93025" stroke-width="1.5"><path d="M5 3h9l5 5v13H5z"/></svg>',
+  img:'<svg viewBox="0 0 24 24" fill="#E8F0FE" stroke="#1A73E8" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="m4 16 5-5 4 4 3-3 4 4" fill="none"/></svg>'};
+
+function renderMails(){
+  $('mails').innerHTML=MAILS.map(m=>`<div class="mail" id="${m.id}"><div class="mail__t"><b>${m.who}</b><span>${m.time}</span></div><p><b style="font-weight:500;color:var(--ink)">${m.subj}</b>${m.body?' – '+m.body:''}</p>
+    <div class="atts">${m.att.map(a=>`<span class="att ${a.k}" id="a-${m.id}-${a.f.replace(/\W/g,'')}"><i>${a.k.toUpperCase()}</i>${a.f}</span>`).join('')}</div><span class="lbl">✓ Nexivo/Zpracováno</span></div>`).join('');
+  $('mailCnt').textContent=`${MAILS.length} nových e-mailů s přílohami`;
+}
+function renderTree(fresh){
+  const t=state.tree; if(!Object.keys(t).length) return;
+  let h=`<div class="node dir" style="--d:0">${ICON.dir}Doklady TAX Tábor</div>`;
+  for(const cl of Object.keys(t)){
+    h+=`<div class="node dir" style="--d:1">${ICON.dir}${cl}</div>`;
+    for(const p of Object.keys(t[cl])){
+      h+=`<div class="node dir" style="--d:2">${ICON.dir}<span>${p.split('/').join(' <span class="path">›</span> ')}</span></div>`;
+      t[cl][p].forEach(f=>h+=`<div class="node file ${f.n===fresh?'new':''}" style="--d:3">${ICON[f.k==='img'?'img':'pdf']}<span>${f.n}</span><small>${f.kb} kB</small></div>`);
+    }
+  }
+  $('tree').innerHTML=h;
+  const n=Object.values(t).reduce((a,c)=>a+Object.values(c).reduce((x,y)=>x+y.length,0),0);
+  $('driveCnt').textContent=`${n} ${n===1?'soubor uložen':n<5?'soubory uloženy':'souborů uloženo'} · ${Object.keys(t).length} klienti`;
+}
+function log(html){const c=$('con');c.querySelector('.cursor')?.remove();const now=new Date(2026,10,4,7,0,state.sec+=1+Math.floor(Math.random()*3));
+  c.insertAdjacentHTML('beforeend',`<div><span class="t">${now.toTimeString().slice(0,8)}</span> ${html}</div><span class="cursor"></span>`);c.scrollTop=c.scrollHeight}
+function steps(i){document.querySelectorAll('.step').forEach((s,j)=>{s.classList.toggle('on',j===i);s.classList.toggle('done',i===-1||j<i)})}
+function addOut(a,d,name){
+  if(!state.rows) $('out').innerHTML='';
+  state.rows++;
+  const z=zone(d.c), st=d.low?'<span class="tag t-warn">Ke kontrole</span>':'<span class="tag t-ok">✓ Vloženo</span>';
+  $('out').insertAdjacentHTML('afterbegin',`<tr class="in"><td><b style="font-weight:500">${a.f}</b><span class="s">${a.from}</span></td><td class="mono">${name}<span class="s">${folder(d).slice(1).join(' › ')}</span></td><td>${CL[d.cl]}</td><td>${d.party}<span class="s">${d.vat}</span></td>
+    <td><span class="tag ${z==='CZ'?'t-cz':z==='EU'?'t-eu':'t-non'}">${d.c} · ${z==='CZ'?'Česko':z==='EU'?'EU':'Mimo EU'}</span></td><td>${d.reg}<span class="s">ř. ${d.row}${d.kh!=='—'?' · KH '+d.kh:''}</span></td><td>${d.cat}</td>
+    <td class="num">${fmt(czk(d))}${d.cur!=='CZK'?`<span class="s">${d.base.toLocaleString('cs-CZ')} ${d.cur} × ${RATE[d.cur].toLocaleString('cs-CZ')}</span>`:''}</td><td class="num">${fmt(tax(d))}</td><td>${st}</td></tr>`);
+  $('outCnt').textContent=`${state.rows} dokladů`;
+  state.sum+=czk(d); state.vat+=tax(d);
+  if(d.c!=='CZ'&&!state.json) showJson(d,name);
+  kpis();
+}
+function showJson(d,name){state.json=1;
+  const o={klient:CL[d.cl],typ:'prijata_faktura',dodavatel:{nazev:d.party,dic:d.vat,zeme:d.c,overeno_vies:EU.includes(d.c)},datum_plneni:d.date,mena:d.cur,castka:d.base,kurz_cnb:RATE[d.cur],zaklad_czk:Math.round(czk(d)),sazba_dph:d.rate,dph_czk:Math.round(tax(d)),rezim_dph:d.reg,radek_priznani:d.row,oddil_kh:d.kh,druh_nakladu:d.cat,jistota:d.conf/100,original:`https://drive.google.com/…/${name}`};
+  $('json').innerHTML=JSON.stringify(o,null,2).replace(/"([^"]+)":/g,'<span class="k">"$1"</span>:').replace(/: "([^"]*)"/g,': <span class="s">"$1"</span>').replace(/: ([\d.]+|true|false)/g,': <span class="n">$1</span>');
+}
+function kpis(){
+  const sec=state.sec;
+  $('kpis').innerHTML=[
+    ['Příloh prošlo',state.att,'včetně rozbaleného ZIP'],
+    ['Vloženo do systému',state.rows,state.low?`${state.low} ke kontrole`:'vše v pořádku'],
+    ['Uloženo v Google Disku',state.files,'originály, jednotné názvy'],
+    ['Základ celkem',fmt(state.sum),'přepočteno na Kč'],
+    ['Doba běhu',`${Math.floor(sec/60)} min ${sec%60} s`,'ručně odhadem 30–40 min']
+  ].map(k=>`<div class="kpi"><div class="l">${k[0]}</div><div class="v">${k[1]}</div><div class="d">${k[2]}</div></div>`).join('');
+}
+
+async function process(m,a,me,from){
+  const el=$(`a-${m.id}-${a.f.replace(/\W/g,'')}`);
+  state.att++; el?.classList.add('on');
+  if(a.skip){steps(0);log(`<span class="w">PŘESKOČENO</span> ${a.f} – ${a.skip}`);await wait(500);el?.classList.remove('on');el?.classList.add('skip');kpis();return}
+  if(a.pair){steps(1);const pth=state.tree[CL.eshop]&&Object.keys(state.tree[CL.eshop]).find(k=>k.includes('10 říjen'));const nm='2026-10-30_JSD-UPS_dovoz-CH.pdf';if(pth){state.tree[CL.eshop][pth].push({n:nm,k:'pdf',kb:a.kb});state.files++;renderTree(nm)}
+    log(`<span class="k">Google Disk</span> → ${nm}`);await wait(350);steps(2);log(`<span class="k">čtu z Disku</span> ${nm} → <span class="ok">${a.pair}</span>`);await wait(500);kpis();return}
+  const d=a.doc; a.from=from; const name=newName(d,a.f);
+  steps(0);log(`<span class="k">stahuji</span> ${a.f} <span class="t">(${a.kb} kB)</span>`);await wait(450);
+  steps(1);const p=folder(d), path=p.slice(1).join('/');
+  (state.tree[p[0]]=state.tree[p[0]]||{}); (state.tree[p[0]][path]=state.tree[p[0]][path]||[]).push({n:name,k:a.k,kb:a.kb}); state.files++;
+  renderTree(name);
+  log(`<span class="k">Google Disk</span> → /${p.join('/')}/<span class="v">${name}</span>`);await wait(550);
+  steps(2);log(`<span class="k">čtu z Disku</span> ${name}: <span class="v">${d.party}</span>, ${d.vat}, ${d.base.toLocaleString('cs-CZ')} ${d.cur}`);await wait(450);
+  if(d.cur!=='CZK') log(`  kurz ČNB ${d.date}: 1 ${d.cur} = ${RATE[d.cur].toLocaleString('cs-CZ')} Kč → <span class="v">${fmt(czk(d))}</span>`);
+  if(EU.includes(d.c)) log(`  VIES: ${d.vat} <span class="ok">platné</span>`);
+  if(d.c==='CZ'&&!d.low) log(`  ARES ✓ · registr nespolehlivých plátců ✓`);
+  log(`  původ <span class="v">${{CZ:'Česko',EU:'EU',NON:'mimo EU'}[zone(d.c)]}</span> → <span class="v">${d.reg}</span> (ř. ${d.row}) · ${d.cat}`);
+  if(d.low){state.low++;log(`  <span class="e">jistota ${d.conf} %</span> – doklad je rozmazaný, posílám dotaz klientovi`)}
+  await wait(450);
+  steps(3);log(`<span class="ok">✓ vloženo</span> do systému TAX Tábor · klient ${CL[d.cl]}`);
+  addOut(a,d,name); el?.classList.remove('on'); el?.classList.add('ok'); await wait(350);
+}
+
+async function start(){
+  const my=++run; SPEED=.75;
+  state={tree:{},sec:0,att:0,rows:0,files:0,sum:0,vat:0,low:0,json:0};
+  $('con').innerHTML='';$('tree').innerHTML='<div class="empty">Čeká na první doklad…</div>';$('out').innerHTML='<tr><td colspan="10" class="empty">Výsledky se objeví, jakmile agent zpracuje první doklad.</td></tr>';
+  $('json').textContent='—';$('notes').innerHTML='<p class="muted">Po dokončení běhu se zde objeví shrnutí.</p>';$('final').classList.remove('on');$('outCnt').textContent='';
+  $('pill').classList.remove('done');$('pill').querySelector('span').textContent='Agent pracuje…';$('again').disabled=true;
+  renderMails();kpis();
+  log(`<span class="k">start</span> kontrola schránky doklady@tax-tabor.cz – nalezeno <span class="v">${MAILS.length}</span> nových e-mailů`);await wait(500);
+  for(const m of MAILS){
+    if(my!==run) return;
+    $(m.id).classList.add('on');
+    log(`<span class="k">e-mail</span> ${m.who} &lt;${m.from}&gt; „${m.subj}“ → klient <span class="v">${CL[(m.att[0].doc||m.att[0].zip?.[0].doc).cl]}</span>`);await wait(350);
+    for(const a of m.att){
+      if(my!==run) return;
+      if(a.zip){const el=$(`a-${m.id}-${a.f.replace(/\W/g,'')}`);el.classList.add('on');log(`<span class="k">rozbaluji</span> ${a.f} → ${a.zip.length} soubory`);await wait(450);
+        for(const z of a.zip){await process(m,z,el,m.from); if(my!==run) return}
+        el.classList.remove('on');el.classList.add('ok');}
+      else await process(m,a,null,m.from);
+    }
+    $(m.id).classList.remove('on');$(m.id).classList.add('ok');
+    log(`<span class="t">  Gmail: e-mail označen štítkem Nexivo/Zpracováno</span>`);await wait(200);
+  }
+  steps(-1);
+  log(`<span class="ok">HOTOVO</span> ${state.rows} dokladů vloženo, ${state.low} ke kontrole. Další kontrola schránky v 7:15.`);
+  $('con').querySelector('.cursor')?.remove();kpis();
+  $('pill').classList.add('done');$('pill').querySelector('span').textContent='Dokončeno';$('again').disabled=false;
+  $('notes').innerHTML=`
+    <div class="alert a-ok"><div><b>Roztříděno a uloženo</b><p>${state.files} originálů v Google Disku ve složkách klient › rok › kvartál › měsíc, jednotně přejmenovaných.</p></div></div>
+    <div class="alert a-ok"><div><b>Dovoz ze Švýcarska spárován</b><p>Faktura a celní doklad (JSD) z jednoho ZIPu propojeny – DPH 5 011 Kč připravena k odpočtu.</p></div></div>
+    <div class="alert a-info"><div><b>Logo z podpisu přeskočeno</b><p>Agent pozná, co není doklad, a do systému to nepouští.</p></div></div>
+    <div class="alert a-warn"><div><b>1 doklad ke kontrole účetní</b><p>scan0091.pdf (Ing. Dvořák) je rozmazaný. Klientovi odešel dotaz s prosbou o lepší sken.</p></div></div>`;
+  $('finT').textContent=`Hotovo za ${Math.floor(state.sec/60)} min ${state.sec%60} s – ${state.rows} dokladů je v systému`;
+  $('finP').textContent=`Základ ${fmt(state.sum)} · DPH ${fmt(state.vat)} · originály v Google Disku · účetní kontroluje jen označené doklady`;
+  $('final').classList.add('on');
+}
+$('again').onclick=start;
+renderMails();setTimeout(start,700);
+</script>
+</body>
+</html>
