@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Doklady AI – TAX Tábor (ukázka)</title>
+<link rel="icon" href="/favicon.ico?v=2" sizes="any">
+<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1C3F7C; --navy-900:#122B57; --navy-700:#24509A; --navy-100:#E6EDF8; --navy-50:#F3F6FB;
+  --red:#E3263A; --red-50:#FDECEE;
+  --green:#178A50; --green-50:#E5F5EC;
+  --amber:#B86E00; --amber-50:#FFF3DF;
+  --violet:#5B3FB8; --violet-50:#EFEAFB;
+  --ink:#14213D; --ink-2:#4A5672; --ink-3:#8590A8; --line:#DDE3EE;
+  --white:#fff; --r:14px; --shadow:0 1px 2px rgba(18,43,87,.06),0 8px 24px rgba(18,43,87,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+body{font-family:Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--navy-50);color:var(--ink);font-size:14px;line-height:1.45}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select{font:inherit}
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+
+/* sidebar */
+.side{background:var(--navy-900);color:#C9D5EC;padding:22px 14px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+.brand{padding:4px 10px 22px}
+.brand b{display:block;font-size:24px;font-weight:800;color:#fff;letter-spacing:.2px;line-height:1}
+.brand span{font-size:10.5px;color:#9FB2D6}
+.nav{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;font-weight:500;width:100%;text-align:left}
+.nav svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav.on{background:#fff;color:var(--navy)}
+.nav .cnt{margin-left:auto;background:var(--red);color:#fff;font-size:11px;font-weight:700;border-radius:20px;padding:1px 8px}
+.side__foot{margin-top:auto;padding:12px;border-radius:12px;background:rgba(255,255,255,.06);font-size:12px}
+.side__foot b{color:#fff;display:block;font-weight:600}
+.powered{margin-top:10px;font-size:10.5px;color:#7F93BA;padding:0 12px}
+
+/* main */
+.main{padding:22px 28px 60px;min-width:0}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.top h1{font-size:22px;font-weight:700;color:var(--navy-900)}
+.top .sub{color:var(--ink-3);font-size:13px}
+.top__r{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.burger{display:none;width:40px;height:40px;border-radius:10px;background:#fff;box-shadow:var(--shadow);align-items:center;justify-content:center}
+.burger i{display:block;width:18px;height:2px;background:var(--red);box-shadow:0 6px 0 var(--red),0 -6px 0 var(--red)}
+.sel{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;font-weight:600;font-size:13.5px;white-space:nowrap;transition:transform .15s,box-shadow .15s,background .15s}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn--p{background:var(--red);color:#fff;box-shadow:0 6px 16px rgba(227,38,58,.25)}
+.btn--p:hover{transform:translateY(-1px)}
+.btn--n{background:var(--navy);color:#fff}
+.btn--g{background:#fff;border:1px solid var(--line);color:var(--navy)}
+.btn--g:hover{border-color:var(--navy)}
+.btn[disabled]{opacity:.55;pointer-events:none}
+
+.view{display:none}.view.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.grid{display:grid;gap:16px}
+.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1.4fr 1fr}
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:18px 20px}
+.card h3{font-size:15px;font-weight:600;color:var(--navy-900);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h3 small{margin-left:auto;font-weight:500;color:var(--ink-3);font-size:12px}
+.kpi .l{color:var(--ink-3);font-size:12.5px}
+.kpi .v{font-size:26px;font-weight:700;color:var(--navy-900);margin:4px 0 2px;letter-spacing:-.3px}
+.kpi .d{font-size:12px;color:var(--green);font-weight:500}
+.kpi .d.r{color:var(--red)}
+
+.flow{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap}
+.flow div{flex:1;min-width:120px;background:var(--navy-50);border-radius:12px;padding:12px;position:relative}
+.flow b{display:block;color:var(--navy);font-size:20px}
+.flow span{font-size:12px;color:var(--ink-2)}
+
+table{width:100%;border-collapse:collapse}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--ink-3);font-weight:600;text-align:left;padding:10px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:11px 10px;border-bottom:1px solid #EEF1F6;vertical-align:middle}
+tr.row{cursor:pointer;transition:background .15s}
+tr.row:hover{background:var(--navy-50)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tw{overflow-x:auto;margin:0 -20px;padding:0 20px}
+.tw--wide table{min-width:1080px}
+.tw--wide td:nth-child(2),.tw--wide td:nth-child(3){max-width:170px}
+.file{display:flex;align-items:center;gap:10px}
+.file i{width:32px;height:38px;border-radius:6px;background:var(--red-50);color:var(--red);font-style:normal;font-size:9px;font-weight:700;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;flex:none}
+.file i.img{background:var(--navy-100);color:var(--navy)}
+.file b{font-weight:500;display:block;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file small{color:var(--ink-3);font-size:11.5px}
+
+.tag{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.t-cz{background:var(--navy-100);color:var(--navy)}
+.t-eu{background:var(--violet-50);color:var(--violet)}
+.t-non{background:var(--amber-50);color:var(--amber)}
+.t-ok{background:var(--green-50);color:var(--green)}
+.t-warn{background:var(--amber-50);color:var(--amber)}
+.t-err{background:var(--red-50);color:var(--red)}
+.t-wait{background:#EEF1F6;color:var(--ink-2)}
+.flag{font-size:11px;font-weight:700;border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--ink-2);margin-right:6px}
+.conf{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2)}
+.conf u{display:block;width:44px;height:5px;border-radius:5px;background:#E6EAF2;position:relative;overflow:hidden;text-decoration:none}
+.conf u::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--green);border-radius:5px}
+
+.spin{width:14px;height:14px;border:2px solid #C8D2E4;border-top-color:var(--navy);border-radius:50%;animation:sp .7s linear infinite;display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.chip{padding:7px 13px;border-radius:20px;background:#fff;border:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--ink-2)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* pipeline */
+.pipe{display:flex;gap:0;margin:4px 0 16px;flex-wrap:wrap}
+.pipe div{flex:1;min-width:110px;text-align:center;font-size:12px;color:var(--ink-3);padding:10px 4px;border-bottom:3px solid var(--line);transition:.3s}
+.pipe div.on{color:var(--navy);border-color:var(--navy);font-weight:600}
+.pipe div.done{color:var(--green);border-color:var(--green)}
+
+/* mail list */
+.mail{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #EEF1F6;align-items:center}
+.mail:last-child{border:0}
+.av{width:36px;height:36px;border-radius:50%;background:var(--navy-100);color:var(--navy);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.mail .m{flex:1;min-width:0}
+.mail .m b{font-weight:600;font-size:13.5px}
+.mail .m p{color:var(--ink-3);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail .att{font-size:12px;color:var(--navy);font-weight:600;white-space:nowrap}
+
+/* bars */
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar .t{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px}
+.bar .t b{font-weight:600}
+.bar .tr{height:10px;border-radius:10px;background:#EEF1F6;overflow:hidden}
+.bar .tr i{display:block;height:100%;border-radius:10px;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+
+.alert{display:flex;gap:12px;padding:12px;border-radius:12px;margin-bottom:10px;align-items:flex-start}
+.alert svg{width:18px;height:18px;flex:none;margin-top:2px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.alert b{display:block;font-weight:600;font-size:13px}
+.alert p{font-size:12.5px;color:var(--ink-2)}
+.alert .btn{margin-left:auto;padding:7px 12px;font-size:12px}
+.a-warn{background:var(--amber-50);color:var(--amber)}
+.a-err{background:var(--red-50);color:var(--red)}
+.a-ok{background:var(--green-50);color:var(--green)}
+
+.dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:13px}
+.dl dt{color:var(--ink-3)}
+.dl dd{font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+.dl .tot{border-top:1px solid var(--line);padding-top:8px;font-weight:700;color:var(--navy-900)}
+
+/* clients */
+.cl{display:flex;align-items:center;gap:12px;padding:14px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;transition:.15s;text-align:left;width:100%}
+.cl:hover,.cl.on{border-color:var(--navy);box-shadow:0 0 0 3px var(--navy-100)}
+.cl .m{flex:1;min-width:0}
+.cl b{display:block;font-weight:600}
+.cl small{color:var(--ink-3);font-size:12px}
+.prog{height:6px;border-radius:6px;background:#EEF1F6;margin-top:6px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--navy)}
+
+/* exports */
+.ex{display:flex;flex-direction:column;gap:10px;padding:16px;border-radius:14px;border:1px solid var(--line);background:#fff;text-align:left;transition:.15s}
+.ex:hover{border-color:var(--navy);transform:translateY(-2px);box-shadow:var(--shadow)}
+.ex .ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.ex b{font-weight:600;color:var(--navy-900)}
+.ex p{font-size:12.5px;color:var(--ink-3)}
+.share{display:flex;gap:10px;flex-wrap:wrap}
+
+.dead{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #EEF1F6}
+.dead:last-child{border:0}
+.dead .dt{width:46px;text-align:center;border-radius:10px;background:var(--navy-50);padding:6px 0;flex:none}
+.dead .dt b{display:block;font-size:17px;color:var(--navy);line-height:1}
+.dead .dt span{font-size:10px;color:var(--ink-3);text-transform:uppercase}
+.dead p{font-size:12.5px;color:var(--ink-3)}
+
+/* drawer */
+.ov{position:fixed;inset:0;background:rgba(18,43,87,.35);opacity:0;pointer-events:none;transition:.25s;z-index:40}
+.ov.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(860px,100%);background:var(--navy-50);z-index:41;transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.drawer.on{transform:none}
+.drawer__h{display:flex;align-items:center;gap:12px;padding:16px 22px;background:#fff;border-bottom:1px solid var(--line)}
+.drawer__h b{font-weight:600}
+.x{margin-left:auto;width:36px;height:36px;border-radius:10px;background:var(--navy-50);font-size:20px;color:var(--ink-2)}
+.drawer__b{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:20px 22px;overflow:auto}
+.paper{background:#fff;border-radius:6px;box-shadow:0 2px 14px rgba(18,43,87,.12);padding:24px;font-size:11px;color:#333;position:relative;min-height:440px}
+.paper h4{font-size:16px;margin-bottom:2px}
+.paper .hl{background:rgba(255,214,0,.35);outline:1.5px solid rgba(220,170,0,.8);border-radius:2px;padding:0 2px}
+.paper table td{padding:5px 4px;font-size:10.5px;border-bottom:1px solid #eee}
+.paper .stamp{position:absolute;right:20px;top:20px;border:2px solid var(--green);color:var(--green);padding:3px 8px;border-radius:6px;font-weight:700;font-size:10px;transform:rotate(6deg)}
+.field{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #EEF1F6;font-size:13px;align-items:center}
+.field span{color:var(--ink-3)}
+.field b{font-weight:500}
+.why{background:#fff;border-left:3px solid var(--violet);border-radius:10px;padding:12px 14px;font-size:12.5px;color:var(--ink-2);margin-top:14px}
+.why b{color:var(--violet);display:block;margin-bottom:4px;font-size:12px;text-transform:uppercase;letter-spacing:.4px}
+
+/* modal + toast */
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%);width:min(520px,calc(100% - 32px));background:#fff;border-radius:18px;padding:22px;z-index:42;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 30px 80px rgba(18,43,87,.3)}
+.modal.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.modal h3{font-size:17px;color:var(--navy-900);margin-bottom:4px}
+.modal label{display:block;font-size:12px;color:var(--ink-3);margin:12px 0 4px}
+.modal input,.modal textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:13px;resize:vertical}
+.modal .act{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--navy-900);color:#fff;padding:12px 18px;border-radius:12px;font-size:13px;opacity:0;transition:.3s;z-index:60;display:flex;gap:10px;align-items:center;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast i{width:8px;height:8px;border-radius:50%;background:#5BE08F;flex:none}
+
+.muted{color:var(--ink-3);font-size:12.5px}
+.mt{margin-top:16px}
+.hide-m{}
+
+/* print report */
+#report{display:none}
+@media print{
+  .app,.drawer,.ov,.modal,.toast{display:none!important}
+  #report{display:block;padding:10mm;font-size:11px}
+  #report h1{font-size:20px;color:var(--navy)}
+  #report table td,#report table th{padding:5px;font-size:10px}
+}
+
+@media (max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}.g2{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed;left:0;top:0;width:260px;z-index:45;transform:translateX(-100%);transition:transform .3s}
+  .side.on{transform:none}
+  .burger{display:flex}
+  .main{padding:16px 16px 60px}
+  .drawer__b{grid-template-columns:1fr}
+  .hide-m{display:none}
+}
+@media (max-width:560px){.g4,.g3{grid-template-columns:1fr 1fr}.kpi .v{font-size:20px}.top h1{font-size:19px}.top__r{margin-left:0;width:100%}.top__r .btn{flex:1;justify-content:center}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side" id="side">
+    <div class="brand"><b>TAX Tábor</b><span>Kompletní účetní a daňové služby</span></div>
+    <button class="nav on" data-go="prehled"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Přehled</button>
+    <button class="nav" data-go="doklady"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 13h4l2 3h4l2-3h4"/></svg>Doručené doklady<span class="cnt" id="navCnt">6</span></button>
+    <button class="nav" data-go="klienti"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c1.9.7 3.1 2.4 3.5 5.2"/></svg>Klienti</button>
+    <button class="nav" data-go="dph"><svg viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>DPH a hlášení</button>
+    <button class="nav" data-go="exporty"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>Exporty a sdílení</button>
+    <div class="side__foot"><b>Schránka doklady@tax-tabor.cz</b>Připojeno · kontrola každých 5 min</div>
+    <div class="powered">Ukázka systému · nexivo</div>
+  </aside>
+
+  <main class="main">
+    <!-- PŘEHLED -->
+    <section class="view on" id="v-prehled">
+      <div class="top">
+        <button class="burger" data-burger><i></i></button>
+        <div><h1>Dobré ráno, Petro</h1><div class="sub">Říjen 2026 · uzávěrka DPH za 21 dní</div></div>
+        <div class="top__r">
+          <button class="btn btn--g" data-go="exporty"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>Exportovat</button>
+          <button class="btn btn--p" data-run><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Zpracovat nové doklady</button>
+        </div>
+      </div>
+
+      <div class="grid g4">
+        <div class="card kpi"><div class="l">Zpracováno dokladů (říjen)</div><div class="v" id="kDocs">412</div><div class="d">+38 % oproti září</div></div>
+        <div class="card kpi"><div class="l">Ušetřený čas</div><div class="v" id="kTime">31,5 h</div><div class="d">≈ 4,6 min na doklad</div></div>
+        <div class="card kpi"><div class="l">Čeká na kontrolu</div><div class="v" id="kCheck">5</div><div class="d r">2 s nízkou jistotou</div></div>
+        <div class="card kpi"><div class="l">Chybějící doklady</div><div class="v">7</div><div class="d r">u 3 klientů · urgence odeslány</div></div>
+      </div>
+
+      <div class="card mt">
+        <h3>Jak doklad projde systémem <small>automaticky, bez přepisování</small></h3>
+        <div class="flow">
+          <div><b>1</b><span>E-mail od klienta dorazí do doklady@tax-tabor.cz</span></div>
+          <div><b>2</b><span>Přílohy (PDF, foto účtenky, ISDOC) se přečtou</span></div>
+          <div><b>3</b><span>Přiřazení ke klientovi podle e-mailu, IČO a odběratele</span></div>
+          <div><b>4</b><span>Rozpoznání CZ / EU / mimo EU a režimu DPH</span></div>
+          <div><b>5</b><span>Ověření ARES, VIES, nespolehlivý plátce, duplicity</span></div>
+          <div><b>6</b><span>Přehled, podklady k DPH a export do účetního SW</span></div>
+        </div>
+      </div>
+
+      <div class="grid g2 mt">
+        <div class="card">
+          <h3>Nové e-maily s doklady <small id="mailInfo">6 nezpracovaných</small></h3>
+          <div id="mails"></div>
+        </div>
+        <div class="card">
+          <h3>Vyžaduje pozornost</h3>
+          <div class="alert a-err"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><div><b>Nespolehlivý plátce</b><p>Dodavatel Stavmat Jih s.r.o. (klient Novák stavby) je v registru nespolehlivých plátců. DPH hrozí ručení.</p></div></div>
+          <div class="alert a-warn"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16V5a2 2 0 0 1 2-2h11"/></svg><div><b>Možná duplicita</b><p>Faktura 2026-0871 od Lumio s.r.o. přišla dvakrát (e-mail i foto).</p></div><button class="btn btn--g" data-toast="Duplicita označena, druhý doklad vyřazen.">Vyřešit</button></div>
+          <div class="alert a-warn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Chybí výpis z banky</b><p>Kavárna U Brány – září a říjen. Klientovi odešla 2. urgence.</p></div><button class="btn btn--g" data-toast="Urgence odeslána klientovi e-mailem i SMS.">Urgovat</button></div>
+          <div class="alert a-ok"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>DIČ ověřena ve VIES</b><p>23 z 23 zahraničních dodavatelů z EU je platných.</p></div></div>
+        </div>
+      </div>
+
+      <div class="grid g2 mt">
+        <div class="card">
+          <h3>Doklady podle původu <small>říjen 2026</small></h3>
+          <div class="bars">
+            <div class="bar"><div class="t"><span>Česko – tuzemské plnění</span><b>318</b></div><div class="tr"><i style="--w:77%;background:var(--navy)"></i></div></div>
+            <div class="bar"><div class="t"><span>EU – reverse charge / pořízení zboží</span><b>64</b></div><div class="tr"><i style="--w:16%;background:var(--violet)"></i></div></div>
+            <div class="bar"><div class="t"><span>Mimo EU – dovoz, služby ze 3. zemí</span><b>30</b></div><div class="tr"><i style="--w:7%;background:var(--amber)"></i></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Termíny</h3>
+          <div class="dead"><div class="dt"><b>25</b><span>lis</span></div><div><b>DPH + kontrolní hlášení za říjen</b><p>14 klientů · 11 připraveno</p></div></div>
+          <div class="dead"><div class="dt"><b>25</b><span>lis</span></div><div><b>Souhrnné hlášení</b><p>3 klienti s dodáním do EU</p></div></div>
+          <div class="dead"><div class="dt"><b>20</b><span>lis</span></div><div><b>Odvody a zálohy na daň ze mezd</b><p>9 klientů se mzdovou agendou</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOKLADY -->
+    <section class="view" id="v-doklady">
+      <div class="top">
+        <button class="burger" data-burger><i></i></button>
+        <div><h1>Doručené doklady</h1><div class="sub">Přílohy z e-mailů – automaticky vytěžené a zařazené</div></div>
+        <div class="top__r">
+          <button class="btn btn--g" data-csv><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>Excel</button>
+          <button class="btn btn--p" data-run><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Zpracovat nové doklady</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="pipe" id="pipe"><div>Stažení příloh</div><div>Čtení dokladu</div><div>Přiřazení klientovi</div><div>Režim DPH</div><div>Kontroly</div></div>
+        <div class="filters" id="filters">
+          <button class="chip on" data-f="all">Vše</button>
+          <button class="chip" data-f="CZ">Česko</button>
+          <button class="chip" data-f="EU">EU</button>
+          <button class="chip" data-f="NON">Mimo EU</button>
+          <button class="chip" data-f="check">Ke kontrole</button>
+        </div>
+        <div class="tw tw--wide"><table>
+          <thead><tr><th>Doklad</th><th>Klient</th><th>Protistrana</th><th>Původ</th><th>Režim DPH</th><th class="num">Základ</th><th class="num">DPH</th><th class="hide-m">Jistota</th><th>Stav</th></tr></thead>
+          <tbody id="docs"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- KLIENTI -->
+    <section class="view" id="v-klienti">
+      <div class="top">
+        <button class="burger" data-burger><i></i></button>
+        <div><h1>Klienti</h1><div class="sub">Každý doklad automaticky ve správné složce klienta</div></div>
+        <div class="top__r"><select class="sel" id="period"><option>Říjen 2026</option><option>Září 2026</option><option>Q3 2026</option></select></div>
+      </div>
+      <div class="grid g2">
+        <div class="grid" id="clients" style="align-content:start"></div>
+        <div id="clientDetail"></div>
+      </div>
+    </section>
+
+    <!-- DPH -->
+    <section class="view" id="v-dph">
+      <div class="top">
+        <button class="burger" data-burger><i></i></button>
+        <div><h1>DPH a hlášení</h1><div class="sub" id="dphSub"></div></div>
+        <div class="top__r">
+          <select class="sel" id="dphClient"></select>
+          <button class="btn btn--n" data-xml="dp"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>XML pro EPO</button>
+        </div>
+      </div>
+      <div class="grid g3" id="dphKpi"></div>
+      <div class="grid g2 mt">
+        <div class="card"><h3>Přiznání k DPH – řádky <small>předvyplněno</small></h3><div class="tw"><table><thead><tr><th>Ř.</th><th>Popis</th><th class="num">Základ</th><th class="num">Daň</th></tr></thead><tbody id="dphRows"></tbody></table></div></div>
+        <div class="card"><h3>Kontrolní hlášení</h3><div class="tw"><table><thead><tr><th>Oddíl</th><th>Obsah</th><th class="num">Dokladů</th><th class="num">Daň</th></tr></thead><tbody id="khRows"></tbody></table></div>
+          <div class="why"><b>Jak systém rozhoduje</b>CZ dodavatel s DIČ → B.2 nad 10 000 Kč, B.3 do 10 000 Kč. Dodavatel z EU s platným DIČ → přijetí služby (ř. 5) nebo pořízení zboží (ř. 3), daň se přizná i odečte. Mimo EU → dovoz zboží (ř. 7, podle JSD) nebo služba ze 3. země (ř. 12). Cizí měny se přepočítají kurzem ČNB ke dni uskutečnění plnění.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPORTY -->
+    <section class="view" id="v-exporty">
+      <div class="top">
+        <button class="burger" data-burger><i></i></button>
+        <div><h1>Exporty a sdílení</h1><div class="sub">Jedním klikem pro klienta, úřad i účetní program</div></div>
+        <div class="top__r"><select class="sel" id="exClient"></select></div>
+      </div>
+      <div class="card">
+        <h3>Sdílet přehled</h3>
+        <div class="share">
+          <button class="btn btn--p" data-share="mail"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Poslat klientovi e-mailem</button>
+          <button class="btn btn--g" data-share="link"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>Zkopírovat odkaz</button>
+          <button class="btn btn--g" data-toast="Odesláno do datové schránky klienta (ID: 7xk4p2m).">Datová schránka</button>
+          <button class="btn btn--g" data-toast="Nahráno do sdílené složky klienta na Google Disku.">Google Disk / OneDrive</button>
+        </div>
+      </div>
+      <div class="grid g3 mt">
+        <button class="ex" data-csv><span class="ic" style="background:var(--green-50);color:var(--green)">XLS</span><b>Excel přehled dokladů</b><p>Všechny doklady, rozpad DPH, původ a režim. Otevře se rovnou v Excelu.</p></button>
+        <button class="ex" data-print><span class="ic" style="background:var(--red-50);color:var(--red)">PDF</span><b>PDF report pro klienta</b><p>Srozumitelné shrnutí měsíce: náklady, výnosy, DPH k úhradě, co chybí.</p></button>
+        <button class="ex" data-xml="dp"><span class="ic" style="background:var(--navy-100);color:var(--navy)">EPO</span><b>Přiznání k DPH (XML)</b><p>Formát pro daňový portál MF – stačí nahrát a podepsat.</p></button>
+        <button class="ex" data-xml="kh"><span class="ic" style="background:var(--navy-100);color:var(--navy)">KH</span><b>Kontrolní hlášení (XML)</b><p>Oddíly A a B vyplněné z dokladů, včetně DIČ protistran.</p></button>
+        <button class="ex" data-xml="sh"><span class="ic" style="background:var(--violet-50);color:var(--violet)">SH</span><b>Souhrnné hlášení (XML)</b><p>Plnění do EU pro klienty, kteří fakturují do zahraničí.</p></button>
+        <button class="ex" data-xml="pohoda"><span class="ic" style="background:var(--amber-50);color:var(--amber)">SW</span><b>Import do účetního programu</b><p>Pohoda XML, Money S3, ABRA Flexi nebo ISDOC – předkontace hotové.</p></button>
+      </div>
+      <div class="card mt">
+        <h3>Co dalšího systém hlídá</h3>
+        <div class="grid g3">
+          <div><b>Automatická urgence</b><p class="muted">Klientovi, který do 5. dne neposlal doklady, sám napíše připomínku.</p></div>
+          <div><b>Párování s bankou</b><p class="muted">Doklady se spárují s platbami z výpisu, nezaplacené faktury se označí.</p></div>
+          <div><b>Kurzy ČNB</b><p class="muted">EUR, USD i další měny se přepočtou kurzem ke dni plnění.</p></div>
+          <div><b>ARES a VIES</b><p class="muted">Kontrola IČO, DIČ a sídla dodavatele u každého dokladu.</p></div>
+          <div><b>Nespolehlivý plátce</b><p class="muted">Varování dřív, než se zaplatí na nezveřejněný účet.</p></div>
+          <div><b>Archiv 10 let</b><p class="muted">Originály uložené u klienta, dohledatelné fulltextem.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer__h"><b id="dTitle">Doklad</b><span id="dTag"></span><button class="x" data-close>&times;</button></div>
+  <div class="drawer__b"><div id="dPaper"></div><div id="dFields"></div></div>
+</aside>
+<div class="modal" id="modal">
+  <h3>Poslat přehled klientovi</h3>
+  <p class="muted" id="mSub"></p>
+  <label>Komu</label><input id="mTo">
+  <label>Zpráva</label><textarea id="mMsg" rows="5"></textarea>
+  <p class="muted mt">Přílohy: přehled-dokladu.xlsx, report-mesice.pdf</p>
+  <div class="act"><button class="btn btn--g" data-close>Zrušit</button><button class="btn btn--p" id="mSend">Odeslat</button></div>
+</div>
+<div class="toast" id="toast"><i></i><span></span></div>
+<div id="report"></div>
+
+<script>
+const RATES={CZK:1,EUR:24.35,USD:22.9};
+const CLIENTS=[
+  {id:'novak',name:'Novák stavby s.r.o.',ico:'28451236',mail:'ucetni@novakstavby.cz',contact:'Jan Novák',agenda:'Účetnictví + mzdy',expected:46},
+  {id:'brana',name:'Kavárna U Brány',ico:'07214589',mail:'brana.kavarna@email.cz',contact:'Lucie Marková',agenda:'Daňová evidence',expected:38},
+  {id:'eshop',name:'Lesní zahrada e-shop s.r.o.',ico:'09385512',mail:'faktury@lesnizahrada.cz',contact:'Tomáš Beneš',agenda:'Účetnictví',expected:64},
+  {id:'dvorak',name:'Ing. Martin Dvořák – projekce',ico:'71203345',mail:'m.dvorak@projekce-td.cz',contact:'Martin Dvořák',agenda:'Daňová evidence',expected:22}
+];
+// side: P = přijatá, V = vydaná; kind: S = služba, Z = zboží
+const BASE_DOCS=[
+  {id:1,client:'novak',file:'FA_2026_10_114.pdf',type:'pdf',side:'P',party:'Stavmat Jih s.r.o.',vat:'CZ27612345',c:'CZ',kind:'Z',date:'02.10.2026',cur:'CZK',base:84300,rate:21,conf:98,flag:'unreliable'},
+  {id:2,client:'novak',file:'faktura-vydana-0458.pdf',type:'pdf',side:'V',party:'Jihostav Development a.s.',vat:'CZ26071231',c:'CZ',kind:'S',date:'05.10.2026',cur:'CZK',base:412000,rate:21,conf:99,rc:true},
+  {id:3,client:'eshop',file:'Invoice_DE-88213.pdf',type:'pdf',side:'P',party:'Nordwerk Gartentechnik GmbH',vat:'DE314887651',c:'DE',kind:'Z',date:'07.10.2026',cur:'EUR',base:3120,rate:21,conf:97},
+  {id:4,client:'eshop',file:'cloudnest_receipt_oct.pdf',type:'pdf',side:'P',party:'CloudNest Inc.',vat:'US 84-2219871',c:'US',kind:'S',date:'01.10.2026',cur:'USD',base:249,rate:21,conf:95},
+  {id:5,client:'eshop',file:'objednavka_shenzhen_7781.pdf',type:'pdf',side:'P',party:'Hongda Trading Co., Ltd.',vat:'—',c:'CN',kind:'Z',date:'09.10.2026',cur:'USD',base:1860,rate:21,conf:91},
+  {id:6,client:'brana',file:'IMG_4471.jpg',type:'img',side:'P',party:'Makro Cash & Carry ČR',vat:'CZ26450691',c:'CZ',kind:'Z',date:'11.10.2026',cur:'CZK',base:6240,rate:12,conf:88},
+  {id:7,client:'brana',file:'IMG_4472.jpg',type:'img',side:'P',party:'Pražírna Kafe Tábor',vat:'CZ08812233',c:'CZ',kind:'Z',date:'12.10.2026',cur:'CZK',base:3980,rate:12,conf:72},
+  {id:8,client:'dvorak',file:'Lumio_2026-0871.pdf',type:'pdf',side:'P',party:'Lumio s.r.o.',vat:'SK2121456789',c:'SK',kind:'S',date:'03.10.2026',cur:'EUR',base:540,rate:21,conf:96,flag:'dup'},
+  {id:9,client:'dvorak',file:'FV_2026_031.pdf',type:'pdf',side:'V',party:'Bauplan Linz GmbH',vat:'ATU68123456',c:'AT',kind:'S',date:'15.10.2026',cur:'EUR',base:2800,rate:0,conf:99},
+  {id:10,client:'novak',file:'CCS_vypis_rijen.pdf',type:'pdf',side:'P',party:'Pohonné hmoty – karta CCS',vat:'CZ47115041',c:'CZ',kind:'Z',date:'31.10.2026',cur:'CZK',base:9150,rate:21,conf:94}
+];
+const NEW_DOCS=[
+  {id:11,client:'brana',file:'uctenka_lidl.jpg',type:'img',side:'P',party:'Lidl Česká republika',vat:'CZ26178541',c:'CZ',kind:'Z',date:'28.10.2026',cur:'CZK',base:1287,rate:12,conf:93,from:'brana.kavarna@email.cz',subj:'účtenky z týdne'},
+  {id:12,client:'eshop',file:'meta_ads_receipt.pdf',type:'pdf',side:'P',party:'Meta Platforms Ireland Ltd.',vat:'IE9692928F',c:'IE',kind:'S',date:'31.10.2026',cur:'EUR',base:410,rate:21,conf:97,from:'faktury@lesnizahrada.cz',subj:'Fwd: Your receipt from Meta'},
+  {id:13,client:'novak',file:'FA_2610055.pdf',type:'pdf',side:'P',party:'Betonárna Planá s.r.o.',vat:'CZ25198811',c:'CZ',kind:'Z',date:'27.10.2026',cur:'CZK',base:156400,rate:21,conf:99,from:'ucetni@novakstavby.cz',subj:'Faktury beton'},
+  {id:14,client:'novak',file:'subdodavka_elektro.pdf',type:'pdf',side:'P',party:'Elektro Kos s.r.o.',vat:'CZ03344120',c:'CZ',kind:'S',date:'29.10.2026',cur:'CZK',base:48000,rate:21,conf:96,rc:true,from:'ucetni@novakstavby.cz',subj:'Faktury beton'},
+  {id:15,client:'eshop',file:'UPS_import_dph.pdf',type:'pdf',side:'P',party:'Swiss Garden Tools AG',vat:'CHE-112.554.991',c:'CH',kind:'Z',date:'30.10.2026',cur:'EUR',base:980,rate:21,conf:84,from:'faktury@lesnizahrada.cz',subj:'Dovoz Švýcarsko'},
+  {id:16,client:'dvorak',file:'scan0091.pdf',type:'pdf',side:'P',party:'Neznámý dodavatel',vat:'?',c:'CZ',kind:'S',date:'30.10.2026',cur:'CZK',base:2100,rate:21,conf:61,from:'m.dvorak@projekce-td.cz',subj:'(bez předmětu)'}
+];
+const EU=['AT','BE','BG','HR','CY','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
+const CNAMES={CZ:'Česko',DE:'Německo',SK:'Slovensko',AT:'Rakousko',IE:'Irsko',US:'USA',CN:'Čína',CH:'Švýcarsko'};
+
+let docs=BASE_DOCS.map(d=>({...d,status:'done'}));
+let filter='all', curClient='eshop', processing=false;
+
+const fmt=n=>Math.round(n).toLocaleString('cs-CZ')+' Kč';
+const zone=d=>d.c==='CZ'?'CZ':EU.includes(d.c)?'EU':'NON';
+const czk=d=>d.base*RATES[d.cur];
+
+function regime(d){
+  const z=zone(d), b=czk(d), r=d.rate/100;
+  if(d.side==='V'){
+    if(z==='CZ'&&d.rc) return {txt:'Přenesená daň. pov. § 92e',row:'25',kh:'A.1',in:0,out:0,why:'Stavební práce pro plátce v CZ – daň přiznává odběratel. Na fakturu se doplní text „daň odvede zákazník“.'};
+    if(z==='CZ') return {txt:'Tuzemské plnění',row:d.rate===21?'1':'2',kh:b>10000?'A.4':'A.5',in:0,out:b*r,why:'Vydaná faktura tuzemskému odběrateli, základní/snížená sazba.'};
+    if(z==='EU') return {txt:'Služba do EU § 9',row:'21',kh:'—',sh:true,in:0,out:0,why:'Služba plátci v EU – místo plnění u odběratele, bez DPH. Patří do souhrnného hlášení (kód 3).'};
+    return {txt:'Vývoz / služba mimo EU',row:'26',kh:'—',in:0,out:0,why:'Plnění mimo EU – osvobozeno, doloží se vývozním dokladem.'};
+  }
+  if(z==='CZ'&&d.rc) return {txt:'Přenesená daň. pov. § 92e',row:'10',kh:'B.1',in:b*r,out:b*r,why:'Subdodávka stavebních prací – dodavatel fakturuje bez DPH, daň přizná i odečte náš klient.'};
+  if(z==='CZ') return {txt:'Tuzemský nákup',row:d.rate===21?'40':'41',kh:b>10000?'B.2':'B.3',in:b*r,out:0,why:`Český dodavatel s DIČ ${d.vat}, odpočet v sazbě ${d.rate} %. ${b>10000?'Nad 10 000 Kč → oddíl B.2 s DIČ a číslem dokladu.':'Do 10 000 Kč → souhrnně v B.3.'}`};
+  if(z==='EU'&&d.kind==='Z') return {txt:'Pořízení zboží z EU § 16',row:'3',kh:'A.2',in:b*r,out:b*r,why:`Dodavatel z ${CNAMES[d.c]||d.c}, DIČ ${d.vat} ověřeno ve VIES. Pořízení zboží – daň 21 % přiznat (ř. 3) a zároveň odečíst (ř. 43).`};
+  if(z==='EU') return {txt:'Služba z EU – reverse charge',row:'5',kh:'A.2',in:b*r,out:b*r,why:`Služba od plátce z ${CNAMES[d.c]||d.c} (DIČ ověřeno ve VIES). Místo plnění v ČR – daň přizná i odečte klient, ř. 5 a 43.`};
+  if(d.kind==='Z') return {txt:'Dovoz zboží (JSD)',row:'7',kh:'—',in:b*r,out:0,why:`Zboží ze země mimo EU (${CNAMES[d.c]||d.c}). DPH vyměřuje celní úřad – systém si vyžádá JSD od dopravce a k odpočtu ji přiřadí (ř. 42).`};
+  return {txt:'Služba ze 3. země § 108',row:'12',kh:'A.2',in:b*r,out:b*r,why:`Služba od osoby mimo EU (${CNAMES[d.c]||d.c}). Klient je povinen přiznat daň (ř. 12) a uplatní odpočet (ř. 43).`};
+}
+function statusTag(d){
+  if(d.status==='wait') return '<span class="tag t-wait">Čeká</span>';
+  if(d.status==='work') return '<span class="tag t-wait"><span class="spin"></span> Zpracovává se</span>';
+  if(d.flag==='unreliable') return '<span class="tag t-err">Nespolehlivý plátce</span>';
+  if(d.flag==='dup') return '<span class="tag t-warn">Duplicita?</span>';
+  if(d.conf<80) return '<span class="tag t-warn">Ke kontrole</span>';
+  return '<span class="tag t-ok">Hotovo</span>';
+}
+const zoneTag=d=>{const z=zone(d);return `<span class="flag">${d.c}</span><span class="tag ${z==='CZ'?'t-cz':z==='EU'?'t-eu':'t-non'}">${z==='CZ'?'Česko':z==='EU'?'EU':'Mimo EU'}</span>`};
+const cName=id=>CLIENTS.find(c=>c.id===id).name;
+const done=()=>docs.filter(d=>d.status==='done');
+
+function renderDocs(){
+  let list=docs.slice().sort((a,b)=>b.id-a.id);
+  if(filter==='check') list=list.filter(d=>d.status==='done'&&(d.conf<80||d.flag));
+  else if(filter!=='all') list=list.filter(d=>zone(d)===filter);
+  document.getElementById('docs').innerHTML=list.map(d=>{
+    const ready=d.status==='done', r=regime(d), tax=r.out||r.in;
+    return `<tr class="row" data-doc="${d.id}">
+      <td><div class="file"><i class="${d.type==='img'?'img':''}">${d.type==='img'?'IMG':'PDF'}</i><div><b>${d.file}</b><small>${d.side==='P'?'Přijatá':'Vydaná'} · ${d.date}</small></div></div></td>
+      <td>${ready||d.status==='work'?cName(d.client):'<span class="muted">—</span>'}</td>
+      <td>${ready?d.party:'<span class="muted">…</span>'}</td>
+      <td>${ready?zoneTag(d):''}</td>
+      <td>${ready?r.txt:''}</td>
+      <td class="num">${ready?fmt(czk(d)):''}${ready&&d.cur!=='CZK'?`<br><small class="muted">${d.base.toLocaleString('cs-CZ')} ${d.cur}</small>`:''}</td>
+      <td class="num">${ready?fmt(tax):''}</td>
+      <td class="hide-m">${ready?`<span class="conf"><u style="--w:${d.conf}%"></u>${d.conf} %</span>`:''}</td>
+      <td>${statusTag(d)}</td></tr>`}).join('');
+  const pending=docs.filter(d=>d.status!=='done').length+(processing?0:NEW_DOCS.filter(n=>!docs.find(d=>d.id===n.id)).length);
+  document.getElementById('navCnt').textContent=pending||'';
+  document.getElementById('navCnt').style.display=pending?'':'none';
+}
+
+function renderMails(){
+  const left=NEW_DOCS.filter(n=>!docs.find(d=>d.id===n.id&&d.status==='done'));
+  const groups={};left.forEach(n=>{(groups[n.from+n.subj]=groups[n.from+n.subj]||[]).push(n)});
+  const el=document.getElementById('mails');
+  document.getElementById('mailInfo').textContent=left.length?`${left.length} nezpracovaných příloh`:'vše zpracováno';
+  el.innerHTML=Object.values(groups).map(g=>{const c=CLIENTS.find(c=>c.mail===g[0].from);
+    return `<div class="mail"><div class="av">${c.contact.split(' ').map(s=>s[0]).join('')}</div><div class="m"><b>${c.contact}</b> <span class="muted">&lt;${g[0].from}&gt;</span><p>${g[0].subj} – ${g.map(x=>x.file).join(', ')}</p></div><span class="att">${g.length} ${g.length===1?'příloha':g.length<5?'přílohy':'příloh'}</span></div>`}).join('')
+    || '<p class="muted" style="padding:20px 0;text-align:center">Všechny doklady z e-mailu jsou zpracované a zařazené u klientů.</p>';
+}
+
+function sums(id){
+  const ds=done().filter(d=>d.client===id);
+  let inc=0,exp=0,vin=0,vout=0;const byZ={CZ:0,EU:0,NON:0};
+  ds.forEach(d=>{const r=regime(d),b=czk(d);d.side==='V'?inc+=b:exp+=b;vin+=r.in;vout+=r.out;byZ[zone(d)]+=b});
+  return {ds,inc,exp,vin,vout,pay:vout-vin,byZ};
+}
+
+function renderClients(){
+  document.getElementById('clients').innerHTML=CLIENTS.map(c=>{
+    const n=done().filter(d=>d.client===c.id).length, got=Math.min(c.expected,Math.round(c.expected*0.6)+n);
+    return `<button class="cl ${c.id===curClient?'on':''}" data-client="${c.id}"><div class="av">${c.name.split(' ').slice(0,2).map(s=>s[0]).join('')}</div><div class="m"><b>${c.name}</b><small>IČO ${c.ico} · ${c.agenda}</small><div class="prog"><i style="width:${got/c.expected*100}%"></i></div></div><small>${got}/${c.expected}</small></button>`}).join('');
+  const c=CLIENTS.find(x=>x.id===curClient), s=sums(c.id), tot=s.byZ.CZ+s.byZ.EU+s.byZ.NON||1;
+  document.getElementById('clientDetail').innerHTML=`
+    <div class="card"><h3>${c.name}<small>${c.contact}</small></h3>
+      <dl class="dl">
+        <dt>Výnosy (vydané faktury)</dt><dd>${fmt(s.inc)}</dd>
+        <dt>Náklady (přijaté doklady)</dt><dd>${fmt(s.exp)}</dd>
+        <dt>DPH na výstupu</dt><dd>${fmt(s.vout)}</dd>
+        <dt>DPH na vstupu (odpočet)</dt><dd>${fmt(s.vin)}</dd>
+        <dt class="tot">${s.pay>=0?'DPH k úhradě':'Nadměrný odpočet'}</dt><dd class="tot" style="color:${s.pay>=0?'var(--red)':'var(--green)'}">${fmt(Math.abs(s.pay))}</dd>
+      </dl>
+      <div class="bars mt">
+        <div class="bar"><div class="t"><span>Česko</span><b>${fmt(s.byZ.CZ)}</b></div><div class="tr"><i style="--w:${s.byZ.CZ/tot*100}%;background:var(--navy)"></i></div></div>
+        <div class="bar"><div class="t"><span>EU</span><b>${fmt(s.byZ.EU)}</b></div><div class="tr"><i style="--w:${s.byZ.EU/tot*100}%;background:var(--violet)"></i></div></div>
+        <div class="bar"><div class="t"><span>Mimo EU</span><b>${fmt(s.byZ.NON)}</b></div><div class="tr"><i style="--w:${s.byZ.NON/tot*100}%;background:var(--amber)"></i></div></div>
+      </div>
+      <div class="share mt"><button class="btn btn--p" data-share="mail">Poslat přehled</button><button class="btn btn--g" data-csv>Excel</button><button class="btn btn--g" data-print>PDF</button></div>
+    </div>
+    <div class="card mt"><h3>Doklady klienta <small>${s.ds.length}</small></h3>
+      ${s.ds.map(d=>`<div class="mail row" data-doc="${d.id}" style="cursor:pointer"><div class="file"><i class="${d.type==='img'?'img':''}">${d.type==='img'?'IMG':'PDF'}</i></div><div class="m"><b>${d.party}</b><p>${d.date} · ${regime(d).txt}</p></div><span class="att">${fmt(czk(d))}</span></div>`).join('')||'<p class="muted">Zatím žádné doklady.</p>'}
+    </div>`;
+  animateBars();
+}
+
+function renderDph(){
+  const id=document.getElementById('dphClient').value, s=sums(id), rows={}, kh={};
+  s.ds.forEach(d=>{const r=regime(d),b=czk(d);
+    (rows[r.row]=rows[r.row]||{b:0,t:0}); rows[r.row].b+=b; rows[r.row].t+=(r.out||r.in);
+    if(r.kh!=='—'){(kh[r.kh]=kh[r.kh]||{n:0,t:0});kh[r.kh].n++;kh[r.kh].t+=(r.out||r.in)}
+    if(r.in&&!['40','41'].includes(r.row)){(rows['43']=rows['43']||{b:0,t:0});rows['43'].b+=b;rows['43'].t+=r.in}
+  });
+  const RL={'1':'Dodání zboží / služeb, základní sazba','2':'Dodání, snížená sazba','3':'Pořízení zboží z EU','5':'Přijetí služby z EU','7':'Dovoz zboží','10':'Přenesená daň. pov. – odběratel','12':'Služby ze 3. zemí','21':'Služby do EU (§ 9)','25':'Přenesená daň. pov. – dodavatel','26':'Vývoz / ostatní osvobozená','40':'Odpočet – tuzemsko, základní','41':'Odpočet – tuzemsko, snížená','43':'Odpočet – reverse charge a pořízení'};
+  const KL={'A.1':'Přenesená pov. – dodavatel','A.2':'Přijatá plnění z EU a 3. zemí','A.4':'Vydané nad 10 000 Kč','A.5':'Vydané do 10 000 Kč','B.1':'Přenesená pov. – odběratel','B.2':'Přijaté nad 10 000 Kč','B.3':'Přijaté do 10 000 Kč'};
+  document.getElementById('dphRows').innerHTML=Object.keys(rows).sort((a,b)=>a-b).map(k=>`<tr><td><b>${k}</b></td><td>${RL[k]}</td><td class="num">${fmt(rows[k].b)}</td><td class="num">${fmt(rows[k].t)}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">Bez dokladů</td></tr>';
+  document.getElementById('khRows').innerHTML=Object.keys(kh).sort().map(k=>`<tr><td><b>${k}</b></td><td>${KL[k]}</td><td class="num">${kh[k].n}</td><td class="num">${fmt(kh[k].t)}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">Bez dokladů</td></tr>';
+  document.getElementById('dphKpi').innerHTML=`
+    <div class="card kpi"><div class="l">DPH na výstupu</div><div class="v">${fmt(s.vout)}</div></div>
+    <div class="card kpi"><div class="l">Odpočet DPH</div><div class="v">${fmt(s.vin)}</div></div>
+    <div class="card kpi"><div class="l">${s.pay>=0?'K úhradě do 25. 11.':'Nadměrný odpočet'}</div><div class="v" style="color:${s.pay>=0?'var(--red)':'var(--green)'}">${fmt(Math.abs(s.pay))}</div></div>`;
+  document.getElementById('dphSub').textContent=`${cName(id)} · říjen 2026 · ${s.ds.length} dokladů`;
+}
+
+function openDoc(id){
+  const d=docs.find(x=>x.id===id); if(!d||d.status!=='done') return;
+  const r=regime(d), c=CLIENTS.find(x=>x.id===d.client), b=czk(d), tax=r.out||r.in;
+  const hasVat=zone(d)==='CZ'&&!d.rc&&d.rate>0;
+  document.getElementById('dTitle').textContent=d.file;
+  document.getElementById('dTag').innerHTML=zoneTag(d);
+  document.getElementById('dPaper').innerHTML=`<div class="paper">${d.conf>=80?'<span class="stamp">VYTĚŽENO</span>':''}
+    <h4>${d.c==='CZ'?'FAKTURA – DAŇOVÝ DOKLAD':'INVOICE'}</h4><p>č. <span class="hl">${d.file.replace(/\.\w+$/,'').replace(/\D/g,'').slice(-6)||'0091'}</span></p><br>
+    <table><tr><td><b>${d.side==='P'?'Dodavatel':'Odběratel'}</b><br><span class="hl">${d.party}</span><br>${d.c==='CZ'?'DIČ':'VAT ID'}: <span class="hl">${d.vat}</span><br>${CNAMES[d.c]||d.c}</td>
+    <td><b>${d.side==='P'?'Odběratel':'Dodavatel'}</b><br><span class="hl">${c.name}</span><br>IČO: ${c.ico}<br>Česká republika</td></tr></table><br>
+    <p>Datum uskutečnění plnění: <span class="hl">${d.date}</span></p><br>
+    <table><tr><td>${d.kind==='Z'?'Dodávka zboží dle objednávky':'Poskytnuté služby'}</td><td style="text-align:right"><span class="hl">${d.base.toLocaleString('cs-CZ')} ${d.cur}</span></td></tr>
+    <tr><td>DPH ${hasVat?d.rate+' %':'—'}</td><td style="text-align:right">${hasVat?(d.base*d.rate/100).toLocaleString('cs-CZ')+' '+d.cur:(d.c==='CZ'?'daň odvede zákazník':'reverse charge')}</td></tr>
+    <tr><td><b>Celkem</b></td><td style="text-align:right"><b>${(hasVat?d.base*(1+d.rate/100):d.base).toLocaleString('cs-CZ')} ${d.cur}</b></td></tr></table></div>
+    <p class="muted mt">Přišlo z ${c.mail} · ${d.date}</p>`;
+  const checks=[];
+  if(d.flag==='unreliable') checks.push('<div class="alert a-err"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg><div><b>Dodavatel je nespolehlivý plátce</b><p>Doporučení: DPH zaplatit přímo na účet správce daně (§ 109a).</p></div></div>');
+  if(d.flag==='dup') checks.push('<div class="alert a-warn"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M4 16V5a2 2 0 0 1 2-2h11"/></svg><div><b>Stejné číslo a částka už v systému je</b><p>Přišlo 3. 10. e-mailem i 6. 10. jako foto.</p></div></div>');
+  if(d.conf<80) checks.push('<div class="alert a-warn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><div><b>Nízká čitelnost</b><p>Zkontrolujte prosím zvýrazněná pole.</p></div></div>');
+  if(!checks.length) checks.push(`<div class="alert a-ok"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><div><b>Všechny kontroly prošly</b><p>${zone(d)==='EU'?'DIČ platné ve VIES':zone(d)==='CZ'?'IČO v ARES, není nespolehlivý plátce':'Měna přepočtena kurzem ČNB'} · bez duplicity</p></div></div>`);
+  document.getElementById('dFields').innerHTML=`
+    ${checks.join('')}
+    <div class="card">
+      <div class="field"><span>Klient</span><b>${c.name}</b></div>
+      <div class="field"><span>Typ</span><b>${d.side==='P'?'Přijatá faktura':'Vydaná faktura'} · ${d.kind==='Z'?'zboží':'služba'}</b></div>
+      <div class="field"><span>Protistrana</span><b>${d.party}</b></div>
+      <div class="field"><span>DIČ / VAT</span><b>${d.vat}</b></div>
+      <div class="field"><span>Země</span><b>${CNAMES[d.c]||d.c}</b></div>
+      ${d.cur!=='CZK'?`<div class="field"><span>Kurz ČNB</span><b>1 ${d.cur} = ${RATES[d.cur].toLocaleString('cs-CZ')} Kč</b></div>`:''}
+      <div class="field"><span>Základ v Kč</span><b>${fmt(b)}</b></div>
+      <div class="field"><span>DPH</span><b>${fmt(tax)}</b></div>
+      <div class="field"><span>Režim</span><b>${r.txt}</b></div>
+      <div class="field"><span>Přiznání / KH</span><b>ř. ${r.row} · ${r.kh==='—'?'mimo KH':'oddíl '+r.kh}</b></div>
+      <div class="field"><span>Předkontace</span><b>${d.side==='V'?'311 / 602':d.kind==='Z'?'501 / 321':'518 / 321'}</b></div>
+    </div>
+    <div class="why"><b>Proč tento režim</b>${r.why}</div>
+    <div class="share mt"><button class="btn btn--n" data-toast="Doklad schválen a předán do účetnictví." data-close>Schválit</button><button class="btn btn--g" data-toast="Klient obdrží dotaz k dokladu e-mailem.">Doptat se klienta</button></div>`;
+  document.getElementById('drawer').classList.add('on');document.getElementById('ov').classList.add('on');
+}
+
+function closeAll(){['drawer','ov','modal'].forEach(i=>document.getElementById(i).classList.remove('on'));document.getElementById('side').classList.remove('on')}
+
+function toast(t){const el=document.getElementById('toast');el.querySelector('span').textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),2800)}
+
+function go(v){
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+  document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('on',x.dataset.go===v));
+  closeAll(); window.scrollTo(0,0);
+  if(v==='klienti') renderClients(); if(v==='dph') renderDph(); if(v==='prehled') animateBars();
+}
+function animateBars(){requestAnimationFrame(()=>document.querySelectorAll('.view.on .bar i').forEach(i=>{i.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>i.style.width=getComputedStyle(i).getPropertyValue('--w')))}))}
+
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+async function run(){
+  const todo=NEW_DOCS.filter(n=>!docs.find(d=>d.id===n.id));
+  if(processing) return; if(!todo.length){toast('Žádné nové doklady – vše je zpracováno.');return}
+  processing=true; document.querySelectorAll('[data-run]').forEach(b=>b.disabled=true);
+  go('doklady'); filter='all'; document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.dataset.f==='all'));
+  todo.forEach(n=>docs.push({...n,status:'wait'})); renderDocs();
+  const steps=[...document.querySelectorAll('#pipe div')];
+  for(let i=0;i<steps.length;i++){steps.forEach((s,j)=>{s.className=j<i?'done':j===i?'on':''});
+    if(i===0) docs.forEach(d=>{if(d.status==='wait')d.status='work'});renderDocs(); await wait(650)}
+  for(const n of todo){docs.find(d=>d.id===n.id).status='done';renderDocs();await wait(260)}
+  steps.forEach(s=>s.className='done');
+  const t=+document.getElementById('kDocs').textContent+todo.length;
+  document.getElementById('kDocs').textContent=t;
+  document.getElementById('kTime').textContent=(t*4.6/60).toFixed(1).replace('.',',')+' h';
+  document.getElementById('kCheck').textContent=done().filter(d=>d.conf<80||d.flag).length;
+  renderMails(); processing=false; document.querySelectorAll('[data-run]').forEach(b=>b.disabled=false);
+  toast(`${todo.length} dokladů vytěženo a přiřazeno ke klientům.`);
+}
+
+function download(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function exportCsv(){
+  const id=document.getElementById('exClient').value, ds=id==='all'?done():done().filter(d=>d.client===id);
+  const head=['Klient','Soubor','Typ','Datum','Protistrana','DIČ','Země','Původ','Měna','Částka v měně','Základ Kč','Sazba','DPH Kč','Režim DPH','Řádek přiznání','Oddíl KH','Jistota %'];
+  const lines=ds.map(d=>{const r=regime(d);return [cName(d.client),d.file,d.side==='P'?'Přijatá':'Vydaná',d.date,d.party,d.vat,CNAMES[d.c]||d.c,{CZ:'Česko',EU:'EU',NON:'Mimo EU'}[zone(d)],d.cur,d.base,Math.round(czk(d)),d.rate+' %',Math.round(r.out||r.in),r.txt,r.row,r.kh,d.conf]});
+  const csv='﻿'+[head,...lines].map(l=>l.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(';')).join('\r\n');
+  download(`prehled-dokladu-${id}-2026-10.csv`,csv,'text/csv;charset=utf-8');toast('Excel přehled stažen.');
+}
+function exportXml(kind){
+  const id=kind==='dp'&&document.getElementById('v-dph').classList.contains('on')?document.getElementById('dphClient').value:(document.getElementById('exClient').value==='all'?'novak':document.getElementById('exClient').value);
+  const c=CLIENTS.find(x=>x.id===id), s=sums(id);
+  const names={dp:'DPHDP3',kh:'DPHKH1',sh:'DPHSHV',pohoda:'dataPack'};
+  let body='';
+  if(kind==='pohoda') body=s.ds.map(d=>`  <invoice type="${d.side==='P'?'receivedInvoice':'issuedInvoice'}" date="${d.date}" partner="${d.party}" vat="${d.vat}" base="${Math.round(czk(d))}" regime="${regime(d).txt}"/>`).join('\n');
+  else body=s.ds.map(d=>{const r=regime(d);return `  <radek r="${r.row}" kh="${r.kh}" dic="${d.vat}" zaklad="${Math.round(czk(d))}" dan="${Math.round(r.out||r.in)}"/>`}).join('\n');
+  const xml=`<?xml version="1.0" encoding="UTF-8"?>\n<!-- Ukázkový export – TAX Tábor / ${c.name} -->\n<${names[kind]} ic="${c.ico}" obdobi="2026-10">\n${body}\n</${names[kind]}>\n`;
+  download(`${names[kind]}-${c.ico}-2026-10.xml`,xml,'application/xml');
+  toast({dp:'XML přiznání k DPH připraveno k nahrání na EPO.',kh:'Kontrolní hlášení staženo.',sh:'Souhrnné hlášení staženo.',pohoda:'Soubor pro import do účetního programu stažen.'}[kind]);
+}
+function printReport(){
+  const id=document.getElementById('exClient').value==='all'?curClient:document.getElementById('exClient').value, c=CLIENTS.find(x=>x.id===id), s=sums(id);
+  document.getElementById('report').innerHTML=`<h1>TAX Tábor – přehled za říjen 2026</h1><p>${c.name} · IČO ${c.ico}</p><br>
+    <p>Výnosy: <b>${fmt(s.inc)}</b> · Náklady: <b>${fmt(s.exp)}</b> · ${s.pay>=0?'DPH k úhradě':'Nadměrný odpočet'}: <b>${fmt(Math.abs(s.pay))}</b> (splatnost 25. 11. 2026)</p><br>
+    <table style="width:100%"><tr><th>Datum</th><th>Protistrana</th><th>Země</th><th>Režim</th><th style="text-align:right">Základ</th><th style="text-align:right">DPH</th></tr>
+    ${s.ds.map(d=>{const r=regime(d);return `<tr><td>${d.date}</td><td>${d.party}</td><td>${CNAMES[d.c]||d.c}</td><td>${r.txt}</td><td style="text-align:right">${fmt(czk(d))}</td><td style="text-align:right">${fmt(r.out||r.in)}</td></tr>`}).join('')}</table>`;
+  window.print();
+}
+function share(type){
+  const id=document.getElementById('exClient').value==='all'?curClient:document.getElementById('exClient').value, c=CLIENTS.find(x=>x.id===id), s=sums(id);
+  if(type==='link'){const url=`https://portal.tax-tabor.cz/p/${c.ico}-2026-10`;navigator.clipboard?.writeText(url).catch(()=>{});toast('Odkaz zkopírován: '+url);return}
+  document.getElementById('mSub').textContent=`${c.name} · říjen 2026`;
+  document.getElementById('mTo').value=c.mail;
+  document.getElementById('mMsg').value=`Dobrý den,\n\nv příloze posíláme přehled dokladů za říjen 2026. ${s.pay>=0?`DPH k úhradě činí ${fmt(s.pay)}, splatnost 25. 11. 2026.`:`Vychází nadměrný odpočet ${fmt(-s.pay)}.`}\n\nS pozdravem\nTAX Tábor`;
+  document.getElementById('modal').classList.add('on');document.getElementById('ov').classList.add('on');
+}
+
+// init
+const opts=CLIENTS.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+document.getElementById('dphClient').innerHTML=opts;document.getElementById('dphClient').value='eshop';
+document.getElementById('exClient').innerHTML='<option value="all">Všichni klienti</option>'+opts;
+document.getElementById('dphClient').onchange=renderDph;
+document.getElementById('mSend').onclick=()=>{closeAll();toast('Přehled odeslán klientovi.')};
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-go],[data-run],[data-doc],[data-close],[data-toast],[data-csv],[data-xml],[data-print],[data-share],[data-client],[data-burger],.chip,#ov');
+  if(!t) return;
+  if(t.id==='ov') return closeAll();
+  if(t.dataset.toast) toast(t.dataset.toast);
+  if(t.dataset.go) go(t.dataset.go);
+  if('run' in t.dataset) run();
+  if(t.dataset.doc) openDoc(+t.dataset.doc);
+  if('close' in t.dataset) closeAll();
+  if('csv' in t.dataset) exportCsv();
+  if(t.dataset.xml) exportXml(t.dataset.xml);
+  if('print' in t.dataset) printReport();
+  if(t.dataset.share) share(t.dataset.share);
+  if(t.dataset.client){curClient=t.dataset.client;document.getElementById('exClient').value=curClient;renderClients()}
+  if('burger' in t.dataset){document.getElementById('side').classList.add('on');document.getElementById('ov').classList.add('on')}
+  if(t.classList.contains('chip')){filter=t.dataset.f;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===t));renderDocs()}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+renderDocs();renderMails();animateBars();
+</script>
+</body>
+</html>
